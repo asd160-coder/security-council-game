@@ -1,0 +1,71 @@
+/* The drafting tray is paper, because the statement is a document — even
+   though it lives inside the modern interface. It sits at the foot of the
+   board like a sheet in a tray. */
+.tray {
+  border-top: 1px solid var(--board-line);
+  background: var(--board-raised);
+  padding: 14px var(--gutter);
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.empty {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-style: italic;
+  color: var(--silver-fainter);
+}
+
+.sheet {
+  background: var(--stock);
+  border: 1px solid var(--stock-edge);
+  border-radius: var(--radius-paper);
+  padding: 16px 18px;
+  box-shadow: var(--shadow-paper);
+  max-width: var(--measure-scene);
+}
+
+.fragment + .fragment {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--stock-edge);
+}
+
+.fragmentHead {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.fragmentIndex {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.fragmentTone {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  text-transform: uppercase;
+  color: var(--wax);
+}
+
+.fragmentText {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.compact .sheet {
+  max-width: none;
+}

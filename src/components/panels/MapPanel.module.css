@@ -1,0 +1,87 @@
+.panel {
+  border: 1px solid var(--board-line);
+  border-radius: var(--radius);
+  background: var(--board-inset);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--board-line);
+  background: var(--board-raised);
+}
+
+.frame {
+  position: relative;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 20px;
+  padding: 12px 14px;
+  border-top: 1px solid var(--board-line);
+  background: var(--board-raised);
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.swatchRing {
+  width: 16px;
+  height: 0;
+  border-top: 1.5px dashed var(--wax);
+  flex-shrink: 0;
+}
+
+.swatchSite {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 9px solid var(--wax);
+  flex-shrink: 0;
+}
+
+.legendText {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  text-transform: uppercase;
+  color: var(--silver-faint);
+  line-height: 1.4;
+}
+
+.legendNote {
+  color: var(--silver-fainter);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* The schematic disclaimer. Small, permanent, and not apologetic — it tells a
+   student what kind of object they are looking at. */
+.schematic {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  color: var(--silver-fainter);
+  font-style: normal;
+}
+
+.inspected {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--brass-bright);
+}

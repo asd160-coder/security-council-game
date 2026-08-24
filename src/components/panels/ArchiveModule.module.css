@@ -1,0 +1,121 @@
+.module {
+  border: 1px solid var(--board-line);
+  border-radius: var(--radius);
+  background: var(--board-raised);
+  overflow: hidden;
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--board-line);
+}
+
+.date {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  color: var(--silver-fainter);
+}
+
+.body {
+  padding: 14px;
+}
+
+.image {
+  width: 100%;
+  border: 1px solid var(--board-line);
+  filter: grayscale(1) contrast(1.05);
+}
+
+/* --------------------------------------------------------- The empty state */
+/* A declared slot with no file is not an error and should not look like one.
+   It shows what will sit here, where it comes from, and that the rights are
+   already settled — which is more useful than a grey box. */
+.awaiting {
+  border: 1px dashed var(--board-line-bright);
+  border-radius: var(--radius);
+  padding: 26px 18px;
+  text-align: center;
+  background: var(--board-inset);
+}
+
+.awaitingMark {
+  width: 34px;
+  height: 34px;
+  margin: 0 auto 12px;
+  border: 1px solid var(--silver-fainter);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  color: var(--silver-fainter);
+}
+
+.awaitingTitle {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--silver-faint);
+  margin-bottom: 8px;
+}
+
+.awaitingNote {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--silver-fainter);
+  max-width: 30rem;
+  margin: 0 auto;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--silver);
+  margin-bottom: 6px;
+  line-height: 1.35;
+}
+
+.caption {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--silver-muted);
+  margin-top: 12px;
+}
+
+.why {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--board-line);
+}
+
+.whyLabel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--brass);
+  display: block;
+  margin-bottom: 5px;
+}
+
+.whyText {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--silver-muted);
+}
+
+.audio {
+  width: 100%;
+  margin-top: 4px;
+}

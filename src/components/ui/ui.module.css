@@ -1,0 +1,181 @@
+/* ------------------------------------------------------------------ Paper */
+/* An archival document laid on the board. Slight rotation is available but
+   deliberately unused by default — one tilted card reads as character, five
+   read as a scrapbook, and this is not a scrapbook. */
+.paper {
+  background: var(--stock);
+  color: var(--ink);
+  border: 1px solid var(--stock-edge);
+  border-radius: var(--radius-paper);
+  box-shadow: var(--shadow-paper);
+  padding: 22px 24px;
+  position: relative;
+}
+
+.paperAged {
+  background: var(--stock-aged);
+}
+
+/* A hairline along the top edge, the way a printed form carries a rule. */
+.paper::before {
+  content: '';
+  position: absolute;
+  inset: 6px 6px auto 6px;
+  height: 1px;
+  background: var(--stock-edge);
+  opacity: 0.6;
+}
+
+.paperTitle {
+  font-family: var(--font-display);
+  font-size: var(--fs-card-title);
+  font-weight: 600;
+  letter-spacing: var(--track-title);
+  line-height: 1.25;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+
+.paperEyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 12px;
+  display: block;
+}
+
+.paperBody {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
+  line-height: 1.62;
+  color: var(--ink-muted);
+}
+
+.paperBody p + p {
+  margin-top: 10px;
+}
+
+/* ----------------------------------------------------------------- Fields */
+/* The label/value pairs that make up a dossier or a perspective card. */
+.field + .field {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--stock-edge);
+}
+
+.fieldLabel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.fieldValue {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
+  line-height: 1.55;
+  color: var(--ink-muted);
+}
+
+/* ------------------------------------------------------------- SourceLine */
+/* Attribution is part of the design here, not a footnote bolted on. */
+.source {
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid var(--stock-edge);
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  line-height: 1.5;
+  color: var(--ink-faint);
+}
+
+.sourceOnBoard {
+  border-top-color: var(--board-line);
+  color: var(--silver-fainter);
+}
+
+.sourceKey {
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+/* ----------------------------------------------------------------- Button */
+.button {
+  font-family: var(--font-mono);
+  font-size: var(--fs-button);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--silver);
+  background: transparent;
+  border: 1px solid var(--board-line-bright);
+  border-radius: var(--radius);
+  padding: 12px 22px;
+  transition:
+    background var(--dur-quick) var(--ease),
+    border-color var(--dur-quick) var(--ease),
+    color var(--dur-quick) var(--ease);
+}
+
+.button:hover {
+  background: var(--board-raised);
+  border-color: var(--silver-faint);
+  color: var(--stock);
+}
+
+.buttonPrimary {
+  background: var(--stock);
+  border-color: var(--stock);
+  color: var(--ink);
+}
+
+.buttonPrimary:hover {
+  background: #fff;
+  border-color: #fff;
+  color: var(--ink);
+}
+
+.buttonQuiet {
+  border-color: transparent;
+  padding: 8px 12px;
+  color: var(--silver-faint);
+}
+
+.buttonQuiet:hover {
+  background: transparent;
+  border-color: transparent;
+  color: var(--silver);
+}
+
+.buttonQuiet:disabled,
+.button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* ----------------------------------------------------------------- Reveal */
+.reveal {
+  animation: rise var(--dur-reveal) var(--ease) both;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(9px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    animation: none;
+  }
+}

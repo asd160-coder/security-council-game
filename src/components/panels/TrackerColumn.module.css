@@ -1,0 +1,188 @@
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--board-line);
+}
+
+.note {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-style: italic;
+  color: var(--silver-fainter);
+  line-height: 1.4;
+  margin-bottom: 20px;
+  margin-top: -6px;
+}
+
+/* ---------------------------------------------------------------- A gauge */
+.gauge {
+  padding: 13px 0;
+  border-bottom: 1px solid var(--board-line);
+}
+
+.gauge:last-child {
+  border-bottom: none;
+}
+
+.gaugeHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 9px;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: var(--track-label-tight);
+  text-transform: uppercase;
+  color: var(--silver-muted);
+}
+
+.readout {
+  font-family: var(--font-mono);
+  font-size: var(--fs-readout);
+  font-weight: 500;
+  color: var(--silver);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ------------------------------------------------------------- The track */
+/* Ticks, not a bar. A filled bar invites reading the variable as a score out
+   of ten; a tick scale with a needle reads as an instrument showing where a
+   value currently sits. */
+.track {
+  position: relative;
+  height: 20px;
+}
+
+.ticks {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tick {
+  width: 1px;
+  height: 5px;
+  background: var(--silver-fainter);
+  opacity: 0.5;
+}
+
+/* The centre tick is the zero mark and stays visible. */
+.tickZero {
+  height: 13px;
+  opacity: 1;
+  background: var(--board-line-bright);
+}
+
+.needle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--needle-color);
+  transition: left var(--dur-needle) var(--ease);
+  box-shadow: 0 0 8px var(--needle-glow);
+}
+
+/* A small head on the needle so it reads as a pointer rather than a divider. */
+.needle::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -2.5px;
+  width: 7px;
+  height: 4px;
+  background: var(--needle-color);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+.registerDanger {
+  --needle-color: var(--wax-bright);
+  --needle-glow: rgba(210, 86, 74, 0.4);
+}
+
+.registerLegitimacy {
+  --needle-color: var(--brass-bright);
+  --needle-glow: rgba(201, 163, 85, 0.35);
+}
+
+.registerNeutral {
+  --needle-color: var(--signal-bright);
+  --needle-glow: rgba(143, 176, 199, 0.35);
+}
+
+/* ------------------------------------------------------------ The annotation */
+/* Chinagraph: the mark left beside a needle that has just moved. It fades,
+   because it is a note about a change, not a permanent part of the readout. */
+.delta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: var(--track-label-tight);
+  font-variant-numeric: tabular-nums;
+  margin-left: 8px;
+  animation: chinagraph 5s var(--ease) both;
+}
+
+.deltaDanger {
+  color: var(--wax-bright);
+}
+
+.deltaCalm {
+  color: var(--signal-bright);
+}
+
+.deltaLegitimacy {
+  color: var(--brass-bright);
+}
+
+.deltaNeutral {
+  color: var(--silver-muted);
+}
+
+@keyframes chinagraph {
+  0% {
+    opacity: 0;
+    transform: translateX(-4px);
+  }
+  12% {
+    opacity: 1;
+    transform: none;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.42;
+  }
+}
+
+.meaning {
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--silver-fainter);
+  margin-top: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .delta {
+    animation: none;
+    opacity: 0.85;
+  }
+}

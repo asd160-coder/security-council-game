@@ -1,0 +1,66 @@
+import styles from './ui.module.css';
+
+/* Shared primitives. Kept in one file because each is a handful of lines and
+   splitting them across five files would obscure how consistent they are. */
+
+export function Eyebrow({ children, className = '' }) {
+  return <span className={`eyebrow ${className}`}>{children}</span>;
+}
+
+export function Paper({ eyebrow, title, aged = false, className = '', children }) {
+  return (
+    <article className={`${styles.paper} ${aged ? styles.paperAged : ''} ${className}`}>
+      {eyebrow && <span className={styles.paperEyebrow}>{eyebrow}</span>}
+      {title && <h3 className={styles.paperTitle}>{title}</h3>}
+      {children}
+    </article>
+  );
+}
+
+export function PaperBody({ paragraphs = [], children }) {
+  return (
+    <div className={styles.paperBody}>
+      {paragraphs.map((text) => (
+        <p key={text.slice(0, 40)}>{text}</p>
+      ))}
+      {children}
+    </div>
+  );
+}
+
+export function Field({ label, children }) {
+  return (
+    <div className={styles.field}>
+      <span className={styles.fieldLabel}>{label}</span>
+      <p className={styles.fieldValue}>{children}</p>
+    </div>
+  );
+}
+
+export function SourceLine({ source, rights, onBoard = false }) {
+  return (
+    <p className={`${styles.source} ${onBoard ? styles.sourceOnBoard : ''}`}>
+      <span className={styles.sourceKey}>Source</span> {source}
+      {rights && (
+        <>
+          {' · '}
+          <span className={styles.sourceKey}>Rights</span> {rights}
+        </>
+      )}
+    </p>
+  );
+}
+
+export function Button({ variant = 'default', className = '', ...props }) {
+  const variantClass =
+    variant === 'primary' ? styles.buttonPrimary : variant === 'quiet' ? styles.buttonQuiet : '';
+  return <button type="button" className={`${styles.button} ${variantClass} ${className}`} {...props} />;
+}
+
+export function Reveal({ delay = 0, className = '', children }) {
+  return (
+    <div className={`${styles.reveal} ${className}`} style={{ animationDelay: `${delay}ms` }}>
+      {children}
+    </div>
+  );
+}

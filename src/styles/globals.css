@@ -1,0 +1,50 @@
+body {
+  background: var(--board);
+  color: var(--silver);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.55;
+}
+
+/* The board has a faint vertical gradient and a fine grain. Both are barely
+   visible; together they stop a large dark field from looking like flat #12161B
+   and give the map something to sit on. */
+#root {
+  min-height: 100%;
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(111, 143, 166, 0.06) 0%, transparent 60%),
+    var(--board);
+}
+
+::selection {
+  background: var(--brass-dim);
+  color: var(--stock);
+}
+
+/* One focus treatment, used everywhere, legible on board and paper alike. */
+:focus-visible {
+  outline: 2px solid var(--brass-bright);
+  outline-offset: 3px;
+  border-radius: var(--radius);
+}
+
+/* Utility: the tracked uppercase mono that labels everything in this
+   interface. Used often enough across unrelated components to live here. */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--silver-faint);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

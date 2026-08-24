@@ -1,0 +1,21 @@
+import day1 from './day1.js';
+
+/* The day registry. Adding Day 2 is two lines: import the file, add it here.
+   Nothing else in the app enumerates days. */
+export const DAYS = [day1];
+
+export const getDay = (number) => DAYS.find((day) => day.number === number) ?? null;
+
+export const hasDay = (number) => Boolean(getDay(number));
+
+export const LAST_BUILT_DAY = DAYS[DAYS.length - 1].number;
+
+/* The full scenario is five days plus a debrief. Only some are built; the
+   interface says so plainly rather than hiding the ones that are not. */
+export const PLANNED_DAYS = [
+  { number: 1, title: 'Discovery' },
+  { number: 2, title: 'Public pressure and private channels' },
+  { number: 3, title: 'Escalation and leverage' },
+  { number: 4, title: 'Negotiation under pressure' },
+  { number: 5, title: 'Final decision' },
+];

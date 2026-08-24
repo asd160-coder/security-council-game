@@ -1,4 +1,4 @@
-import { useEffect, useId, useMemo, useState } from 'react';
+import { useId, useMemo } from 'react';
 import {
   FRAMES,
   LANDMASSES,
@@ -20,7 +20,15 @@ import styles from './CrisisMap.module.css';
    rings — which is what turns the map from decoration into something a player
    has a reason to touch. */
 
-export default function CrisisMap({ frame = 'hemispheric', showRings = false, compact = false }) {
+export default function CrisisMap({
+  frame = 'hemispheric',
+  showRings = false,
+  compact = false,
+  /* Backdrop use: no place names, and fill the box without distorting the
+     projection. Labels behind a headline compete with it and lose. */
+  labels = true,
+  cover = false,
+}) {
   const gradientId = useId();
   const frameSpec = FRAMES[frame] ?? FRAMES.hemispheric;
 
@@ -57,10 +65,14 @@ export default function CrisisMap({ frame = 'hemispheric', showRings = false, co
     <svg
       className={`${styles.map} ${compact ? styles.compact : ''}`}
       viewBox={`0 0 ${frameSpec.width} ${frameSpec.height}`}
-      role="img"
+      preserveAspectRatio={cover ? 'xMidYMid slice' : 'xMidYMid meet'}
+      role={labels ? 'img' : 'presentation'}
+      aria-hidden={labels ? undefined : 'true'}
       aria-label={
         frame === 'caribbean'
           ? 'Schematic map of the Caribbean and eastern United States, showing Cuba, Havana, the San Cristóbal missile site, Washington and New York.'
+          : frame === 'regional'
+          ? 'Schematic map of North America and the Caribbean, showing missile range rings drawn from the San Cristóbal site: an inner ring at approximately 1,290 miles and an outer ring at approximately 2,800 miles.'
           : 'Schematic world map showing the four centres of the crisis: Washington, the United Nations in New York, Moscow, and a missile site in Cuba.'
       }
     >
@@ -102,7 +114,7 @@ export default function CrisisMap({ frame = 'hemispheric', showRings = false, co
             <path
               key={ring.id}
               d={ring.path}
-              className={styles.ring}
+              className={`${styles.ring} ${index === 0 ? styles.ringInner : ''}`}
               style={{ animationDelay: `${index * 0.45}s` }}
             />
           ))}
@@ -123,42 +135,29 @@ export default function CrisisMap({ frame = 'hemispheric', showRings = false, co
             ) : (
               <circle cx={marker.x} cy={marker.y} r={3.5} className={styles.dot} />
             )}
-            <text
-              x={marker.x + (marker.site ? 12 : 9)}
-              y={marker.y - (marker.sub ? 1 : 3)}
-              className={`${styles.label} ${marker.site ? styles.labelSite : ''}`}
-            >
-              {marker.label}
-            </text>
-            {marker.sub && (
-              <text x={marker.x + (marker.site ? 12 : 9)} y={marker.y + 11} className={styles.sub}>
-                {marker.sub}
-              </text>
+            {labels && (
+              <>
+                <text
+                  x={marker.x + (marker.site ? 12 : 9)}
+                  y={marker.y - (marker.sub ? 1 : 3)}
+                  className={`${styles.label} ${marker.site ? styles.labelSite : ''}`}
+                >
+                  {marker.label}
+                </text>
+                {marker.sub && (
+                  <text
+                    x={marker.x + (marker.site ? 12 : 9)}
+                    y={marker.y + 11}
+                    className={styles.sub}
+                  >
+                    {marker.sub}
+                  </text>
+                )}
+              </>
             )}
           </g>
         ))}
       </g>
     </svg>
   );
-}
-
-/* Ring labels live outside the SVG so they can use the interface's own type
-   scale rather than SVG text metrics. */
-export function RingLegend() {
-  return RANGE_RINGS;
-}
-
-/* Small helper for the panel: delays the caribbean frame swap by a beat so the
-   transition reads as a deliberate zoom rather than a flicker. */
-export function useDelayedFrame(active, delay = 260) {
-  const [frame, setFrame] = useState(active ? 'caribbean' : 'hemispheric');
-  useEffect(() => {
-    if (!active) {
-      setFrame('hemispheric');
-      return undefined;
-    }
-    const timer = setTimeout(() => setFrame('caribbean'), delay);
-    return () => clearTimeout(timer);
-  }, [active, delay]);
-  return frame;
 }

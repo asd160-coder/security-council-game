@@ -59,6 +59,11 @@
 
 /* ----------------------------------------------------------------- Fields */
 /* The label/value pairs that make up a dossier or a perspective card. */
+
+/* A field following body prose needs the same separation two fields give each
+   other — without this the "what this changes" label sits flush against the
+   last line of the entry. */
+.paperBody + .field,
 .field + .field {
   margin-top: 12px;
   padding-top: 12px;

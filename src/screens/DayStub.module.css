@@ -1,0 +1,49 @@
+.screen {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: var(--gutter);
+}
+
+.inner {
+  max-width: 40rem;
+  width: 100%;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--fs-screen-title);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--stock);
+  margin: 14px 0 20px;
+}
+
+.prose p {
+  font-family: var(--font-body);
+  font-size: var(--fs-scene);
+  line-height: 1.66;
+  color: var(--silver-muted);
+}
+
+.prose p + p {
+  margin-top: 14px;
+}
+
+.rule {
+  height: 1px;
+  background: var(--board-line);
+  border: none;
+  margin: 30px 0;
+}
+
+.draftWrap {
+  margin-bottom: 30px;
+}
+
+.actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}

@@ -53,16 +53,22 @@ export function reducer(state, action) {
       return { ...state, stepIndex: state.stepIndex + 1 };
 
     case 'chooseLine': {
-      const { stepKey, choice } = action;
+      const { stepKey, choice, unlockId } = action;
       const before = state.trackers;
       const after = applyEffects(before, choice.effects);
-      return {
-        ...state,
-        trackers: after,
-        lastDeltas: choice.effects,
-        choices: { ...state.choices, [stepKey]: choice.id },
-        stepIndex: state.stepIndex + 1,
-      };
+      /* The information a choice earns is filed at the moment the choice is
+         made, not when the consequence screen happens to render it. The
+         consequence step shows what was filed; it does not do the filing. */
+      return fileUnlock(
+        {
+          ...state,
+          trackers: after,
+          lastDeltas: choice.effects,
+          choices: { ...state.choices, [stepKey]: choice.id },
+          stepIndex: state.stepIndex + 1,
+        },
+        unlockId,
+      );
     }
 
     case 'unlock':

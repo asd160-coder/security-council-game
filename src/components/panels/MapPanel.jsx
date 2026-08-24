@@ -1,4 +1,5 @@
-import CrisisMap, { useDelayedFrame } from '../map/CrisisMap.jsx';
+import CrisisMap from '../map/CrisisMap.jsx';
+import useDelayedFrame from '../../lib/useDelayedFrame.js';
 import { RANGE_RINGS } from '../map/geography.js';
 import { PLAY } from '../../data/copy.js';
 import { Button, Eyebrow } from '../ui/index.jsx';
@@ -18,18 +19,21 @@ export default function MapPanel({ inspected, onInspect }) {
     <section className={styles.panel} aria-label={PLAY.map}>
       <div className={styles.head}>
         <Eyebrow>{PLAY.map}</Eyebrow>
-        {inspected ? (
-          <span className={styles.inspected}>{PLAY.mapInspected}</span>
-        ) : (
-          <Button variant="quiet" onClick={onInspect}>
-            {PLAY.mapHint}
-          </Button>
-        )}
+        {inspected && <span className={styles.inspected}>{PLAY.mapInspected}</span>}
       </div>
 
       <div className={styles.frame}>
         <CrisisMap frame={frame} showRings={inspected} />
       </div>
+
+      {/* The inspect control sits under the map rather than in its header:
+          in a 260px rail a header with a button in it wraps to four lines,
+          and this reads more clearly as an action on the thing above it. */}
+      {!inspected && (
+        <button type="button" className={styles.inspect} onClick={onInspect}>
+          {PLAY.mapHint}
+        </button>
+      )}
 
       <div className={styles.legend}>
         <div className={styles.legendItem}>

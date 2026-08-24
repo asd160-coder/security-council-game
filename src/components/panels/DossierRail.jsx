@@ -1,19 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
-import { getCard } from '../../data/cards.js';
-import { getDossier } from '../../data/dossiers.js';
+import { KIND_LABEL, resolveEntry } from '../../lib/entries.js';
 import { PLAY } from '../../data/copy.js';
 import { Button, Eyebrow, Field, Paper, PaperBody } from '../ui/index.jsx';
 import styles from './DossierRail.module.css';
-
-/* Resolves an unlock id against both content sets, so the rail does not care
-   whether an item is a perspective card or an intelligence note. */
-export function resolveEntry(id) {
-  const card = getCard(id);
-  if (card) return { ...card, type: 'card' };
-  const dossier = getDossier(id);
-  if (dossier) return { ...dossier, type: 'dossier' };
-  return null;
-}
 
 const KIND_CLASS = {
   country: styles.kindCountry,
@@ -23,16 +12,6 @@ const KIND_CLASS = {
   procedure: styles.kindProcedure,
   geography: styles.kindGeography,
   memo: styles.kindMemo,
-};
-
-const KIND_LABEL = {
-  country: 'Country',
-  actor: 'Actor',
-  intelligence: 'Intel',
-  channel: 'Channel',
-  procedure: 'Procedure',
-  geography: 'Geography',
-  memo: 'Memo',
 };
 
 export function EntryCard({ entry }) {
@@ -96,6 +75,9 @@ export default function DossierRail({ unlocked, unlockedToday = [] }) {
                   openId === entry.id ? styles.itemActive : ''
                 }`}
                 onClick={() => setOpenId(entry.id)}
+                aria-label={`Open ${KIND_LABEL[entry.kind]}: ${
+                  entry.type === 'card' ? entry.name : entry.title
+                }`}
               >
                 <span className={styles.itemKind}>{KIND_LABEL[entry.kind]}</span>
                 <span className={styles.itemName}>

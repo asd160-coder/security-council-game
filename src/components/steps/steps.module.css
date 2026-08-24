@@ -1,0 +1,311 @@
+/* Shared step layout. Every step is a column of at most a few elements with a
+   single action at the foot — the repetition is deliberate, because a student
+   who has learned Day 1's rhythm should not have to relearn it on Day 3. */
+
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  max-width: var(--measure-scene);
+}
+
+.stepWide {
+  max-width: 56rem;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dayTitle {
+  font-family: var(--font-display);
+  font-size: var(--fs-day-title);
+  font-weight: 300;
+  letter-spacing: -0.015em;
+  line-height: 1.02;
+  color: var(--stock);
+}
+
+.dayNumber {
+  font-weight: 600;
+  color: var(--silver-faint);
+  display: block;
+  font-size: 0.42em;
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.dateline {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--silver-fainter);
+}
+
+/* Scene prose. The one place in this interface running at reading size. */
+.prose p {
+  font-family: var(--font-body);
+  font-size: var(--fs-scene);
+  line-height: 1.68;
+  color: var(--silver);
+}
+
+.prose p + p {
+  margin-top: 14px;
+}
+
+.proseMuted p {
+  color: var(--silver-muted);
+}
+
+.rule {
+  height: 1px;
+  background: var(--board-line);
+  border: none;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* ------------------------------------------------------------- Choice list */
+.choices {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* A choice is a diplomatic line, so it is set as one — the label above it in
+   mono is the strategy, the serif below is the thing you would actually say. */
+.choice {
+  width: 100%;
+  text-align: left;
+  display: block;
+  padding: 16px 18px;
+  border: 1px solid var(--board-line);
+  border-left: 2px solid transparent;
+  border-radius: var(--radius);
+  background: var(--board-raised);
+  transition:
+    background var(--dur-quick) var(--ease),
+    border-color var(--dur-quick) var(--ease),
+    transform var(--dur-quick) var(--ease);
+}
+
+.choice:hover {
+  background: #232b34;
+  border-color: var(--board-line-bright);
+  border-left-color: var(--brass);
+  transform: translateX(2px);
+}
+
+.choiceLabel {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--brass);
+  margin-bottom: 8px;
+}
+
+.choiceLine {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--fs-choice);
+  line-height: 1.55;
+  color: var(--silver);
+}
+
+.adviser {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 4px;
+}
+
+.adviserTaken {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  text-transform: uppercase;
+  color: var(--silver-fainter);
+}
+
+/* -------------------------------------------------------- Chosen line echo */
+/* After a decision, the line you took is repeated back — quietly, as a record
+   of what was said rather than as a reward for saying it. */
+.echo {
+  border-left: 2px solid var(--brass);
+  padding: 4px 0 4px 18px;
+}
+
+.echoLabel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--silver-fainter);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.echoLine {
+  font-family: var(--font-body);
+  font-size: var(--fs-scene);
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--silver-muted);
+}
+
+/* ------------------------------------------------------------- Unlock note */
+.unlock {
+  border: 1px solid var(--board-line);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  background: var(--board-raised);
+}
+
+.unlockHead {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.unlockLabel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--brass-bright);
+}
+
+/* ---------------------------------------------------------- Drafting options */
+.draftOptions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+@media (max-width: 860px) {
+  .draftOptions {
+    grid-template-columns: 1fr;
+  }
+}
+
+.draftOption {
+  text-align: left;
+  padding: 16px 18px;
+  border: 1px solid var(--board-line);
+  border-radius: var(--radius);
+  background: var(--board-raised);
+  transition:
+    background var(--dur-quick) var(--ease),
+    border-color var(--dur-quick) var(--ease);
+}
+
+.draftOption:hover {
+  background: #232b34;
+  border-color: var(--brass);
+}
+
+.draftLabel {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 15.5px;
+  font-weight: 600;
+  color: var(--stock);
+  margin-bottom: 6px;
+}
+
+.draftDescription {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--silver-muted);
+}
+
+.note {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-style: italic;
+  color: var(--silver-fainter);
+}
+
+/* ----------------------------------------------------------------- Summary */
+.summaryGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 26px;
+}
+
+@media (max-width: 860px) {
+  .summaryGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.summaryBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.movementList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.movementRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--board-line);
+}
+
+.movementLabel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: var(--track-label-tight);
+  text-transform: uppercase;
+  color: var(--silver-muted);
+}
+
+.movementValue {
+  font-family: var(--font-mono);
+  font-size: var(--fs-readout);
+  font-variant-numeric: tabular-nums;
+}
+
+.movementDanger {
+  color: var(--wax-bright);
+}
+
+.movementCalm {
+  color: var(--signal-bright);
+}
+
+.movementLegitimacy {
+  color: var(--brass-bright);
+}
+
+.movementNeutral {
+  color: var(--silver);
+}
+
+.tomorrow {
+  border-left: 2px solid var(--wax);
+  padding-left: 18px;
+}

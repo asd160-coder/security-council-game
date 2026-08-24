@@ -21,6 +21,26 @@
   position: relative;
 }
 
+.inspect {
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--silver-muted);
+  background: var(--board-raised);
+  border-top: 1px solid var(--board-line);
+  padding: 11px 12px;
+  transition:
+    background var(--dur-quick) var(--ease),
+    color var(--dur-quick) var(--ease);
+}
+
+.inspect:hover {
+  background: #262f38;
+  color: var(--stock);
+}
+
 .legend {
   display: flex;
   flex-wrap: wrap;

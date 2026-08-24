@@ -1,0 +1,43 @@
+.credits {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: var(--gutter);
+  background: rgba(7, 10, 13, 0.82);
+  backdrop-filter: blur(3px);
+}
+
+.creditsInner {
+  max-width: 34rem;
+  width: 100%;
+}
+
+.creditsClose {
+  display: block;
+  margin: 16px auto 0;
+}
+
+.creditsList {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--stock-edge);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.creditsItem {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  line-height: 1.55;
+  color: var(--ink-faint);
+}
+
+.creditsItemTitle {
+  color: var(--ink);
+  text-transform: uppercase;
+  display: block;
+}

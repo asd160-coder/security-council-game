@@ -19,6 +19,12 @@ export const project = (lon, lat, frame) => ({
 export const FRAMES = {
   hemispheric: { lon0: -128, lon1: 52, lat0: -6, lat1: 74, width: 1000, height: 520 },
   caribbean: { lon0: -94, lon1: -58, lat0: 14, lat1: 44, width: 1000, height: 520 },
+  /* The frame the range rings are drawn in. A 1,290-mile radius is roughly 19
+     degrees of arc, which overflows the Caribbean frame entirely and renders
+     as a wash of colour rather than as a ring. This frame is sized so the
+     MRBM ring sits inside it and the IRBM ring runs off the edge — which is
+     itself the point worth seeing. */
+  regional: { lon0: -122, lon1: -42, lat0: -4, lat1: 60, width: 1000, height: 520 },
 };
 
 const NORTH_AMERICA = [
@@ -63,22 +69,22 @@ const AFRICA_N = [
 ];
 
 export const LANDMASSES = [
-  { id: 'north-america', points: NORTH_AMERICA, frames: ['hemispheric', 'caribbean'] },
-  { id: 'cuba', points: CUBA, frames: ['hemispheric', 'caribbean'], emphasis: true },
-  { id: 'hispaniola', points: HISPANIOLA, frames: ['hemispheric', 'caribbean'] },
-  { id: 'florida-keys', points: FLORIDA_KEYS, frames: ['caribbean'] },
-  { id: 'south-america', points: SOUTH_AMERICA_N, frames: ['hemispheric', 'caribbean'] },
+  { id: 'north-america', points: NORTH_AMERICA, frames: ['hemispheric', 'caribbean', 'regional'] },
+  { id: 'cuba', points: CUBA, frames: ['hemispheric', 'caribbean', 'regional'], emphasis: true },
+  { id: 'hispaniola', points: HISPANIOLA, frames: ['hemispheric', 'caribbean', 'regional'] },
+  { id: 'florida-keys', points: FLORIDA_KEYS, frames: ['caribbean', 'regional'] },
+  { id: 'south-america', points: SOUTH_AMERICA_N, frames: ['hemispheric', 'caribbean', 'regional'] },
   { id: 'eurasia', points: EURASIA, frames: ['hemispheric'] },
   { id: 'africa', points: AFRICA_N, frames: ['hemispheric'] },
 ];
 
 /* The four poles of the crisis. */
 export const MARKERS = [
-  { id: 'washington', label: 'Washington', lon: -77.04, lat: 38.9, frames: ['hemispheric', 'caribbean'] },
+  { id: 'washington', label: 'Washington', lon: -77.04, lat: 38.9, frames: ['hemispheric', 'caribbean', 'regional'] },
   { id: 'new-york', label: 'United Nations', sub: 'New York', lon: -73.97, lat: 40.75, frames: ['hemispheric', 'caribbean'] },
   { id: 'moscow', label: 'Moscow', lon: 37.62, lat: 55.75, frames: ['hemispheric'] },
   { id: 'havana', label: 'Havana', lon: -82.38, lat: 23.13, frames: ['caribbean'] },
-  { id: 'san-cristobal', label: 'San Cristóbal', sub: 'Missile site', lon: -83.05, lat: 22.72, site: true, frames: ['hemispheric', 'caribbean'] },
+  { id: 'san-cristobal', label: 'San Cristóbal', sub: 'Missile site', lon: -83.05, lat: 22.72, site: true, frames: ['hemispheric', 'caribbean', 'regional'] },
 ];
 
 const EARTH_RADIUS_MI = 3958.8;

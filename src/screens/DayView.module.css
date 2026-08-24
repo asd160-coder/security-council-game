@@ -1,0 +1,164 @@
+.view {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ------------------------------------------------------------------ Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 12px var(--gutter);
+  border-bottom: 1px solid var(--board-line);
+  background: var(--board-raised);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.identity {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  min-width: 0;
+}
+
+.wordmark {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--silver-faint);
+  white-space: nowrap;
+}
+
+.seat {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--stock);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.seatDelegation {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  text-transform: uppercase;
+  color: var(--silver-fainter);
+  white-space: nowrap;
+}
+
+/* The day tracker in the header: five days, one built. Showing the unbuilt
+   ones greyed is more honest than hiding them, and it tells a student how
+   long the crisis is meant to run. */
+.days {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dayPip {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  color: var(--silver-fainter);
+  border: 1px solid var(--board-line);
+  border-radius: var(--radius);
+  padding: 4px 8px;
+  line-height: 1;
+}
+
+.dayPipActive {
+  color: var(--stock);
+  border-color: var(--silver-faint);
+  background: var(--board-inset);
+}
+
+.dayPipFuture {
+  opacity: 0.42;
+}
+
+/* ------------------------------------------------------------------- Body */
+.body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: var(--rail-width) minmax(0, 1fr) var(--tracker-width);
+  gap: var(--gutter);
+  padding: var(--gutter);
+  max-width: var(--measure-page);
+  margin: 0 auto;
+  width: 100%;
+  align-items: start;
+}
+
+.left,
+.right {
+  position: sticky;
+  top: calc(56px + var(--gutter));
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: calc(100vh - 56px - var(--gutter) * 2);
+}
+
+.centre {
+  min-width: 0;
+  padding-bottom: 20px;
+}
+
+/* Below the three-column threshold the board unstacks into one column:
+   scene first, then map, then indicators, then file. The scene always leads. */
+@media (max-width: 1180px) {
+  .body {
+    grid-template-columns: 1fr;
+  }
+
+  .left,
+  .right {
+    position: static;
+    max-height: none;
+  }
+
+  .centre {
+    order: -1;
+  }
+
+  .right {
+    order: 1;
+  }
+
+  .left {
+    order: 2;
+  }
+}
+
+.progress {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 26px;
+}
+
+.progressStep {
+  height: 2px;
+  flex: 1;
+  background: var(--board-line);
+  transition: background var(--dur-reveal) var(--ease);
+}
+
+.progressStepDone {
+  background: var(--silver-fainter);
+}
+
+.progressStepCurrent {
+  background: var(--brass-bright);
+}
+
+.trayWrap {
+  border-top: 1px solid var(--board-line);
+  margin-top: auto;
+}

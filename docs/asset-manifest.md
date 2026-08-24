@@ -144,6 +144,96 @@ Listed so the decision does not get revisited later.
 
 ---
 
+## Where to look
+
+### JFK Presidential Library — `jfklibrary.org`
+The single best starting point. Holds the White House Photographs collection
+(Stoughton, Knudsen), the Presidential Recordings including the EXCOMM tapes,
+and the televised addresses. Use the digital archive search; most items carry
+a clear rights statement and a downloadable master.
+
+Search terms that work: `Cuban missile crisis`, `Executive Committee`,
+`October 1962`, plus photographer surnames `Stoughton` and `Knudsen`.
+
+### National Archives Catalog — `catalog.archives.gov`
+The deepest holdings, and the least convenient interface. Everything is
+described at series and item level with an explicit "Use Restrictions" field —
+read that field rather than assuming. Filter by *Photographs and Graphic
+Works* or *Sound Recordings* and by the relevant record group (Department of
+Defense, CIA, Navy).
+
+### CIA FOIA Electronic Reading Room — `cia.gov/readingroom`
+Where the declassified reconnaissance product lives, including the annotated
+NPIC briefing boards. A dedicated Cuban Missile Crisis collection was released
+for the fiftieth anniversary. This is the only place to get the briefing
+boards at usable resolution.
+
+### Naval History and Heritage Command — `history.navy.mil`
+Quarantine photography: destroyers alongside Soviet freighters, the P-2
+Neptune overflights, RF-8 low-level reconnaissance. US Navy work, public
+domain, and consistently well captioned with dates and hull numbers.
+
+### Library of Congress — `loc.gov`
+Prints and Photographs Division. Mixed rights — the site gives a rights
+advisory per item, and a good deal of what it holds is *not* public domain.
+Read the advisory every time.
+
+### Wikimedia Commons — `commons.wikimedia.org`
+Useful as an *index*, not as a source. It aggregates federal works and shows
+the rights reasoning, but the reasoning is user-supplied and sometimes wrong.
+Use it to discover an image, then follow its citation back to the originating
+archive and download from there.
+
+## The two hard cases
+
+Most figures in this scenario are easy to source. Two are not.
+
+**Anatoly Dobrynin.** Soviet official photography is not public domain and its
+status is genuinely tangled. The workable route is US government photographs
+taken during his long Washington posting — White House arrivals, signings,
+State Department occasions — which are federal works.
+
+**U Thant.** The obvious images are UN Photo, which the UN licenses. The same
+route applies: look for US government photographs of his White House visits
+rather than UN chamber photography.
+
+If neither yields a rights-clear image, the interface is designed to work
+without portraits and should be left to do so.
+
+---
+
+## Portraits
+
+The role cards and dossiers currently carry **no portraits**, by design. If
+portraits are added, one rule governs them, and it is an extension of the rule
+already in `src/styles/tokens.css`:
+
+> **A photograph is 1962. An illustration is now.**
+> Archival photography renders on paper, in the archival register, with its
+> source line. Any created portrait must be visibly an *interpretation* —
+> drawn, screened, or otherwise plainly not photographic — and belongs to the
+> board, the present-day interface.
+
+Why this matters more than usual here: this is a history product for students,
+and the whole design argues that the material on screen is real. A created
+likeness that reads as a photograph borrows that credibility without earning
+it, and a student cannot tell which is which. The core brief's own guardrail
+against fictionalising the central historical actors points the same way.
+
+Practical consequences:
+
+- Never place a created portrait on the paper surface, and never give it a
+  source line. Those are reserved for archival material.
+- Keep created portraits in a treatment that could not be mistaken for a
+  photograph: line work, a coarse halftone, a single-colour screen print.
+- Label them. A small `Illustration` marker in the mono register, in the same
+  position an archival item carries its source, keeps the distinction visible
+  without belabouring it.
+- Consistency is what sells it. Three portraits in three different styles read
+  as clip art; three in one committed treatment read as an editorial decision.
+
+---
+
 ## Practical notes for whoever adds the files
 
 - Files go in `public/archive/`. Reference them by filename in the `file`

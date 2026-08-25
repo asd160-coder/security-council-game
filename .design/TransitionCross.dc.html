@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@200;300;400;500;600&amp;family=Source+Serif+4:ital,wght@0,300..600;1,300..600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+  <style>
+    body { margin:0; background:#12161b; color:#c3c9d0; font-family:'Source Serif 4',Georgia,'Times New Roman',serif; }
+    a { color:#c9a355; }
+    a:hover { color:#a8853c; }
+  </style>
+</helmet>
+<div style="width:880px; height:600px; background:#12161b; box-sizing:border-box; padding:28px 32px; display:flex; flex-direction:column; gap:20px; overflow:hidden;">
+<div style="display:flex; align-items:center; justify-content:space-between; padding-bottom:12px; border-bottom:1px solid #2a323b;">
+  <div style="display:flex; align-items:center; gap:12px;">
+    <span style="font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:#6f7883;">October 1962</span>
+    <img src="rfk.jpg" alt="" style="width:30px; height:30px; border-radius:50%; object-fit:cover; object-position:50% 20%; border:1px solid #3a444f;">
+    <span style="font-family:'Libre Franklin','Helvetica Neue',Arial,sans-serif; font-size:14px; font-weight:600; color:#e6e1d6;">Robert Kennedy</span>
+  </div>
+  <span style="font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace; font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:#4d555f;">persists</span>
+</div>
+<div style="flex:1; min-height:0; display:flex; flex-direction:column; gap:18px; position:relative; overflow:hidden;">
+<div style="display:flex; gap:4px;"><span style="height:2px; flex:1; background:#4d555f;"></span><span style="height:2px; flex:1; background:#4d555f;"></span><span style="height:2px; flex:1; background:#4d555f;"></span><span style="height:2px; flex:1; background:#c9a355;"></span><span style="height:2px; flex:1; background:#2a323b;"></span><span style="height:2px; flex:1; background:#2a323b;"></span></div>
+<div style="opacity:0.22; transform:translateY(-14px);">
+  <span style="font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:#6f7883;">How your position was read</span>
+  <div style="display:flex; flex-direction:column; gap:14px;"><p style="margin:0; font-family:'Source Serif 4',Georgia,'Times New Roman',serif; font-size:19px; line-height:1.68; color:#97a0aa;">Your stance projects seriousness and resolve. Others are less likely to dismiss your position, but some now read the crisis as moving closer to confrontation.</p></div>
+</div>
+<div style="opacity:0.45; transform:translateY(10px); border-top:1px dashed #3a444f; padding-top:16px;">
+  <span style="font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:#6f7883;">Drafting — opening line</span>
+  <p style="margin:12px 0 0; font-family:'Source Serif 4',Georgia,'Times New Roman',serif; font-size:19px; line-height:1.68; color:#c3c9d0;">Choose the tone of your opening diplomatic line.</p>
+</div>
+</div>
+<div style="display:flex; justify-content:space-between; align-items:baseline;">
+  <span style="font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace; font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:#4d555f;">Frame 2 · outgoing lifts and fades, incoming rises</span>
+  <span style="font-family:'Source Serif 4',Georgia,'Times New Roman',serif; font-size:12px; font-style:italic; color:#4d555f;">only the scene column crosses</span>
+</div>
+</div>
+</x-dc>
+<script data-dc-script>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

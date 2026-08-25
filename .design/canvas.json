@@ -1,0 +1,149 @@
+{
+  "artboards": [
+    {
+      "file": "Main.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 880,
+      "h": 660
+    },
+    {
+      "file": "ResponseLines.dc.html",
+      "x": 960,
+      "y": 0,
+      "w": 880,
+      "h": 660
+    },
+    {
+      "file": "ResponseChosen.dc.html",
+      "x": 1920,
+      "y": 0,
+      "w": 880,
+      "h": 660
+    },
+    {
+      "file": "ConsequenceHold.dc.html",
+      "x": 0,
+      "y": 760,
+      "w": 1060,
+      "h": 660
+    },
+    {
+      "file": "ConsequenceTravel.dc.html",
+      "x": 1140,
+      "y": 760,
+      "w": 1060,
+      "h": 660
+    },
+    {
+      "file": "ConsequenceCard.dc.html",
+      "x": 2280,
+      "y": 760,
+      "w": 1060,
+      "h": 660
+    },
+    {
+      "file": "DraftingCurrent.dc.html",
+      "x": 0,
+      "y": 1520,
+      "w": 880,
+      "h": 620
+    },
+    {
+      "file": "DraftingSpecimen.dc.html",
+      "x": 960,
+      "y": 1520,
+      "w": 880,
+      "h": 620
+    },
+    {
+      "file": "DraftingSheet.dc.html",
+      "x": 1920,
+      "y": 1520,
+      "w": 880,
+      "h": 620
+    },
+    {
+      "file": "TransitionOut.dc.html",
+      "x": 0,
+      "y": 2240,
+      "w": 880,
+      "h": 600
+    },
+    {
+      "file": "TransitionCross.dc.html",
+      "x": 960,
+      "y": 2240,
+      "w": 880,
+      "h": 600
+    },
+    {
+      "file": "TransitionIn.dc.html",
+      "x": 1920,
+      "y": 2240,
+      "w": 880,
+      "h": 600
+    },
+    {
+      "file": "MapRail.dc.html",
+      "x": 0,
+      "y": 2920,
+      "w": 380,
+      "h": 620
+    },
+    {
+      "file": "MapExpanding.dc.html",
+      "x": 460,
+      "y": 2920,
+      "w": 880,
+      "h": 620
+    },
+    {
+      "file": "MapOverlay.dc.html",
+      "x": 1420,
+      "y": 2920,
+      "w": 1240,
+      "h": 760
+    }
+  ],
+  "annotations": [
+    {
+      "id": "row-response",
+      "x": -320,
+      "y": 0,
+      "w": 240,
+      "text": "RESPONSE SCENE\n\nYour speech-bubble idea, in documentary register.\n\nDecide: does the speaker stay for the whole scene, or withdraw once the lines appear?"
+    },
+    {
+      "id": "row-consequence",
+      "x": -320,
+      "y": 760,
+      "w": 240,
+      "text": "CONSEQUENCE BEAT\n\nDecide: does the scene hold while the needles settle, or do they move under the next screen?\n\nRight now they move and you miss it."
+    },
+    {
+      "id": "row-drafting",
+      "x": -320,
+      "y": 1520,
+      "w": 240,
+      "text": "DRAFTING \u00b7 THREE DIRECTIONS\n\nA is what ships today.\nB leads with the sentence.\nC makes the sheet the interface.\n\nPick one, or mix."
+    },
+    {
+      "id": "row-transitions",
+      "x": -320,
+      "y": 2240,
+      "w": 240,
+      "text": "TRANSITIONS\n\nWhat persists, what crosses.\n\nHeader, rail and indicators hold still; only the scene column moves."
+    },
+    {
+      "id": "row-map",
+      "x": -320,
+      "y": 2920,
+      "w": 240,
+      "text": "MAP \u00b7 RAIL TO OVERLAY\n\nFrame 1 is drawn at the true 260px so the problem is visible next to the fix.\n\nDecide how the overlay is dismissed and whether it pauses the scene."
+    }
+  ],
+  "launch": {
+    "view": "canvas"
+  }
+}

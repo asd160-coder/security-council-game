@@ -2,3 +2,8 @@ node_modules
 dist
 .DS_Store
 *.local
+
+# The seeded design canvas: ~2.3 MB of editor payload wrapped around the
+# artboards, rebuilt by seed-canvas.mjs from the working files beside it.
+# Committing it would add a new multi-megabyte blob on every re-seed.
+.design/october-1962-motion-study.html

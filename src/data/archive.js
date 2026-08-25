@@ -34,6 +34,19 @@ export const ARCHIVE = [
       'This is the evidence itself. Every decision that follows rests on an image most of the world had not yet seen.',
   },
   {
+    id: 'npic-briefing-board',
+    kind: 'image',
+    file: null, // public/archive/npic-briefing-board-1962-10-16.jpg
+    title: 'NPIC briefing board, annotated',
+    date: '15–16 October 1962',
+    caption:
+      'A mounted briefing board of the same imagery, marked up by photo interpreters to identify launch positions, erectors and support vehicles.',
+    source: 'CIA / National Photographic Interpretation Center, FOIA Electronic Reading Room',
+    rights: 'Public domain — work of the US federal government',
+    whyItMatters:
+      'The board is where a photograph became an argument. Someone had to decide what the shapes on the film meant, and then persuade a president of it.',
+  },
+  {
     id: 'excomm-cabinet-room',
     kind: 'image',
     file: null, // public/archive/excomm-cabinet-room-1962-10-29.jpg

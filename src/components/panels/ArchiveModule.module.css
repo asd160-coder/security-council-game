@@ -43,6 +43,22 @@
   background: var(--board-inset);
 }
 
+/* A declared file that will not load is a mistake, not an empty slot. The wax
+   register is this interface's mark for something wrong. */
+.awaitingFailed {
+  border-color: var(--wax);
+  border-style: solid;
+}
+
+.awaitingFailed .awaitingMark {
+  border-color: var(--wax);
+  color: var(--wax-bright);
+}
+
+.awaitingFailed .awaitingTitle {
+  color: var(--wax-bright);
+}
+
 .awaitingMark {
   width: 34px;
   height: 34px;

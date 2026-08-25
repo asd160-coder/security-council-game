@@ -56,6 +56,12 @@ export const PLAY = {
   awaitingAsset: 'Archival item not yet attached',
   awaitingAssetNote:
     'This slot is declared with its source and rights. The file has not been added to the build.',
+  /* Distinct from the above on purpose: an empty slot is expected, a declared
+     file that will not load is a mistake, and the two should not look the
+     same to whoever is adding assets. */
+  missingAsset: 'Archival file could not be loaded',
+  missingAssetNote: (file) =>
+    `This slot expects "${file}" in public/archive. Check the filename and extension match exactly.`,
   play: 'Play',
   pause: 'Pause',
   skip: 'Skip',

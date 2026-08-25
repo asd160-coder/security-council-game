@@ -49,6 +49,12 @@ export const PLAY = {
   map: 'Situation map',
   mapHint: 'Inspect the map',
   mapInspected: 'Geography noted',
+  /* The overlay. Opening the map at full size IS inspecting it — one action
+     rather than a button that unlocks and a separate control that enlarges. */
+  mapExpand: 'Open at full size',
+  mapOverlayTitle: 'Strike range from San Cristóbal',
+  mapOverlayDay: (n) => `Situation map · Day ${n}`,
+  mapScale: 'Coastlines schematic · ranges to scale',
   archive: 'Archive',
   newInFile: 'New in your file',
   soWhat: 'What this changes',

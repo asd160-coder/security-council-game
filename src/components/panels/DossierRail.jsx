@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { KIND_LABEL, resolveEntry } from '../../lib/entries.js';
 import { PLAY } from '../../data/copy.js';
 import { Button, Eyebrow, Field, Paper, PaperBody } from '../ui/index.jsx';
@@ -90,24 +91,29 @@ export default function DossierRail({ unlocked, unlockedToday = [] }) {
         )}
       </section>
 
-      {open && (
-        <div
-          className={styles.viewer}
-          role="dialog"
-          aria-modal="true"
-          aria-label={open.type === 'card' ? open.name : open.title}
-          onClick={(event) => {
-            if (event.target === event.currentTarget) close();
-          }}
-        >
-          <div className={styles.viewerInner}>
-            <EntryCard entry={open} />
-            <Button className={styles.viewerClose} onClick={close} autoFocus>
-              {PLAY.close}
-            </Button>
-          </div>
-        </div>
-      )}
+      {/* Portalled for the same reason as the map overlay: the rail this lives
+          in is position: sticky, and a fixed element inside that stacking
+          context paints beneath its siblings whatever its z-index. */}
+      {open &&
+        createPortal(
+          <div
+            className={styles.viewer}
+            role="dialog"
+            aria-modal="true"
+            aria-label={open.type === 'card' ? open.name : open.title}
+            onClick={(event) => {
+              if (event.target === event.currentTarget) close();
+            }}
+          >
+            <div className={styles.viewerInner}>
+              <EntryCard entry={open} />
+              <Button className={styles.viewerClose} onClick={close} autoFocus>
+                {PLAY.close}
+              </Button>
+            </div>
+          </div>,
+          document.body,
+        )}
     </>
   );
 }

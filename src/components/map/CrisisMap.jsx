@@ -20,6 +20,14 @@ import styles from './CrisisMap.module.css';
    rings — which is what turns the map from decoration into something a player
    has a reason to touch. */
 
+/* Labels hang to the right of their dot by default. A marker can set
+   `anchor: 'end'` to hang left instead, which is how two places close enough
+   to collide — Washington and the UN — keep their own space. */
+const labelX = (marker) => {
+  const offset = marker.site ? 12 : 9;
+  return marker.anchor === 'end' ? marker.x - offset : marker.x + offset;
+};
+
 export default function CrisisMap({
   frame = 'hemispheric',
   showRings = false,
@@ -138,16 +146,18 @@ export default function CrisisMap({
             {labels && (
               <>
                 <text
-                  x={marker.x + (marker.site ? 12 : 9)}
+                  x={labelX(marker)}
                   y={marker.y - (marker.sub ? 1 : 3)}
+                  textAnchor={marker.anchor ?? 'start'}
                   className={`${styles.label} ${marker.site ? styles.labelSite : ''}`}
                 >
                   {marker.label}
                 </text>
                 {marker.sub && (
                   <text
-                    x={marker.x + (marker.site ? 12 : 9)}
+                    x={labelX(marker)}
                     y={marker.y + 11}
+                    textAnchor={marker.anchor ?? 'start'}
                     className={styles.sub}
                   >
                     {marker.sub}

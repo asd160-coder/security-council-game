@@ -45,7 +45,7 @@
      anything. */
   --wax: #b23a2f;
   --wax-bright: #d2564a; /* the moment a delta lands */
-  --wax-dim: rgba(178, 58, 47, 0.22); /* arc fills, danger wash */
+  --wax-dim: rgba(178, 58, 47, 0.16); /* arc fills, danger wash */
 
   /* Brass is the institutional register: legitimacy, council trust, the UN.
      Restraint applies here too, but it is allowed to be a little warmer. */

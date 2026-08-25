@@ -80,8 +80,8 @@ export const LANDMASSES = [
 
 /* The four poles of the crisis. */
 export const MARKERS = [
-  { id: 'washington', label: 'Washington', lon: -77.04, lat: 38.9, frames: ['hemispheric', 'caribbean', 'regional'] },
-  { id: 'new-york', label: 'United Nations', sub: 'New York', lon: -73.97, lat: 40.75, frames: ['hemispheric', 'caribbean'] },
+  { id: 'washington', label: 'Washington', lon: -77.04, lat: 38.9, anchor: 'end', frames: ['hemispheric', 'caribbean', 'regional'] },
+  { id: 'new-york', label: 'United Nations', sub: 'New York', lon: -73.97, lat: 40.75, frames: ['hemispheric', 'caribbean', 'regional'] },
   { id: 'moscow', label: 'Moscow', lon: 37.62, lat: 55.75, frames: ['hemispheric'] },
   { id: 'havana', label: 'Havana', lon: -82.38, lat: 23.13, frames: ['caribbean'] },
   { id: 'san-cristobal', label: 'San Cristóbal', sub: 'Missile site', lon: -83.05, lat: 22.72, site: true, frames: ['hemispheric', 'caribbean', 'regional'] },

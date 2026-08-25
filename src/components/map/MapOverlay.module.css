@@ -1,0 +1,188 @@
+/* The map at full size.
+
+   Follows the file viewer's overlay pattern in DossierRail: fixed scrim, one
+   panel, Escape and scrim-click to dismiss. The map is the reason this exists,
+   so it takes the space and the reading column sits beside it. */
+.scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--gutter);
+  background: rgba(7, 10, 13, 0.86);
+  backdrop-filter: blur(4px);
+  animation: fade var(--dur-quick) var(--ease) both;
+}
+
+.panel {
+  width: min(1240px, 100%);
+  /* Claim the vertical space rather than sizing to content: the map was
+     rendering well below 1:1 in a panel that had room to spare. */
+  height: min(780px, calc(100vh - var(--gutter) * 2));
+  max-height: calc(100vh - var(--gutter) * 2);
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 24px 26px 22px;
+  background: var(--board);
+  border: 1px solid var(--board-line-bright);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-panel);
+  /* Grows from the rail rather than dropping in from nowhere. */
+  animation: expand var(--dur-reveal) var(--ease) both;
+}
+
+.head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.2vw, 26px);
+  font-weight: 300;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  color: var(--stock);
+}
+
+.body {
+  display: flex;
+  gap: 26px;
+  min-height: 0;
+  flex: 1;
+}
+
+.mapWrap {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid var(--board-line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+}
+
+.aside {
+  width: 240px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  overflow-y: auto;
+}
+
+.legend {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--board-line);
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.swatchSite {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 9px solid var(--wax);
+  flex-shrink: 0;
+}
+
+.swatchRing {
+  width: 18px;
+  border-top: 1.5px dashed var(--wax);
+  flex-shrink: 0;
+}
+
+.legendText {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: var(--track-label-tight);
+  text-transform: uppercase;
+  color: var(--silver-faint);
+  line-height: 1.45;
+}
+
+.legendNote {
+  display: block;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--silver-fainter);
+}
+
+.note p {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.62;
+  color: var(--silver-muted);
+}
+
+.note p + p {
+  margin-top: 12px;
+}
+
+.scale {
+  margin-top: auto;
+  padding-top: 14px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  color: var(--silver-fainter);
+  line-height: 1.5;
+}
+
+/* Below the two-column threshold the reading column moves under the map. */
+@media (max-width: 900px) {
+  .body {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+
+  .aside {
+    width: auto;
+  }
+
+  .scale {
+    margin-top: 0;
+  }
+}
+
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes expand {
+  from {
+    opacity: 0;
+    transform: scale(0.965) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrim,
+  .panel {
+    animation: none;
+  }
+}

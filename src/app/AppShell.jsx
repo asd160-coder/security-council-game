@@ -56,7 +56,7 @@ export default function AppShell() {
         >
           <div className={styles.creditsInner}>
             <Paper title={APP.creditsTitle}>
-              <PaperBody paragraphs={[APP.creditsBody, APP.creditsNote]} />
+              <PaperBody paragraphs={[APP.creditsBody, APP.creditsNote, APP.creditsPortraits]} />
 
               <div className={styles.creditsList}>
                 {ARCHIVE.map((item) => (

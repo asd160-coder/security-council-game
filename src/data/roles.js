@@ -3,11 +3,22 @@
    paraphrased, because they are the first thing that makes the roles feel
    different from one another.
 
-   `startingUnlock` is granted at role selection, per the content pack. */
+   `startingUnlock` is granted at role selection, per the content pack.
+
+   `portrait` names a file in public/portraits — deliberately NOT
+   public/archive. These are generated painted illustrations, not
+   photographs: invented likenesses of real people. They render only on board
+   surfaces, always carry the illustration marker, and never carry a source
+   line, because source lines belong to archival material. The folder split
+   is the first line of that distinction and the label is the second. */
 
 export const ROLES = [
   {
     id: 'rfk',
+    portrait: 'robert-kennedy.jpg',
+    /* Each source frames its subject at a different scale, so the crop
+       origin is per-image rather than shared. */
+    portraitFocus: '50% 12%',
     name: 'Robert Kennedy',
     title: 'Attorney General of the United States',
     delegation: 'United States',
@@ -31,6 +42,10 @@ export const ROLES = [
   },
   {
     id: 'dobrynin',
+    portrait: 'anatoly-dobrynin.jpg',
+    /* Each source frames its subject at a different scale, so the crop
+       origin is per-image rather than shared. */
+    portraitFocus: '50% 34%',
     name: 'Anatoly Dobrynin',
     title: 'Soviet Ambassador to the United States',
     delegation: 'Soviet Union',
@@ -51,6 +66,10 @@ export const ROLES = [
   },
   {
     id: 'uthant',
+    portrait: 'u-thant.jpg',
+    /* Each source frames its subject at a different scale, so the crop
+       origin is per-image rather than shared. */
+    portraitFocus: '50% 24%',
     name: 'U Thant',
     title: 'Secretary-General of the United Nations',
     delegation: 'United Nations',

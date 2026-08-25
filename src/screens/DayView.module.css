@@ -20,9 +20,23 @@
 
 .identity {
   display: flex;
-  align-items: baseline;
-  gap: 14px;
+  align-items: center;
+  gap: 12px;
   min-width: 0;
+}
+
+/* A small portrait beside the seat name — enough to keep the face you chose
+   present without giving it billing. Marked as an illustration for screen
+   readers; the visible marker lives on the role card where there is room. */
+.seatPortrait {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 20%;
+  border: 1px solid var(--board-line-bright);
+  filter: saturate(0.86) contrast(1.03);
+  flex-shrink: 0;
 }
 
 .wordmark {

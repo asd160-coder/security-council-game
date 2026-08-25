@@ -83,6 +83,13 @@ export default function DayView({ day, role, state, dispatch }) {
       <header className={styles.header}>
         <div className={styles.identity}>
           <span className={styles.wordmark}>{APP.title}</span>
+          {role.portrait && (
+            <img
+              className={styles.seatPortrait}
+              src={`portraits/${role.portrait}`}
+              alt={`${role.name} — ${PLAY.illustration.toLowerCase()}`}
+            />
+          )}
           <span className={styles.seat}>{role.name}</span>
           <span className={styles.seatDelegation}>{role.delegation}</span>
         </div>

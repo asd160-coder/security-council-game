@@ -17,6 +17,8 @@ export const APP = {
     'Archival photographs and audio in this simulation are works of the United States federal government and are in the public domain. Each item carries its source where it appears.',
   creditsNote:
     'Dialogue lines are authored for the simulation. They are written in the register of the historical figures and are not quotations.',
+  creditsPortraits:
+    'Portraits are generated painted illustrations, not photographs. They are interpretations of their subjects and are marked as such wherever they appear.',
   close: 'Close',
 };
 
@@ -66,6 +68,9 @@ export const PLAY = {
   pause: 'Pause',
   skip: 'Skip',
   close: 'Close',
+  /* Marks a created likeness. Sits where an archival item carries its source,
+     so the difference between the two registers is visible in the same slot. */
+  illustration: 'Illustration',
 };
 
 export const SUMMARY = {

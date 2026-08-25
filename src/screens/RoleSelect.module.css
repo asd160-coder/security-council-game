@@ -38,16 +38,26 @@
   .grid {
     grid-template-columns: 1fr;
   }
+
+  /* One column means a full-width card, and a 4:3.4 portrait at that width
+     fills most of the screen. Cap the height so the portrait stays a header
+     for the card rather than becoming the card. */
+  .portraitFrame {
+    aspect-ratio: auto;
+    height: 380px;
+  }
+
+
 }
 
-/* A seat, not a character select. No portraits — we have no rights-clear
-   likenesses, and inventing one would be worse than a strong typographic
-   card. The name is the image. */
+/* A seat, not a character select. The portrait leads, then the delegation,
+   then what the seat is actually responsible for. */
 .card {
   display: flex;
   flex-direction: column;
   text-align: left;
-  padding: 26px 24px 24px;
+  padding: 0 0 24px;
+  overflow: hidden;
   border: 1px solid var(--board-line);
   border-top: 2px solid var(--seat-color);
   border-radius: var(--radius);
@@ -75,6 +85,61 @@
 
 .seatUn {
   --seat-color: var(--brass);
+}
+
+/* ------------------------------------------------------------- Portrait */
+.portraitFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3.4;
+  overflow: hidden;
+  background: var(--board-inset);
+  border-bottom: 1px solid var(--board-line);
+}
+
+.portrait {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* object-position comes from the role data — see portraitFocus in roles.js. */
+  filter: saturate(0.86) contrast(1.03);
+  transition: transform var(--dur-reveal) var(--ease);
+}
+
+.card:hover .portrait {
+  transform: scale(1.02);
+}
+
+/* The board's own colour, washed back over the foot of the portrait, so the
+   image resolves into the card instead of stopping at a hard edge. */
+.portraitFrame::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 26%;
+  background: linear-gradient(to bottom, transparent, var(--board-raised) 88%);
+  pointer-events: none;
+}
+
+/* Marks the likeness as created. Sits in the position an archival item would
+   carry its source line, which is the point. */
+.illustrationMark {
+  position: absolute;
+  left: 14px;
+  bottom: 10px;
+  z-index: 1;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--silver-faint);
+}
+
+.cardBody {
+  padding: 16px 22px 0;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .delegation {
@@ -144,7 +209,7 @@
 }
 
 .take {
-  margin-top: auto;
+  margin: auto 22px 0;
   font-family: var(--font-mono);
   font-size: var(--fs-button);
   letter-spacing: var(--track-label);

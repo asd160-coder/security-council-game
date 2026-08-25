@@ -1,5 +1,5 @@
 import { ROLES } from '../data/roles.js';
-import { ROLE_SELECT } from '../data/copy.js';
+import { PLAY, ROLE_SELECT } from '../data/copy.js';
 import { Reveal } from '../components/ui/index.jsx';
 import styles from './RoleSelect.module.css';
 
@@ -30,19 +30,32 @@ export default function RoleSelect({ onSelect }) {
               aria-label={`${ROLE_SELECT.choose}: ${role.name}, ${role.title}`}
               style={{ height: '100%' }}
             >
-              <span className={styles.delegation}>{role.delegation}</span>
-              <span className={styles.name}>{role.name}</span>
-              <span className={styles.role}>{role.title}</span>
-              <span className={styles.standfirstCard}>{role.standfirst}</span>
+              <span className={styles.portraitFrame}>
+                <img
+                  className={styles.portrait}
+                  src={`portraits/${role.portrait}`}
+                  style={{ objectPosition: role.portraitFocus }}
+                  alt=""
+                  loading="eager"
+                />
+                <span className={styles.illustrationMark}>{PLAY.illustration}</span>
+              </span>
 
-              <span className={styles.fields}>
-                <span className={styles.field}>
-                  <span className={styles.fieldLabel}>{ROLE_SELECT.emphasis}</span>
-                  <span className={styles.fieldValue}>{role.emphasis}</span>
-                </span>
-                <span className={styles.field}>
-                  <span className={styles.fieldLabel}>{ROLE_SELECT.tension}</span>
-                  <span className={styles.fieldValue}>{role.tension}</span>
+              <span className={styles.cardBody}>
+                <span className={styles.delegation}>{role.delegation}</span>
+                <span className={styles.name}>{role.name}</span>
+                <span className={styles.role}>{role.title}</span>
+                <span className={styles.standfirstCard}>{role.standfirst}</span>
+
+                <span className={styles.fields}>
+                  <span className={styles.field}>
+                    <span className={styles.fieldLabel}>{ROLE_SELECT.emphasis}</span>
+                    <span className={styles.fieldValue}>{role.emphasis}</span>
+                  </span>
+                  <span className={styles.field}>
+                    <span className={styles.fieldLabel}>{ROLE_SELECT.tension}</span>
+                    <span className={styles.fieldValue}>{role.tension}</span>
+                  </span>
                 </span>
               </span>
 

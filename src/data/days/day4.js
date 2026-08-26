@@ -407,16 +407,19 @@ const day4 = {
             rfk: [
               {
                 id: 'rfk4r-forthwith',
+                label: 'Immediate dismantling',
                 text: 'upon the immediate dismantling of the weapons, verified before any undertaking takes effect.',
                 effects: { leverage: 2, escalation: 1, legitimacy: 0, councilTrust: -2, civilianRisk: 1 },
               },
               {
                 id: 'rfk4r-verified',
+                label: 'Verified removal',
                 text: 'upon the verified removal of the weapons concerned, the two steps proceeding together.',
                 effects: { leverage: 0, escalation: -2, legitimacy: 2, councilTrust: 2, civilianRisk: -2 },
               },
               {
                 id: 'rfk4r-turkey',
+                label: 'A withdrawal in return',
                 text: 'upon withdrawal of the weapons, this Government undertaking a comparable withdrawal elsewhere in due course and without public announcement.',
                 effects: { leverage: -2, escalation: -2, legitimacy: -1, councilTrust: 1, civilianRisk: -2 },
               },
@@ -424,16 +427,19 @@ const day4 = {
             dobrynin: [
               {
                 id: 'dob4r-lift',
+                label: 'The quarantine lifted',
                 text: 'upon the lifting of the quarantine and an undertaking against invasion given publicly.',
                 effects: { leverage: 2, escalation: 1, legitimacy: -1, councilTrust: -1, civilianRisk: 1 },
               },
               {
                 id: 'dob4r-mutual',
+                label: 'Reciprocal withdrawal',
                 text: 'upon a reciprocal undertaking, neither withdrawal preceding the other.',
                 effects: { leverage: 0, escalation: -2, legitimacy: 2, councilTrust: 2, civilianRisk: -2 },
               },
               {
                 id: 'dob4r-quiet',
+                label: 'Assurance, quietly',
                 text: 'upon an assurance against invasion, the question of other deployments being reserved for later and quieter discussion.',
                 effects: { leverage: -1, escalation: -2, legitimacy: 1, councilTrust: 1, civilianRisk: -2 },
               },
@@ -441,16 +447,19 @@ const day4 = {
             uthant: [
               {
                 id: 'uth4r-suspend',
+                label: 'Both measures suspended',
                 text: 'upon both Governments suspending the measures now in force for the duration of the discussions.',
                 effects: { leverage: 1, escalation: -2, legitimacy: 1, councilTrust: 1, civilianRisk: -2 },
               },
               {
                 id: 'uth4r-consent',
+                label: 'Cuban consent',
                 text: 'upon the consent of the Government of Cuba, which shall be sought and not assumed.',
                 effects: { leverage: -2, escalation: -1, legitimacy: 2, councilTrust: 2, civilianRisk: -1 },
               },
               {
                 id: 'uth4r-report',
+                label: 'Compliance reported',
                 text: 'upon both Governments accepting that any failure to comply will be reported to this Council by name.',
                 effects: { leverage: 2, escalation: 0, legitimacy: 1, councilTrust: -2, civilianRisk: 0 },
               },

@@ -3,7 +3,7 @@ import { getModifier, getResolution, getRoleCloser } from '../data/endings.js';
 import { TRACKERS } from '../data/trackers.js';
 import { formatValue } from '../lib/format.js';
 import { Button, Reveal } from '../components/ui/index.jsx';
-import { ENDING } from '../data/copy.js';
+import { DEBRIEF, ENDING } from '../data/copy.js';
 import styles from './EndingScreen.module.css';
 
 /* How the run resolved.
@@ -16,7 +16,7 @@ import styles from './EndingScreen.module.css';
    clauses and the student's own closing as its final paragraph. That is the
    artefact the session produces, and the thing a teacher can actually read. */
 
-export default function EndingScreen({ state, role, onRestart }) {
+export default function EndingScreen({ state, role, onRestart, onDebrief }) {
   const { resolution, modifiers } = resolveOutcome({
     trackers: state.trackers,
     choices: state.choices,
@@ -110,9 +110,10 @@ export default function EndingScreen({ state, role, onRestart }) {
       <Reveal delay={640} className={styles.foot}>
         <p className={styles.next}>{ENDING.next}</p>
         <div className={styles.actions}>
-          <Button variant="primary" onClick={onRestart}>
-            {ENDING.restart}
+          <Button variant="primary" onClick={onDebrief}>
+            {DEBRIEF.enter}
           </Button>
+          <Button onClick={onRestart}>{ENDING.restart}</Button>
         </div>
       </Reveal>
     </div>

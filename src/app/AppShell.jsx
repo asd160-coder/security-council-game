@@ -4,6 +4,7 @@ import RoleSelect from '../screens/RoleSelect.jsx';
 import DayView from '../screens/DayView.jsx';
 import DayStub from '../screens/DayStub.jsx';
 import EndingScreen from '../screens/EndingScreen.jsx';
+import DebriefScreen from '../screens/DebriefScreen.jsx';
 import { Button, Paper, PaperBody } from '../components/ui/index.jsx';
 import { initialState, reducer } from '../lib/gameState.js';
 import { getRole } from '../data/roles.js';
@@ -43,6 +44,15 @@ export default function AppShell() {
 
       {state.screen === 'ending' && role && (
         <EndingScreen
+          state={state}
+          role={role}
+          onRestart={() => dispatch({ type: 'restart' })}
+          onDebrief={() => dispatch({ type: 'openDebrief' })}
+        />
+      )}
+
+      {state.screen === 'debrief' && role && (
+        <DebriefScreen
           state={state}
           role={role}
           onRestart={() => dispatch({ type: 'restart' })}

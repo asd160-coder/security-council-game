@@ -24,7 +24,11 @@ export default function DraftingTray({ draft, compact = false }) {
             <div key={entry.dayNumber} className={styles.fragment}>
               <div className={styles.fragmentHead}>
                 <span className={styles.fragmentIndex}>{PLAY.draftFragment(index + 1)}</span>
-                <span className={styles.fragmentTone}>{entry.label}</span>
+                {/* The clause's own character, not the last action taken on
+                    it. Rewriting it renames it; leaving it alone does not. */}
+                <span className={styles.fragmentTone}>
+                  {entry.revised ? entry.label : (entry.originalLabel ?? entry.label)}
+                </span>
                 {entry.revised && <span className={styles.revisedMark}>{PLAY.revised}</span>}
               </div>
               <p className={styles.fragmentText}>{entry.fragment}</p>

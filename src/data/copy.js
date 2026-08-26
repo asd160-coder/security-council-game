@@ -108,8 +108,24 @@ export const ENDING = {
   cost: 'What it cost',
   statementTitle: 'Your statement, complete',
   ownWords: 'In conclusion — your own words',
-  next: 'This is the end of the playable crisis. The debrief — comparing your route with the historical record, and the discussion prompts that go with it — is the remaining piece and is not built yet.',
+  next: 'The debrief reads this run back to you — why it ended as it did, the five decisions that made it, and how the document came to say what it says.',
   restart: 'Play again as a different role',
+};
+
+export const DEBRIEF = {
+  day: (n) => `Day ${n}`,
+  noChoice: 'No decisive exchange was recorded for this day.',
+  draftNote: (action, label) => {
+    if (action === 'wrote') return 'Drafting — you wrote the closing';
+    if (action === 'revised') return `Drafting — rewrote the clause as ${label}`;
+    if (action === 'held') return 'Drafting — left the clause as written';
+    return `Drafting — ${label}`;
+  },
+  superseded: 'Superseded',
+  revisedOn: (n) => `Revised on Day ${n}`,
+  travelled: (n) => `moved ${n}`,
+  restart: 'Play again as a different role',
+  enter: 'Continue to the debrief',
 };
 
 export const STUB = {

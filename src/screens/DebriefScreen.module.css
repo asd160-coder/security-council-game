@@ -1,0 +1,379 @@
+/* A seminar handout, not a results page. Long-form measure, generous rules
+   between sections, and nothing that reads as a scoreboard. */
+.screen {
+  min-height: 100vh;
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: 7vh var(--gutter) var(--gutter);
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--fs-screen-title);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--stock);
+}
+
+.standfirst {
+  font-family: var(--font-body);
+  font-size: var(--fs-scene);
+  line-height: 1.62;
+  color: var(--silver-muted);
+  max-width: 42rem;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sectionHead {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--board-line);
+}
+
+.prose p {
+  font-family: var(--font-body);
+  font-size: 15.5px;
+  line-height: 1.68;
+  color: var(--silver-muted);
+  max-width: 42rem;
+}
+
+.prose p + p {
+  margin-top: 14px;
+}
+
+.caveat {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--silver-fainter);
+  max-width: 40rem;
+}
+
+/* --------------------------------------------------------- The five days */
+.path {
+  display: flex;
+  flex-direction: column;
+}
+
+.dayRow {
+  display: grid;
+  grid-template-columns: 118px minmax(0, 1fr);
+  gap: 22px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--board-line);
+}
+
+.dayRow:last-child {
+  border-bottom: none;
+}
+
+@media (max-width: 720px) {
+  .dayRow {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+
+.dayMark {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dayNumber {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+.dayTitle {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--silver-fainter);
+}
+
+.dayBody {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.choiceLabel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--silver-faint);
+}
+
+/* What you said, in your own words at the time. */
+.choiceLine {
+  font-family: var(--font-body);
+  font-size: 15.5px;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--silver);
+}
+
+.consequence {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--silver-fainter);
+}
+
+.draftNote {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  text-transform: uppercase;
+  color: var(--silver-fainter);
+}
+
+/* -------------------------------------------------------- The document */
+.document {
+  background: var(--stock);
+  border: 1px solid var(--stock-edge);
+  border-radius: var(--radius-paper);
+  padding: 26px 28px;
+  box-shadow: var(--shadow-paper);
+}
+
+.part + .part {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--stock-edge);
+}
+
+.partHead {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.partDay {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* Three provenances, three marks: chosen, rewritten, written. */
+.partKind {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: var(--radius);
+}
+
+.kindSelected {
+  color: var(--ink-faint);
+  border: 1px solid var(--stock-edge);
+}
+
+.kindRevised {
+  color: var(--brass);
+  border: 1px solid var(--brass);
+}
+
+.kindWritten {
+  color: var(--stock);
+  background: var(--wax);
+  border: 1px solid var(--wax);
+}
+
+.partText {
+  font-family: var(--font-body);
+  font-size: 15.5px;
+  line-height: 1.66;
+  color: var(--ink);
+  white-space: pre-wrap;
+}
+
+.supersededLabel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.superseded {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--stock-edge);
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-faint);
+  text-decoration: line-through;
+  text-decoration-color: var(--stock-edge);
+}
+
+/* ------------------------------------------------------ Their own words */
+.ownWords {
+  background: var(--stock);
+  border: 1px solid var(--stock-edge);
+  border-left: 3px solid var(--wax);
+  border-radius: var(--radius-paper);
+  padding: 24px 26px;
+  box-shadow: var(--shadow-paper);
+}
+
+.ownWordsText {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--ink);
+  white-space: pre-wrap;
+}
+
+/* ---------------------------------------------------------- The trades */
+.patterns {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pattern {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.patternTitle {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--stock);
+}
+
+.patternText {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--silver-muted);
+  max-width: 42rem;
+}
+
+/* A restrained ledger. Where each measure finished and how far it moved to
+   get there — no bars, no needles, nothing that reads as a score. */
+.ledger {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ledgerRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 60px 90px;
+  gap: 14px;
+  align-items: baseline;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--board-line);
+}
+
+.ledgerLabel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: var(--track-label-tight);
+  text-transform: uppercase;
+  color: var(--silver-muted);
+}
+
+.ledgerValue {
+  font-family: var(--font-mono);
+  font-size: var(--fs-readout);
+  font-variant-numeric: tabular-nums;
+  color: var(--silver);
+  text-align: right;
+}
+
+.ledgerTravel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  color: var(--silver-fainter);
+  text-align: right;
+}
+
+/* -------------------------------------------------------- Discussion */
+.prompts {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.prompt {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 16px;
+}
+
+.promptIndex {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  color: var(--brass);
+  padding-top: 4px;
+}
+
+.promptQ {
+  font-family: var(--font-body);
+  font-size: 16.5px;
+  line-height: 1.55;
+  color: var(--silver);
+  margin-bottom: 6px;
+}
+
+.promptNote {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--silver-fainter);
+  max-width: 40rem;
+}
+
+.foot {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-top: 8px;
+}
+
+.actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}

@@ -1,4 +1,4 @@
-import { applyEffects, initialTrackers } from './trackers.js';
+import { applyEffects, diffTrackers, initialTrackers } from './trackers.js';
 import { getRole } from '../data/roles.js';
 import { getDay, PLANNED_DAYS } from '../data/days/index.js';
 
@@ -8,7 +8,7 @@ import { getDay, PLANNED_DAYS } from '../data/days/index.js';
    adding persistence later is a load and a save, not a refactor. */
 
 export const initialState = {
-  screen: 'title', // title | roleSelect | play | stub
+  screen: 'title', // title | roleSelect | play | stub | ending | debrief
   roleId: null,
   day: 1,
   stepIndex: 0,
@@ -28,6 +28,11 @@ export const initialState = {
   /* The student's own closing. Not scored, carried into the ending and quoted
      back — which is honest, and is what a debrief will be built from. */
   closing: '',
+  /* One snapshot per completed day: where the trackers stood and how far they
+     moved that day. The only thing the debrief needs that playing does not —
+     dayStartTrackers is overwritten at every boundary, so without this the run
+     can be reported at its end but not as a shape over five days. */
+  history: [],
   mapInspected: false,
   creditsOpen: false,
 };
@@ -154,7 +159,16 @@ export function reducer(state, action) {
             operativeText,
             revised: entry.revised || changed,
             revisedOnDay: changed ? action.dayNumber : entry.revisedOnDay,
+            /* Holding is still an act on the document and a later reading of
+               the run should be able to say so — otherwise the day that chose
+               to leave the clause alone looks like a day that did nothing. */
+            heldOnDay: changed ? entry.heldOnDay : action.dayNumber,
             original: changed ? entry.original ?? entry.fragment : entry.original,
+            /* The label the clause carried before this day touched it. Set
+               whether or not the text changed, because the label is
+               overwritten either way — without it the composing day loses its
+               own name and gets reported under the reviser's. */
+            originalLabel: entry.originalLabel ?? entry.label,
           };
         }),
         stepIndex: state.stepIndex + 1,
@@ -169,14 +183,23 @@ export function reducer(state, action) {
          scoped to a single day resets here, which is what lets the summary
          report the day's movement rather than the run's. */
       const next = state.day + 1;
+      const history = [
+        ...state.history,
+        {
+          day: state.day,
+          trackers: state.trackers,
+          deltas: diffTrackers(state.dayStartTrackers, state.trackers),
+        },
+      ];
       if (!getDay(next)) {
         /* End of the scenario is an outcome, not an absence. The stub remains
            for a truncated build where later days simply are not written yet. */
         const finished = state.day >= PLANNED_DAYS[PLANNED_DAYS.length - 1].number;
-        return { ...state, screen: finished ? 'ending' : 'stub' };
+        return { ...state, history, screen: finished ? 'ending' : 'stub' };
       }
       return {
         ...state,
+        history,
         day: next,
         stepIndex: 0,
         unlockedToday: [],
@@ -184,6 +207,9 @@ export function reducer(state, action) {
         dayStartTrackers: state.trackers,
       };
     }
+
+    case 'openDebrief':
+      return { ...state, screen: 'debrief' };
 
     case 'toggleCredits':
       return { ...state, creditsOpen: !state.creditsOpen };

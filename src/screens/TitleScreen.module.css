@@ -74,11 +74,14 @@
   }
 }
 
+/* The type sits low in the frame rather than centred, so Kennedy's face is
+   clear above it. He reads as a presence over the title instead of being
+   covered by it. */
 .inner {
   position: relative;
   z-index: 1;
-  align-self: center;
-  padding: 8vh var(--gutter) 0;
+  align-self: end;
+  padding: 8vh var(--gutter) 4vh;
   max-width: var(--measure-page);
   margin: 0 auto;
   width: 100%;

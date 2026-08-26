@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getArchive, isPresent } from '../../data/archive.js';
 import { PLAY } from '../../data/copy.js';
+import ArchiveOverlay from './ArchiveOverlay.jsx';
 import { Eyebrow, SourceLine } from '../ui/index.jsx';
 import styles from './ArchiveModule.module.css';
 
@@ -17,6 +18,8 @@ import styles from './ArchiveModule.module.css';
 export default function ArchiveModule({ id }) {
   const item = getArchive(id);
   const [failed, setFailed] = useState(false);
+  const [open, setOpen] = useState(false);
+  const close = useCallback(() => setOpen(false), []);
 
   /* Correcting a filename should recover without a reload. */
   useEffect(() => setFailed(false), [item?.file]);
@@ -48,13 +51,24 @@ export default function ArchiveModule({ id }) {
           </audio>
         )}
 
+        {/* An image that loaded is a control: the boards carry coordinates and
+            reference numbers that only resolve at full size. Audio is not —
+            there is nothing to enlarge. */}
         {present && !failed && item.kind !== 'audio' && (
-          <img
-            className={styles.image}
-            src={`archive/${item.file}`}
-            alt={item.caption}
-            onError={() => setFailed(true)}
-          />
+          <button
+            type="button"
+            className={styles.imageButton}
+            onClick={() => setOpen(true)}
+            aria-label={PLAY.archiveExpand}
+          >
+            <img
+              className={styles.image}
+              src={`archive/${item.file}`}
+              alt={item.caption}
+              onError={() => setFailed(true)}
+            />
+            <span className={styles.expandMark} aria-hidden="true" />
+          </button>
         )}
 
         {showPlaceholder && (
@@ -80,6 +94,8 @@ export default function ArchiveModule({ id }) {
 
         <SourceLine source={item.source} rights={item.rights} onBoard />
       </div>
+
+      {open && <ArchiveOverlay item={item} onClose={close} />}
     </figure>
   );
 }

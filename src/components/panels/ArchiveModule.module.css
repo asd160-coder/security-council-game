@@ -25,10 +25,45 @@
   padding: 14px;
 }
 
+/* The thumbnail is a control. The corner mark sits on the frame rather than
+   over the photograph, so nothing is hidden behind an icon. */
+.imageButton {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: zoom-in;
+}
+
 .image {
   width: 100%;
   border: 1px solid var(--board-line);
   filter: grayscale(1) contrast(1.05);
+  transition: filter var(--dur-quick) var(--ease);
+}
+
+.imageButton:hover .image,
+.imageButton:focus-visible .image {
+  filter: grayscale(1) contrast(1.12) brightness(1.06);
+}
+
+.expandMark {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 13px;
+  height: 13px;
+  border-top: 1px solid var(--silver-faint);
+  border-right: 1px solid var(--silver-faint);
+  opacity: 0.55;
+  transition: opacity var(--dur-quick) var(--ease);
+}
+
+.imageButton:hover .expandMark,
+.imageButton:focus-visible .expandMark {
+  opacity: 1;
 }
 
 /* --------------------------------------------------------- The empty state */

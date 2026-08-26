@@ -55,6 +55,7 @@ export const PLAY = {
   mapOverlayTitle: 'Strike range from San Cristóbal',
   mapOverlayDay: (n) => `Situation map · Day ${n}`,
   mapScale: 'Coastlines schematic · ranges to scale',
+  archiveExpand: 'Examine at full size',
   archive: 'Archive',
   newInFile: 'New in your file',
   soWhat: 'What this changes',

@@ -1,0 +1,98 @@
+.imageWrap {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--board-line);
+  border-radius: var(--radius);
+  background: var(--board-inset);
+  overflow: hidden;
+}
+
+/* Deliberately unfiltered, where the panel thumbnail is rendered greyscale to
+   sit in the house style. At full size you are examining the document itself,
+   and the interface should not be editorialising the evidence. */
+.image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.aside {
+  width: 260px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+}
+
+.date {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  text-transform: uppercase;
+  color: var(--silver-faint);
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--board-line);
+}
+
+.caption {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.62;
+  color: var(--silver-muted);
+}
+
+.why {
+  padding-top: 14px;
+  border-top: 1px solid var(--board-line);
+}
+
+.whyLabel {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--brass);
+  margin-bottom: 6px;
+}
+
+.whyText {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--silver-muted);
+}
+
+.source {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--board-line);
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  line-height: 1.55;
+  color: var(--silver-faint);
+}
+
+.sourceKey {
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+@media (max-width: 900px) {
+  .aside {
+    width: auto;
+  }
+
+  .source {
+    margin-top: 0;
+  }
+
+  .imageWrap {
+    flex: none;
+  }
+}

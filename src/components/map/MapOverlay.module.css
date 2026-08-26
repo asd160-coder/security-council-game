@@ -1,68 +1,5 @@
-/* The map at full size.
-
-   Follows the file viewer's overlay pattern in DossierRail: fixed scrim, one
-   panel, Escape and scrim-click to dismiss. The map is the reason this exists,
-   so it takes the space and the reading column sits beside it. */
-.scrim {
-  position: fixed;
-  inset: 0;
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--gutter);
-  background: rgba(7, 10, 13, 0.86);
-  backdrop-filter: blur(4px);
-  animation: fade var(--dur-quick) var(--ease) both;
-}
-
-.panel {
-  width: min(1240px, 100%);
-  /* Claim the vertical space rather than sizing to content: the map was
-     rendering well below 1:1 in a panel that had room to spare. */
-  height: min(780px, calc(100vh - var(--gutter) * 2));
-  max-height: calc(100vh - var(--gutter) * 2);
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-  padding: 24px 26px 22px;
-  background: var(--board);
-  border: 1px solid var(--board-line-bright);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-panel);
-  /* Grows from the rail rather than dropping in from nowhere. */
-  animation: expand var(--dur-reveal) var(--ease) both;
-}
-
-.head {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-.heading {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  min-width: 0;
-}
-
-.title {
-  font-family: var(--font-display);
-  font-size: clamp(20px, 2.2vw, 26px);
-  font-weight: 300;
-  letter-spacing: -0.015em;
-  line-height: 1.15;
-  color: var(--stock);
-}
-
-.body {
-  display: flex;
-  gap: 26px;
-  min-height: 0;
-  flex: 1;
-}
+/* Map-specific pieces only. The scrim, panel, head and dismissal behaviour
+   live in ui/Overlay — this file styles what sits inside it. */
 
 .mapWrap {
   flex: 1;
@@ -149,12 +86,9 @@
 }
 
 /* Below the two-column threshold the reading column moves under the map. */
+/* The stacking itself is handled by ui/Overlay; these are the consequences of
+   it for the reading column. */
 @media (max-width: 900px) {
-  .body {
-    flex-direction: column;
-    overflow-y: auto;
-  }
-
   .aside {
     width: auto;
   }
@@ -164,25 +98,3 @@
   }
 }
 
-@keyframes fade {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes expand {
-  from {
-    opacity: 0;
-    transform: scale(0.965) translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .scrim,
-  .panel {
-    animation: none;
-  }
-}

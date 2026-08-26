@@ -1,4 +1,3 @@
-import CrisisMap from '../components/map/CrisisMap.jsx';
 import { Button, Reveal } from '../components/ui/index.jsx';
 import { APP } from '../data/copy.js';
 import styles from './TitleScreen.module.css';
@@ -7,7 +6,11 @@ export default function TitleScreen({ onBegin, onCredits }) {
   return (
     <div className={styles.screen}>
       <div className={styles.backdrop} aria-hidden="true">
-        <CrisisMap frame="caribbean" labels={false} cover />
+        <img
+          className={styles.backdropImage}
+          src="art/kennedy-castro-khrushchev.jpg"
+          alt=""
+        />
       </div>
 
       <div className={styles.inner}>
@@ -32,8 +35,8 @@ export default function TitleScreen({ onBegin, onCredits }) {
 
       <div className={styles.foot}>
         <p className={styles.footNote}>
-          An educational simulation. Dialogue is authored in the register of the historical figures
-          and is not quoted.
+          An educational simulation. Artwork is illustrated, not photographic. Dialogue is authored
+          in the register of the historical figures and is not quoted.
         </p>
         <Button variant="quiet" onClick={onCredits}>
           {APP.credits}

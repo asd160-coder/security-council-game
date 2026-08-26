@@ -6,30 +6,72 @@
   overflow: hidden;
 }
 
-/* The map is the hero, at low contrast, filling the screen behind the title.
-   The most characteristic thing about this crisis is the geography of it —
-   four capitals and ninety miles of water — so that is what opens.
+/* The three men who could end it, and the thing they were arguing about.
+   Illustrated, not photographic — the footer says so.
 
-   It is unlabelled here and masked diagonally: the type occupies the lower
-   left, so the map is held back there and allowed to come forward across the
-   upper right. Geography as ground, not as competition. */
+   The image is pushed toward the board's own colour so it reads as part of
+   this interface rather than pasted into it: desaturated, cooled, and dark
+   enough that display type sits on it without needing a panel behind. */
 .backdrop {
   position: absolute;
   inset: 0;
-  opacity: 0.85;
+  overflow: hidden;
   pointer-events: none;
-  mask-image: linear-gradient(
-    102deg,
-    transparent 8%,
-    rgba(0, 0, 0, 0.3) 30%,
-    rgba(0, 0, 0, 0.82) 58%,
-    rgba(0, 0, 0, 1) 82%
-  );
 }
 
-.backdrop svg {
+.backdropImage {
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  /* Kennedy sits hard left, which is where the title goes. Favouring the right
+     of the frame keeps the missile and Khrushchev in clear air and lets the
+     scrim take Kennedy down to a suggestion. */
+  object-position: 54% 42%;
+  filter: saturate(0.42) contrast(1.02) brightness(0.66);
+  /* A documentary push: the image drifts for half a minute and settles. Slow
+     enough to be felt rather than watched. */
+  animation: drift 34s var(--ease) both;
+}
+
+/* Two scrims, one job each. The first clears the left column for the type;
+   the second seats the image on the board top and bottom so it has no edge. */
+.backdrop::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(100deg, rgba(18, 22, 27, 0.95) 0%, rgba(18, 22, 27, 0.88) 18%, rgba(18, 22, 27, 0.6) 42%, rgba(18, 22, 27, 0.12) 72%, transparent 88%),
+    linear-gradient(to top, var(--board) 0%, rgba(18, 22, 27, 0.2) 34%, transparent 62%),
+    linear-gradient(to bottom, var(--board) 0%, transparent 22%);
+}
+
+@keyframes drift {
+  from {
+    transform: scale(1.085) translateX(1.2%);
+  }
+  to {
+    transform: scale(1) translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backdropImage {
+    animation: none;
+  }
+}
+
+/* Below the two-column threshold the faces stop competing with the type: the
+   frame tightens onto the centre and the scrim closes over more of it. */
+@media (max-width: 860px) {
+  .backdropImage {
+    object-position: 58% 38%;
+  }
+
+  .backdrop::after {
+    background:
+      linear-gradient(to top, var(--board) 0%, rgba(18, 22, 27, 0.62) 46%, rgba(18, 22, 27, 0.35) 100%),
+      linear-gradient(to bottom, var(--board) 0%, transparent 26%);
+  }
 }
 
 .inner {
@@ -96,11 +138,15 @@
   width: 100%;
 }
 
+/* This line is a disclosure, not decoration — it is what tells a reader the
+   artwork is illustrated. It was set in the faintest silver, which measures
+   about 2.4:1 against the board and fails small-text contrast; muted silver
+   takes it to roughly 6.9:1. */
 .footNote {
   font-family: var(--font-mono);
-  font-size: var(--fs-label-sm);
+  font-size: var(--fs-label);
   letter-spacing: var(--track-label-tight);
-  color: var(--silver-fainter);
+  color: var(--silver-muted);
   max-width: 42rem;
-  line-height: 1.5;
+  line-height: 1.55;
 }

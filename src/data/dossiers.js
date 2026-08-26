@@ -57,6 +57,54 @@ export const DOSSIERS = [
     soWhat:
       'The crisis is driven less by the number of weapons than by the minutes between launch and impact — and by what those minutes do to the people who must decide.',
   },
+  /* ------------------------------------------------------------- Day 2 */
+  {
+    id: 'note-quarantine-word',
+    kind: 'procedure',
+    label: 'Quarantine',
+    title: 'Why not the word blockade',
+    body: [
+      'A blockade is, in law, an act of war. Naming this one a quarantine was not a softening of the policy but a careful placing of it: a measure short of war, announced as such, and defensible before an international body.',
+      'The ships were still stopped. The word decided what stopping them meant.',
+    ],
+    soWhat:
+      'Language here is not decoration on the policy. It is the part of the policy that determines what the other side is entitled to do in reply.',
+  },
+  {
+    id: 'note-chamber',
+    kind: 'procedure',
+    label: 'The chamber',
+    title: 'What a public session can and cannot settle',
+    body: [
+      'Nothing said in the Council will remove a missile. What the chamber does is fix positions in front of witnesses, and make it costly to be caught in a falsehood.',
+      'Its value to a government under pressure is the same as its danger: whatever is said there cannot afterwards be unsaid.',
+    ],
+    soWhat:
+      'Speak in the chamber to bind the other side, and accept that you are binding yourself by the same act.',
+  },
+  {
+    id: 'note-channel-limits',
+    kind: 'channel',
+    label: 'Channel limits',
+    title: 'What a back-channel can carry',
+    body: [
+      'A private channel can carry an intention, a warning, or a question that could not survive being asked in public. It cannot carry a guarantee.',
+      'Everything passed through it is deniable by design, which is exactly why both sides can afford to use it — and exactly why neither can rely on it.',
+    ],
+    soWhat:
+      'Use the channel to find out what is possible. Do not use it to settle anything you would need to prove later.',
+  },
+  {
+    id: 'memo-aide-day2',
+    kind: 'memo',
+    label: 'Aide memo',
+    title: 'The record is now the constraint',
+    body: [
+      'Until yesterday both governments could still adjust their positions quietly. Since the broadcast, every adjustment has to be explained to an audience that was not previously in the room.',
+    ],
+    soWhat:
+      'Any settlement from here must be one both sides can describe to their own public without calling it a defeat.',
+  },
   {
     id: 'memo-aide',
     kind: 'memo',

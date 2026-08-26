@@ -12,7 +12,16 @@
      legitimacy  → brass, the institutional register
      neutral     → signal blue, movement without judgement */
 
-export const TRACKER_SCALE = { min: -8, max: 8 };
+/* The scale has to hold five days of accumulation, not one.
+
+   It was ±8 when a day contained a single choice and Day 1 could move a
+   tracker by at most 2. Day 2 has three effect-bearing decisions — the
+   chamber, the channel, and the strength of the clause — so a consistent
+   player can move one variable by 6 in a day. At ±8 that pins a needle by
+   Day 3 and the instrument stops reporting anything for the rest of the run.
+   ±14 leaves Day 1 reading as small direction-setting, Day 2 as a marked
+   shift, and the ends of the scale reachable but not cheap. */
+export const TRACKER_SCALE = { min: -14, max: 14 };
 
 export const TRACKERS = [
   {

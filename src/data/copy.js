@@ -56,6 +56,12 @@ export const PLAY = {
   mapOverlayDay: (n) => `Situation map · Day ${n}`,
   mapScale: 'Coastlines schematic · ranges to scale',
   archiveExpand: 'Examine at full size',
+  youSaid: 'You said',
+  theyReplied: 'The reply',
+  reconsider: 'Take it differently',
+  stageOne: 'One',
+  stageTwo: 'Two',
+  standing: 'Where you stand',
   archive: 'Archive',
   newInFile: 'New in your file',
   soWhat: 'What this changes',
@@ -90,11 +96,11 @@ export const SUMMARY = {
 };
 
 export const STUB = {
-  eyebrow: 'End of the vertical slice',
-  title: 'Day 2 is not built yet',
-  body: [
-    'You have reached the end of what exists. Day 1 is complete: the crisis was introduced, you took a position, the indicators moved, material was filed, and the first fragment of your statement was written.',
-    'Days 2 to 5 and the debrief are specified in the design packet and not yet implemented. The structure they will use is the one you have just played.',
+  eyebrow: 'End of what is built',
+  title: (next) => `Day ${next} is not built yet`,
+  body: (built, next) => [
+    `You have reached the end of what exists. Days 1 to ${built} are complete: the crisis was introduced and made public, you took positions in the chamber and in private, the indicators moved, material was filed, and your statement has ${built} clauses.`,
+    `Days ${next} to 5 and the debrief are specified in the design packet and not yet implemented. The structure they will use is the one you have just played.`,
   ],
   restart: 'Play again as a different role',
 };

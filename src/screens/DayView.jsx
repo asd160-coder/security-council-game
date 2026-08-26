@@ -2,14 +2,17 @@ import { useMemo } from 'react';
 import BriefingStep from '../components/steps/BriefingStep.jsx';
 import PrivateBriefStep from '../components/steps/PrivateBriefStep.jsx';
 import DialogueStep from '../components/steps/DialogueStep.jsx';
+import ExchangeStep from '../components/steps/ExchangeStep.jsx';
 import ConsequenceStep from '../components/steps/ConsequenceStep.jsx';
 import DraftingStep from '../components/steps/DraftingStep.jsx';
+import DraftingComposeStep from '../components/steps/DraftingComposeStep.jsx';
 import SummaryStep from '../components/steps/SummaryStep.jsx';
 import DossierRail from '../components/panels/DossierRail.jsx';
 import TrackerColumn from '../components/panels/TrackerColumn.jsx';
 import DraftingTray from '../components/panels/DraftingTray.jsx';
 import MapPanel from '../components/panels/MapPanel.jsx';
 import { PLANNED_DAYS } from '../data/days/index.js';
+import { diffTrackers } from '../lib/trackers.js';
 import { APP, PLAY } from '../data/copy.js';
 import styles from './DayView.module.css';
 
@@ -27,25 +30,43 @@ const STEP_RENDERERS = {
   briefing: BriefingStep,
   privateBrief: PrivateBriefStep,
   dialogue: DialogueStep,
+  exchange: ExchangeStep,
   consequence: ConsequenceStep,
   drafting: DraftingStep,
+  draftingCompose: DraftingComposeStep,
   summary: SummaryStep,
 };
+
+/* The consequence step that reports on a given step id, if there is one. */
+const consequenceFor = (day, stepId) =>
+  day.steps.find((s) => s.kind === 'consequence' && s.after === stepId) ?? null;
 
 export default function DayView({ day, role, state, dispatch }) {
   const step = day.steps[state.stepIndex];
 
-  /* The choice made on this day's dialogue step, needed by the consequence
-     step that follows it. Looked up rather than passed down, so steps stay
-     independent of one another's order. */
-  const dialogueStep = useMemo(() => day.steps.find((s) => s.kind === 'dialogue'), [day]);
-  const consequenceStep = useMemo(() => day.steps.find((s) => s.kind === 'consequence'), [day]);
+  const stepById = useMemo(
+    () => Object.fromEntries(day.steps.map((s) => [s.id, s])),
+    [day],
+  );
+
+  /* A consequence names the exchange it reports on with `after`, rather than
+     the day being scanned for the first step of some kind. That is what lets a
+     day hold two conversations — Day 2 has a public one and a private one, and
+     each consequence has to find its own. */
+  const sourceStep = step?.after ? stepById[step.after] : null;
   const chosen = useMemo(() => {
-    const key = `${day.id}:dialogue`;
-    const choiceId = state.choices[key];
-    if (!choiceId || !dialogueStep) return null;
-    return dialogueStep.choicesByRole[role.id]?.find((c) => c.id === choiceId) ?? null;
-  }, [day.id, state.choices, dialogueStep, role.id]);
+    if (!sourceStep) return null;
+    const choiceId = state.choices[`${day.id}:${sourceStep.id}`];
+    if (!choiceId) return null;
+    const pool =
+      sourceStep.kind === 'exchange'
+        ? sourceStep.openingsByRole[role.id]?.flatMap((o) => o.follow ?? [])
+        : sourceStep.choicesByRole?.[role.id];
+    return pool?.find((c) => c.id === choiceId) ?? null;
+  }, [day.id, state.choices, sourceStep, role.id]);
+
+  /* The adviser lives on whichever step of this day offers one. */
+  const adviserStep = useMemo(() => day.steps.find((s) => s.adviser), [day]);
 
   const Renderer = step ? STEP_RENDERERS[step.kind] : null;
 
@@ -60,20 +81,29 @@ export default function DayView({ day, role, state, dispatch }) {
     role,
     onAdvance: advance,
     onChoose:
-      step?.kind === 'dialogue'
+      step?.kind === 'dialogue' || step?.kind === 'exchange'
         ? (choice) =>
             dispatch({
               type: 'chooseLine',
-              stepKey: `${day.id}:dialogue`,
+              stepKey: `${day.id}:${step.id}`,
               choice,
-              /* Which entry this line earns, per the day's consequence table. */
-              unlockId: consequenceStep?.variants?.[choice.feedback]?.unlocks,
+              /* Which entry this line earns, per the consequence that reports
+                 on this step. */
+              unlockId: consequenceFor(day, step.id)?.variants?.[choice.feedback]?.unlocks,
             })
         : (option) => dispatch({ type: 'chooseDraft', dayNumber: day.number, option }),
-    onConsultAdviser: () => dispatch({ type: 'unlock', id: step?.adviser?.unlocks }),
-    adviserTaken: state.unlocked.includes(dialogueStep?.adviser?.unlocks),
+    onConsultAdviser: () => dispatch({ type: 'unlock', id: adviserStep?.adviser?.unlocks }),
+    adviserTaken: state.unlocked.includes(adviserStep?.adviser?.unlocks),
     choice: chosen,
-    deltas: state.lastDeltas,
+    /* The consequence panel wants the movement from the choice just made; the
+       summary wants the whole day's. diffTrackers has been sitting in
+       lib/trackers.js unused since Milestone 1 waiting for a day with more
+       than one choice in it. */
+    deltas:
+      step?.kind === 'summary'
+        ? diffTrackers(state.dayStartTrackers, state.trackers)
+        : state.lastDeltas,
+    trackers: state.trackers,
     unlockedToday: state.unlockedToday,
     draft: state.draft,
   };
@@ -127,7 +157,9 @@ export default function DayView({ day, role, state, dispatch }) {
           <div className={styles.progress} aria-hidden="true">
             {day.steps.map((s, index) => (
               <span
-                key={s.kind}
+                /* Keyed by id, not kind: from Day 2 a day can hold two steps
+                   of the same kind — two conversations means two consequences. */
+                key={s.id}
                 className={`${styles.progressStep} ${
                   index < state.stepIndex ? styles.progressStepDone : ''
                 } ${index === state.stepIndex ? styles.progressStepCurrent : ''}`}

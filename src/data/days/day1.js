@@ -6,7 +6,9 @@
    the first stored fragment of the player's draft, but does not supply the
    fragment text, and the drafting tray needs something real to hold.
 
-   A day is an ordered list of steps. Each step's `kind` selects a renderer.
+   A day is an ordered list of steps. Each step's `kind` selects a renderer and
+   its `id` is how choices are keyed and how a consequence finds the exchange it
+   reports on — which is what lets a day hold more than one conversation.
    Adding Day 2 means writing the next file in this directory and registering
    it — no component needs to change so long as it reuses these kinds. */
 
@@ -20,6 +22,7 @@ const day1 = {
   steps: [
     {
       kind: 'briefing',
+      id: 'briefing',
       archiveId: 'u2-mrbm-launch-site',
       body: [
         'Reconnaissance has revealed missile installations in Cuba. What was once suspicion is becoming strategic reality. Across Washington, Moscow, and the United Nations, leaders are now weighing the same question: how can this threat be answered without pushing the world toward catastrophe?',
@@ -31,11 +34,13 @@ const day1 = {
 
     {
       kind: 'privateBrief',
+      id: 'private-brief',
       eyebrow: 'For your eyes only',
     },
 
     {
       kind: 'dialogue',
+      id: 'first-response',
       eyebrow: 'First formal response',
       framing: [
         'The world does not yet know how far this crisis will go. Officials are watching for signs of panic, weakness, resolve, and restraint. Your first words will not solve the crisis, but they will shape how others interpret your intent.',
@@ -144,6 +149,8 @@ const day1 = {
 
     {
       kind: 'consequence',
+      id: 'consequence',
+      after: 'first-response',
       eyebrow: 'How your position was read',
       /* Keyed by the chosen line's `feedback`. Each strategy type also carries
          the unlock it earns, following the content pack's trigger table. */
@@ -169,6 +176,7 @@ const day1 = {
 
     {
       kind: 'drafting',
+      id: 'drafting',
       eyebrow: 'Drafting — opening line',
       prompt: 'Choose the tone of your opening diplomatic line.',
       note: 'This becomes the first fragment of the statement you will build across the crisis.',
@@ -210,6 +218,7 @@ const day1 = {
 
     {
       kind: 'summary',
+      id: 'summary',
       eyebrow: 'End of day',
       body: [
         'The crisis has entered a new phase. Your first response has shaped how others read your intent: as strength, caution, diplomacy, or procedural restraint. None of these paths is without cost.',

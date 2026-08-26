@@ -1,5 +1,6 @@
 import DraftingTray from '../components/panels/DraftingTray.jsx';
 import { Button, Reveal } from '../components/ui/index.jsx';
+import { LAST_BUILT_DAY } from '../data/days/index.js';
 import { STUB } from '../data/copy.js';
 import styles from './DayStub.module.css';
 
@@ -10,16 +11,18 @@ import styles from './DayStub.module.css';
    useful feedback on than one that marks its own edge. */
 
 export default function DayStub({ draft, onRestart }) {
+  const next = LAST_BUILT_DAY + 1;
+
   return (
     <div className={styles.screen}>
       <div className={styles.inner}>
         <Reveal>
           <span className="eyebrow">{STUB.eyebrow}</span>
-          <h2 className={styles.title}>{STUB.title}</h2>
+          <h2 className={styles.title}>{STUB.title(next)}</h2>
         </Reveal>
 
         <Reveal delay={120} className={styles.prose}>
-          {STUB.body.map((paragraph) => (
+          {STUB.body(LAST_BUILT_DAY, next).map((paragraph) => (
             <p key={paragraph.slice(0, 40)}>{paragraph}</p>
           ))}
         </Reveal>

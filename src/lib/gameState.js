@@ -1,5 +1,6 @@
 import { applyEffects, initialTrackers } from './trackers.js';
 import { getRole } from '../data/roles.js';
+import { getDay } from '../data/days/index.js';
 
 /* All game state in one serialisable object. Nothing is persisted: a classroom
    run should start clean every time, and the design packet asks for a
@@ -83,8 +84,14 @@ export function reducer(state, action) {
       /* One fragment per day. Re-choosing on the same day replaces rather than
          appends, so a player who changes their mind does not end up with two. */
       const kept = state.draft.filter((entry) => entry.dayNumber !== dayNumber);
+      /* From Day 2 the drafting choice carries weight of its own: how strongly
+         a clause commits you is a decision with a cost. Day 1's tone options
+         have no effects and are unaffected by this. */
+      const after = option.effects ? applyEffects(state.trackers, option.effects) : state.trackers;
       return {
         ...state,
+        trackers: after,
+        lastDeltas: option.effects ?? state.lastDeltas,
         draft: [
           ...kept,
           {
@@ -98,8 +105,21 @@ export function reducer(state, action) {
       };
     }
 
-    case 'endDay':
-      return { ...state, screen: 'stub' };
+    case 'endDay': {
+      /* The day boundary. Trackers and the file carry forward; everything
+         scoped to a single day resets here, which is what lets the summary
+         report the day's movement rather than the run's. */
+      const next = state.day + 1;
+      if (!getDay(next)) return { ...state, screen: 'stub' };
+      return {
+        ...state,
+        day: next,
+        stepIndex: 0,
+        unlockedToday: [],
+        lastDeltas: {},
+        dayStartTrackers: state.trackers,
+      };
+    }
 
     case 'toggleCredits':
       return { ...state, creditsOpen: !state.creditsOpen };

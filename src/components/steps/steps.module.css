@@ -308,4 +308,222 @@
 .tomorrow {
   border-left: 2px solid var(--wax);
   padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tomorrowText {
+  font-family: var(--font-body);
+  font-size: var(--fs-scene);
+  line-height: 1.66;
+  color: var(--silver);
+}
+
+/* ------------------------------------------------------ Private exchange */
+/* The back-channel is not the chamber. It is set closer, without the public
+   register: no eyebrow in brass, no on-the-record framing, and a rule down the
+   left that marks the whole scene as one continuous conversation. */
+.privateScene {
+  border-left: 1px solid var(--board-line-bright);
+  padding-left: 22px;
+}
+
+.privateMark {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--silver-fainter);
+}
+
+.counterpart {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--board-line);
+}
+
+.counterpartName {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--stock);
+}
+
+.counterpartTitle {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  text-transform: uppercase;
+  color: var(--silver-fainter);
+}
+
+/* What you said, held on screen while they answer. */
+.said {
+  padding: 4px 0 4px 18px;
+  border-left: 2px solid var(--brass);
+}
+
+.saidLabel {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--silver-fainter);
+  margin-bottom: 8px;
+}
+
+.saidLine {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--silver-muted);
+}
+
+/* Their answer. Set at reading size in the serif, because it is speech and it
+   is the thing the second choice has to be made against. */
+.reply {
+  padding: 16px 18px;
+  background: var(--board-raised);
+  border: 1px solid var(--board-line);
+  border-radius: var(--radius);
+}
+
+.replyLabel {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--signal-bright);
+  margin-bottom: 10px;
+}
+
+.replyLine {
+  font-family: var(--font-body);
+  font-size: var(--fs-scene);
+  line-height: 1.66;
+  color: var(--silver);
+}
+
+/* ------------------------------------------------- Composed drafting */
+.composeStage {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stageHead {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.stageIndex {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+.stagePrompt {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--silver-muted);
+}
+
+.frameOption {
+  text-align: left;
+  padding: 14px 16px;
+  border: 1px solid var(--board-line);
+  border-left: 2px solid transparent;
+  border-radius: var(--radius);
+  background: var(--board-raised);
+  font-family: var(--font-body);
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: var(--silver);
+  transition:
+    background var(--dur-quick) var(--ease),
+    border-color var(--dur-quick) var(--ease);
+}
+
+.frameOption:hover {
+  background: #232b34;
+  border-color: var(--board-line-bright);
+  border-left-color: var(--brass);
+}
+
+.frameChosen {
+  border-left-color: var(--brass);
+  background: #232b34;
+}
+
+/* The clause as it currently reads, on paper, updating as the two halves are
+   chosen. The document is the point, so it is shown as a document. */
+.clauseSheet {
+  background: var(--stock);
+  border: 1px solid var(--stock-edge);
+  border-radius: var(--radius-paper);
+  padding: 20px 22px;
+  box-shadow: var(--shadow-paper);
+}
+
+.clauseLabel {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 10px;
+}
+
+.clauseText {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.clausePending {
+  color: var(--ink-faint);
+  font-style: italic;
+}
+
+.operativeEffects {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.effectChip {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: var(--track-label-tight);
+  text-transform: uppercase;
+  color: var(--silver-fainter);
+}
+
+.movementPair {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+/* The running total. Quieter than the delta, because the delta is the news. */
+.movementStanding {
+  font-family: var(--font-mono);
+  font-size: var(--fs-readout);
+  font-variant-numeric: tabular-nums;
+  color: var(--silver-faint);
+  min-width: 2ch;
+  text-align: right;
 }

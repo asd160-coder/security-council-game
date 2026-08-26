@@ -18,6 +18,22 @@ point of download, not asserted here.
 
 ---
 
+## Status
+
+Three slots are filled, from a single declassified PDF of the first U-2
+coverage: the San Diego de los Baños MRBM launch-site readout board, the Los
+Palacios encampment board, and the CIA's SS-4 reference photograph from a
+Moscow parade. All three are CIA/NPIC product and public domain.
+
+Still open: the EXCOMM Cabinet Room photograph, and the 22 October address
+audio. The same PDF also carries a colour White House photograph of U-2 pilot
+Richard Heyser with USAF officers, which has no slot yet.
+
+One correction the plates forced: the imagery is annotated **Los Palacios** and
+**San Diego de los Baños**, not San Cristóbal. Those are neighbouring sites in
+the same Pinar del Río complex, and the slot metadata now says what the boards
+say rather than what this manifest originally guessed.
+
 ## Tier 1 — Day 1, the three declared slots
 
 These fill the slots that already exist in the build.

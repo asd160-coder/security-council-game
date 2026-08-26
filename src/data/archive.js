@@ -21,14 +21,14 @@
 
 export const ARCHIVE = [
   {
-    id: 'u2-san-cristobal',
+    id: 'u2-mrbm-launch-site',
     kind: 'image',
-    file: null, // public/archive/u2-san-cristobal-1962-10-14.jpg
-    title: 'U-2 reconnaissance frame, San Cristóbal',
-    date: '14 October 1962',
+    file: 'u2-mrbm-launch-site-1962-10-15.jpg',
+    title: 'MRBM launch site, San Diego de los Baños',
+    date: 'Readout board dated 15 October 1962',
     caption:
-      'A high-altitude photograph of a medium-range ballistic missile site under construction in western Cuba.',
-    source: 'CIA / National Photographic Interpretation Center, via the US National Archives',
+      'U-2 photography of western Cuba, marked up by photo interpreters: eight missile trailers, four probable erector/launcher units, tent areas and construction.',
+    source: 'CIA / National Photographic Interpretation Center',
     rights: 'Public domain — work of the US federal government',
     whyItMatters:
       'This is the evidence itself. Every decision that follows rests on an image most of the world had not yet seen.',
@@ -36,15 +36,28 @@ export const ARCHIVE = [
   {
     id: 'npic-briefing-board',
     kind: 'image',
-    file: null, // public/archive/npic-briefing-board-1962-10-16.jpg
-    title: 'NPIC briefing board, annotated',
-    date: '15–16 October 1962',
+    file: 'npic-briefing-board-1962-10-15.jpg',
+    title: 'Military encampment, Los Palacios',
+    date: 'Readout board dated 15 October 1962',
     caption:
-      'A mounted briefing board of the same imagery, marked up by photo interpreters to identify launch positions, erectors and support vehicles.',
-    source: 'CIA / National Photographic Interpretation Center, FOIA Electronic Reading Room',
+      'A second readout board from the same coverage, annotating a convoy, six missile trailers, equipment and tents. Reference NPIC G-6731.',
+    source: 'CIA / National Photographic Interpretation Center',
     rights: 'Public domain — work of the US federal government',
     whyItMatters:
       'The board is where a photograph became an argument. Someone had to decide what the shapes on the film meant, and then persuade a president of it.',
+  },
+  {
+    id: 'ss4-reference',
+    kind: 'image',
+    file: 'ss4-reference-red-square.jpg',
+    title: 'SS-4 medium-range ballistic missile, Moscow parade',
+    date: 'Reference photograph, early 1960s',
+    caption:
+      'A Soviet SS-4 on its transporter in Red Square. Photographs like this gave interpreters the measurements they compared against the shapes in the Cuban imagery.',
+    source: 'CIA reference photography',
+    rights: 'Public domain — work of the US federal government',
+    whyItMatters:
+      'Identification was comparison. The missiles were recognised in Cuba because the Soviet Union had already paraded them through its own capital.',
   },
   {
     id: 'excomm-cabinet-room',

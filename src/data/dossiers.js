@@ -105,6 +105,42 @@ export const DOSSIERS = [
     soWhat:
       'Any settlement from here must be one both sides can describe to their own public without calling it a defeat.',
   },
+  /* ------------------------------------------------------------- Day 3 */
+  {
+    id: 'note-operational',
+    kind: 'intelligence',
+    label: 'Readiness',
+    title: 'What the quarantine does not reach',
+    body: [
+      'The line stops what has not yet arrived. It does nothing about what is already on the island, and photography shows work at the sites continuing at the same pace.',
+      'Every day the quarantine holds is a day the argument for patience gets weaker, because the thing being waited out is being finished.',
+    ],
+    soWhat:
+      'Pressure that works slowly is only useful against a problem that is not itself on a clock. This one is.',
+  },
+  {
+    id: 'note-leverage',
+    kind: 'channel',
+    label: 'Leverage',
+    title: 'What leverage is for',
+    body: [
+      'Advantage that is never spent is not advantage; it is a position. The question on a day like this is not whether you have leverage but what you intend to exchange it for, and whether the other side can afford to accept.',
+      'A settlement the other government cannot survive agreeing to is not available at any price.',
+    ],
+    soWhat:
+      'Ask what the other side needs to be able to say afterwards. That, and not the balance of force, is usually what decides whether a deal exists.',
+  },
+  {
+    id: 'memo-aide-day3',
+    kind: 'memo',
+    label: 'Aide memo',
+    title: 'Two clocks, running at different speeds',
+    body: [
+      'Diplomacy is measured in days and the construction schedule is measured in days, and they are not the same days. Whichever finishes first decides what the other one was for.',
+    ],
+    soWhat:
+      'Time is not neutral here. It is working for one side, and it is worth being clear which.',
+  },
   {
     id: 'memo-aide',
     kind: 'memo',

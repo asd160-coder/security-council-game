@@ -33,6 +33,13 @@ export function diffTrackers(before, after) {
   return deltas;
 }
 
+/* Which third of the scale a value sits in.
+
+   Used by day content that varies its scene text with where the crisis stands
+   rather than with which line was taken — three variants instead of a tree,
+   and it reads as consequence without costing a branch. */
+export const band = (value) => (value >= 5 ? 'high' : value <= -5 ? 'low' : 'mid');
+
 /* Position on the needle track, 0 to 1. */
 export const trackerPosition = (value) =>
   (value - TRACKER_SCALE.min) / (TRACKER_SCALE.max - TRACKER_SCALE.min);

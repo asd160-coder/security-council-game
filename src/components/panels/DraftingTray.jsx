@@ -25,8 +25,18 @@ export default function DraftingTray({ draft, compact = false }) {
               <div className={styles.fragmentHead}>
                 <span className={styles.fragmentIndex}>{PLAY.draftFragment(index + 1)}</span>
                 <span className={styles.fragmentTone}>{entry.label}</span>
+                {entry.revised && <span className={styles.revisedMark}>{PLAY.revised}</span>}
               </div>
               <p className={styles.fragmentText}>{entry.fragment}</p>
+              {/* A revised clause keeps the line it replaced. The point of a
+                  drafting ladder is that the document has a history, and that
+                  is only legible if the earlier wording is still visible. */}
+              {entry.revised && entry.original && entry.original !== entry.fragment && (
+                <p className={styles.fragmentOriginal}>
+                  <span className={styles.originalLabel}>{PLAY.previously}</span>
+                  {entry.original}
+                </p>
+              )}
             </div>
           ))}
         </div>

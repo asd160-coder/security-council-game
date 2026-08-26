@@ -69,3 +69,36 @@
 .compact .sheet {
   max-width: none;
 }
+
+.revisedMark {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-left: auto;
+}
+
+/* The superseded wording. Struck through and set back, so the clause reads as
+   a document that was changed rather than one that was always this. */
+.fragmentOriginal {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--stock-edge);
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--ink-faint);
+  text-decoration: line-through;
+  text-decoration-color: var(--stock-edge);
+}
+
+.originalLabel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-block;
+  color: var(--ink-faint);
+}

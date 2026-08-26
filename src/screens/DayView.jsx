@@ -3,16 +3,18 @@ import BriefingStep from '../components/steps/BriefingStep.jsx';
 import PrivateBriefStep from '../components/steps/PrivateBriefStep.jsx';
 import DialogueStep from '../components/steps/DialogueStep.jsx';
 import ExchangeStep from '../components/steps/ExchangeStep.jsx';
+import WitnessStep from '../components/steps/WitnessStep.jsx';
 import ConsequenceStep from '../components/steps/ConsequenceStep.jsx';
 import DraftingStep from '../components/steps/DraftingStep.jsx';
 import DraftingComposeStep from '../components/steps/DraftingComposeStep.jsx';
+import DraftingReviseStep from '../components/steps/DraftingReviseStep.jsx';
 import SummaryStep from '../components/steps/SummaryStep.jsx';
 import DossierRail from '../components/panels/DossierRail.jsx';
 import TrackerColumn from '../components/panels/TrackerColumn.jsx';
 import DraftingTray from '../components/panels/DraftingTray.jsx';
 import MapPanel from '../components/panels/MapPanel.jsx';
 import { PLANNED_DAYS } from '../data/days/index.js';
-import { diffTrackers } from '../lib/trackers.js';
+import { band, diffTrackers } from '../lib/trackers.js';
 import { APP, PLAY } from '../data/copy.js';
 import styles from './DayView.module.css';
 
@@ -31,9 +33,11 @@ const STEP_RENDERERS = {
   privateBrief: PrivateBriefStep,
   dialogue: DialogueStep,
   exchange: ExchangeStep,
+  witness: WitnessStep,
   consequence: ConsequenceStep,
   drafting: DraftingStep,
   draftingCompose: DraftingComposeStep,
+  draftingRevise: DraftingReviseStep,
   summary: SummaryStep,
 };
 
@@ -56,7 +60,7 @@ export default function DayView({ day, role, state, dispatch }) {
   const sourceStep = step?.after ? stepById[step.after] : null;
   const chosen = useMemo(() => {
     if (!sourceStep) return null;
-    const choiceId = state.choices[`${day.id}:${sourceStep.id}`];
+    const choiceId = state.choices[`${day.id}:${sourceStep.id}`]?.id;
     if (!choiceId) return null;
     const pool =
       sourceStep.kind === 'exchange'
@@ -67,6 +71,21 @@ export default function DayView({ day, role, state, dispatch }) {
 
   /* The adviser lives on whichever step of this day offers one. */
   const adviserStep = useMemo(() => day.steps.find((s) => s.adviser), [day]);
+
+  /* What a day can know about the run so far, without content having to reach
+     into state itself. Escalation is the band that matters for scene text; the
+     channel category is the compressed form of what happened in the previous
+     day's private exchange. */
+  const standing = band(state.trackers.escalation);
+  const history = useMemo(
+    () => ({
+      channelCategory:
+        state.choices[`day${day.number - 1}:back-channel`]?.feedback ??
+        state.choices[`day${day.number - 1}:pressure`]?.feedback ??
+        null,
+    }),
+    [state.choices, day.number],
+  );
 
   const Renderer = step ? STEP_RENDERERS[step.kind] : null;
 
@@ -92,6 +111,15 @@ export default function DayView({ day, role, state, dispatch }) {
               unlockId: consequenceFor(day, step.id)?.variants?.[choice.feedback]?.unlocks,
             })
         : (option) => dispatch({ type: 'chooseDraft', dayNumber: day.number, option }),
+    onRevise: (option) =>
+      dispatch({
+        type: 'reviseDraft',
+        targetDay: step.targetDay,
+        dayNumber: day.number,
+        option,
+      }),
+    standing,
+    history,
     onConsultAdviser: () => dispatch({ type: 'unlock', id: adviserStep?.adviser?.unlocks }),
     adviserTaken: state.unlocked.includes(adviserStep?.adviser?.unlocks),
     choice: chosen,

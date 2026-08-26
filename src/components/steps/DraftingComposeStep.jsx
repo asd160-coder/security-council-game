@@ -19,11 +19,17 @@ export default function DraftingComposeStep({ step, role, onChoose }) {
   const frames = step.framesByRole[role.id] ?? [];
   const operatives = step.operativesByRole[role.id] ?? [];
 
+  /* The halves are stored as well as the joined line. A later day revising
+     this clause must be able to rewrite what it undertakes while keeping the
+     framing the player chose — otherwise the revision silently discards a
+     decision they already made, and the ladder stops being a ladder. */
   const commit = (operative) =>
     onChoose({
       id: `${frame.id}+${operative.id}`,
       label: operative.label,
       fragment: `${frame.text} ${operative.text}`,
+      frameText: frame.text,
+      operativeText: operative.text,
       effects: operative.effects,
     });
 

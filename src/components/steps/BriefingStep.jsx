@@ -6,7 +6,13 @@ import styles from './steps.module.css';
 /* The shared crisis briefing. Identical for all three roles — the facts do not
    change with the chair, which is the point the next step then complicates. */
 
-export default function BriefingStep({ day, step, onAdvance }) {
+export default function BriefingStep({ day, step, onAdvance, standing, history }) {
+  /* From Day 3 an opening can vary with where the crisis stands, and can
+     acknowledge what the previous day's private channel did. Both are optional;
+     Days 1 and 2 supply neither and render exactly as before. */
+  const body = step.bodyByBand?.[standing] ?? step.body;
+  const callback = step.channelCallback?.[history?.channelCategory] ?? null;
+
   return (
     <div className={`${styles.step} ${styles.stepWide}`}>
       <Reveal delay={0} className={styles.head}>
@@ -22,10 +28,17 @@ export default function BriefingStep({ day, step, onAdvance }) {
       </Reveal>
 
       <Reveal delay={220} className={styles.prose}>
-        {step.body.map((paragraph) => (
+        {body.map((paragraph) => (
           <p key={paragraph.slice(0, 40)}>{paragraph}</p>
         ))}
       </Reveal>
+
+      {callback && (
+        <Reveal delay={320} className={styles.callback}>
+          <span className={styles.callbackLabel}>{PLAY.sinceYesterday}</span>
+          <p className={styles.callbackText}>{callback}</p>
+        </Reveal>
+      )}
 
       {step.archiveId && (
         <Reveal delay={360}>

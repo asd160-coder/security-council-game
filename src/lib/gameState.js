@@ -17,7 +17,11 @@ export const initialState = {
      without recomputing it from the choice. */
   lastDeltas: {},
   dayStartTrackers: initialTrackers(),
-  choices: {}, // stepKey -> choice id, kept for later days to reference
+  /* stepKey -> { id, feedback }. The feedback category is stored alongside the
+     id because that is what later days actually want: eighteen back-channel
+     lines collapse to five categories, and a callback keyed to the category
+     costs five variants instead of eighteen. */
+  choices: {},
   unlocked: [], // ids from cards.js and dossiers.js, in the order filed
   unlockedToday: [],
   draft: [], // { dayNumber, optionId, label, fragment }
@@ -65,7 +69,10 @@ export function reducer(state, action) {
           ...state,
           trackers: after,
           lastDeltas: choice.effects,
-          choices: { ...state.choices, [stepKey]: choice.id },
+          choices: {
+            ...state.choices,
+            [stepKey]: { id: choice.id, feedback: choice.feedback },
+          },
           stepIndex: state.stepIndex + 1,
         },
         unlockId,
@@ -99,8 +106,48 @@ export function reducer(state, action) {
             optionId: option.id,
             label: option.label,
             fragment: option.fragment,
+            /* Present only for composed clauses; a later revision needs the
+               halves to rewrite one without losing the other. */
+            frameText: option.frameText,
+            operativeText: option.operativeText,
           },
         ],
+        stepIndex: state.stepIndex + 1,
+      };
+    }
+
+    case 'reviseDraft': {
+      /* A revision rewrites an existing clause rather than adding a new one.
+         The statement has as many fragments as it has days that wrote one, and
+         Day 3 writes none — it edits Day 2's. Keeping `original` is what lets
+         the tray show that the document has a history. */
+      const { targetDay, option } = action;
+      const after = option.effects ? applyEffects(state.trackers, option.effects) : state.trackers;
+      return {
+        ...state,
+        trackers: after,
+        lastDeltas: option.effects ?? state.lastDeltas,
+        draft: state.draft.map((entry) => {
+          if (entry.dayNumber !== targetDay) return entry;
+          /* A revision supplies a new operative half and keeps the frame the
+             player chose. `hold` supplies neither and leaves the line intact. */
+          const operativeText = option.operative ?? entry.operativeText;
+          const fragment = option.operative
+            ? `${entry.frameText} ${option.operative}`
+            : entry.fragment;
+          /* Holding is a decision, not an edit. Marking an unchanged clause
+             "Revised" would be a small lie on the face of the document. */
+          const changed = Boolean(option.operative);
+          return {
+            ...entry,
+            label: option.label,
+            fragment,
+            operativeText,
+            revised: entry.revised || changed,
+            revisedOnDay: changed ? action.dayNumber : entry.revisedOnDay,
+            original: changed ? entry.original ?? entry.fragment : entry.original,
+          };
+        }),
         stepIndex: state.stepIndex + 1,
       };
     }

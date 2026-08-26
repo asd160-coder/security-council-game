@@ -527,3 +527,47 @@
   min-width: 2ch;
   text-align: right;
 }
+
+/* -------------------------------------------------- Day-3 opening callback */
+/* What yesterday's private channel did, acknowledged in one line. Set apart
+   from the scene prose because it is memory, not news. */
+.callback {
+  border-left: 2px solid var(--signal);
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.callbackLabel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--signal-bright);
+}
+
+.callbackText {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-style: italic;
+  line-height: 1.62;
+  color: var(--silver-muted);
+}
+
+/* ------------------------------------------------------------- Revision */
+.revisionCurrent {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.revisionOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.revisionHold {
+  border-left-color: var(--silver-fainter);
+}

@@ -13,7 +13,7 @@ import styles from './steps.module.css';
    The whole scene is one step rather than two, so the opening stays on screen
    under the reply and the conversation reads as continuous. */
 
-export default function ExchangeStep({ step, role, onChoose }) {
+export default function ExchangeStep({ step, role, onChoose, onConsultAdviser, adviserTaken }) {
   const [opening, setOpening] = useState(null);
   const openings = step.openingsByRole[role.id] ?? [];
   const counterpart = step.counterpartByRole[role.id];
@@ -39,6 +39,20 @@ export default function ExchangeStep({ step, role, onChoose }) {
           <p key={paragraph.slice(0, 40)}>{paragraph}</p>
         ))}
       </Reveal>
+
+      {/* The adviser sits at the opening, before anything has been said — the
+          same placement as the public scene, and useless once you have spoken. */}
+      {step.adviser && !opening && (
+        <Reveal delay={200} className={styles.adviser}>
+          {adviserTaken ? (
+            <span className={styles.adviserTaken}>Adviser consulted · memo filed</span>
+          ) : (
+            <Button variant="quiet" onClick={onConsultAdviser}>
+              {step.adviser.label}
+            </Button>
+          )}
+        </Reveal>
+      )}
 
       {!opening ? (
         <Reveal delay={240}>

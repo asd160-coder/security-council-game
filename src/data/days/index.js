@@ -1,9 +1,10 @@
 import day1 from './day1.js';
 import day2 from './day2.js';
+import day3 from './day3.js';
 
 /* The day registry. Adding Day 2 is two lines: import the file, add it here.
    Nothing else in the app enumerates days. */
-export const DAYS = [day1, day2];
+export const DAYS = [day1, day2, day3];
 
 export const getDay = (number) => DAYS.find((day) => day.number === number) ?? null;
 

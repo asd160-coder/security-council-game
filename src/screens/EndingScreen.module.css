@@ -1,0 +1,223 @@
+.screen {
+  min-height: 100vh;
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 7vh var(--gutter) var(--gutter);
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--wax-bright);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--fs-screen-title);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+  color: var(--stock);
+}
+
+.standfirst {
+  font-family: var(--font-body);
+  font-size: var(--fs-scene);
+  line-height: 1.6;
+  color: var(--silver);
+  max-width: 40rem;
+}
+
+.prose p {
+  font-family: var(--font-body);
+  font-size: var(--fs-scene);
+  line-height: 1.7;
+  color: var(--silver-muted);
+  max-width: 42rem;
+}
+
+.prose p + p {
+  margin-top: 16px;
+}
+
+.rule {
+  height: 1px;
+  background: var(--board-line);
+  border: none;
+}
+
+/* The role's own last line. Set apart, because what each of the three is left
+   holding is not the same thing. */
+.closer {
+  border-left: 2px solid var(--brass);
+  padding-left: 20px;
+}
+
+.closerText {
+  font-family: var(--font-body);
+  font-size: var(--fs-scene);
+  line-height: 1.68;
+  color: var(--silver);
+  max-width: 40rem;
+}
+
+/* ------------------------------------------------------------ The price */
+.modifiers {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.modifier {
+  display: grid;
+  grid-template-columns: 130px minmax(0, 1fr);
+  gap: 20px;
+  align-items: baseline;
+}
+
+@media (max-width: 720px) {
+  .modifier {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}
+
+.modifierLabel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--silver-faint);
+}
+
+.modifierText {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--silver-muted);
+}
+
+/* ------------------------------------------------------- The document */
+.statement {
+  background: var(--stock);
+  border: 1px solid var(--stock-edge);
+  border-radius: var(--radius-paper);
+  padding: 28px 30px;
+  box-shadow: var(--shadow-paper);
+}
+
+.statementHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  padding-bottom: 14px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--stock-edge);
+}
+
+.statementTitle {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.statementRole {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.line {
+  font-family: var(--font-body);
+  font-size: 15.5px;
+  line-height: 1.66;
+  color: var(--ink);
+}
+
+.line + .line {
+  margin-top: 14px;
+}
+
+/* Their own sentences, kept visually continuous with the rest of the document
+   and marked only by a rule — it is the same statement, finished. */
+.ownWords {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--stock-edge);
+  white-space: pre-wrap;
+}
+
+.ownWordsLabel {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--wax);
+  margin-bottom: 8px;
+}
+
+/* ------------------------------------------------------------ Standing */
+.standing {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+}
+
+.standingItem {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.standingLabel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  text-transform: uppercase;
+  color: var(--silver-fainter);
+}
+
+.standingValue {
+  font-family: var(--font-mono);
+  font-size: var(--fs-readout);
+  font-variant-numeric: tabular-nums;
+  color: var(--silver);
+}
+
+.foot {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 8px;
+}
+
+.next {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--silver-fainter);
+  max-width: 40rem;
+}
+
+.actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}

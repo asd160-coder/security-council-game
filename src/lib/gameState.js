@@ -1,6 +1,6 @@
 import { applyEffects, initialTrackers } from './trackers.js';
 import { getRole } from '../data/roles.js';
-import { getDay } from '../data/days/index.js';
+import { getDay, PLANNED_DAYS } from '../data/days/index.js';
 
 /* All game state in one serialisable object. Nothing is persisted: a classroom
    run should start clean every time, and the design packet asks for a
@@ -25,6 +25,9 @@ export const initialState = {
   unlocked: [], // ids from cards.js and dossiers.js, in the order filed
   unlockedToday: [],
   draft: [], // { dayNumber, optionId, label, fragment }
+  /* The student's own closing. Not scored, carried into the ending and quoted
+     back — which is honest, and is what a debrief will be built from. */
+  closing: '',
   mapInspected: false,
   creditsOpen: false,
 };
@@ -71,7 +74,13 @@ export function reducer(state, action) {
           lastDeltas: choice.effects,
           choices: {
             ...state.choices,
-            [stepKey]: { id: choice.id, feedback: choice.feedback },
+            [stepKey]: {
+              id: choice.id,
+              feedback: choice.feedback,
+              /* Day 5's final choice carries a posture the outcome logic
+                 reads. Earlier days do not set one. */
+              ...(choice.posture ? { posture: choice.posture } : {}),
+            },
           },
           stepIndex: state.stepIndex + 1,
         },
@@ -152,12 +161,20 @@ export function reducer(state, action) {
       };
     }
 
+    case 'setClosing':
+      return { ...state, closing: action.text, stepIndex: state.stepIndex + 1 };
+
     case 'endDay': {
       /* The day boundary. Trackers and the file carry forward; everything
          scoped to a single day resets here, which is what lets the summary
          report the day's movement rather than the run's. */
       const next = state.day + 1;
-      if (!getDay(next)) return { ...state, screen: 'stub' };
+      if (!getDay(next)) {
+        /* End of the scenario is an outcome, not an absence. The stub remains
+           for a truncated build where later days simply are not written yet. */
+        const finished = state.day >= PLANNED_DAYS[PLANNED_DAYS.length - 1].number;
+        return { ...state, screen: finished ? 'ending' : 'stub' };
+      }
       return {
         ...state,
         day: next,

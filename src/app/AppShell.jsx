@@ -3,6 +3,7 @@ import TitleScreen from '../screens/TitleScreen.jsx';
 import RoleSelect from '../screens/RoleSelect.jsx';
 import DayView from '../screens/DayView.jsx';
 import DayStub from '../screens/DayStub.jsx';
+import EndingScreen from '../screens/EndingScreen.jsx';
 import { Button, Paper, PaperBody } from '../components/ui/index.jsx';
 import { initialState, reducer } from '../lib/gameState.js';
 import { getRole } from '../data/roles.js';
@@ -38,6 +39,14 @@ export default function AppShell() {
 
       {state.screen === 'play' && role && day && (
         <DayView day={day} role={role} state={state} dispatch={dispatch} />
+      )}
+
+      {state.screen === 'ending' && role && (
+        <EndingScreen
+          state={state}
+          role={role}
+          onRestart={() => dispatch({ type: 'restart' })}
+        />
       )}
 
       {state.screen === 'stub' && (

@@ -68,6 +68,8 @@ export const PLAY = {
   keepAsWritten: 'Leave the clause as written',
   witnessAdvance: 'Continue',
   slotIndex: (n) => ['One', 'Two', 'Three', 'Four'][n - 1] ?? String(n),
+  writingCount: (sentences, words) =>
+    `${sentences} sentence${sentences === 1 ? '' : 's'} · ${words} word${words === 1 ? '' : 's'}`,
   archive: 'Archive',
   newInFile: 'New in your file',
   soWhat: 'What this changes',
@@ -99,6 +101,15 @@ export const SUMMARY = {
   filed: 'Filed today',
   draftSoFar: 'Your statement so far',
   tomorrow: 'Tomorrow',
+};
+
+export const ENDING = {
+  eyebrow: 'How it resolved',
+  cost: 'What it cost',
+  statementTitle: 'Your statement, complete',
+  ownWords: 'In conclusion — your own words',
+  next: 'This is the end of the playable crisis. The debrief — comparing your route with the historical record, and the discussion prompts that go with it — is the remaining piece and is not built yet.',
+  restart: 'Play again as a different role',
 };
 
 export const STUB = {

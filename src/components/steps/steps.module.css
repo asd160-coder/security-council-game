@@ -590,3 +590,106 @@
   line-height: 1.5;
   color: var(--silver-faint);
 }
+
+/* ---------------------------------------------------------- Writing task */
+.statementLine {
+  font-family: var(--font-body);
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--ink);
+  padding-left: 26px;
+  position: relative;
+}
+
+.statementLine + .statementLine {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--stock-edge);
+}
+
+.statementIndex {
+  position: absolute;
+  left: 0;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: var(--track-label-tight);
+  color: var(--ink-faint);
+  top: 4px;
+}
+
+/* The part they are writing. Marked as theirs by weight rather than by an
+   announcement — it is the same document, in the same hand. */
+.statementClosing {
+  color: var(--ink);
+}
+
+.statementClosing .statementIndex {
+  color: var(--wax);
+}
+
+.writingBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.writingLabel {
+  font-family: var(--font-display);
+  font-size: 15.5px;
+  font-weight: 600;
+  color: var(--stock);
+}
+
+.writingGuide {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--silver-faint);
+  margin-bottom: 4px;
+}
+
+/* Paper, not a form field. The student is writing into the document. */
+.writingBox {
+  width: 100%;
+  background: var(--stock);
+  color: var(--ink);
+  border: 1px solid var(--stock-edge);
+  border-radius: var(--radius-paper);
+  padding: 16px 18px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  resize: vertical;
+  box-shadow: var(--shadow-paper);
+}
+
+.writingBox::placeholder {
+  color: var(--ink-faint);
+  font-style: italic;
+}
+
+.writingFoot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.writingCount {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  text-transform: uppercase;
+  color: var(--silver-fainter);
+}
+
+/* Says what is still wanted. Not an error, and never in the wax register —
+   nothing has gone wrong. */
+.writingNeeds {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-style: italic;
+  color: var(--silver-faint);
+}

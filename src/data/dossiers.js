@@ -189,6 +189,42 @@ export const DOSSIERS = [
     soWhat:
       'A settlement is not finished when the principals agree. It is finished when the people who have to implement it accept that they were party to it.',
   },
+  /* ------------------------------------------------------------- Day 5 */
+  {
+    id: 'note-waiting',
+    kind: 'procedure',
+    label: 'Waiting',
+    title: 'The part nobody writes down',
+    body: [
+      'Most of a crisis is not decision. It is the interval between having done what you can and learning whether it worked, conducted by people who cannot leave the building and have nothing further to contribute.',
+      'It is also when mistakes are made, because an interval is uncomfortable and there is always somebody willing to fill it with an action.',
+    ],
+    soWhat:
+      'The discipline at the end is not choosing well. It is not choosing again merely because waiting is difficult.',
+  },
+  {
+    id: 'note-assurance',
+    kind: 'channel',
+    label: 'Assurance',
+    title: 'What a private word is worth',
+    body: [
+      'An assurance given in a room with no record cannot be enforced, produced, or cited. Its entire value is the reputation of the person giving it and the belief that they can deliver what they promise.',
+      'Which is why it is the last instrument available, and why it works only for people who have spent the week being careful about what they said.',
+    ],
+    soWhat:
+      'Everything you did earlier decides whether this works now. That is not a mechanism; it is what a reputation is.',
+  },
+  {
+    id: 'memo-aide-day5',
+    kind: 'memo',
+    label: 'Aide memo',
+    title: 'Nobody planned for it going well',
+    body: [
+      'Every hour of preparation this week has gone on the case where this fails. If the answer is yes, the most delicate phase begins with no plan, run by people who have not slept, improvising the part that has to be got exactly right.',
+    ],
+    soWhat:
+      'Success has its own requirements and they have not been prepared for. Assume the first hour after agreement is the one most likely to undo it.',
+  },
   {
     id: 'memo-aide',
     kind: 'memo',

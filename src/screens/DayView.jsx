@@ -9,12 +9,13 @@ import DraftingStep from '../components/steps/DraftingStep.jsx';
 import DraftingComposeStep from '../components/steps/DraftingComposeStep.jsx';
 import DraftingReviseStep from '../components/steps/DraftingReviseStep.jsx';
 import DraftingAssembleStep from '../components/steps/DraftingAssembleStep.jsx';
+import WritingStep from '../components/steps/WritingStep.jsx';
 import SummaryStep from '../components/steps/SummaryStep.jsx';
 import DossierRail from '../components/panels/DossierRail.jsx';
 import TrackerColumn from '../components/panels/TrackerColumn.jsx';
 import DraftingTray from '../components/panels/DraftingTray.jsx';
 import MapPanel from '../components/panels/MapPanel.jsx';
-import { PLANNED_DAYS } from '../data/days/index.js';
+import { PLANNED_DAYS, getDay } from '../data/days/index.js';
 import { band, diffTrackers } from '../lib/trackers.js';
 import { APP, PLAY } from '../data/copy.js';
 import styles from './DayView.module.css';
@@ -40,6 +41,7 @@ const STEP_RENDERERS = {
   draftingCompose: DraftingComposeStep,
   draftingRevise: DraftingReviseStep,
   draftingAssemble: DraftingAssembleStep,
+  writing: WritingStep,
   summary: SummaryStep,
 };
 
@@ -84,15 +86,19 @@ export default function DayView({ day, role, state, dispatch }) {
      channel category is the compressed form of what happened in the previous
      day's private exchange. */
   const standing = band(state.trackers.escalation);
-  const history = useMemo(
-    () => ({
-      channelCategory:
-        state.choices[`day${day.number - 1}:back-channel`]?.feedback ??
-        state.choices[`day${day.number - 1}:pressure`]?.feedback ??
-        null,
-    }),
-    [state.choices, day.number],
-  );
+  const history = useMemo(() => {
+    /* The previous day's exchange, found by kind rather than by name. This was
+       a list of hardcoded step ids and it silently stopped working the moment
+       a day named its exchange something new — Day 5's callback could never
+       have fired, because Day 4 calls its exchange `negotiation`. */
+    const previous = getDay(day.number - 1);
+    const exchange = previous?.steps.find((s) => s.kind === 'exchange');
+    return {
+      channelCategory: exchange
+        ? (state.choices[`${previous.id}:${exchange.id}`]?.feedback ?? null)
+        : null,
+    };
+  }, [state.choices, day.number]);
 
   const Renderer = step ? STEP_RENDERERS[step.kind] : null;
 
@@ -127,6 +133,7 @@ export default function DayView({ day, role, state, dispatch }) {
       }),
     standing,
     history,
+    onSubmit: (text) => dispatch({ type: 'setClosing', text }),
     onConsultAdviser: () => dispatch({ type: 'unlock', id: adviserStep?.adviser?.unlocks }),
     adviserTaken: state.unlocked.includes(adviserStep?.adviser?.unlocks),
     choice: chosen,

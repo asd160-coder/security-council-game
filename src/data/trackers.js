@@ -14,14 +14,21 @@
 
 /* The scale has to hold five days of accumulation, not one.
 
-   It was ±8 when a day contained a single choice and Day 1 could move a
-   tracker by at most 2. Day 2 has three effect-bearing decisions — the
-   chamber, the channel, and the strength of the clause — so a consistent
-   player can move one variable by 6 in a day. At ±8 that pins a needle by
-   Day 3 and the instrument stops reporting anything for the rest of the run.
-   ±14 leaves Day 1 reading as small direction-setting, Day 2 as a marked
-   shift, and the ends of the scale reachable but not cheap. */
-export const TRACKER_SCALE = { min: -14, max: 14 };
+   Set from measurement rather than guessed at. Walking all 62,208 complete
+   Day 1-3 paths per role showed nothing at the rail on ±14 — but a p90 run,
+   the top decile rather than an outlier, finished Day 3 at 10 with only four
+   points of headroom, and Day 3 alone can move a tracker by 6. Two more days
+   at that rate pins an ordinary strong run during Day 4 with the finale still
+   unplayed. At ±20 the same p90 lands near 18 and only maximal play reaches
+   the rail on the last day, which is what the end of a scale is for.
+
+   The underlying cause is worth recording: 90% of options are already
+   trade-offs, so this is not all-gain design. It is that U Thant's trade-offs
+   push the same way in his own terms — lower escalation and higher legitimacy
+   are both wins for him — and almost nothing takes legitimacy or council trust
+   away. From Day 4 the options are capped at ±2 and several cost those two
+   directly. */
+export const TRACKER_SCALE = { min: -20, max: 20 };
 
 export const TRACKERS = [
   {

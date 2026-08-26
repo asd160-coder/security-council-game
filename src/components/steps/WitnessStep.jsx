@@ -14,8 +14,11 @@ import styles from './steps.module.css';
    and the principals stay historical. */
 
 export default function WitnessStep({ step, role, onAdvance }) {
-  const witness = step.byRole[role.id];
-  if (!witness) return null;
+  /* One card or several. Day 3 hands over a single person; Day 4 hands over
+     the parties whose consent is now needed and who were not asked. Same beat
+     either way — documents that reached your desk, and no choices on them. */
+  const cards = step.cardsByRole?.[role.id] ?? (step.byRole?.[role.id] ? [step.byRole[role.id]] : []);
+  if (cards.length === 0) return null;
 
   return (
     <div className={styles.step}>
@@ -23,14 +26,18 @@ export default function WitnessStep({ step, role, onAdvance }) {
         <span className="eyebrow">{step.eyebrow}</span>
       </Reveal>
 
-      <Reveal delay={120}>
-        <Paper eyebrow={witness.source} title={witness.title}>
-          <PaperBody paragraphs={witness.body} />
-          <Field label={step.weighLabel}>{witness.weigh}</Field>
-        </Paper>
-      </Reveal>
+      <div className={styles.witnessStack}>
+        {cards.map((card, index) => (
+          <Reveal key={card.title} delay={120 + index * 110}>
+            <Paper eyebrow={card.source} title={card.title}>
+              <PaperBody paragraphs={card.body} />
+              <Field label={card.weighLabel ?? step.weighLabel}>{card.weigh}</Field>
+            </Paper>
+          </Reveal>
+        ))}
+      </div>
 
-      <Reveal delay={280} className={styles.actions}>
+      <Reveal delay={280 + cards.length * 110} className={styles.actions}>
         <Button variant="primary" onClick={onAdvance}>
           {PLAY.witnessAdvance}
         </Button>

@@ -38,7 +38,7 @@ export function diffTrackers(before, after) {
    Used by day content that varies its scene text with where the crisis stands
    rather than with which line was taken — three variants instead of a tree,
    and it reads as consequence without costing a branch. */
-export const band = (value) => (value >= 5 ? 'high' : value <= -5 ? 'low' : 'mid');
+export const band = (value) => (value >= 7 ? 'high' : value <= -7 ? 'low' : 'mid');
 
 /* Position on the needle track, 0 to 1. */
 export const trackerPosition = (value) =>

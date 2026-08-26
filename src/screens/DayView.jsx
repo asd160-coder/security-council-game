@@ -8,6 +8,7 @@ import ConsequenceStep from '../components/steps/ConsequenceStep.jsx';
 import DraftingStep from '../components/steps/DraftingStep.jsx';
 import DraftingComposeStep from '../components/steps/DraftingComposeStep.jsx';
 import DraftingReviseStep from '../components/steps/DraftingReviseStep.jsx';
+import DraftingAssembleStep from '../components/steps/DraftingAssembleStep.jsx';
 import SummaryStep from '../components/steps/SummaryStep.jsx';
 import DossierRail from '../components/panels/DossierRail.jsx';
 import TrackerColumn from '../components/panels/TrackerColumn.jsx';
@@ -38,6 +39,7 @@ const STEP_RENDERERS = {
   drafting: DraftingStep,
   draftingCompose: DraftingComposeStep,
   draftingRevise: DraftingReviseStep,
+  draftingAssemble: DraftingAssembleStep,
   summary: SummaryStep,
 };
 
@@ -62,6 +64,11 @@ export default function DayView({ day, role, state, dispatch }) {
     if (!sourceStep) return null;
     const choiceId = state.choices[`${day.id}:${sourceStep.id}`]?.id;
     if (!choiceId) return null;
+    /* A converging exchange keeps its follow-ups on the step rather than on
+       each opening, so look there too. The stored line is already resolved to
+       this role, so the shared definition only needs its label back. */
+    const shared = sourceStep.sharedFollow?.find((o) => o.id === choiceId);
+    if (shared) return { ...shared, line: shared.lineByRole[role.id] };
     const pool =
       sourceStep.kind === 'exchange'
         ? sourceStep.openingsByRole[role.id]?.flatMap((o) => o.follow ?? [])

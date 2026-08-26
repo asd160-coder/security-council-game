@@ -67,6 +67,7 @@ export const PLAY = {
   previously: 'Previously — ',
   keepAsWritten: 'Leave the clause as written',
   witnessAdvance: 'Continue',
+  slotIndex: (n) => ['One', 'Two', 'Three', 'Four'][n - 1] ?? String(n),
   archive: 'Archive',
   newInFile: 'New in your file',
   soWhat: 'What this changes',

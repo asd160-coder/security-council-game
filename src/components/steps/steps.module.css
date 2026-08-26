@@ -571,3 +571,22 @@
 .revisionHold {
   border-left-color: var(--silver-fainter);
 }
+
+.witnessStack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Why a shared position costs what it costs for you, today. */
+.choiceNote {
+  display: block;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid var(--board-line);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--silver-faint);
+}

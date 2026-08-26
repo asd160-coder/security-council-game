@@ -141,6 +141,54 @@ export const DOSSIERS = [
     soWhat:
       'Time is not neutral here. It is working for one side, and it is worth being clear which.',
   },
+  /* ------------------------------------------------------------- Day 4 */
+  {
+    id: 'note-two-letters',
+    kind: 'channel',
+    label: 'Two letters',
+    title: 'Which text is the government',
+    body: [
+      'A state that sends two incompatible offers in one night is not being devious; it is being more than one thing. Somewhere behind the second letter is an argument the first letter lost.',
+      'Choosing which to answer is therefore not a reading of the text. It is a choice about which faction you would rather be negotiating with, made on the assumption that answering one strengthens it.',
+    ],
+    soWhat:
+      'You are not replying to a government. You are replying into an argument inside a government, and your reply is evidence in it.',
+  },
+  {
+    id: 'note-jupiters',
+    kind: 'intelligence',
+    label: 'The Jupiters',
+    title: 'Obsolete and expensive at the same time',
+    body: [
+      'The missiles in Turkey are liquid-fuelled, slow to prepare, and had been under discussion for withdrawal for a year on straightforward military grounds. As weapons they are worth very little.',
+      'As a guarantee they are worth what every other guarantee is worth, because they are the same promise made in a different place. That is why they cannot be traded openly, and why they can be removed quietly a few months later without anyone calling it a trade.',
+    ],
+    soWhat:
+      'The difference between a concession and a coincidence is timing and publicity. Both are available if the two sides want them to be.',
+  },
+  {
+    id: 'note-pledge',
+    kind: 'procedure',
+    label: 'The pledge',
+    title: 'What an undertaking not to invade is worth',
+    body: [
+      'A promise given by one administration binds it for as long as it is in office and no longer, which both governments understand. It cannot be enforced and it will not be written into anything ratified.',
+      'It is nevertheless the thing being asked for, because a public undertaking is expensive to break — not impossible, expensive. That is the whole of the security being offered.',
+    ],
+    soWhat:
+      'The settlement rests on a promise that is worth exactly the cost of breaking it. Deciding whether that is enough is the actual question.',
+  },
+  {
+    id: 'memo-aide-day4',
+    kind: 'memo',
+    label: 'Aide memo',
+    title: 'The people who are not in the room',
+    body: [
+      'Two governments are settling the terms. Two others own the territory and the bases being disposed of, and neither has been asked. Every arrangement reached today has to be carried out by somebody who was not consulted about it.',
+    ],
+    soWhat:
+      'A settlement is not finished when the principals agree. It is finished when the people who have to implement it accept that they were party to it.',
+  },
   {
     id: 'memo-aide',
     kind: 'memo',

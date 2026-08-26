@@ -13,7 +13,33 @@ import styles from './steps.module.css';
    The whole scene is one step rather than two, so the opening stays on screen
    under the reply and the conversation reads as continuous. */
 
-export default function ExchangeStep({ step, role, onChoose, onConsultAdviser, adviserTaken }) {
+/* A shared follow-up is a position on the table rather than a personal move.
+   It carries the same strategic meaning for all three roles and a different
+   line, a different price, and — where standing is against you — a different
+   price again. This is where it resolves into an ordinary choice, so nothing
+   downstream has to know convergence exists. */
+function resolveShared(option, roleId, trackers) {
+  const strain = option.strain;
+  const strained =
+    strain && trackers && trackers[strain.tracker] < strain.below;
+  return {
+    id: option.id,
+    label: option.label,
+    feedback: option.feedback,
+    line: option.lineByRole[roleId],
+    effects: (strained ? strain.effectsByRole : option.effectsByRole)[roleId],
+    note: strained ? strain.note : option.note,
+  };
+}
+
+export default function ExchangeStep({
+  step,
+  role,
+  trackers,
+  onChoose,
+  onConsultAdviser,
+  adviserTaken,
+}) {
   const [opening, setOpening] = useState(null);
   const openings = step.openingsByRole[role.id] ?? [];
   const counterpart = step.counterpartByRole[role.id];
@@ -94,7 +120,10 @@ export default function ExchangeStep({ step, role, onChoose, onConsultAdviser, a
 
           <Reveal delay={580}>
             <div className={styles.choices} role="group" aria-label={step.followPrompt}>
-              {opening.follow.map((choice) => (
+              {(step.sharedFollow
+                ? step.sharedFollow.map((o) => resolveShared(o, role.id, trackers))
+                : opening.follow
+              ).map((choice) => (
                 <button
                   key={choice.id}
                   type="button"
@@ -103,6 +132,9 @@ export default function ExchangeStep({ step, role, onChoose, onConsultAdviser, a
                 >
                   <span className={styles.choiceLabel}>{choice.label}</span>
                   <span className={styles.choiceLine}>{choice.line}</span>
+                  {/* Why this costs what it costs, when standing has changed
+                      the price. Shown before the choice, like Day 2's chips. */}
+                  {choice.note && <span className={styles.choiceNote}>{choice.note}</span>}
                 </button>
               ))}
             </div>

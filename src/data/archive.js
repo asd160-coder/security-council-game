@@ -62,11 +62,11 @@ export const ARCHIVE = [
   {
     id: 'excomm-cabinet-room',
     kind: 'image',
-    file: null, // public/archive/excomm-cabinet-room-1962-10-29.jpg
+    file: 'excomm-cabinet-room-1962-10.jpg',
     title: 'Executive Committee meeting, Cabinet Room',
     date: 'October 1962',
     caption:
-      'The President and his advisers during the Executive Committee deliberations at the White House.',
+      'The Executive Committee in session at the White House. Robert Kennedy stands at the left of the frame; the Vice-President sits at the table. The room in which every option was argued, repeatedly, by people who disagreed.',
     source: 'Cecil Stoughton, White House Photographs, John F. Kennedy Presidential Library',
     rights: 'Public domain — work of the US federal government',
     whyItMatters:
@@ -84,6 +84,32 @@ export const ARCHIVE = [
     rights: 'Public domain — work of the US federal government',
     whyItMatters:
       'The moment the crisis stopped being secret. Public knowledge narrowed what either government could quietly agree to.',
+  },
+  {
+    id: 'p2-neptune',
+    kind: 'image',
+    file: 'p2-neptune-okhotsk-1962-10.jpg',
+    title: 'Patrol aircraft over the Okhotsk',
+    date: 'October 1962',
+    caption:
+      'A US Navy P-2 Neptune of squadron VP-18 passing low over the Soviet freighter Okhotsk, her deck cargo in plain view. The quarantine was enforced largely by being seen to be enforced.',
+    source: 'US Navy, Naval History and Heritage Command',
+    rights: 'Public domain — work of the US federal government',
+    whyItMatters:
+      'This is what the line actually looked like: an aircraft, a ship, and two governments watching to see what the other would do about it.',
+  },
+  {
+    id: 'ship-departing',
+    kind: 'image',
+    file: 'soviet-ship-departing-1962-11.jpg',
+    title: 'Soviet freighter leaving Cuba, deck cargo uncovered',
+    date: 'November 1962',
+    caption:
+      'A departing freighter photographed from directly above, her crated cargo left uncovered on deck so that it could be counted from the air. Verification, conducted by consent and without anyone having to say so.',
+    source: 'US Navy, Naval History and Heritage Command',
+    rights: 'Public domain — work of the US federal government',
+    whyItMatters:
+      'The settlement held because both sides arranged to let the other watch it being kept. That is what a verified withdrawal looked like in practice.',
   },
 ];
 

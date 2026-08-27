@@ -21,6 +21,7 @@ const day3 = {
     {
       kind: 'briefing',
       id: 'update',
+      archiveId: 'p2-neptune',
       /* Scene text varies with where escalation stands rather than with which
          line was taken: three variants, shared across all three roles. */
       bodyByBand: {

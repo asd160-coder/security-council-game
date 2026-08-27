@@ -23,7 +23,7 @@ const day1 = {
     {
       kind: 'briefing',
       id: 'briefing',
-      archiveId: 'u2-mrbm-launch-site',
+      archiveIds: ['u2-mrbm-launch-site', 'ss4-reference'],
       body: [
         'Reconnaissance has revealed missile installations in Cuba. What was once suspicion is becoming strategic reality. Across Washington, Moscow, and the United Nations, leaders are now weighing the same question: how can this threat be answered without pushing the world toward catastrophe?',
         'Every public statement, every private message, and every signal of weakness or resolve may shape what comes next.',

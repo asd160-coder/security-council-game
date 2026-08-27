@@ -31,9 +31,30 @@ tool that produced it is `.design/clip-audio.swift` — `swift clip-audio.swift
 <in> <out.m4a> <startSeconds> <durationSeconds>` — kept because any later clip
 should be cut the same way.
 
-Still open: the EXCOMM Cabinet Room photograph. The U-2 PDF also carries a
-colour White House photograph of pilot Richard Heyser with USAF officers, which
-has no slot yet.
+All seven slots are now filled and every day carries media: Day 1 the U-2
+launch-site board paired with the SS-4 reference that made identifying it
+possible, Day 2 the address, Day 3 the Neptune over the Okhotsk, Day 4 the
+Executive Committee, Day 5 a departing freighter with its cargo uncovered for
+counting.
+
+One filled item, the Los Palacios encampment board, is deliberately not shown —
+it duplicates the launch-site board's function and Day 1 does not need three
+frames. It stays available.
+
+Two candidates remain unused: the colour White House photograph of pilot
+Richard Heyser in the U-2 PDF, and a larger copy of the departing freighter,
+which is only 600px wide in the version to hand.
+
+## Milestone 6 — the consequence visualisation
+
+Deferred deliberately and scoped to the ruptured ending rather than a
+between-days interstitial, where there is time to read it. Two conditions
+before anything is built: figures sourced for **1962** arsenals rather than the
+1980s — nuclear-winter modelling dates from 1983 and the standard casualty
+projections describe a far larger exchange than October 1962 could have
+produced — and the packet's own treatment, which asks for expanding zones,
+communication-failure markers and stability indicators rather than explosive
+imagery.
 
 One correction the plates forced: the imagery is annotated **Los Palacios** and
 **San Diego de los Baños**, not San Cristóbal. Those are neighbouring sites in

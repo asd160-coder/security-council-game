@@ -30,6 +30,7 @@ const day4 = {
     {
       kind: 'briefing',
       id: 'update',
+      archiveId: 'excomm-cabinet-room',
       bodyByBand: {
         low: [
           'Two letters arrived from Moscow overnight. The first, received late and evidently written in haste, offers the removal of the weapons in exchange for an undertaking not to invade Cuba. The second, broadcast this morning, adds the American missiles in Turkey to the price.',

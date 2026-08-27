@@ -12,6 +12,7 @@ export default function BriefingStep({ day, step, onAdvance, standing, history }
      Days 1 and 2 supply neither and render exactly as before. */
   const body = step.bodyByBand?.[standing] ?? step.body;
   const callback = step.channelCallback?.[history?.channelCategory] ?? null;
+  const archive = step.archiveIds ?? (step.archiveId ? [step.archiveId] : []);
 
   return (
     <div className={`${styles.step} ${styles.stepWide}`}>
@@ -40,11 +41,14 @@ export default function BriefingStep({ day, step, onAdvance, standing, history }
         </Reveal>
       )}
 
-      {step.archiveId && (
-        <Reveal delay={360}>
-          <ArchiveModule id={step.archiveId} />
+      {/* A day may carry more than one item. Day 1 shows the Cuban frame and
+          the reference photograph that made identifying it possible, because
+          the pair is the lesson and either alone is only half of it. */}
+      {archive.map((id, index) => (
+        <Reveal key={id} delay={360 + index * 120}>
+          <ArchiveModule id={id} />
         </Reveal>
-      )}
+      ))}
 
       <Reveal delay={460} className={styles.actions}>
         <Button variant="primary" onClick={onAdvance}>

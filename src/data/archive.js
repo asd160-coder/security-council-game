@@ -75,12 +75,12 @@ export const ARCHIVE = [
   {
     id: 'jfk-address',
     kind: 'audio',
-    file: null, // public/archive/jfk-address-1962-10-22.mp3
+    file: 'jfk-address-1962-10-22.m4a',
     title: 'Radio and television address to the nation',
     date: '22 October 1962',
     caption:
-      'The President informs the American public of the missile installations and announces a naval quarantine of Cuba.',
-    source: 'John F. Kennedy Presidential Library and Museum',
+      'An excerpt from the address in which the President sets out what has been found in Cuba, what these weapons can reach, and why a build-up conducted in secret is treated differently from one conducted openly. Two minutes fifty-four seconds of a seventeen-minute broadcast.',
+    source: 'John F. Kennedy Presidential Library and Museum, JFKWHA-142-001',
     rights: 'Public domain — work of the US federal government',
     whyItMatters:
       'The moment the crisis stopped being secret. Public knowledge narrowed what either government could quietly agree to.',

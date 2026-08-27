@@ -25,9 +25,15 @@ coverage: the San Diego de los Baños MRBM launch-site readout board, the Los
 Palacios encampment board, and the CIA's SS-4 reference photograph from a
 Moscow parade. All three are CIA/NPIC product and public domain.
 
-Still open: the EXCOMM Cabinet Room photograph, and the 22 October address
-audio. The same PDF also carries a colour White House photograph of U-2 pilot
-Richard Heyser with USAF officers, which has no slot yet.
+The 22 October address is in: a 2:54 excerpt (3:30–6:24 of the seventeen-minute
+broadcast) cut from JFKWHA-142-001, encoded as mono AAC at ~64 kbps. The clip
+tool that produced it is `.design/clip-audio.swift` — `swift clip-audio.swift
+<in> <out.m4a> <startSeconds> <durationSeconds>` — kept because any later clip
+should be cut the same way.
+
+Still open: the EXCOMM Cabinet Room photograph. The U-2 PDF also carries a
+colour White House photograph of pilot Richard Heyser with USAF officers, which
+has no slot yet.
 
 One correction the plates forced: the imagery is annotated **Los Palacios** and
 **San Diego de los Baños**, not San Cristóbal. Those are neighbouring sites in

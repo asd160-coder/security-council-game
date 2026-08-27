@@ -231,3 +231,79 @@
 @media (prefers-reduced-motion: reduce) {
   .drawn { animation: none; }
 }
+
+/* ------------------------------------------------------- The summary */
+/* An illustration, not a document. It carries the same marker the portraits
+   do and no source line, and it opens at full size because it is dense with
+   text that cannot be read at panel width. */
+.posterButton {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: zoom-in;
+}
+
+.poster {
+  width: 100%;
+  border: 1px solid var(--board-line);
+  border-radius: var(--radius);
+  filter: saturate(0.72) contrast(1.02);
+  transition: filter var(--dur-quick) var(--ease);
+}
+
+.posterButton:hover .poster,
+.posterButton:focus-visible .poster {
+  filter: saturate(0.85) contrast(1.05);
+}
+
+.posterLabelRow {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.posterMark {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--silver-fainter);
+  border-left: 1px solid var(--board-line-bright);
+  padding-left: 12px;
+}
+
+.expandMark {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 13px;
+  height: 13px;
+  border-top: 1px solid var(--silver-faint);
+  border-right: 1px solid var(--silver-faint);
+  opacity: 0.55;
+  transition: opacity var(--dur-quick) var(--ease);
+}
+
+.posterButton:hover .expandMark,
+.posterButton:focus-visible .expandMark {
+  opacity: 1;
+}
+
+.posterNote {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--silver-fainter);
+  max-width: 44rem;
+}
+
+.posterFull {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

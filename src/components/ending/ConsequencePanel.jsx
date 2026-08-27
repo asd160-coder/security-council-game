@@ -1,4 +1,7 @@
+import { useCallback, useState } from 'react';
+import Overlay from '../ui/Overlay.jsx';
 import { CONSEQUENCE } from '../../data/consequence.js';
+import { PLAY } from '../../data/copy.js';
 import styles from './ConsequencePanel.module.css';
 
 /* What was at stake, shown only when the frame breaks.
@@ -13,7 +16,10 @@ import styles from './ConsequencePanel.module.css';
    That is also, as it happens, the more frightening account. */
 
 export default function ConsequencePanel() {
-  const { eyebrow, title, standfirst, warning, ledger, breakdown, unknown, footer } = CONSEQUENCE;
+  const { eyebrow, title, standfirst, warning, ledger, breakdown, unknown, poster, footer } =
+    CONSEQUENCE;
+  const [posterOpen, setPosterOpen] = useState(false);
+  const closePoster = useCallback(() => setPosterOpen(false), []);
 
   return (
     <section className={styles.panel} aria-label={eyebrow}>
@@ -90,7 +96,38 @@ export default function ConsequencePanel() {
         </div>
       </div>
 
+      {/* Placed last on purpose: the sourced 1962 account is read first and
+          this second, so the general statement lands against the specific
+          one rather than instead of it. */}
+      {poster && (
+        <div className={styles.section}>
+          {/* The marker sits on the label row rather than over the artwork: the
+              poster's own caption runs along its bottom edge, and a chip in the
+              corner covered it. */}
+          <span className={styles.posterLabelRow}>
+            <span className={styles.sectionLabel}>{poster.label}</span>
+            <span className={styles.posterMark}>{PLAY.illustration}</span>
+          </span>
+          <button
+            type="button"
+            className={styles.posterButton}
+            onClick={() => setPosterOpen(true)}
+            aria-label={poster.open}
+          >
+            <img className={styles.poster} src={`art/${poster.file}`} alt={poster.caption} />
+            <span className={styles.expandMark} aria-hidden="true" />
+          </button>
+          <p className={styles.posterNote}>{poster.note}</p>
+        </div>
+      )}
+
       <p className={styles.footer}>{footer}</p>
+
+      {posterOpen && (
+        <Overlay eyebrow={poster.label} title={poster.title} onClose={closePoster}>
+          <img className={styles.posterFull} src={`art/${poster.file}`} alt={poster.caption} />
+        </Overlay>
+      )}
     </section>
   );
 }

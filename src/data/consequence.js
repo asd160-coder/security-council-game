@@ -84,6 +84,23 @@ export const CONSEQUENCE = {
     ],
   },
 
+  /* The illustrated summary, placed after the 1962 material rather than before
+     it, so a reader meets the sourced account first and the general one
+     second. It is marked as an illustration and carries no source line —
+     the same rule the portraits follow, because it is a made thing rather
+     than a document. Its figures describe a late-Cold-War exchange, which the
+     section above it has already said. */
+  poster: {
+    label: 'An illustrated summary',
+    file: 'price-of-the-brink.jpg',
+    title: 'The price of the brink',
+    caption:
+      'A summary of what a nuclear exchange between the two powers would have meant, made for this project rather than drawn from the record.',
+    note:
+      'Its figures describe the arsenals of the later Cold War rather than those of 1962, for the reasons set out above. Read it as a statement of what was ultimately at stake in the confrontation, not as a projection of what October 1962 would have produced.',
+    open: 'Open at full size',
+  },
+
   footer:
     'Shown here because your run ended in rupture. Every other ending reaches this page without it, which is the point.',
 };

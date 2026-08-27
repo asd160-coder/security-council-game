@@ -2,6 +2,7 @@ import { resolveOutcome } from '../lib/outcome.js';
 import { getModifier, getResolution, getRoleCloser } from '../data/endings.js';
 import { TRACKERS } from '../data/trackers.js';
 import { formatValue } from '../lib/format.js';
+import ConsequencePanel from '../components/ending/ConsequencePanel.jsx';
 import { Button, Reveal } from '../components/ui/index.jsx';
 import { DEBRIEF, ENDING } from '../data/copy.js';
 import styles from './EndingScreen.module.css';
@@ -67,6 +68,14 @@ export default function EndingScreen({ state, role, onRestart, onDebrief }) {
             })}
           </Reveal>
         </>
+      )}
+
+      {/* Only when the frame breaks. Every other ending reaches the document
+          without passing through this, which is the whole point of it. */}
+      {resolution === 'ruptured' && (
+        <Reveal delay={460}>
+          <ConsequencePanel />
+        </Reveal>
       )}
 
       <Reveal delay={480}>

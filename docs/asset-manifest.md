@@ -47,14 +47,21 @@ which is only 600px wide in the version to hand.
 
 ## Milestone 6 — the consequence visualisation
 
-Deferred deliberately and scoped to the ruptured ending rather than a
-between-days interstitial, where there is time to read it. Two conditions
-before anything is built: figures sourced for **1962** arsenals rather than the
-1980s — nuclear-winter modelling dates from 1983 and the standard casualty
-projections describe a far larger exchange than October 1962 could have
-produced — and the packet's own treatment, which asks for expanding zones,
-communication-failure markers and stability indicators rather than explosive
-imagery.
+**Built.** It renders on the ruptured ending only, in
+`src/components/ending/ConsequencePanel.jsx`, with its content in
+`src/data/consequence.js`.
+
+Both conditions held. Every figure describes October 1962 — 42 R-12 launchers,
+roughly a hundred tactical warheads on the island that Washington did not know
+about, an invasion force of over a hundred thousand — and the panel states
+plainly that what would have followed cannot be estimated honestly, naming the
+1980s modelling that the familiar figures actually come from. There is no
+depiction of an attack and no casualty arithmetic.
+
+The treatment is the warning interval rather than the explosion: a thirteen-
+minute scale with detection, verification, notification and decision marked
+inside it, which is the packet's communication-failure brief and is also the
+more frightening account. The infographic that prompted this is not used.
 
 One correction the plates forced: the imagery is annotated **Los Palacios** and
 **San Diego de los Baños**, not San Cristóbal. Those are neighbouring sites in

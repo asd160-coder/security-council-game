@@ -1,0 +1,233 @@
+/* The consequence panel.
+
+   Shown only when the frame breaks. Every decision here is a decision not to
+   dramatise: no explosion, no count-up, nothing that reads as a penalty
+   screen. The wax register appears in one place — the interval itself —
+   because the interval is the subject. */
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 30px 32px;
+  border: 1px solid var(--board-line-bright);
+  border-top: 2px solid var(--wax);
+  border-radius: var(--radius);
+  background: var(--board-inset);
+}
+
+.head { display: flex; flex-direction: column; gap: 12px; }
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.2vw, 25px);
+  font-weight: 300;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  color: var(--stock);
+}
+
+.standfirst {
+  font-family: var(--font-body);
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: var(--silver-muted);
+  max-width: 44rem;
+}
+
+.section { display: flex; flex-direction: column; gap: 14px; }
+
+.sectionLabel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--silver-faint);
+}
+
+.prose p {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.68;
+  color: var(--silver-muted);
+  max-width: 44rem;
+}
+
+.prose p + p { margin-top: 12px; }
+
+/* ------------------------------------------------------ The interval */
+/* A horizontal scale, not a countdown. The point is that four things have to
+   happen inside it — not that a clock is running out. */
+.timeline { position: relative; padding: 26px 0 6px; }
+
+.track {
+  position: relative;
+  height: 2px;
+  background: linear-gradient(to right, var(--board-line-bright), var(--wax));
+}
+
+.tick {
+  position: absolute;
+  top: -5px;
+  width: 1px;
+  height: 12px;
+  background: var(--silver-fainter);
+}
+
+.marker {
+  position: absolute;
+  top: 14px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 116px;
+  text-align: center;
+}
+
+.markerLabel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  text-transform: uppercase;
+  color: var(--silver);
+}
+
+.markerNote {
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--silver-fainter);
+}
+
+/* The first and last markers sit at 0% and 100%, so centring them puts half of
+   each outside the panel. They anchor to their own edge instead. */
+.markerStart {
+  transform: translateX(0);
+  align-items: flex-start;
+  text-align: left;
+}
+
+.markerEnd {
+  transform: translateX(-100%);
+  align-items: flex-end;
+  text-align: right;
+}
+
+.markerEnd .markerLabel { color: var(--wax-bright); }
+
+/* The interval draws itself once, left to right. Slow enough to be a
+   statement, short enough not to be a wait. */
+.drawn { animation: draw 1.8s var(--ease) both; transform-origin: left center; }
+
+@keyframes draw {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.timelineFoot {
+  margin-top: 62px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--silver-muted);
+  max-width: 44rem;
+}
+
+.minutes {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: var(--track-label-tight);
+  color: var(--wax-bright);
+}
+
+/* ------------------------------------------------------ The ledger */
+.ledger { display: flex; flex-direction: column; }
+
+.row {
+  display: grid;
+  grid-template-columns: 130px minmax(0, 1fr);
+  gap: 24px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--board-line);
+}
+
+.row:last-child { border-bottom: none; }
+
+.figureBlock { display: flex; flex-direction: column; gap: 2px; }
+
+.figure {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  color: var(--stock);
+  line-height: 1;
+}
+
+.unit {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: var(--track-label-tight);
+  text-transform: uppercase;
+  color: var(--silver-faint);
+  line-height: 1.4;
+}
+
+.rowBody { display: flex; flex-direction: column; gap: 6px; }
+
+.rowNote {
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--silver-muted);
+}
+
+/* What was and was not known at the time — the same distinction the archive
+   panels have been making about evidence all the way through. */
+.rowKnown {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  line-height: 1.55;
+  color: var(--silver-fainter);
+}
+
+.footer {
+  padding-top: 18px;
+  border-top: 1px solid var(--board-line);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--silver-fainter);
+}
+
+@media (max-width: 900px) {
+  .row { grid-template-columns: 1fr; gap: 8px; }
+
+  /* Below this the markers cannot sit side by side without colliding, so the
+     interval becomes a list and keeps its meaning. */
+  .timeline { padding-top: 0; }
+  .track, .tick { display: none; }
+
+  .marker,
+  .markerStart,
+  .markerEnd {
+    position: static;
+    transform: none;
+    width: auto;
+    align-items: flex-start;
+    text-align: left;
+    padding: 9px 0 9px 16px;
+    border-left: 2px solid var(--board-line-bright);
+  }
+
+  .markerEnd { border-left-color: var(--wax); }
+  .timelineFoot { margin-top: 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawn { animation: none; }
+}

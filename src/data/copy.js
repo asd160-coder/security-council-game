@@ -21,6 +21,8 @@ export const APP = {
     'Portraits are generated painted illustrations, not photographs. They are interpretations of their subjects and are marked as such wherever they appear.',
   creditsMap:
     'Coastlines and inland water on the situation map are drawn from Natural Earth, which is in the public domain. They are generalised for display; the range rings are computed from published missile ranges rather than drawn.',
+  creditsRooms:
+    'The rooms behind the conversations are invented. They are drawn in the interface from simple shapes, not photographed or reconstructed, and no scene depicts a real room, meeting or document.',
   close: 'Close',
 };
 

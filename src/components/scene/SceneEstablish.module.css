@@ -5,6 +5,9 @@
    way in. No imagery beyond the portraits that already exist. */
 
 .establish {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -12,15 +15,20 @@
   border: 1px solid var(--board-line);
   border-top: 2px solid var(--board-line-bright);
   border-radius: var(--radius);
-  /* A single raking gradient over the ground. The scene's own light source,
-     positioned per day by SCENE_MOODS via --scene-light. */
-  background:
-    radial-gradient(
-      120% 90% at var(--scene-light, 50% 0%),
-      rgba(111, 143, 166, var(--scene-tone, 0.06)) 0%,
-      transparent 64%
-    ),
-    var(--board-inset);
+  /* The room plate is the ground now and carries its own light, so the raking
+     gradient that used to stand in for one has gone. --board-inset stays as
+     what the plate is seated against, and as the card's colour if no room
+     resolves. */
+  background: var(--board-inset);
+}
+
+/* Everything above the plate. The plate is position:absolute inset:0 with no
+   z-index of its own, so one step is enough; `isolation: isolate` keeps that
+   contained rather than competing with the sticky rails or the overlays at
+   z-index 40/50/60. */
+.establish > *:not([class*='plate']) {
+  position: relative;
+  z-index: 1;
 }
 
 .head {
@@ -40,12 +48,15 @@
   max-width: 30rem;
 }
 
+/* Raised two steps from --silver-fainter. Measured over the brightest plate
+   in the set (the chamber in daylight) this line came out at 3.18:1 on faint,
+   which is not enough for 10px uppercase mono at 0.2em tracking. */
 .eyebrow {
   font-family: var(--font-mono);
   font-size: var(--fs-label-sm);
   letter-spacing: var(--track-eyebrow);
   text-transform: uppercase;
-  color: var(--silver-fainter);
+  color: var(--silver-muted);
 }
 
 /* --------------------------------------------------------------- Staging */
@@ -125,37 +136,15 @@
 }
 
 /* The two scenes with no one opposite — Day 1's first words and the Council
-   session — are not addressed to a person but to a room. So the far side gets
-   a room: a long shallow rank of places, wider and dimmer than the four-seat
-   institution mark, with nobody picked out of it. Nobody in particular is
-   listening, which is exactly the problem with speaking in public. */
+   session — are addressed to a room rather than to a person, and that room is
+   now drawn behind the card. The far side keeps a share of the stage so the
+   table rule still falls where it falls in every other scene; it simply has
+   nobody standing in it.
+
+   This also fixes the one stage dimension that was never reduced on a narrow
+   board: at 160px the emptiest configuration was the tallest one. */
 .sideEmpty {
-  min-height: 160px;
-  align-items: flex-end;
-}
-
-.room {
-  display: flex;
-  align-items: flex-end;
-  gap: 13px;
-  height: 92px;
-  opacity: 0.6;
-}
-
-.roomSeat {
-  display: block;
-  width: 10px;
-  height: 100%;
-  border-radius: var(--radius);
-  background: linear-gradient(to bottom, var(--board-line-bright), transparent);
-}
-
-.roomSeat:nth-child(2n) {
-  height: 72%;
-}
-
-.roomSeat:nth-child(3n) {
-  height: 88%;
+  min-height: 96px;
 }
 
 /* Beside the portrait, level with it — flush to the bottom it read as having
@@ -188,6 +177,10 @@
   .establish {
     padding: 26px 20px 24px;
     gap: 24px;
+  }
+
+  .sideEmpty {
+    min-height: 56px;
   }
 
   /* The two sides stop opposing each other once there is no width to oppose

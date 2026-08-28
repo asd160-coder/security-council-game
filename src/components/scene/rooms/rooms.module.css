@@ -1,0 +1,320 @@
+/* The room palette.
+
+   Declared here rather than in the global token set for the same reason the
+   map declares its own: a room interior has its own temperature, and it needs
+   values between --board-inset and --board-raised that nothing else wants.
+   They are still named, not scattered hexes.
+
+   Everything is board register. Nothing in this file may drift toward the
+   paper palette — a drawn room is the present interface showing you where you
+   are, not a 1962 document. */
+
+.plate {
+  --room-void: #090d12; /* deepest ground, behind everything */
+  --room-wall: #1b232c;
+  --room-floor: #121820;
+  --room-line: #333d48; /* hairlines inside the room */
+  --room-edge: #55636f; /* lit edges, near surfaces */
+  --room-furniture: #222b34;
+  --room-far: #161d25; /* things at a distance */
+  --room-glass: #2b3742; /* window and doorway fill */
+  --room-glass-lit: #465a68;
+  --room-warm: #a8853c; /* the lamp. brass, rationed */
+  --room-warm-soft: rgba(168, 133, 60, 0.14);
+
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: var(--radius);
+  pointer-events: none;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.ground {
+  fill: var(--room-void);
+}
+
+/* -------------------------------------------------------------- Structure */
+
+.wall {
+  fill: var(--room-wall);
+}
+
+.floor {
+  fill: var(--room-floor);
+}
+
+.horizon {
+  stroke: var(--room-edge);
+  stroke-width: 1;
+  opacity: 0.5;
+}
+
+/* The project's texture idiom: a faint ruled field, the same weight as the
+   map's graticule. Reads as drawn rather than photographic, which is the
+   whole register. */
+.hatching line {
+  stroke: var(--room-line);
+  stroke-width: 0.5;
+  opacity: 0.42;
+}
+
+.receding path {
+  fill: var(--room-far);
+  stroke: var(--room-line);
+  stroke-width: 1;
+}
+
+/* ---------------------------------------------------------------- Windows */
+
+.window {
+  fill: var(--room-glass);
+}
+
+.windowLit {
+  fill: var(--room-glass-lit);
+}
+
+.windowFrame {
+  fill: none;
+  stroke: var(--room-edge);
+  stroke-width: 1.5;
+}
+
+.blinds line {
+  stroke: var(--room-wall);
+  stroke-width: 3;
+  opacity: 0.72;
+}
+
+.drape {
+  fill: var(--room-furniture);
+}
+
+.door {
+  fill: var(--room-far);
+}
+
+.doorOpen {
+  fill: var(--room-glass-lit);
+}
+
+.doorFrame {
+  fill: none;
+  stroke: var(--room-edge);
+  stroke-width: 1.5;
+}
+
+/* -------------------------------------------------------------- Furniture */
+
+.table {
+  fill: var(--room-furniture);
+}
+
+/* The one lit line in most plates. It is the near edge of the table, and it
+   is what the two presences read as sitting on opposite sides of. */
+.tableEdge {
+  fill: none;
+  stroke: var(--room-edge);
+  stroke-width: 2;
+}
+
+.chair {
+  fill: var(--room-far);
+  stroke: var(--room-line);
+  stroke-width: 1;
+}
+
+.chairRail {
+  stroke: var(--room-line);
+  stroke-width: 1;
+}
+
+.placard {
+  fill: var(--room-furniture);
+  stroke: var(--room-edge);
+  stroke-width: 1;
+}
+
+.placardRule {
+  stroke: var(--room-edge);
+  stroke-width: 1;
+  opacity: 0.6;
+}
+
+.mic {
+  fill: var(--room-far);
+  stroke: var(--room-edge);
+  stroke-width: 1.4;
+}
+
+.desk {
+  fill: var(--room-furniture);
+}
+
+.deskEdge {
+  fill: none;
+  stroke: var(--room-edge);
+  stroke-width: 2;
+}
+
+.bench {
+  fill: var(--room-furniture);
+  stroke: var(--room-line);
+  stroke-width: 1;
+}
+
+.phone {
+  fill: var(--room-far);
+  stroke: var(--room-edge);
+  stroke-width: 1.2;
+}
+
+/* Papers read as work, not as documents. Deliberately not paper-register
+   stock colour — a legible sheet on the board side would confuse which
+   register it belongs to. */
+.paper {
+  fill: var(--room-furniture);
+  stroke: var(--room-edge);
+  stroke-width: 0.8;
+  opacity: 0.9;
+}
+
+.emblem circle,
+.emblem line {
+  fill: none;
+  stroke: var(--room-edge);
+  stroke-width: 1.5;
+  opacity: 0.5;
+}
+
+.clock circle {
+  fill: var(--room-far);
+  stroke: var(--room-edge);
+  stroke-width: 1.5;
+}
+
+.clock line {
+  stroke: var(--room-edge);
+  stroke-width: 1.5;
+}
+
+/* ------------------------------------------------------------------- Lamp */
+
+/* The only warm thing in the set, and rationed on purpose: a lamp is what
+   makes a room private, and if every room had one none of them would be. */
+/* Deliberately weak per ring — four of these stack into the falloff. */
+.lampGlow {
+  fill: var(--room-warm-soft);
+}
+
+.lampShade,
+.lampBase {
+  fill: var(--room-warm);
+  opacity: 0.72;
+}
+
+.lampStem {
+  stroke: var(--room-edge);
+  stroke-width: 2;
+}
+
+/* ------------------------------------------------------------------ Light */
+
+.lightCore {
+  stop-color: #c9a355;
+}
+
+.lightMid {
+  stop-color: #6f8fa6;
+}
+
+.lightEdge {
+  stop-color: #6f8fa6;
+}
+
+/* ------------------------------------------------------------ The variants */
+
+.plateCard {
+  animation: plateIn 900ms var(--ease) both;
+}
+
+@keyframes plateIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* The band keeps the room present during the conversation without ever
+   putting an utterance on top of scenery. It is the same drawing, cropped to
+   its top strip and pushed well down in contrast. */
+.plateBand {
+  opacity: 0.5;
+}
+
+/* -------------------------------------------------------------- The scrim */
+
+/* The readability contract, in --board at graduated alpha rather than neutral
+   black — the recipe the title screen already uses. Layer one clears the
+   column the type sits in; layers two and three seat the plate against the
+   card top and bottom so it has no visible edge. */
+.scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      104deg,
+      rgba(18, 22, 27, 0.9) 0%,
+      rgba(18, 22, 27, 0.72) 26%,
+      rgba(18, 22, 27, 0.34) 54%,
+      rgba(18, 22, 27, 0.12) 80%,
+      transparent 100%
+    ),
+    linear-gradient(to bottom, rgba(13, 17, 22, 0.88) 0%, rgba(13, 17, 22, 0.34) 26%, transparent 46%),
+    linear-gradient(to top, var(--board-inset) 0%, rgba(13, 17, 22, 0.3) 14%, transparent 32%);
+}
+
+/* Under the band the type sits directly on top of the strip, so the wash is
+   flat and heavier rather than raked. */
+.plateBand .scrim {
+  background: linear-gradient(
+    to bottom,
+    rgba(13, 17, 22, 0.72) 0%,
+    rgba(13, 17, 22, 0.84) 62%,
+    var(--board) 100%
+  );
+}
+
+/* On a narrow board the plate has to carry text across its whole width rather
+   than only down one column, so the raking layer is replaced by a flat one —
+   the same substitution the title screen makes at this breakpoint. */
+@media (max-width: 860px) {
+  .scrim {
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(13, 17, 22, 0.9) 0%,
+        rgba(13, 17, 22, 0.6) 34%,
+        rgba(13, 17, 22, 0.72) 100%
+      ),
+      linear-gradient(to top, var(--board-inset) 0%, transparent 26%);
+  }
+}
+
+/* Motion is one slow breath on the light and nothing else. No parallax, no
+   drift on structure — furniture that moves reads as a camera move, and a
+   camera move is the thing this is not. */
+@media (prefers-reduced-motion: reduce) {
+  .plateCard {
+    animation: none;
+  }
+}

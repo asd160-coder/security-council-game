@@ -76,7 +76,13 @@ export default function AppShell() {
           <div className={styles.creditsInner}>
             <Paper title={APP.creditsTitle}>
               <PaperBody
-                paragraphs={[APP.creditsBody, APP.creditsNote, APP.creditsPortraits, APP.creditsMap]}
+                paragraphs={[
+                  APP.creditsBody,
+                  APP.creditsNote,
+                  APP.creditsPortraits,
+                  APP.creditsMap,
+                  APP.creditsRooms,
+                ]}
               />
 
               <div className={styles.creditsList}>

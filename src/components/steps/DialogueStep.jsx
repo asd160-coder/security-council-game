@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { Button, Reveal } from '../ui/index.jsx';
 import { PLAY } from '../../data/copy.js';
 import { moodFor } from '../../data/scene.js';
+import { roomFor } from '../../data/rooms.js';
 import RoleAnchor from '../scene/RoleAnchor.jsx';
+import RoomPlate from '../scene/rooms/RoomPlate.jsx';
 import SceneEstablish from '../scene/SceneEstablish.jsx';
 import UtteranceList from '../scene/UtteranceList.jsx';
 import scene from '../scene/scene.module.css';
@@ -27,6 +29,8 @@ export default function DialogueStep({ day, step, role, onChoose, onConsultAdvis
   const [entered, setEntered] = useState(false);
   const choices = step.choicesByRole[role.id] ?? [];
   const mood = moodFor(day.number);
+  /* Which room this is. A lookup, not content — see src/data/rooms.js. */
+  const room = roomFor(day.id, step.id, role.id);
 
   const style = {
     '--scene-axis': `${mood.axis}px`,
@@ -37,7 +41,13 @@ export default function DialogueStep({ day, step, role, onChoose, onConsultAdvis
   if (!entered) {
     return (
       <div className={`${styles.step} ${styles.stepScene}`} style={style}>
-        <SceneEstablish step={step} role={role} counterpart={null} onEnter={() => setEntered(true)} />
+        <SceneEstablish
+          step={step}
+          role={role}
+          counterpart={null}
+          room={room}
+          onEnter={() => setEntered(true)}
+        />
       </div>
     );
   }
@@ -45,10 +55,16 @@ export default function DialogueStep({ day, step, role, onChoose, onConsultAdvis
   return (
     <div className={`${styles.step} ${styles.stepScene}`} style={style}>
       <div className={scene.scene}>
-        <Reveal className={scene.head}>
-          <span className={scene.eyebrow}>{step.eyebrow}</span>
-          {step.place && <span className={scene.place}>{step.place}</span>}
-        </Reveal>
+        {/* The room stays present during the conversation as a strip behind
+            the head — the same drawing cropped to its top and pushed down in
+            contrast, so no utterance is ever read over scenery. */}
+        <div className={scene.headWrap}>
+          <RoomPlate {...room} variant="band" />
+          <Reveal className={scene.head}>
+            <span className={scene.eyebrow}>{step.eyebrow}</span>
+            {step.place && <span className={scene.place}>{step.place}</span>}
+          </Reveal>
+        </div>
 
         <Reveal delay={100} className={scene.framing}>
           {step.framing.map((paragraph) => (

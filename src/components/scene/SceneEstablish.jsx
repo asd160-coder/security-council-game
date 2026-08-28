@@ -1,6 +1,7 @@
 import { Button } from '../ui/index.jsx';
 import { PLAY } from '../../data/copy.js';
 import RoleAnchor from './RoleAnchor.jsx';
+import RoomPlate from './rooms/RoomPlate.jsx';
 import SpeakerPresence from './SpeakerPresence.jsx';
 import styles from './SceneEstablish.module.css';
 
@@ -22,30 +23,29 @@ import styles from './SceneEstablish.module.css';
    interaction, not an animation, and skipping it would put a player who has
    asked for less movement into a different flow from everyone else. */
 
-export default function SceneEstablish({ step, role, counterpart, onEnter }) {
+export default function SceneEstablish({ step, role, counterpart, room, onEnter }) {
   return (
     <div className={styles.establish}>
+      {room && <RoomPlate {...room} variant="card" />}
+
       <div className={styles.head}>
         {step.place && <span className={styles.place}>{step.place}</span>}
         <span className={styles.eyebrow}>{step.eyebrow}</span>
       </div>
 
       <div className={styles.stage}>
+        {/* Day 1 and the Council session have no counterpart — you are
+            addressing the room itself. That used to be drawn as a rank of
+            abstract seats on the far side, standing in for a room there was
+            no other way to show. The plate behind now IS the room, complete
+            with its own chairs, so the stand-in has been removed rather than
+            drawn twice. */}
         {counterpart ? (
           <div className={`${styles.side} ${styles.sideFar}`}>
             <SpeakerPresence counterpart={counterpart} />
           </div>
         ) : (
-          /* Day 1 and the Council session have no counterpart: you are
-             speaking to the room itself, and the far side stays empty on
-             purpose rather than being filled with a stand-in. */
-          <div className={`${styles.side} ${styles.sideFar} ${styles.sideEmpty}`} aria-hidden="true">
-            <span className={styles.room}>
-              {Array.from({ length: 9 }, (_, i) => (
-                <span key={i} className={styles.roomSeat} />
-              ))}
-            </span>
-          </div>
+          <div className={`${styles.side} ${styles.sideFar} ${styles.sideEmpty}`} aria-hidden="true" />
         )}
 
         <span className={styles.table} aria-hidden="true" />

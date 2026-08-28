@@ -20,27 +20,51 @@
 
 /* -------------------------------------------------------------- The head */
 
+/* The band's containing block. It reaches past the head on both sides so the
+   strip reads as the room continuing behind the column rather than as a
+   panel sitting in it, and it establishes the stacking context the plate is
+   positioned in. */
+.headWrap {
+  position: relative;
+  isolation: isolate;
+  padding: 16px 20px 18px;
+  margin: -16px -20px -6px;
+  border-radius: var(--radius);
+}
+
 .head {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
+/* --silver-muted, not --silver-faint. Measured over the band at its brightest
+   this line came out at 3.73:1; the same substitution the title screen made
+   for its footnote — faint to muted — takes it past 6:1. The plate lightens
+   the ground under the head by a few points and this is what pays for it. */
 .place {
   font-family: var(--font-body);
   font-size: var(--fs-body-sm);
   font-style: italic;
   line-height: 1.5;
-  color: var(--silver-faint);
+  color: var(--silver-muted);
   max-width: 30rem;
 }
 
+/* Same reasoning as .place, taken one step further. 10px uppercase mono at
+   0.2em tracking is the least legible combination in the type system, so it
+   does not get to sit at 3.8:1 over a lit plate. It lands on the same value
+   as .place and loses nothing by it: the hierarchy between these two lines
+   was never carried by colour, it is carried by 14.5px italic serif against
+   10px tracked mono. */
 .eyebrow {
   font-family: var(--font-mono);
   font-size: var(--fs-label-sm);
   letter-spacing: var(--track-eyebrow);
   text-transform: uppercase;
-  color: var(--silver-fainter);
+  color: var(--silver-muted);
 }
 
 /* ------------------------------------------------------------- Far side */
@@ -170,6 +194,13 @@
 @media (max-width: 860px) {
   .scene {
     gap: 20px;
+  }
+
+  /* Narrower bleed on a narrow board — 20px of overhang either side is most
+     of the gutter once the rails have unstacked. */
+  .headWrap {
+    padding: 14px 14px 16px;
+    margin: -14px -14px -4px;
   }
 
   /* The axis stops being horizontal — there is no width left to put a table

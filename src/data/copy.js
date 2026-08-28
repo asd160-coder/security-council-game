@@ -59,6 +59,21 @@ export const PLAY = {
   youSaid: 'You said',
   theyReplied: 'The reply',
   reconsider: 'Take it differently',
+
+  /* Conversation scenes. The establishing card names the room and the two
+     people in it before anything is said; `enterScene` is the only way out of
+     it, and is deliberately plain — the drama is the room, not the button. */
+  scenePlace: 'The room',
+  sceneWith: 'Present',
+  sceneYou: 'You',
+  enterScene: 'Go in',
+  /* The accessible name for the first set of options in a dialogue step. The
+     exchange steps take theirs from `openingPrompt`/`followPrompt` in the day
+     data; a dialogue step has no such field, so the string lives here rather
+     than hardcoded in the component. */
+  openingPositionLabel: 'Your opening position',
+  /* Sits above the player's options, on their side of the table. */
+  couldSay: 'What you could say',
   stageOne: 'One',
   stageTwo: 'Two',
   standing: 'Where you stand',

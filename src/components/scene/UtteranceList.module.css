@@ -1,0 +1,194 @@
+/* Possible utterances.
+
+   Two rules govern this file:
+
+   1. The spoken sentence is the primary unit. The label is metadata about the
+      sentence and is styled as such.
+   2. The register variants differ in SHAPE ONLY — measure, leading, padding,
+      indent, rule. No colour, no weight, no size varies between them. The
+      moment a register looks warmer or louder than another, the interface has
+      started grading the student's diplomacy, which is the one thing this
+      project refuses to do. */
+
+.utterances {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.utterance {
+  width: 100%;
+  text-align: left;
+  display: block;
+  position: relative;
+  padding: 15px 18px 15px 20px;
+  border: 1px solid transparent;
+  border-left: 2px solid var(--board-line-bright);
+  border-radius: var(--radius);
+  background: transparent;
+  transition:
+    background var(--dur-quick) var(--ease),
+    border-color var(--dur-quick) var(--ease);
+}
+
+/* Chrome arrives on approach rather than sitting there permanently. The
+   global :focus-visible ring still applies, so keyboard users get the same
+   affordance without depending on this. */
+.utterance:hover,
+.utterance:focus-visible {
+  background: var(--board-raised);
+  border-color: var(--board-line);
+  border-left-color: var(--brass);
+}
+
+.label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--silver-fainter);
+  margin-bottom: 9px;
+  transition: color var(--dur-quick) var(--ease);
+}
+
+.utterance:hover .label,
+.utterance:focus-visible .label {
+  color: var(--brass);
+}
+
+.line {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--fs-choice);
+  line-height: 1.58;
+  color: var(--silver);
+}
+
+.note {
+  display: block;
+  margin-top: 11px;
+  padding-top: 9px;
+  border-top: 1px solid var(--board-line);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--silver-faint);
+}
+
+/* ------------------------------------------------------------- Registers */
+
+/* measure — the long view. The most room of any register: wide measure,
+   open leading, air above and below. A sentence that is not in a hurry. */
+.utterance[data-register='measure'] {
+  padding-top: 19px;
+  padding-bottom: 19px;
+}
+
+.utterance[data-register='measure'] .line {
+  line-height: 1.74;
+  max-width: 40rem;
+}
+
+.utterance[data-register='measure'] .label {
+  margin-bottom: 11px;
+}
+
+/* press — weight applied. Tighter, squarer, less spare room. */
+.utterance[data-register='press'] {
+  padding-top: 13px;
+  padding-bottom: 13px;
+  border-left-width: 3px;
+  border-radius: 0;
+}
+
+.utterance[data-register='press'] .line {
+  line-height: 1.48;
+  max-width: 33rem;
+}
+
+.utterance[data-register='press'] .label {
+  margin-bottom: 7px;
+}
+
+/* edge — the closing of an option. Narrowest measure, so the sentence wraps
+   sooner and reads compressed; flush hard against the rule with nothing
+   spare on either side. */
+.utterance[data-register='edge'] {
+  padding: 12px 14px 12px 16px;
+  border-left-width: 3px;
+  border-radius: 0;
+}
+
+.utterance[data-register='edge'] .line {
+  line-height: 1.42;
+  max-width: 27rem;
+  letter-spacing: -0.004em;
+}
+
+.utterance[data-register='edge'] .label {
+  letter-spacing: var(--track-label-tight);
+  margin-bottom: 6px;
+}
+
+/* bridge — something offered in both directions, so it is held open at both
+   ends and sits balanced rather than flush. */
+.utterance[data-register='bridge'] {
+  padding: 17px 20px;
+  border-left-width: 1px;
+  border-right: 1px solid var(--board-line-bright);
+}
+
+.utterance[data-register='bridge']:hover,
+.utterance[data-register='bridge']:focus-visible {
+  border-right-color: var(--brass);
+}
+
+.utterance[data-register='bridge'] .line {
+  line-height: 1.62;
+  max-width: 36rem;
+}
+
+/* probe — a question that has not decided what it wants yet. Set further in,
+   lighter, with room left after it. */
+.utterance[data-register='probe'] {
+  padding-left: 34px;
+  padding-bottom: 21px;
+}
+
+/* Note there is no colour change here, though an earlier pass had one. Every
+   opening in the game uses this register, and dimming a whole group makes it
+   read as unavailable rather than as tentative — and dimming any option at
+   all would be the interface having an opinion. Indent, leading and the room
+   left after the sentence carry it instead. */
+.utterance[data-register='probe'] .line {
+  line-height: 1.66;
+  max-width: 35rem;
+}
+
+/* plain — the fallback for a category with no mapping. Nothing in the game
+   currently lands here: every follow-up has a category and every opening is
+   given `probe` explicitly. Stated anyway so that a new authored category
+   degrades to the base treatment instead of to nothing. */
+.utterance[data-register='plain'] .line {
+  max-width: 35rem;
+}
+
+@media (max-width: 860px) {
+  /* The indent variants stop earning their keep once the column is narrow —
+     a 34px inset on a 340px line is a wrapping problem, not a rhetorical
+     cue. Measure and leading still differentiate. */
+  .utterance[data-register='probe'] {
+    padding-left: 20px;
+  }
+
+  .utterance,
+  .utterance[data-register='measure'],
+  .utterance[data-register='press'],
+  .utterance[data-register='edge'],
+  .utterance[data-register='bridge'] {
+    padding-right: 14px;
+    padding-left: 16px;
+  }
+}

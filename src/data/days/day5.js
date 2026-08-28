@@ -54,6 +54,9 @@ const day5 = {
       kind: 'exchange',
       id: 'final',
       eyebrow: 'Before the answer comes',
+      /* Where this happens. One line, read before anyone speaks. */
+      place:
+        'A morning with nothing in it but waiting. The decision has left your hands and has not yet arrived anywhere.',
       openingPrompt: 'How you spend the morning',
       followPrompt: 'What you do with the time that is left',
       adviser: {
@@ -61,9 +64,23 @@ const day5 = {
         unlocks: 'memo-aide-day5',
       },
       counterpartByRole: {
-        rfk: { name: 'The Executive Committee', title: 'In session since before dawn' },
-        dobrynin: { name: 'The embassy', title: 'Waiting on Moscow, as you are' },
-        uthant: { name: 'Both missions', title: 'Available to you, and to each other only through you' },
+        /* Nobody is across the table on the last day. All three face a room
+           waiting on a cable that has not come. */
+        rfk: {
+          name: 'The Executive Committee',
+          title: 'In session since before dawn',
+          presence: 'body',
+        },
+        dobrynin: {
+          name: 'The embassy',
+          title: 'Waiting on Moscow, as you are',
+          presence: 'body',
+        },
+        uthant: {
+          name: 'Both missions',
+          title: 'Available to you, and to each other only through you',
+          presence: 'body',
+        },
       },
       framingByRole: {
         rfk: [

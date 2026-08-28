@@ -1,0 +1,186 @@
+/* The conversation scene: two sides of a table.
+
+   A hard left/right split does not survive a 544px column, so the axis is
+   built from inset, alignment and a vertical rule rather than from two
+   columns. The counterpart's material — their presence, their replies — sits
+   flush to the left edge. Yours — what you said, what you might say next — is
+   inset behind a hairline that reads as the near edge of the table. The inset
+   distance is the width of that table, and it is set per day.
+
+   Conversation steps are wider than the 34rem `.step` cap because a scene
+   needs room the way a document does not. Prose inside stays at reading
+   measure regardless. */
+
+.scene {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 44rem;
+}
+
+/* -------------------------------------------------------------- The head */
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.place {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--silver-faint);
+  max-width: 30rem;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--silver-fainter);
+}
+
+/* ------------------------------------------------------------- Far side */
+
+/* Theirs. Flush to the edge, nothing in front of it. */
+.far {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.farReply {
+  padding: 16px 18px;
+  background: var(--board-raised);
+  border: 1px solid var(--board-line);
+  border-left: 2px solid var(--signal);
+  border-radius: var(--radius);
+  max-width: 36rem;
+}
+
+.replyLabel {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--signal-bright);
+  margin-bottom: 10px;
+}
+
+.replyLine {
+  font-family: var(--font-body);
+  font-size: var(--fs-scene);
+  line-height: 1.66;
+  color: var(--silver);
+}
+
+/* ------------------------------------------------------------ Near side */
+
+/* Yours. Inset behind the table edge — the single strongest signal that two
+   people are facing each other, and it costs one border and one margin. */
+.near {
+  margin-left: var(--scene-axis, 56px);
+  padding-left: 22px;
+  border-left: 1px solid var(--board-line);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.nearHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.nearLabel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--silver-fainter);
+}
+
+/* What you already said. Demoted — it is on the record now, and the live
+   question is what you do next. */
+.said {
+  padding: 2px 0 2px 16px;
+  border-left: 2px solid var(--brass);
+}
+
+.saidLabel {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--silver-fainter);
+  margin-bottom: 8px;
+}
+
+.saidLine {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--silver-muted);
+}
+
+/* --------------------------------------------------------------- Framing */
+
+/* The room, in prose. Held at reading measure even though the scene around it
+   is wider. */
+.framing p {
+  font-family: var(--font-body);
+  font-size: var(--fs-scene);
+  line-height: 1.68;
+  color: var(--silver-muted);
+  max-width: var(--measure-scene);
+}
+
+.framing p + p {
+  margin-top: 14px;
+}
+
+/* --------------------------------------------------------------- Adviser */
+
+.adviser {
+  display: flex;
+}
+
+.adviserTaken {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--silver-fainter);
+}
+
+.actions {
+  display: flex;
+}
+
+/* ---------------------------------------------------------- Narrow board */
+
+@media (max-width: 860px) {
+  .scene {
+    gap: 20px;
+  }
+
+  /* The axis stops being horizontal — there is no width left to put a table
+     across. The near side keeps its rule so the two voices stay
+     distinguishable, but stops being pushed away from the edge. */
+  .near {
+    margin-left: 0;
+    padding-left: 16px;
+  }
+
+  .nearHead {
+    align-items: flex-start;
+  }
+}

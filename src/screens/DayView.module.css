@@ -97,6 +97,27 @@
   opacity: 0.42;
 }
 
+/* Below this the header runs out of room and the seat delegation drives
+   straight through the day pips — every element in here is `nowrap`, so
+   nothing yields. The wordmark and the delegation are the two restatements:
+   the portrait and the name already say whose seat this is, and the date is
+   on the briefing. Dropping them gives the pips their room back. */
+@media (max-width: 620px) {
+  .header {
+    gap: 12px;
+    padding: 10px var(--gutter);
+  }
+
+  .wordmark,
+  .seatDelegation {
+    display: none;
+  }
+
+  .days {
+    flex-shrink: 0;
+  }
+}
+
 /* ------------------------------------------------------------------- Body */
 .body {
   flex: 1;
@@ -123,6 +144,20 @@
 .centre {
   min-width: 0;
   padding-bottom: 20px;
+}
+
+/* The board stepping back while two people talk. Opacity only — nothing is
+   hidden, nothing is disabled, and everything returns on approach. The value
+   is deliberately mild: at 0.55 the indicators are still readable across a
+   classroom, which matters more than the effect does. */
+.recede {
+  opacity: 0.55;
+  transition: opacity var(--dur-reveal) var(--ease);
+}
+
+.recede:hover,
+.recede:focus-within {
+  opacity: 1;
 }
 
 /* Below the three-column threshold the board unstacks into one column:

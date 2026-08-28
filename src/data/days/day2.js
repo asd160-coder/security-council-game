@@ -36,6 +36,9 @@ const day2 = {
       kind: 'dialogue',
       id: 'public-exchange',
       eyebrow: 'Security Council · on the record',
+      /* Where this happens. One line, read before anyone speaks. */
+      place:
+        'The chamber. Cameras, a horseshoe table, and every word carried live to capitals that will read it differently.',
       framing: [
         'The chamber is full and the cameras are running. Nothing said here will move a missile. What is said here will fix what each government can afterwards be held to.',
         'You are called to speak.',
@@ -174,12 +177,32 @@ const day2 = {
       kind: 'exchange',
       id: 'back-channel',
       eyebrow: 'Private channel · not for the record',
+      /* Where this happens. One line, read before anyone speaks. */
+      place:
+        'Somewhere neither government will confirm afterwards. No minute, no aide, no third person.',
       openingPrompt: 'How you open',
       followPrompt: 'How you answer',
       counterpartByRole: {
-        rfk: { name: 'Anatoly Dobrynin', title: 'Soviet Ambassador' },
-        dobrynin: { name: 'Robert Kennedy', title: 'Attorney General' },
-        uthant: { name: 'Both missions', title: 'Approached separately, within the hour' },
+        /* `presence` chooses how the person opposite is shown, and `roleRef`
+           points at the seat whose portrait to use. See src/data/scene.js —
+           only figures who are also playable seats have a likeness. */
+        rfk: {
+          name: 'Anatoly Dobrynin',
+          title: 'Soviet Ambassador',
+          presence: 'principal',
+          roleRef: 'dobrynin',
+        },
+        dobrynin: {
+          name: 'Robert Kennedy',
+          title: 'Attorney General',
+          presence: 'principal',
+          roleRef: 'rfk',
+        },
+        uthant: {
+          name: 'Both missions',
+          title: 'Approached separately, within the hour',
+          presence: 'body',
+        },
       },
       framingByRole: {
         rfk: [

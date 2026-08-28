@@ -42,6 +42,9 @@ const day1 = {
       kind: 'dialogue',
       id: 'first-response',
       eyebrow: 'First formal response',
+      /* Where this happens. One line, read before anyone speaks. */
+      place:
+        'The room where the first words are chosen. Outside it, nobody yet knows there is anything to choose.',
       framing: [
         'The world does not yet know how far this crisis will go. Officials are watching for signs of panic, weakness, resolve, and restraint. Your first words will not solve the crisis, but they will shape how others interpret your intent.',
         'Choose your initial line carefully.',

@@ -139,6 +139,9 @@ const day4 = {
       kind: 'exchange',
       id: 'negotiation',
       eyebrow: 'The decisive conversation',
+      /* Where this happens. One line, read before anyone speaks. */
+      place:
+        'The table where the thing is actually settled, if it is settled. Everyone in the room knows it.',
       openingPrompt: 'How you enter it',
       followPrompt: 'Which answer you press for',
       adviser: {
@@ -146,9 +149,24 @@ const day4 = {
         unlocks: 'memo-aide-day4',
       },
       counterpartByRole: {
-        rfk: { name: 'The Executive Committee', title: 'Reconvened after the aircraft was lost' },
-        dobrynin: { name: 'Robert Kennedy', title: 'Arrived without notice, for the third time this week' },
-        uthant: { name: 'Both missions and two others', title: 'Washington, Moscow, Ankara, Havana' },
+        /* A committee is not a person and is not drawn as one. Kennedy is,
+           because he is a playable seat with a portrait already. */
+        rfk: {
+          name: 'The Executive Committee',
+          title: 'Reconvened after the aircraft was lost',
+          presence: 'body',
+        },
+        dobrynin: {
+          name: 'Robert Kennedy',
+          title: 'Arrived without notice, for the third time this week',
+          presence: 'principal',
+          roleRef: 'rfk',
+        },
+        uthant: {
+          name: 'Both missions and two others',
+          title: 'Washington, Moscow, Ankara, Havana',
+          presence: 'body',
+        },
       },
       framingByRole: {
         rfk: [

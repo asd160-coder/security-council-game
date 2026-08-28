@@ -99,6 +99,9 @@ const day3 = {
       kind: 'exchange',
       id: 'pressure',
       eyebrow: 'Not a meeting anyone will minute',
+      /* Where this happens. One line, read before anyone speaks. */
+      place:
+        'A corridor, an anteroom, ten minutes between other things. Nowhere anyone will look for a record of it.',
       openingPrompt: 'How you meet it',
       followPrompt: 'How you answer',
       adviser: {
@@ -106,9 +109,24 @@ const day3 = {
         unlocks: 'memo-aide-day3',
       },
       counterpartByRole: {
-        rfk: { name: 'A senior military adviser', title: 'Speaking for those who want the sites struck' },
-        dobrynin: { name: 'The embassy military attaché', title: 'Reporting separately to Moscow' },
-        uthant: { name: 'A permanent representative', title: 'Speaking for a delegation losing patience' },
+        /* Invented composites, sanctioned by the brief. No likeness of them
+           exists and none may be invented, so they are given a place in the
+           room rather than a face. */
+        rfk: {
+          name: 'A senior military adviser',
+          title: 'Speaking for those who want the sites struck',
+          presence: 'individual',
+        },
+        dobrynin: {
+          name: 'The embassy military attaché',
+          title: 'Reporting separately to Moscow',
+          presence: 'individual',
+        },
+        uthant: {
+          name: 'A permanent representative',
+          title: 'Speaking for a delegation losing patience',
+          presence: 'individual',
+        },
       },
       framingByRole: {
         rfk: [

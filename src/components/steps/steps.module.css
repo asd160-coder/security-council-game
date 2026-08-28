@@ -13,6 +13,14 @@
   max-width: 56rem;
 }
 
+/* Conversation steps. Wider than a document because a scene needs room to put
+   two people at opposite ends of something; narrower than a briefing because
+   it is still one conversation and not a spread. Prose inside is held at
+   reading measure regardless — see scene.module.css. */
+.stepScene {
+  max-width: 44rem;
+}
+
 .head {
   display: flex;
   flex-direction: column;

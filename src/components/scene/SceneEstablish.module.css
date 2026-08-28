@@ -1,0 +1,198 @@
+/* The establishing card: where this is, and who is in it.
+
+   Composition does the work. Two presences at opposite ends of a horizontal
+   rule that reads as the table between them, the room named above, and one
+   way in. No imagery beyond the portraits that already exist. */
+
+.establish {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 34px 30px 30px;
+  border: 1px solid var(--board-line);
+  border-top: 2px solid var(--board-line-bright);
+  border-radius: var(--radius);
+  /* A single raking gradient over the ground. The scene's own light source,
+     positioned per day by SCENE_MOODS via --scene-light. */
+  background:
+    radial-gradient(
+      120% 90% at var(--scene-light, 50% 0%),
+      rgba(111, 143, 166, var(--scene-tone, 0.06)) 0%,
+      transparent 64%
+    ),
+    var(--board-inset);
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Where you are. Set in serif rather than the mono of interface labels,
+   because it is a description of a place, not a readout. */
+.place {
+  font-family: var(--font-body);
+  font-size: var(--fs-scene);
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--silver-muted);
+  max-width: 30rem;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--silver-fainter);
+}
+
+/* --------------------------------------------------------------- Staging */
+
+.stage {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.side {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 4px 0;
+}
+
+.sideFar {
+  justify-content: flex-start;
+  animation: arriveFar 620ms var(--ease) both;
+}
+
+.sideNear {
+  justify-content: flex-end;
+  animation: arriveNear 620ms var(--ease) 120ms both;
+}
+
+/* Walking in — the counterpart from their side, you from yours. This is the
+   only motion in the scene system and it is deliberately short. */
+@keyframes arriveFar {
+  from {
+    opacity: 0;
+    transform: translateX(-14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes arriveNear {
+  from {
+    opacity: 0;
+    transform: translateX(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* The table between them. Grows out from the centre after both have arrived. */
+.table {
+  display: block;
+  height: 1px;
+  margin: 14px 0;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--board-line-bright) 12%,
+    var(--board-line-bright) 88%,
+    transparent
+  );
+  animation: layTable 520ms var(--ease) 320ms both;
+  transform-origin: center;
+}
+
+@keyframes layTable {
+  from {
+    opacity: 0;
+    transform: scaleX(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* The two scenes with no one opposite — Day 1's first words and the Council
+   session — are not addressed to a person but to a room. So the far side gets
+   a room: a long shallow rank of places, wider and dimmer than the four-seat
+   institution mark, with nobody picked out of it. Nobody in particular is
+   listening, which is exactly the problem with speaking in public. */
+.sideEmpty {
+  min-height: 62px;
+  align-items: flex-end;
+}
+
+.room {
+  display: flex;
+  align-items: flex-end;
+  gap: 7px;
+  height: 34px;
+  opacity: 0.6;
+}
+
+.roomSeat {
+  display: block;
+  width: 5px;
+  height: 100%;
+  border-radius: var(--radius);
+  background: linear-gradient(to bottom, var(--board-line-bright), transparent);
+}
+
+.roomSeat:nth-child(2n) {
+  height: 72%;
+}
+
+.roomSeat:nth-child(3n) {
+  height: 88%;
+}
+
+/* Sits above the anchor rather than beside it, so the name has the line to
+   itself and the tag is not competing with it for the edge. */
+.youMark {
+  align-self: flex-end;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--silver-fainter);
+}
+
+.actions {
+  display: flex;
+}
+
+/* Motion here is the sense of entering a room, which is worth having and not
+   worth insisting on. Under reduced motion every element is simply present at
+   full opacity — nothing is delayed, nothing is withheld. */
+@media (prefers-reduced-motion: reduce) {
+  .sideFar,
+  .sideNear,
+  .table {
+    animation: none;
+  }
+}
+
+@media (max-width: 860px) {
+  .establish {
+    padding: 26px 20px 24px;
+    gap: 24px;
+  }
+
+  /* The two sides stop opposing each other once there is no width to oppose
+     across; they stack, and the table becomes the divider between them. */
+  .sideNear {
+    justify-content: flex-start;
+  }
+}

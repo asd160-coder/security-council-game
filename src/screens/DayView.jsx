@@ -52,6 +52,14 @@ const consequenceFor = (day, stepId) =>
 export default function DayView({ day, role, state, dispatch }) {
   const step = day.steps[state.stepIndex];
 
+  /* While two people are talking, the analytical surface around them steps
+     back — the map, the file and the indicators drop in contrast so the room
+     is the thing in front of you. They come back the moment the conversation
+     resolves, and they come back early on hover or keyboard focus, because a
+     teacher pointing at an indicator mid-scene should not have to leave the
+     scene to read it. */
+  const inConversation = step?.kind === 'dialogue' || step?.kind === 'exchange';
+
   const stepById = useMemo(
     () => Object.fromEntries(day.steps.map((s) => [s.id, s])),
     [day],
@@ -187,7 +195,7 @@ export default function DayView({ day, role, state, dispatch }) {
       </header>
 
       <div className={styles.body}>
-        <div className={styles.left}>
+        <div className={`${styles.left} ${inConversation ? styles.recede : ''}`}>
           <MapPanel
             inspected={state.mapInspected}
             onInspect={() => dispatch({ type: 'inspectMap' })}
@@ -217,7 +225,7 @@ export default function DayView({ day, role, state, dispatch }) {
           {Renderer && <Renderer {...stepProps} />}
         </main>
 
-        <div className={styles.right}>
+        <div className={`${styles.right} ${inConversation ? styles.recede : ''}`}>
           <TrackerColumn
             trackers={state.trackers}
             deltas={step?.kind === 'consequence' ? state.lastDeltas : {}}

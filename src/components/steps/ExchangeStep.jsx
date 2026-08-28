@@ -1,9 +1,15 @@
 import { useState } from 'react';
 import { Button, Reveal } from '../ui/index.jsx';
 import { PLAY } from '../../data/copy.js';
+import { moodFor } from '../../data/scene.js';
+import RoleAnchor from '../scene/RoleAnchor.jsx';
+import SceneEstablish from '../scene/SceneEstablish.jsx';
+import SpeakerPresence from '../scene/SpeakerPresence.jsx';
+import UtteranceList from '../scene/UtteranceList.jsx';
+import scene from '../scene/scene.module.css';
 import styles from './steps.module.css';
 
-/* The back-channel: an exchange with a reply beat.
+/* An exchange with a reply beat.
 
    You speak, the counterpart answers in character keyed to what you said, and
    then you choose again with that answer in front of you. The second choice is
@@ -11,7 +17,12 @@ import styles from './steps.module.css';
    the opening is a probe; what you do with the answer is the decision.
 
    The whole scene is one step rather than two, so the opening stays on screen
-   under the reply and the conversation reads as continuous. */
+   under the reply and the conversation reads as continuous.
+
+   Staged across the table: their presence and their reply sit flush on the far
+   side, everything of yours is inset behind the near edge. Turn-taking is the
+   alternation between the two sides, and the counterpart's presence marker
+   lights while their answer is the live thing on screen. */
 
 /* A shared follow-up is a position on the table rather than a personal move.
    It carries the same strategic meaning for all three roles and a different
@@ -33,6 +44,7 @@ function resolveShared(option, roleId, trackers) {
 }
 
 export default function ExchangeStep({
+  day,
   step,
   role,
   trackers,
@@ -40,113 +52,130 @@ export default function ExchangeStep({
   onConsultAdviser,
   adviserTaken,
 }) {
+  const [entered, setEntered] = useState(false);
   const [opening, setOpening] = useState(null);
   const openings = step.openingsByRole[role.id] ?? [];
   const counterpart = step.counterpartByRole[role.id];
   /* The framing differs per role: three people walk into three different
      rooms, and the room is most of what the scene is. */
   const framing = step.framingByRole?.[role.id] ?? step.framing ?? [];
+  const mood = moodFor(day.number);
+
+  const style = {
+    '--scene-axis': `${mood.axis}px`,
+    '--scene-light': mood.light,
+    '--scene-tone': mood.tone,
+  };
+
+  if (!entered) {
+    return (
+      <div className={`${styles.step} ${styles.stepScene}`} style={style}>
+        <SceneEstablish
+          step={step}
+          role={role}
+          counterpart={counterpart}
+          onEnter={() => setEntered(true)}
+        />
+      </div>
+    );
+  }
 
   return (
-    <div className={`${styles.step} ${styles.privateScene}`}>
-      <Reveal className={styles.head}>
-        <span className={styles.privateMark}>{step.eyebrow}</span>
-      </Reveal>
-
-      {counterpart && (
-        <Reveal delay={80} className={styles.counterpart}>
-          <span className={styles.counterpartName}>{counterpart.name}</span>
-          <span className={styles.counterpartTitle}>{counterpart.title}</span>
+    <div className={`${styles.step} ${styles.stepScene}`} style={style}>
+      <div className={scene.scene}>
+        <Reveal className={scene.head}>
+          <span className={scene.eyebrow}>{step.eyebrow}</span>
+          {step.place && <span className={scene.place}>{step.place}</span>}
         </Reveal>
-      )}
 
-      <Reveal delay={140} className={`${styles.prose} ${styles.proseMuted}`}>
-        {framing.map((paragraph) => (
-          <p key={paragraph.slice(0, 40)}>{paragraph}</p>
-        ))}
-      </Reveal>
-
-      {/* The adviser sits at the opening, before anything has been said — the
-          same placement as the public scene, and useless once you have spoken. */}
-      {step.adviser && !opening && (
-        <Reveal delay={200} className={styles.adviser}>
-          {adviserTaken ? (
-            <span className={styles.adviserTaken}>Adviser consulted · memo filed</span>
-          ) : (
-            <Button variant="quiet" onClick={onConsultAdviser}>
-              {step.adviser.label}
-            </Button>
-          )}
+        {/* Theirs: flush to the far edge. The presence lights while their
+            reply is the live thing on screen and goes quiet again once the
+            question has come back to you. */}
+        <Reveal delay={80} className={scene.far}>
+          <SpeakerPresence counterpart={counterpart} speaking={Boolean(opening)} compact />
         </Reveal>
-      )}
 
-      {!opening ? (
-        <Reveal delay={240}>
-          <div className={styles.choices} role="group" aria-label={step.openingPrompt}>
-            {openings.map((option) => (
-              <button
-                key={option.id}
-                type="button"
-                className={styles.choice}
-                onClick={() => setOpening(option)}
-              >
-                <span className={styles.choiceLabel}>{option.label}</span>
-                <span className={styles.choiceLine}>{option.line}</span>
-              </button>
-            ))}
-          </div>
+        <Reveal delay={140} className={scene.framing}>
+          {framing.map((paragraph) => (
+            <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+          ))}
         </Reveal>
-      ) : (
-        <>
-          <div className={styles.said}>
-            <span className={styles.saidLabel}>{PLAY.youSaid}</span>
-            <p className={styles.saidLine}>{opening.line}</p>
-          </div>
 
-          {/* Announced, because the reply is new information the next decision
-              depends on. */}
-          <Reveal delay={220} className={styles.reply}>
-            <span className={styles.replyLabel}>
-              {counterpart ? counterpart.name : PLAY.theyReplied}
-            </span>
-            <p className={styles.replyLine} aria-live="polite">
-              {opening.reply}
-            </p>
+        {/* The adviser sits at the opening, before anything has been said, and
+            is useless once you have spoken. */}
+        {step.adviser && !opening && (
+          <Reveal delay={200} className={scene.adviser}>
+            {adviserTaken ? (
+              <span className={scene.adviserTaken}>Adviser consulted · memo filed</span>
+            ) : (
+              <Button variant="quiet" onClick={onConsultAdviser}>
+                {step.adviser.label}
+              </Button>
+            )}
           </Reveal>
+        )}
 
-          <Reveal delay={520}>
-            <hr className={styles.rule} />
-          </Reveal>
-
-          <Reveal delay={580}>
-            <div className={styles.choices} role="group" aria-label={step.followPrompt}>
-              {(step.sharedFollow
-                ? step.sharedFollow.map((o) => resolveShared(o, role.id, trackers))
-                : opening.follow
-              ).map((choice) => (
-                <button
-                  key={choice.id}
-                  type="button"
-                  className={styles.choice}
-                  onClick={() => onChoose(choice)}
-                >
-                  <span className={styles.choiceLabel}>{choice.label}</span>
-                  <span className={styles.choiceLine}>{choice.line}</span>
-                  {/* Why this costs what it costs, when standing has changed
-                      the price. Shown before the choice, like Day 2's chips. */}
-                  {choice.note && <span className={styles.choiceNote}>{choice.note}</span>}
-                </button>
-              ))}
+        {!opening ? (
+          <Reveal delay={260} className={scene.near}>
+            <div className={scene.nearHead}>
+              <span className={scene.nearLabel}>{PLAY.couldSay}</span>
+              <RoleAnchor role={role} />
             </div>
+            {/* Openings carry no category anywhere in the corpus, and should
+                not: probing is what they all are. One register for the group. */}
+            <UtteranceList
+              options={openings}
+              label={step.openingPrompt}
+              onChoose={setOpening}
+              register="probe"
+            />
           </Reveal>
+        ) : (
+          <>
+            <div className={scene.near}>
+              <div className={scene.said}>
+                <span className={scene.saidLabel}>{PLAY.youSaid}</span>
+                <p className={scene.saidLine}>{opening.line}</p>
+              </div>
+            </div>
 
-          <Reveal delay={640} className={styles.actions}>
-            <Button variant="quiet" onClick={() => setOpening(null)}>
-              {PLAY.reconsider}
-            </Button>
-          </Reveal>
-        </>
-      )}
+            {/* Announced, because the reply is new information the next
+                decision depends on. */}
+            <Reveal delay={220} className={scene.far}>
+              <div className={scene.farReply}>
+                <span className={scene.replyLabel}>
+                  {counterpart ? counterpart.name : PLAY.theyReplied}
+                </span>
+                <p className={scene.replyLine} aria-live="polite">
+                  {opening.reply}
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={520} className={scene.near}>
+              <div className={scene.nearHead}>
+                <span className={scene.nearLabel}>{PLAY.couldSay}</span>
+                <RoleAnchor role={role} />
+              </div>
+              <UtteranceList
+                options={
+                  step.sharedFollow
+                    ? step.sharedFollow.map((o) => resolveShared(o, role.id, trackers))
+                    : opening.follow
+                }
+                label={step.followPrompt}
+                onChoose={onChoose}
+              />
+            </Reveal>
+
+            <Reveal delay={600} className={scene.actions}>
+              <Button variant="quiet" onClick={() => setOpening(null)}>
+                {PLAY.reconsider}
+              </Button>
+            </Reveal>
+          </>
+        )}
+      </div>
     </div>
   );
 }

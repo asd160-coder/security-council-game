@@ -130,21 +130,21 @@
    institution mark, with nobody picked out of it. Nobody in particular is
    listening, which is exactly the problem with speaking in public. */
 .sideEmpty {
-  min-height: 62px;
+  min-height: 160px;
   align-items: flex-end;
 }
 
 .room {
   display: flex;
   align-items: flex-end;
-  gap: 7px;
-  height: 34px;
+  gap: 13px;
+  height: 92px;
   opacity: 0.6;
 }
 
 .roomSeat {
   display: block;
-  width: 5px;
+  width: 10px;
   height: 100%;
   border-radius: var(--radius);
   background: linear-gradient(to bottom, var(--board-line-bright), transparent);
@@ -158,10 +158,10 @@
   height: 88%;
 }
 
-/* Sits above the anchor rather than beside it, so the name has the line to
-   itself and the tag is not competing with it for the edge. */
+/* Beside the portrait, level with it — flush to the bottom it read as having
+   fallen off the frame. */
 .youMark {
-  align-self: flex-end;
+  align-self: center;
   font-family: var(--font-mono);
   font-size: var(--fs-label-sm);
   letter-spacing: var(--track-label);

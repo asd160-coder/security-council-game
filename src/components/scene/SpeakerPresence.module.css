@@ -24,8 +24,8 @@
 .frame {
   display: block;
   position: relative;
-  width: 62px;
-  aspect-ratio: 4 / 4.4;
+  width: 140px;
+  aspect-ratio: 4 / 4.6;
   overflow: hidden;
   background: var(--board-inset);
   border: 1px solid var(--board-line);
@@ -34,7 +34,7 @@
 }
 
 .presenceCompact .frame {
-  width: 44px;
+  width: 104px;
 }
 
 .portrait {
@@ -67,19 +67,24 @@
    space a light source. */
 .zone {
   display: block;
-  width: 34px;
-  height: 68px;
+  width: 70px;
+  height: 156px;
   border-radius: var(--radius);
+  border: 1px solid var(--board-line);
   border-top: 2px solid var(--silver-fainter);
+  /* Raised rather than inset. The establishing card's own ground IS
+     --board-inset, so an inset zone vanished into it completely and the
+     adviser had no presence at all on the one screen meant to introduce him.
+     Raised reads against both grounds. */
   background:
-    linear-gradient(118deg, rgba(111, 143, 166, 0.1) 0%, transparent 58%),
-    var(--board-inset);
+    linear-gradient(118deg, rgba(111, 143, 166, 0.12) 0%, transparent 58%),
+    var(--board-raised);
   transition: border-top-color var(--dur-quick) var(--ease);
 }
 
 .presenceCompact .zone {
-  width: 26px;
-  height: 48px;
+  width: 54px;
+  height: 118px;
 }
 
 .zoneSpeaking {
@@ -93,18 +98,18 @@
 .seats {
   display: flex;
   align-items: flex-end;
-  gap: 6px;
-  height: 68px;
+  gap: 11px;
+  height: 156px;
 }
 
 .presenceCompact .seats {
-  height: 48px;
-  gap: 5px;
+  height: 118px;
+  gap: 9px;
 }
 
 .seat {
   display: block;
-  width: 6px;
+  width: 11px;
   height: 100%;
   border-radius: var(--radius);
   background: linear-gradient(to bottom, var(--board-line-bright), var(--board-inset));
@@ -168,12 +173,21 @@
 
 @media (max-width: 860px) {
   .frame {
-    width: 48px;
+    width: 108px;
+  }
+
+  .presenceCompact .frame {
+    width: 84px;
   }
 
   .zone,
   .seats {
-    height: 52px;
+    height: 120px;
+  }
+
+  .presenceCompact .zone,
+  .presenceCompact .seats {
+    height: 94px;
   }
 
   .name {

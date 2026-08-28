@@ -19,6 +19,8 @@ export const APP = {
     'Dialogue lines are authored for the simulation. They are written in the register of the historical figures and are not quotations.',
   creditsPortraits:
     'Portraits are generated painted illustrations, not photographs. They are interpretations of their subjects and are marked as such wherever they appear.',
+  creditsMap:
+    'Coastlines and inland water on the situation map are drawn from Natural Earth, which is in the public domain. They are generalised for display; the range rings are computed from published missile ranges rather than drawn.',
   close: 'Close',
 };
 
@@ -54,7 +56,7 @@ export const PLAY = {
   mapExpand: 'Open at full size',
   mapOverlayTitle: 'Strike range from San Cristóbal',
   mapOverlayDay: (n) => `Situation map · Day ${n}`,
-  mapScale: 'Coastlines schematic · ranges to scale',
+  mapScale: 'Coastlines generalised · ranges to scale',
   archiveExpand: 'Examine at full size',
   youSaid: 'You said',
   theyReplied: 'The reply',

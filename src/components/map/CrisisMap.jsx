@@ -1,14 +1,14 @@
 import { useId, useMemo } from 'react';
 import {
   FRAMES,
-  LANDMASSES,
   LAUNCH_POINT,
   MARKERS,
   RANGE_RINGS,
+  landFor,
+  lakesFor,
   project,
   rangeRing,
   ringPath,
-  toPath,
 } from './geography.js';
 import styles from './CrisisMap.module.css';
 
@@ -51,14 +51,10 @@ export default function CrisisMap({
     [frameSpec],
   );
 
-  const land = useMemo(
-    () =>
-      LANDMASSES.filter((mass) => mass.frames.includes(frame)).map((mass) => ({
-        ...mass,
-        d: toPath(mass.points, frameSpec),
-      })),
-    [frame, frameSpec],
-  );
+  /* Which rings belong to a frame is decided by their bounding boxes rather
+     than by a hand-kept list, so adding a frame needs no bookkeeping. */
+  const land = useMemo(() => landFor(frameSpec), [frameSpec]);
+  const lakes = useMemo(() => lakesFor(frameSpec), [frameSpec]);
 
   const markers = useMemo(
     () =>
@@ -78,10 +74,10 @@ export default function CrisisMap({
       aria-hidden={labels ? undefined : 'true'}
       aria-label={
         frame === 'caribbean'
-          ? 'Schematic map of the Caribbean and eastern United States, showing Cuba, Havana, the San Cristóbal missile site, Washington and New York.'
+          ? 'Map of the Caribbean and eastern United States, showing Cuba, Havana, the San Cristóbal missile site, Washington and New York.'
           : frame === 'regional'
-          ? 'Schematic map of North America and the Caribbean, showing missile range rings drawn from the San Cristóbal site: an inner ring at approximately 1,290 miles and an outer ring at approximately 2,800 miles.'
-          : 'Schematic world map showing the four centres of the crisis: Washington, the United Nations in New York, Moscow, and a missile site in Cuba.'
+          ? 'Map of North America and the Caribbean, showing missile range rings drawn from the San Cristóbal site: an inner ring at approximately 1,290 miles and an outer ring at approximately 2,800 miles.'
+          : 'World map showing the four centres of the crisis: Washington, the United Nations in New York, Moscow, and a missile site in Cuba.'
       }
     >
       <defs>
@@ -109,10 +105,16 @@ export default function CrisisMap({
       <g>
         {land.map((mass) => (
           <path
-            key={mass.id}
+            key={mass.key}
             d={mass.d}
-            className={`${styles.land} ${mass.emphasis ? styles.landEmphasis : ''}`}
+            className={`${styles.land} ${mass.id === 'cuba' ? styles.landEmphasis : ''}`}
           />
+        ))}
+        {/* Inland water painted back over the land. Cheaper and steadier than
+            interior rings with an even-odd fill, and it lets the lakes take
+            the water colour exactly. */}
+        {lakes.map((lake) => (
+          <path key={lake.key} d={lake.d} className={styles.lake} />
         ))}
       </g>
 

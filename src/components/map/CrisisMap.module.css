@@ -33,6 +33,17 @@
   stroke-width: 1.3;
 }
 
+/* Inland water. Painted in the flat water colour rather than the water
+   gradient, which is a radial lit from the top of the whole canvas and would
+   put a highlight inside Lake Superior. A hairline keeps the lakes from
+   dissolving into the land at hemispheric scale, where Erie is four pixels. */
+.lake {
+  fill: var(--map-water);
+  stroke: var(--map-land-edge);
+  stroke-width: 0.6;
+  stroke-linejoin: round;
+}
+
 .dot {
   fill: var(--silver-muted);
   stroke: var(--map-water);

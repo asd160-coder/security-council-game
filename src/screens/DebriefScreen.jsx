@@ -10,10 +10,11 @@ import {
   SECTIONS,
 } from '../data/debrief.js';
 import { getResolution } from '../data/endings.js';
+import { getArchive } from '../data/archive.js';
 import { getTracker } from '../data/trackers.js';
 import { formatValue } from '../lib/format.js';
 import { Button, Eyebrow, Reveal } from '../components/ui/index.jsx';
-import { DEBRIEF } from '../data/copy.js';
+import { DEBRIEF, PLAY } from '../data/copy.js';
 import styles from './DebriefScreen.module.css';
 
 /* The debrief.
@@ -58,6 +59,30 @@ export default function DebriefScreen({ state, role, onRestart }) {
             <p>{POSTURE_NOTES[conditions.posture]}</p>
           )}
         </div>
+
+        {/* The numbers the rule was actually applied to. `readEndingConditions`
+            has gathered these since the debrief was built and the screen showed
+            a restatement of the rule instead — which is the one thing its own
+            comment says not to do. The figures are the honest version: this is
+            what your run was standing at when the question was put. */}
+        <div className={styles.conditions}>
+          <span className={styles.conditionsLabel}>{DEBRIEF.conditionsLabel}</span>
+          <div className={styles.conditionsRow}>
+            {[
+              ['escalation', conditions.escalation],
+              ['councilTrust', conditions.councilTrust],
+              ['legitimacy', conditions.legitimacy],
+            ].map(([key, value]) => (
+              <span key={key} className={styles.condition}>
+                <span className={styles.conditionKey}>{getTracker(key)?.label}</span>
+                <span className={styles.conditionValue}>{formatValue(value)}</span>
+              </span>
+            ))}
+          </div>
+          {conditions.finalLabel && (
+            <p className={styles.conditionsFinal}>{DEBRIEF.finalWas(conditions.finalLabel)}</p>
+          )}
+        </div>
       </Reveal>
 
       {/* ------------------------------------------------ The five days */}
@@ -78,6 +103,15 @@ export default function DebriefScreen({ state, role, onRestart }) {
                     did. */}
                 {entry.mandate && (
                   <span className={styles.mandateNote}>{DEBRIEF.mandate(entry.mandate)}</span>
+                )}
+                {/* Day 2 said two things — one in the chamber and one in a room
+                    with no minute taken. Reading them together is the day. */}
+                {entry.alsoLabel && (
+                  <div className={styles.alsoSaid}>
+                    <span className={styles.alsoScene}>{entry.alsoScene}</span>
+                    <span className={styles.choiceLabel}>{entry.alsoLabel}</span>
+                    {entry.alsoLine && <p className={styles.choiceLine}>“{entry.alsoLine}”</p>}
+                  </div>
                 )}
                 {entry.label && <span className={styles.choiceLabel}>{entry.label}</span>}
                 {entry.line ? (
@@ -116,6 +150,14 @@ export default function DebriefScreen({ state, role, onRestart }) {
                 {part.label && <span className={styles.partDay}>{part.label}</span>}
               </div>
               <p className={styles.partText}>{part.text}</p>
+              {/* Where a clause argued from a document rather than only
+                  asserting, the debrief says so — as the ending does. */}
+              {part.citation && (
+                <p className={styles.partCitation}>
+                  <span className={styles.partCitationMark}>{PLAY.arguedFrom}</span>
+                  {getArchive(part.citation.archiveId)?.title}
+                </p>
+              )}
               {part.original && (
                 <p className={styles.superseded}>
                   <span className={styles.supersededLabel}>{DEBRIEF.superseded}</span>

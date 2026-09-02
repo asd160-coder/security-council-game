@@ -19,6 +19,17 @@ function decisiveStep(day) {
   return talking[talking.length - 1] ?? null;
 }
 
+/* ...but "decisive" was silently doing the work of "only". Day 2's chamber
+   session is an effect-bearing choice made on the record in front of the
+   world, and the debrief never mentioned it — one of the nine decisions in a
+   run simply vanished from the account of that run. This returns the earlier
+   conversation of a day when there is one, so the public position can be read
+   beside the private one, which on Day 2 is the entire point of the day. */
+function earlierStep(day) {
+  const talking = day.steps.filter((s) => s.kind === 'dialogue' || s.kind === 'exchange');
+  return talking.length > 1 ? talking[0] : null;
+}
+
 /* Resolve a stored choice id back to the line the player was shown. Shared
    follow-ups keep their text per role, so the role has to come with it. */
 function findChoice(step, roleId, choiceId) {
@@ -60,6 +71,9 @@ export function readPath(state, roleId) {
        fragment": Day 3 rewrites Day 2's clause rather than writing its own,
        and Day 5 writes the closing, which is not a draft entry at all. */
     const mandate = mandateFor(state, day, roleId);
+    const earlier = earlierStep(day);
+    const earlierStored = earlier ? state.choices[`${day.id}:${earlier.id}`] : null;
+    const earlierChoice = findChoice(earlier, roleId, earlierStored?.id);
     const added = state.draft.find((d) => d.dayNumber === day.number);
     const revisedHere = state.draft.find((d) => d.revisedOnDay === day.number);
     const heldHere = state.draft.find((d) => d.heldOnDay === day.number);
@@ -69,6 +83,11 @@ export function readPath(state, roleId) {
       title: day.title,
       dateline: day.dateline,
       scene: step?.eyebrow ?? null,
+      /* Day 2 only: the position taken in the chamber, before the one taken in
+         private. Null everywhere else. */
+      alsoScene: earlier?.eyebrow ?? null,
+      alsoLabel: earlierChoice?.label ?? null,
+      alsoLine: earlierChoice?.line ?? null,
       /* Only Day 4 has a council, so this is null on every other day and the
          screen simply does not render the line. */
       mandate: mandate?.title ?? null,
@@ -95,15 +114,18 @@ export function readPath(state, roleId) {
 /* Patterns rather than numbers. The point of a tracker was never its value; it
    was the trade it recorded, and a trade is a relationship between two of
    them. Strength decides which patterns are worth mentioning. */
+/* Thresholds set against measured distributions, not the nominal scale — half
+   of all Kennedy and Dobrynin runs used to match no pattern at all, so the
+   debrief named no trade in the very section built to name one. */
 const PATTERN_RULES = [
-  { id: 'trust-for-leverage', test: (t) => t.councilTrust >= 6 && t.leverage <= 3, strength: (t) => t.councilTrust - t.leverage },
-  { id: 'leverage-for-trust', test: (t) => t.leverage >= 8 && t.councilTrust <= 2, strength: (t) => t.leverage - t.councilTrust },
-  { id: 'legitimate-but-doubted', test: (t) => t.legitimacy >= 8 && t.councilTrust <= 2, strength: (t) => t.legitimacy - t.councilTrust },
-  { id: 'effective-but-indefensible', test: (t) => t.leverage >= 8 && t.legitimacy <= 2, strength: (t) => t.leverage - t.legitimacy },
-  { id: 'cooled-and-protected', test: (t) => t.escalation <= -6 && t.civilianRisk <= -6, strength: (t) => -(t.escalation + t.civilianRisk) },
-  { id: 'held-by-danger', test: (t) => t.escalation >= 5 && t.leverage >= 8, strength: (t) => t.escalation + t.leverage },
-  { id: 'risk-carried', test: (t) => t.civilianRisk >= 3, strength: (t) => t.civilianRisk * 2 },
-  { id: 'quiet-throughout', test: (t) => t.escalation <= -8 && t.leverage <= 4, strength: (t) => -t.escalation },
+  { id: 'trust-for-leverage', test: (t) => t.councilTrust >= 4 && t.leverage <= 5, strength: (t) => t.councilTrust - t.leverage },
+  { id: 'leverage-for-trust', test: (t) => t.leverage >= 6 && t.councilTrust <= 3, strength: (t) => t.leverage - t.councilTrust },
+  { id: 'legitimate-but-doubted', test: (t) => t.legitimacy >= 6 && t.councilTrust <= 3, strength: (t) => t.legitimacy - t.councilTrust },
+  { id: 'effective-but-indefensible', test: (t) => t.leverage >= 6 && t.legitimacy <= 4, strength: (t) => t.leverage - t.legitimacy },
+  { id: 'cooled-and-protected', test: (t) => t.escalation <= -4 && t.civilianRisk <= -4, strength: (t) => -(t.escalation + t.civilianRisk) },
+  { id: 'held-by-danger', test: (t) => t.escalation >= 2 && t.leverage >= 6, strength: (t) => t.escalation + t.leverage },
+  { id: 'risk-carried', test: (t) => t.civilianRisk >= 1, strength: (t) => t.civilianRisk * 2 },
+  { id: 'quiet-throughout', test: (t) => t.escalation <= -6 && t.leverage <= 4, strength: (t) => -t.escalation },
 ];
 
 export function readPatterns(trackers, limit = 2) {
@@ -160,6 +182,8 @@ export function readDocument(state) {
     revised: Boolean(entry.revised),
     revisedOnDay: entry.revisedOnDay ?? null,
     original: entry.revised ? entry.original : null,
+    /* What the clause argued from, where it argued from anything. */
+    citation: entry.citation ?? null,
     kind: entry.revised ? 'revised' : 'selected',
   }));
   if (state.closing) {

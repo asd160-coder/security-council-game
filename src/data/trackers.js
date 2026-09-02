@@ -1,5 +1,25 @@
 /* The five crisis variables.
 
+   ESCALATION AND CIVILIAN RISK ARE NOT THE SAME AXIS, and the content must not
+   let them drift back into being one. Escalation is the temperature between
+   the two governments — how close this is to a shooting war. Civilian risk is
+   exposure: people on the island, people in the cities, over time.
+
+   They come apart in specific and real ways, and the effect vectors are
+   written to that rule. A warning given publicly raises the temperature and
+   gives people notice, so escalation rises while exposure falls. Time bought
+   at the table lowers the temperature and leaves the sites building and the
+   quarantine biting, so escalation falls while exposure rises. Verification
+   lowers both, which is why it is the rarest and most valuable move on the
+   board.
+
+   This was not true until Milestone 10: the two correlated at r = 0.948 across
+   every authored option and there was not one choice where they moved in
+   opposite directions. Civilian risk was a second escalation needle wearing a
+   different label, which is worse than a needle that does nothing — it implies
+   a trade-off the content never actually offered. If a later day is authored,
+   check the correlation before shipping it.
+
    These are not scores. The brief is firm that they should read as measured
    crisis indicators rather than arcade bars, so each carries a `meaning` line
    describing what movement represents — not whether it is good. Rising

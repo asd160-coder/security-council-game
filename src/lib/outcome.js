@@ -24,20 +24,45 @@ export function resolveOutcome({ trackers, choices, roleId, dayId = 'day5', step
   const resolution = resolveCategory(posture, trackers);
 
   /* Only genuine extremes speak. A modifier that fires on an ordinary run is
-     not a modifier, it is furniture. */
+     not a modifier, it is furniture.
+
+     But the first version of these thresholds was set against the ±20 scale
+     rather than against where runs actually land, and the result was the
+     opposite failure: two thirds of Kennedy and Dobrynin runs finished with
+     NO modifier at all, so the layer this file calls the point was silent for
+     most players. Measured over all 311,040 runs per role, the values below
+     now sit around the tenth and ninetieth percentile of what is actually
+     reachable — extreme enough to mean something, common enough to be read.
+     `legitimacy-low` was worse than rare: unreachable for U Thant and 252
+     paths in 311,040 for Kennedy. */
   const modifiers = [];
   if (legitimacy >= 9) modifiers.push('legitimacy-high');
-  if (legitimacy <= -3) modifiers.push('legitimacy-low');
+  if (legitimacy <= 1) modifiers.push('legitimacy-low');
   if (councilTrust <= 0) modifiers.push('trust-spent');
-  if (leverage >= 11) modifiers.push('leverage-high');
-  if (civilianRisk >= 4) modifiers.push('risk-high');
-  if (civilianRisk <= -9) modifiers.push('risk-protected');
-  if (escalation <= -9 && resolution !== 'ruptured') modifiers.push('escalation-low');
+  if (leverage >= 9) modifiers.push('leverage-high');
+  if (civilianRisk >= 1) modifiers.push('risk-high');
+  if (civilianRisk <= -8) modifiers.push('risk-protected');
+  if (escalation <= -7 && resolution !== 'ruptured') modifiers.push('escalation-low');
 
   return { resolution, posture, modifiers };
 }
 
-function resolveCategory(posture, { escalation, councilTrust, legitimacy }) {
+/* A settlement reached with people left more exposed than they started is not
+   a clean settlement, whatever the two governments signed. It is the thing
+   `fragile` was for: an agreement resting on something that will not bear
+   weight.
+
+   This is the only place civilian risk touches the outcome, and it was added
+   in Milestone 10 because until then it touched nothing at all — the one
+   tracker that could not influence which of the four endings you got, in a
+   game about the cost of brinkmanship. It demotes rather than decides, which
+   is the right size for it: exposure does not settle a crisis or break it, it
+   determines what the settlement cost. */
+function tempered(resolution, civilianRisk) {
+  return resolution === 'settled' && civilianRisk >= 3 ? 'fragile' : resolution;
+}
+
+function resolveCategory(posture, { escalation, councilTrust, legitimacy, civilianRisk }) {
   /* Withdrawing the offer is the only move that can break the frame outright.
      Whether it does depends on what is left to catch it: either the crisis is
      already hot enough that nothing will, or standing has been spent so far
@@ -62,20 +87,20 @@ function resolveCategory(posture, { escalation, councilTrust, legitimacy }) {
   if (posture === 'assure') {
     /* A private assurance closes the gap only if the other side has reason to
        believe you. That is what council trust has been measuring. */
-    return councilTrust >= 4 ? 'settled' : 'fragile';
+    return councilTrust >= 4 ? tempered('settled', civilianRisk) : 'fragile';
   }
 
   if (posture === 'hold') {
     /* Holding works when the terms were already acceptable and the temperature
        is low enough for silence to read as confidence rather than refusal. */
-    if (escalation <= 0 && councilTrust >= 2) return 'settled';
+    if (escalation <= 0 && councilTrust >= 2) return tempered('settled', civilianRisk);
     return escalation <= 4 ? 'fragile' : 'contained';
   }
 
   if (posture === 'extend') {
     /* More time is rarely wasted and rarely decisive. It settles only where
        the standing was already strong enough to settle without it. */
-    if (councilTrust >= 6 && legitimacy >= 6) return 'settled';
+    if (councilTrust >= 6 && legitimacy >= 6) return tempered('settled', civilianRisk);
     return escalation <= 5 ? 'fragile' : 'contained';
   }
 

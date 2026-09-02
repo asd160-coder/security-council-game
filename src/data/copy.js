@@ -155,6 +155,8 @@ export const DEBRIEF = {
     return `Drafting — ${label}`;
   },
   mandate: (title) => `You went in having agreed to: ${title.toLowerCase()}`,
+  conditionsLabel: 'Where you stood when the question was put',
+  finalWas: (label) => `The last thing you did was: ${label.toLowerCase()}.`,
   superseded: 'Superseded',
   revisedOn: (n) => `Revised on Day ${n}`,
   travelled: (n) => `moved ${n}`,

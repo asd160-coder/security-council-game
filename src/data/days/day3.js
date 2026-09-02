@@ -153,7 +153,7 @@ const day3 = {
                 label: 'Refuse it, and say why',
                 line: 'You have told me what happens on the third day and you have not told me what happens on the tenth. Until you can, the answer is no.',
                 feedback: 'restraint',
-                effects: { leverage: -1, escalation: -2, legitimacy: 1, councilTrust: 2, civilianRisk: -2 },
+                effects: { leverage: -1, escalation: -2, legitimacy: 1, councilTrust: 2, civilianRisk: 1 },
               },
               {
                 id: 'rfk3f-prepare',
@@ -176,7 +176,7 @@ const day3 = {
                 label: 'Buy the time anyway',
                 line: 'Then we have days, and I intend to spend them. Bring me the estimate again tomorrow and tell me if it moves.',
                 feedback: 'restraint',
-                effects: { leverage: 0, escalation: -1, legitimacy: 1, councilTrust: 1, civilianRisk: -1 },
+                effects: { leverage: 0, escalation: -1, legitimacy: 1, councilTrust: 1, civilianRisk: 2 },
               },
               {
                 id: 'rfk3f-deadline',
@@ -247,7 +247,7 @@ const day3 = {
                 label: 'Accept the division',
                 line: 'Then report your assessment and leave the policy to me. We will both be more useful if neither pretends to the other’s competence.',
                 feedback: 'restraint',
-                effects: { leverage: 0, escalation: -1, legitimacy: 1, councilTrust: 2, civilianRisk: -1 },
+                effects: { leverage: 0, escalation: -1, legitimacy: 1, councilTrust: 2, civilianRisk: 1 },
               },
               {
                 id: 'dob3f-assert',
@@ -295,7 +295,7 @@ const day3 = {
                 label: 'Continue regardless',
                 line: 'Then I shall be used. An office that only acts when it is certain of thanks is not worth having.',
                 feedback: 'restraint',
-                effects: { leverage: -1, escalation: -2, legitimacy: 2, councilTrust: 1, civilianRisk: -2 },
+                effects: { leverage: -1, escalation: -2, legitimacy: 2, councilTrust: 1, civilianRisk: 1 },
               },
               {
                 id: 'uth3f-adapt',
@@ -341,7 +341,7 @@ const day3 = {
                 label: 'Put it on the record anyway',
                 line: 'Then it will change no votes and it will be in the record. In thirty years that will be the only part of this week anyone defends.',
                 feedback: 'restraint',
-                effects: { leverage: -1, escalation: -1, legitimacy: 2, councilTrust: 1, civilianRisk: -2 },
+                effects: { leverage: -1, escalation: -1, legitimacy: 2, councilTrust: 1, civilianRisk: 1 },
               },
               {
                 id: 'uth3f-trade',
@@ -413,7 +413,7 @@ const day3 = {
             label: 'Open it',
             operative:
               'the withdrawal of these installations under verification would be met by assurances this Government is prepared to give.',
-            effects: { leverage: -1, escalation: -2, legitimacy: 2, councilTrust: 2, civilianRisk: -2 },
+            effects: { leverage: -1, escalation: -2, legitimacy: 2, councilTrust: 2, civilianRisk: 1 },
           },
         ],
         dobrynin: [
@@ -434,7 +434,7 @@ const day3 = {
             label: 'Open it',
             operative:
               'a reciprocal withdrawal accompanied by an assurance against invasion would be acceptable to this Government.',
-            effects: { leverage: -1, escalation: -2, legitimacy: 2, councilTrust: 2, civilianRisk: -2 },
+            effects: { leverage: -1, escalation: -2, legitimacy: 2, councilTrust: 2, civilianRisk: 1 },
           },
         ],
         uthant: [

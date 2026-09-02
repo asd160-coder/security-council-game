@@ -63,7 +63,7 @@ const day1 = {
             label: 'Firm warning',
             line: 'The United States cannot ignore a threat of this magnitude. Any response must show that such a deployment carries serious consequences.',
             feedback: 'firm',
-            effects: { leverage: 2, escalation: 2, legitimacy: 0, councilTrust: -1, civilianRisk: 1 },
+            effects: { leverage: 2, escalation: 2, legitimacy: 0, councilTrust: -1, civilianRisk: -1 },
           },
           {
             id: 'rfk-b',

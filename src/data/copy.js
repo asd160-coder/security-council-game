@@ -50,6 +50,8 @@ export const PLAY = {
   draft: 'Draft statement',
   draftEmpty: 'Your statement will be built here, one fragment at a time.',
   draftFragment: (n) => `Fragment ${n}`,
+  /* Labels the source a clause was argued from. */
+  arguedFrom: 'Argued from',
   map: 'Situation map',
   mapHint: 'Inspect the map',
   mapInspected: 'Geography noted',
@@ -78,6 +80,11 @@ export const PLAY = {
   openingPositionLabel: 'Your opening position',
   /* Sits above the player's options, on their side of the table. */
   couldSay: 'What you could say',
+  /* The council. `councilPrompt` sits above the three courses; `overruled`
+     labels the adviser who comes back afterwards, and is deliberately blunt —
+     the point of the beat is that you are answerable to someone. */
+  councilPrompt: 'Whose course you carry into the room',
+  overruled: 'The advice you did not take',
   stageOne: 'One',
   stageTwo: 'Two',
   standing: 'Where you stand',
@@ -90,6 +97,8 @@ export const PLAY = {
   writingCount: (sentences, words) =>
     `${sentences} sentence${sentences === 1 ? '' : 's'} · ${words} word${words === 1 ? '' : 's'}`,
   archive: 'Archive',
+  /* Marks a primary source shown in part rather than whole. */
+  excerpted: 'Excerpt — the full document is longer',
   newInFile: 'New in your file',
   soWhat: 'What this changes',
   whyItMatters: 'Why this matters',
@@ -140,6 +149,7 @@ export const DEBRIEF = {
     if (action === 'held') return 'Drafting — left the clause as written';
     return `Drafting — ${label}`;
   },
+  mandate: (title) => `You went in having agreed to: ${title.toLowerCase()}`,
   superseded: 'Superseded',
   revisedOn: (n) => `Revised on Day ${n}`,
   travelled: (n) => `moved ${n}`,

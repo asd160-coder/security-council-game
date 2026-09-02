@@ -1,4 +1,5 @@
 import { PLAY } from '../../data/copy.js';
+import { getArchive } from '../../data/archive.js';
 import { Eyebrow } from '../ui/index.jsx';
 import styles from './DraftingTray.module.css';
 
@@ -32,6 +33,17 @@ export default function DraftingTray({ draft, compact = false }) {
                 {entry.revised && <span className={styles.revisedMark}>{PLAY.revised}</span>}
               </div>
               <p className={styles.fragmentText}>{entry.fragment}</p>
+              {/* What the clause argues from. A statement that cites its source
+                  is a different kind of document from one that only asserts. */}
+              {entry.citation && (
+                <p className={styles.citation}>
+                  <span className={styles.citationMark}>{PLAY.arguedFrom}</span>
+                  “{entry.citation.quote}”
+                  <span className={styles.citationSource}>
+                    {getArchive(entry.citation.archiveId)?.title}
+                  </span>
+                </p>
+              )}
               {/* A revised clause keeps the line it replaced. The point of a
                   drafting ladder is that the document has a history, and that
                   is only legible if the earlier wording is still visible. */}

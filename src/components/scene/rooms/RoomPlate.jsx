@@ -73,7 +73,7 @@ export default function RoomPlate({
            viewBox crops to the band that carries the meaning: the horizon,
            the chairs behind it and the near edge of the table. The band
            variant crops further, to structure alone. */
-        viewBox={band ? `0 96 ${FIELD.w} 210` : `0 96 ${FIELD.w} 420`}
+        viewBox={band ? `0 96 ${FIELD.w} 300` : `0 84 ${FIELD.w} 450`}
         /* The card and the band are different shapes over the same drawing.
            `slice` fills either without distorting; anchoring the band to the
            top (`xMidYMin`) crops to the structure of the room rather than to

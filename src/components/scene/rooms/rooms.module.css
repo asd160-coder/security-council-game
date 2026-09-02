@@ -256,8 +256,11 @@
 /* The band keeps the room present during the conversation without ever
    putting an utterance on top of scenery. It is the same drawing, cropped to
    its top strip and pushed well down in contrast. */
+/* Raised from 0.5. The band is the room staying in view while you talk, and at
+   half opacity behind a flat wash it had receded to the point of being a
+   texture rather than a place. */
 .plateBand {
-  opacity: 0.5;
+  opacity: 0.72;
 }
 
 /* -------------------------------------------------------------- The scrim */
@@ -288,8 +291,8 @@
 .plateBand .scrim {
   background: linear-gradient(
     to bottom,
-    rgba(13, 17, 22, 0.72) 0%,
-    rgba(13, 17, 22, 0.84) 62%,
+    rgba(13, 17, 22, 0.66) 0%,
+    rgba(13, 17, 22, 0.8) 58%,
     var(--board) 100%
   );
 }

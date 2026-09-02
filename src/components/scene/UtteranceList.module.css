@@ -192,3 +192,40 @@
     padding-left: 16px;
   }
 }
+
+/* A line you have not earned yet. Visible, legible, and plainly not takeable —
+   the opposite of hidden. It is set back rather than greyed out, because the
+   sentence is still worth reading; what is unavailable is saying it. */
+.utteranceLocked {
+  cursor: not-allowed;
+  border-left-style: dashed;
+}
+
+.utteranceLocked .line {
+  color: var(--silver-faint);
+}
+
+.utteranceLocked:hover,
+.utteranceLocked:focus-visible {
+  background: transparent;
+  border-color: transparent;
+  border-left-color: var(--board-line-bright);
+}
+
+.utteranceLocked:hover .label,
+.utteranceLocked:focus-visible .label {
+  color: var(--silver-fainter);
+}
+
+.locked {
+  display: block;
+  margin-top: 11px;
+  padding-top: 9px;
+  border-top: 1px dashed var(--board-line);
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: var(--silver-faint);
+}

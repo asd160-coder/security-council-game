@@ -102,3 +102,39 @@
   display: inline-block;
   color: var(--ink-faint);
 }
+
+/* The source a clause was argued from, set on the paper below it. Smaller and
+   in the faint ink, the way a footnote sits under the line it supports. */
+.citation {
+  margin-top: 10px;
+  padding-top: 9px;
+  border-top: 1px solid var(--stock-edge);
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--ink-faint);
+}
+
+.citationMark {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  font-style: normal;
+  letter-spacing: var(--track-label-tight);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 5px;
+}
+
+.citationSource {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-style: normal;
+  letter-spacing: var(--track-label-tight);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  opacity: 0.85;
+}

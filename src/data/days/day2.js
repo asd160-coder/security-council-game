@@ -22,7 +22,10 @@ const day2 = {
     {
       kind: 'briefing',
       id: 'update',
-      archiveId: 'jfk-address',
+      /* The address and the proclamation that followed it the next morning.
+         Examining the proclamation files the legal ground, which is what opens
+         the lawfulness line in Day 4's negotiation. */
+      archiveIds: ['jfk-address', 'proclamation-3504'],
       body: [
         'The crisis is no longer private. In a broadcast heard across the world, the United States has disclosed the installations and announced a naval quarantine of Cuba. Soviet vessels are already at sea. The Security Council has been convened.',
         'Until last night, both governments could still move quietly. Every position taken from this morning is taken in front of an audience that will remember it.',

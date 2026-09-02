@@ -6,7 +6,7 @@ import styles from './steps.module.css';
 /* The shared crisis briefing. Identical for all three roles — the facts do not
    change with the chair, which is the point the next step then complicates. */
 
-export default function BriefingStep({ day, step, onAdvance, standing, history }) {
+export default function BriefingStep({ day, step, onAdvance, standing, history, onOpenArchive }) {
   /* From Day 3 an opening can vary with where the crisis stands, and can
      acknowledge what the previous day's private channel did. Both are optional;
      Days 1 and 2 supply neither and render exactly as before. */
@@ -46,7 +46,7 @@ export default function BriefingStep({ day, step, onAdvance, standing, history }
           the pair is the lesson and either alone is only half of it. */}
       {archive.map((id, index) => (
         <Reveal key={id} delay={360 + index * 120}>
-          <ArchiveModule id={id} />
+          <ArchiveModule id={id} onOpen={onOpenArchive} />
         </Reveal>
       ))}
 

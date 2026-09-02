@@ -37,13 +37,18 @@ export default function UtteranceList({ options, label, onChoose, register }) {
         <button
           key={option.id}
           type="button"
-          className={styles.utterance}
+          className={`${styles.utterance} ${option.locked ? styles.utteranceLocked : ''}`}
           data-register={register ?? registerFor(option.feedback)}
+          disabled={option.locked}
           onClick={() => onChoose(option)}
         >
           <span className={styles.label}>{option.label}</span>
           <span className={styles.line}>{option.line}</span>
-          {option.note && <span className={styles.note}>{option.note}</span>}
+          {/* A locked line states its own condition. Hiding it would let a
+              student who skipped the document think the game was simply
+              smaller than it is. */}
+          {option.locked && <span className={styles.locked}>{option.lockedNote}</span>}
+          {option.note && !option.locked && <span className={styles.note}>{option.note}</span>}
         </button>
       ))}
     </div>

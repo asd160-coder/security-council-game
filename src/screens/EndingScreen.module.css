@@ -221,3 +221,22 @@
   gap: 14px;
   flex-wrap: wrap;
 }
+
+/* The source a clause was argued from, in the finished statement. Set as a
+   footnote under the line it supports rather than beside it, so the document
+   still reads as a document. */
+.citation {
+  margin-top: 6px;
+  margin-bottom: 4px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: var(--ink-faint);
+}
+
+.citationMark {
+  margin-right: 8px;
+  opacity: 0.7;
+}

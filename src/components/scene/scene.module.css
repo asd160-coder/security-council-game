@@ -24,10 +24,17 @@
    strip reads as the room continuing behind the column rather than as a
    panel sitting in it, and it establishes the stacking context the plate is
    positioned in. */
+/* The band roughly doubles, from about 97px to about 180px. At the old height
+   the room was a hairline behind the eyebrow; at this one it is a room you are
+   in while you talk, and the type still sits on its own ground. */
 .headWrap {
   position: relative;
   isolation: isolate;
-  padding: 16px 20px 18px;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px 20px 20px;
   margin: -16px -20px -6px;
   border-radius: var(--radius);
 }
@@ -199,7 +206,8 @@
   /* Narrower bleed on a narrow board — 20px of overhang either side is most
      of the gutter once the rails have unstacked. */
   .headWrap {
-    padding: 14px 14px 16px;
+    min-height: 128px;
+    padding: 16px 14px 16px;
     margin: -14px -14px -4px;
   }
 

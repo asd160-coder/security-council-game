@@ -236,6 +236,18 @@ export const DOSSIERS = [
     soWhat:
       'There is no purely domestic statement in this crisis. Assume every audience is listening to all of them.',
   },
+  {
+    id: 'note-quarantine-law',
+    kind: 'procedure',
+    label: 'The legal ground',
+    title: 'Why it is a quarantine and not a blockade',
+    body: [
+      'A blockade is an act of war, and declaring one unilaterally would have handed the other side the argument. The proclamation avoids that by resting on two things the United States did not decide alone: a joint resolution of Congress and a vote of the Organ of Consultation of the American Republics.',
+      'Every recital in the document is doing that work. The interdiction is narrow by design — named categories of materiel, a stated hour, and an explicit instruction that force is used only after directions have been refused.',
+    ],
+    soWhat:
+      'Having read the ground it stands on, you can argue the quarantine as lawful rather than merely assert it. That argument is only available to someone who has read the document.',
+  },
 ];
 
 export const getDossier = (id) => DOSSIERS.find((entry) => entry.id === id) ?? null;

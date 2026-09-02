@@ -33,6 +33,10 @@ export default function DraftingAssembleStep({ step, role, onChoose }) {
            the way Day 3 revises Day 2's operative and keeps its frame. */
         parts: Object.fromEntries(slots.map((s, i) => [s.id, parts[i].text])),
         effects: parts.reduce((acc, p) => ({ ...acc, ...(p.effects ?? {}) }), {}),
+        /* If any part of the assembled clause was argued from a document, the
+           clause carries that citation. Only the third slot — the half that
+           costs — has any, so there is never more than one to find. */
+        citation: parts.find((p) => p.citation)?.citation ?? undefined,
       });
     }
   };

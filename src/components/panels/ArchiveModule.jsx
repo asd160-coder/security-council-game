@@ -15,7 +15,7 @@ import styles from './ArchiveModule.module.css';
    Without this a mistyped extension renders a browser broken-image glyph in
    the middle of an otherwise careful interface, and says nothing about why. */
 
-export default function ArchiveModule({ id }) {
+export default function ArchiveModule({ id, onOpen }) {
   const item = getArchive(id);
   const [failed, setFailed] = useState(false);
   const [open, setOpen] = useState(false);
@@ -27,7 +27,9 @@ export default function ArchiveModule({ id }) {
   if (!item) return null;
 
   const present = isPresent(item);
-  const showPlaceholder = !present || failed;
+  /* Documents ship in the bundle, so the awaiting/missing states cannot
+     apply to them. */
+  const showPlaceholder = item.kind !== 'document' && (!present || failed);
 
   return (
     <figure className={styles.module}>
@@ -51,10 +53,40 @@ export default function ArchiveModule({ id }) {
           </audio>
         )}
 
+        {/* A primary source text, set as paper. This is the one place in the
+            archive where the register matters more than the medium: a 1962
+            document is not the present interface reading the crisis, it IS
+            1962, so it goes on stock rather than on the board. */}
+        {item.kind === 'document' && (
+          <button
+            type="button"
+            className={styles.document}
+            /* Examining a document is the act that files it. Same shape as the
+               map: the thing you did IS the unlock, rather than a separate
+               control that claims you read it. */
+            onClick={() => {
+              setOpen(true);
+              if (item.unlocks) onOpen?.(item.unlocks);
+            }}
+            aria-label={PLAY.archiveExpand}
+          >
+            {item.text.map((paragraph) => (
+              <p key={paragraph.slice(0, 40)} className={styles.documentLine}>
+                {paragraph}
+              </p>
+            ))}
+            {/* Said plainly rather than left to be noticed. A proclamation runs
+                nine hundred words; taking the part that argues and marking the
+                cut is better than silently abridging. */}
+            {item.excerpt && <p className={styles.documentCut}>{PLAY.excerpted}</p>}
+            <span className={styles.documentMark} aria-hidden="true" />
+          </button>
+        )}
+
         {/* An image that loaded is a control: the boards carry coordinates and
             reference numbers that only resolve at full size. Audio is not —
             there is nothing to enlarge. */}
-        {present && !failed && item.kind !== 'audio' && (
+        {present && !failed && item.kind === 'image' && (
           <button
             type="button"
             className={styles.imageButton}

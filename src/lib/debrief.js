@@ -1,4 +1,5 @@
 import { DAYS, getDay } from '../data/days/index.js';
+import { councilFor } from '../data/council.js';
 import { resolveOutcome } from './outcome.js';
 import { TRACKER_KEYS } from '../data/trackers.js';
 
@@ -33,6 +34,19 @@ function findChoice(step, roleId, choiceId) {
   return pool.find((c) => c.id === choiceId) ?? null;
 }
 
+/* The course you agreed to take into the room, on a day that had a council.
+   Not the decisive choice — the negotiation is that — but the thing the
+   decisive choice can be read against, which is the whole point of having
+   been advised. */
+function mandateFor(state, day, roleId) {
+  const council = day.steps.find((s) => s.kind === 'council');
+  if (!council) return null;
+  const stored = state.choices[`${day.id}:${council.id}`];
+  if (!stored?.mandate) return null;
+  const adviser = councilFor(roleId)?.advisers.find((a) => a.id === stored.id);
+  return adviser ? { mandate: stored.mandate, title: adviser.title } : null;
+}
+
 const consequenceFor = (day, stepId, feedback) =>
   day.steps.find((s) => s.kind === 'consequence' && s.after === stepId)?.variants?.[feedback]?.text ?? null;
 
@@ -45,6 +59,7 @@ export function readPath(state, roleId) {
     /* What the day did to the document, which is not always "added a
        fragment": Day 3 rewrites Day 2's clause rather than writing its own,
        and Day 5 writes the closing, which is not a draft entry at all. */
+    const mandate = mandateFor(state, day, roleId);
     const added = state.draft.find((d) => d.dayNumber === day.number);
     const revisedHere = state.draft.find((d) => d.revisedOnDay === day.number);
     const heldHere = state.draft.find((d) => d.heldOnDay === day.number);
@@ -54,6 +69,9 @@ export function readPath(state, roleId) {
       title: day.title,
       dateline: day.dateline,
       scene: step?.eyebrow ?? null,
+      /* Only Day 4 has a council, so this is null on every other day and the
+         screen simply does not render the line. */
+      mandate: mandate?.title ?? null,
       label: choice?.label ?? null,
       line: choice?.line ?? null,
       consequence: stored ? consequenceFor(day, step.id, stored.feedback) : null,

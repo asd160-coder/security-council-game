@@ -73,6 +73,12 @@ export default function DebriefScreen({ state, role, onRestart }) {
                 <span className={styles.dayTitle}>{entry.title}</span>
               </div>
               <div className={styles.dayBody}>
+                {/* Only Day 4 has a council. Reading the mandate above the
+                    choice is the point: what you agreed to do, then what you
+                    did. */}
+                {entry.mandate && (
+                  <span className={styles.mandateNote}>{DEBRIEF.mandate(entry.mandate)}</span>
+                )}
                 {entry.label && <span className={styles.choiceLabel}>{entry.label}</span>}
                 {entry.line ? (
                   <p className={styles.choiceLine}>“{entry.line}”</p>

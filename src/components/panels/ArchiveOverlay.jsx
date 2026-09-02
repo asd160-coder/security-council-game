@@ -12,9 +12,23 @@ import styles from './ArchiveOverlay.module.css';
 export default function ArchiveOverlay({ item, onClose }) {
   return (
     <Overlay eyebrow={PLAY.archive} title={item.title} onClose={onClose}>
-      <div className={styles.imageWrap}>
-        <img className={styles.image} src={`archive/${item.file}`} alt={item.caption} />
-      </div>
+      {/* A document has nothing to enlarge — it has something to read. At
+          overlay width it gets the measure a page of prose actually needs,
+          which is the whole reason for opening it. */}
+      {item.kind === 'document' ? (
+        <div className={styles.documentWrap}>
+          {item.text.map((paragraph) => (
+            <p key={paragraph.slice(0, 40)} className={styles.documentLine}>
+              {paragraph}
+            </p>
+          ))}
+          {item.excerpt && <p className={styles.documentCut}>{PLAY.excerpted}</p>}
+        </div>
+      ) : (
+        <div className={styles.imageWrap}>
+          <img className={styles.image} src={`archive/${item.file}`} alt={item.caption} />
+        </div>
+      )}
 
       <aside className={styles.aside}>
         <p className={styles.date}>{item.date}</p>

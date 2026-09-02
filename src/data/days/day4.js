@@ -30,7 +30,9 @@ const day4 = {
     {
       kind: 'briefing',
       id: 'update',
-      archiveId: 'excomm-cabinet-room',
+      /* The room, and the memorandum that created it — read together before
+         the council convenes in it. */
+      archiveIds: ['excomm-cabinet-room', 'nsam-196'],
       bodyByBand: {
         low: [
           'Two letters arrived from Moscow overnight. The first, received late and evidently written in haste, offers the removal of the weapons in exchange for an undertaking not to invade Cuba. The second, broadcast this morning, adds the American missiles in Turkey to the price.',
@@ -59,82 +61,21 @@ const day4 = {
     },
 
     /* --------------------------------------- The parties who were not asked */
+    /* The cabinet, before the other side.
+
+       This replaces the `witness` step that used to sit here. Its two cables —
+       Ankara having read the second letter, Havana not being a party to either
+       — are not lost: they are now what two of the three advisers are arguing
+       from, which is a better use of them than a desk with nobody attached.
+       The cast and the courses live in src/data/council.js. */
     {
-      kind: 'witness',
-      id: 'table',
-      eyebrow: 'Whose agreement this now requires',
-      weighLabel: 'What they can withhold',
-      cardsByRole: {
-        rfk: [
-          {
-            source: 'Cable from the embassy in Ankara',
-            title: 'Turkey has read the second letter',
-            body: [
-              'The Turkish government has been shown the broadcast text and states that it will not accept the removal of the missiles on its territory as the price of a settlement over Cuba, and that it regards any such arrangement as a matter on which it must be consulted rather than informed.',
-              'The Jupiters are obsolete. Their withdrawal has been under discussion for a year on purely military grounds. None of that is now available as an argument.',
-            ],
-            weigh:
-              'An alliance guarantee is worth what its smallest member believes it is worth. Trading one ally’s security for another’s is the single most expensive thing available to you today.',
-          },
-          {
-            source: 'Havana, via intercepted traffic',
-            title: 'Cuba is not a party to either letter',
-            body: [
-              'Neither letter mentions the Cuban government except as the territory in question. Havana has stated publicly that it will not permit inspection of its territory under an arrangement made between two other powers.',
-              'The weapons are Soviet. The soil is not.',
-            ],
-            weigh:
-              'A settlement neither Havana nor Ankara will honour is a settlement that has to be enforced, which is the thing the settlement was for avoiding.',
-          },
-        ],
-        dobrynin: [
-          {
-            source: 'Second cable, marked for the Ambassador',
-            title: 'Moscow has sent two positions and explained neither',
-            body: [
-              'You have now been instructed to support a public position on Turkey and a private position that does not mention it. No guidance accompanies either as to which is the real one.',
-              'You are being asked to conduct a negotiation whose terms your own government appears still to be arguing about.',
-            ],
-            weigh:
-              'Whichever letter is answered, you will have been the ambassador who was told about it afterwards.',
-          },
-          {
-            source: 'Havana, via the Soviet mission',
-            title: 'Castro is asking questions you cannot answer',
-            body: [
-              'The Cuban government wishes to know whether an assurance against invasion would be given to it or about it, and whether inspection would be conducted on its territory by agreement to which it is a party.',
-              'It has also asked what happens to the weapons if the answer to either question is no.',
-            ],
-            weigh:
-              'The ally whose territory this is has understood that the arrangement may be made over its head, and has begun saying so.',
-          },
-        ],
-        uthant: [
-          {
-            source: 'Note from the Turkish mission',
-            title: 'A third country has been priced without being asked',
-            body: [
-              'The mission states that its government is not a party to the exchange between Washington and Moscow, that it has not consented to the terms of the second letter, and that it expects the Secretary-General to say so.',
-              'It is the same objection you raised on Cuba’s behalf on Tuesday, made by a delegation that did not support you then.',
-            ],
-            weigh:
-              'The principle you have been defending has acquired a second claimant. It is stronger for that and considerably harder to apply consistently.',
-          },
-          {
-            source: 'Cuban mission',
-            title: 'Inspection cannot be agreed over Havana’s head',
-            body: [
-              'The mission restates that United Nations observers will not be admitted under an arrangement concluded between the two great powers, and asks whether the Secretary-General intends to seek Cuban consent or to assume it.',
-              'It notes, without warmth, that you were the only person in the building to raise the question before it became convenient.',
-            ],
-            weigh:
-              'Your standing here rests on having asked when nobody else did. It will not survive assuming now.',
-          },
-        ],
-      },
+      kind: 'council',
+      id: 'council',
+      eyebrow: 'Before you go in',
+      weighLabel: 'What it would cost',
+      prompt: 'Whose course you carry into the room',
     },
 
-    /* ---------------------------------- Openings diverge, the table converges */
     {
       kind: 'exchange',
       id: 'negotiation',
@@ -337,6 +278,30 @@ const day4 = {
             note: 'A deadline is only a deadline if the other side believes you can carry it out. From where you presently stand it will be read as a bluff, and bluffs get tested.',
           },
         },
+        /* The one line on this day that has to be earned. It is available only
+           to a player who opened Proclamation 3504 and read what the quarantine
+           stands on; without that it shows as unavailable, with the reason,
+           rather than quietly not being there. Arguing that a measure is lawful
+           is not a move you can make from having heard it called lawful. */
+        {
+          id: 'day4-lawful',
+          label: 'Argue the ground it stands on',
+          feedback: 'selective',
+          requires: 'note-quarantine-law',
+          requiresNote:
+            'Available once you have examined the quarantine proclamation. The argument is in the document, not in the summary of it.',
+          lineByRole: {
+            rfk: 'The quarantine is not a blockade and I can tell you exactly why it is not: a congressional resolution, a vote of the American republics, named categories of materiel and an hour it began. Every one of those is on the record and none of them is mine alone.',
+            dobrynin: 'Your Government drafted that proclamation carefully, and I have read it carefully. It rests on a vote of your hemisphere and it interdicts named categories only. I am prepared to treat it as what it says it is, and to expect it to stay that.',
+            uthant: 'The measure is narrower than either of you describes it. It names its categories, it names its hour, and it instructs that force follow refusal rather than precede it. I would rather both of you argued about what it says than about what it is called.',
+          },
+          effectsByRole: {
+            rfk: { leverage: 1, escalation: -1, legitimacy: 2, councilTrust: 2, civilianRisk: -1 },
+            dobrynin: { leverage: 1, escalation: -1, legitimacy: 2, councilTrust: 1, civilianRisk: -1 },
+            uthant: { leverage: 0, escalation: -2, legitimacy: 3, councilTrust: 2, civilianRisk: -1 },
+          },
+          note: 'Legality is the one argument in this room that costs nothing and is available to whoever has actually read the document.',
+        },
       ],
     },
 
@@ -366,6 +331,19 @@ const day4 = {
     },
 
     /* --------------------------------------------------- Assemble the bargain */
+    /* Back in the room, afterwards. The adviser you overruled — whichever of
+       the two you did not take stands furthest from what you actually did.
+       `after` names the negotiation so this step receives its resolved choice
+       the same way a consequence does. */
+    {
+      kind: 'reckoning',
+      id: 'reckoning',
+      after: 'negotiation',
+      eyebrow: 'The room, again',
+      place: 'The same table, an hour later. Nobody has left and nothing has been decided twice.',
+      weighLabel: 'What they want on the record',
+    },
+
     {
       kind: 'draftingAssemble',
       id: 'bargain',
@@ -432,6 +410,11 @@ const day4 = {
               },
               {
                 id: 'rfk4r-verified',
+                citation: {
+                  archiveId: 'jfk-reply-27-oct',
+                  quote:
+                    'to remove promptly the quarantine measures now in effect and… to give assurances against an invasion of Cuba',
+                },
                 label: 'Verified removal',
                 text: 'upon the verified removal of the weapons concerned, the two steps proceeding together.',
                 effects: { leverage: 0, escalation: -2, legitimacy: 2, councilTrust: 2, civilianRisk: -2 },
@@ -446,6 +429,11 @@ const day4 = {
             dobrynin: [
               {
                 id: 'dob4r-lift',
+                citation: {
+                  archiveId: 'jfk-reply-27-oct',
+                  quote:
+                    'You would agree to remove these weapons systems from Cuba under appropriate United Nations observation and supervision',
+                },
                 label: 'The quarantine lifted',
                 text: 'upon the lifting of the quarantine and an undertaking against invasion given publicly.',
                 effects: { leverage: 2, escalation: 1, legitimacy: -1, councilTrust: -1, civilianRisk: 1 },
@@ -466,6 +454,11 @@ const day4 = {
             uthant: [
               {
                 id: 'uth4r-suspend',
+                citation: {
+                  archiveId: 'proclamation-3504',
+                  quote:
+                    'force shall not be used except in case of failure or refusal to comply with directions… In any case, force shall be used only to the extent necessary',
+                },
                 label: 'Both measures suspended',
                 text: 'upon both Governments suspending the measures now in force for the duration of the discussions.',
                 effects: { leverage: 1, escalation: -2, legitimacy: 1, councilTrust: 1, civilianRisk: -2 },

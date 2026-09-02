@@ -4,7 +4,8 @@ import { TRACKERS } from '../data/trackers.js';
 import { formatValue } from '../lib/format.js';
 import ConsequencePanel from '../components/ending/ConsequencePanel.jsx';
 import { Button, Reveal } from '../components/ui/index.jsx';
-import { DEBRIEF, ENDING } from '../data/copy.js';
+import { DEBRIEF, ENDING, PLAY } from '../data/copy.js';
+import { getArchive } from '../data/archive.js';
 import styles from './EndingScreen.module.css';
 
 /* How the run resolved.
@@ -93,9 +94,19 @@ export default function EndingScreen({ state, role, onRestart, onDebrief }) {
           </div>
 
           {state.draft.map((entry) => (
-            <p key={entry.dayNumber} className={styles.line}>
-              {entry.fragment}
-            </p>
+            <div key={entry.dayNumber}>
+              <p className={styles.line}>{entry.fragment}</p>
+              {/* A clause that was argued from a document says so here, in the
+                  finished statement, which is where it matters most: the
+                  difference between a document that asserts and one that
+                  cites is the whole of what a student is learning to write. */}
+              {entry.citation && (
+                <p className={styles.citation}>
+                  <span className={styles.citationMark}>{PLAY.arguedFrom}</span>
+                  {getArchive(entry.citation.archiveId)?.title}
+                </p>
+              )}
+            </div>
           ))}
 
           {state.closing && (

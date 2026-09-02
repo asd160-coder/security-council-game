@@ -377,3 +377,16 @@
   gap: 14px;
   flex-wrap: wrap;
 }
+
+/* The course the room pressed on you, set above the choice you actually made
+   so the two can be read against each other. Quieter than the choice label:
+   advice is context, the decision is the record. */
+.mandateNote {
+  display: block;
+  margin-bottom: 8px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--ink-faint);
+}

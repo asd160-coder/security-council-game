@@ -22,7 +22,8 @@ const day5 = {
     {
       kind: 'briefing',
       id: 'update',
-      archiveId: 'ship-departing',
+      /* What was sent last night, while you were deciding. */
+      archiveIds: ['ship-departing', 'jfk-reply-27-oct'],
       bodyByBand: {
         low: [
           'The terms went to Moscow overnight. Nothing has come back. The quarantine holds, the sites are unchanged since yesterday, and for the first time in a week there is nothing scheduled to happen in the next few hours that anyone in this building controls.',

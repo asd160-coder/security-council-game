@@ -54,7 +54,24 @@ const ROOMS = {
 
   /* "The room has been arguing since the aircraft was lost" — the cabinet
      room, late. Kennedy arrives at the embassy again without notice. U Thant
-     has four delegations in three hours, which is a chamber. */
+     has four delegations in three hours, which is a chamber.
+
+     The council and the reckoning sit in the same room as the negotiation for
+     each role: you are advised where you are and answer for it in the same
+     place, so the day reads as one continuous sitting rather than three
+     locations. Only the occupancy shifts — the embassy empties out by the
+     time Dobrynin has to account for what he did. */
+  'day4:council': {
+    rfk: { room: 'cabinet', light: 'night', occupancy: 'full' },
+    dobrynin: { room: 'embassy', light: 'lamp', occupancy: 'bilateral' },
+    uthant: { room: 'chamber', light: 'evening', occupancy: 'occupied' },
+  },
+  'day4:reckoning': {
+    rfk: { room: 'cabinet', light: 'night', occupancy: 'full' },
+    dobrynin: { room: 'embassy', light: 'lamp', occupancy: 'solitary' },
+    uthant: { room: 'chamber', light: 'evening', occupancy: 'occupied' },
+  },
+
   'day4:negotiation': {
     rfk: { room: 'cabinet', light: 'night', occupancy: 'full' },
     dobrynin: { room: 'embassy', light: 'lamp', occupancy: 'bilateral' },

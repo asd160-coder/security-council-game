@@ -5,6 +5,8 @@ import DialogueStep from '../components/steps/DialogueStep.jsx';
 import ExchangeStep from '../components/steps/ExchangeStep.jsx';
 import WitnessStep from '../components/steps/WitnessStep.jsx';
 import ConsequenceStep from '../components/steps/ConsequenceStep.jsx';
+import CouncilStep from '../components/steps/CouncilStep.jsx';
+import ReckoningStep from '../components/steps/ReckoningStep.jsx';
 import DraftingStep from '../components/steps/DraftingStep.jsx';
 import DraftingComposeStep from '../components/steps/DraftingComposeStep.jsx';
 import DraftingReviseStep from '../components/steps/DraftingReviseStep.jsx';
@@ -36,6 +38,8 @@ const STEP_RENDERERS = {
   dialogue: DialogueStep,
   exchange: ExchangeStep,
   witness: WitnessStep,
+  council: CouncilStep,
+  reckoning: ReckoningStep,
   consequence: ConsequenceStep,
   drafting: DraftingStep,
   draftingCompose: DraftingComposeStep,
@@ -58,7 +62,8 @@ export default function DayView({ day, role, state, dispatch }) {
      resolves, and they come back early on hover or keyboard focus, because a
      teacher pointing at an indicator mid-scene should not have to leave the
      scene to read it. */
-  const inConversation = step?.kind === 'dialogue' || step?.kind === 'exchange';
+  const inConversation =
+    step?.kind === 'dialogue' || step?.kind === 'exchange' || step?.kind === 'council';
 
   const stepById = useMemo(
     () => Object.fromEntries(day.steps.map((s) => [s.id, s])),
@@ -94,6 +99,16 @@ export default function DayView({ day, role, state, dispatch }) {
      channel category is the compressed form of what happened in the previous
      day's private exchange. */
   const standing = band(state.trackers.escalation);
+
+  /* The course you agreed to take into the negotiation, if this day has a
+     council. `history.channelCategory` cannot serve here — it is hardcoded to
+     look at the PREVIOUS day — so the mandate is derived the same way and
+     passed alongside it. Found by kind, for the same reason the exchange is:
+     a hardcoded step id silently stops working the moment a day renames one. */
+  const mandate = useMemo(() => {
+    const council = day.steps.find((s) => s.kind === 'council');
+    return council ? (state.choices[`${day.id}:${council.id}`]?.mandate ?? null) : null;
+  }, [day, state.choices]);
   const history = useMemo(() => {
     /* The previous day's exchange, found by kind rather than by name. This was
        a list of hardcoded step ids and it silently stopped working the moment
@@ -121,7 +136,7 @@ export default function DayView({ day, role, state, dispatch }) {
     role,
     onAdvance: advance,
     onChoose:
-      step?.kind === 'dialogue' || step?.kind === 'exchange'
+      step?.kind === 'dialogue' || step?.kind === 'exchange' || step?.kind === 'council'
         ? (choice) =>
             dispatch({
               type: 'chooseLine',
@@ -143,6 +158,8 @@ export default function DayView({ day, role, state, dispatch }) {
     history,
     onSubmit: (text) => dispatch({ type: 'setClosing', text }),
     onConsultAdviser: () => dispatch({ type: 'unlock', id: adviserStep?.adviser?.unlocks }),
+    /* Examining a primary source files what it teaches. */
+    onOpenArchive: (unlockId) => dispatch({ type: 'unlock', id: unlockId }),
     adviserTaken: state.unlocked.includes(adviserStep?.adviser?.unlocks),
     choice: chosen,
     /* The consequence panel wants the movement from the choice just made; the
@@ -155,6 +172,10 @@ export default function DayView({ day, role, state, dispatch }) {
         : state.lastDeltas,
     trackers: state.trackers,
     unlockedToday: state.unlockedToday,
+    /* The whole file, not just today's. A line gated on having read a document
+       has to be able to ask whether it was ever read. */
+    unlocked: state.unlocked,
+    mandate,
     draft: state.draft,
   };
 

@@ -96,3 +96,42 @@
     flex: none;
   }
 }
+
+/* --------------------------------------------------------------- Document */
+
+/* Paper, at reading measure. The point of opening a document is the measure —
+   a 34rem column of prose rather than a panel-width sliver of it. */
+.documentWrap {
+  padding: 34px 38px 30px;
+  background: var(--stock);
+  border-radius: var(--radius-paper);
+  overflow-y: auto;
+}
+
+.documentLine {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ink-muted);
+  max-width: 34rem;
+}
+
+.documentLine + .documentLine {
+  margin-top: 15px;
+}
+
+.documentLine:first-child {
+  color: var(--ink);
+}
+
+.documentCut {
+  margin-top: 20px;
+  padding-top: 12px;
+  border-top: 1px solid var(--stock-edge);
+  max-width: 34rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}

@@ -85,6 +85,10 @@ export function reducer(state, action) {
               /* Day 5's final choice carries a posture the outcome logic
                  reads. Earlier days do not set one. */
               ...(choice.posture ? { posture: choice.posture } : {}),
+              /* Day 4's council choice carries the course you agreed to take
+                 into the negotiation. The reckoning reads it back to work out
+                 whom you overruled. Same guarded shape as posture. */
+              ...(choice.mandate ? { mandate: choice.mandate } : {}),
             },
           },
           stepIndex: state.stepIndex + 1,
@@ -124,6 +128,10 @@ export function reducer(state, action) {
                halves to rewrite one without losing the other. */
             frameText: option.frameText,
             operativeText: option.operativeText,
+            /* What the clause argues FROM. Present only where a drafting
+               option cites a document; the tray and the finished statement
+               both show it, so a student's argument carries its sources. */
+            citation: option.citation,
           },
         ],
         stepIndex: state.stepIndex + 1,

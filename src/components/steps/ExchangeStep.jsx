@@ -31,10 +31,14 @@ import styles from './steps.module.css';
    line, a different price, and — where standing is against you — a different
    price again. This is where it resolves into an ordinary choice, so nothing
    downstream has to know convergence exists. */
-function resolveShared(option, roleId, trackers) {
+function resolveShared(option, roleId, trackers, unlocked) {
   const strain = option.strain;
   const strained =
     strain && trackers && trackers[strain.tracker] < strain.below;
+  /* A line can require that a document has actually been read. The gate is the
+     same test the adviser memo uses — has this id been filed — and a locked
+     line is shown with its condition rather than removed. */
+  const locked = Boolean(option.requires) && !unlocked?.includes(option.requires);
   return {
     id: option.id,
     label: option.label,
@@ -42,6 +46,8 @@ function resolveShared(option, roleId, trackers) {
     line: option.lineByRole[roleId],
     effects: (strained ? strain.effectsByRole : option.effectsByRole)[roleId],
     note: strained ? strain.note : option.note,
+    locked,
+    lockedNote: option.requiresNote,
   };
 }
 
@@ -50,6 +56,7 @@ export default function ExchangeStep({
   step,
   role,
   trackers,
+  unlocked,
   onChoose,
   onConsultAdviser,
   adviserTaken,
@@ -171,7 +178,7 @@ export default function ExchangeStep({
               <UtteranceList
                 options={
                   step.sharedFollow
-                    ? step.sharedFollow.map((o) => resolveShared(o, role.id, trackers))
+                    ? step.sharedFollow.map((o) => resolveShared(o, role.id, trackers, unlocked))
                     : opening.follow
                 }
                 label={step.followPrompt}

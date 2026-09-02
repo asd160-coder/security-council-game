@@ -2,10 +2,13 @@ import { applyEffects, diffTrackers, initialTrackers } from './trackers.js';
 import { getRole } from '../data/roles.js';
 import { getDay, PLANNED_DAYS } from '../data/days/index.js';
 
-/* All game state in one serialisable object. Nothing is persisted: a classroom
-   run should start clean every time, and the design packet asks for a
-   deterministic flow for repeat testing. Because the shape is plain data,
-   adding persistence later is a load and a save, not a refactor. */
+/* All game state in one serialisable object.
+
+   That shape is why persistence, added in src/lib/persist.js, is a load and a
+   save rather than a refactor — which this comment predicted in Milestone 1
+   and is now true. A run is saved so an accidental reload does not destroy it,
+   and is never resumed without the student choosing to; the clean-start intent
+   the design packet asks for is preserved by asking rather than by forgetting. */
 
 export const initialState = {
   screen: 'title', // title | roleSelect | play | stub | ending | debrief
@@ -221,6 +224,12 @@ export function reducer(state, action) {
 
     case 'toggleCredits':
       return { ...state, creditsOpen: !state.creditsOpen };
+
+    /* Picking up a saved run. The stored object is spread over a fresh initial
+       state rather than used directly, so a save written before a field existed
+       still boots with that field at its default instead of undefined. */
+    case 'resume':
+      return { ...initialState, ...action.state, creditsOpen: false };
 
     case 'restart':
       return { ...initialState, screen: 'roleSelect' };

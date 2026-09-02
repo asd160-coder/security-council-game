@@ -2,7 +2,7 @@ import { Button, Reveal } from '../components/ui/index.jsx';
 import { APP } from '../data/copy.js';
 import styles from './TitleScreen.module.css';
 
-export default function TitleScreen({ onBegin, onCredits }) {
+export default function TitleScreen({ onBegin, onCredits, saved, onResume }) {
   return (
     <div className={styles.screen}>
       <div className={styles.backdrop} aria-hidden="true">
@@ -26,10 +26,25 @@ export default function TitleScreen({ onBegin, onCredits }) {
         <Reveal delay={380}>
           <p className={styles.standfirst}>{APP.standfirst}</p>
         </Reveal>
-        <Reveal delay={480}>
-          <Button variant="primary" onClick={onBegin}>
-            {APP.begin}
-          </Button>
+        <Reveal delay={480} className={styles.actions}>
+          {/* A run left open in this browser. Offered rather than restored: a
+              classroom session is meant to start clean, and the student is the
+              one who knows whether the last run was theirs. Resuming leads,
+              because it is the choice that does not throw work away. */}
+          {saved ? (
+            <>
+              <Button variant="primary" onClick={onResume}>
+                {APP.resume(saved.day)}
+              </Button>
+              <Button variant="quiet" onClick={onBegin}>
+                {APP.beginFresh}
+              </Button>
+            </>
+          ) : (
+            <Button variant="primary" onClick={onBegin}>
+              {APP.begin}
+            </Button>
+          )}
         </Reveal>
       </div>
 

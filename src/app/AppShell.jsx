@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import TitleScreen from '../screens/TitleScreen.jsx';
 import RoleSelect from '../screens/RoleSelect.jsx';
 import DayView from '../screens/DayView.jsx';
@@ -8,6 +8,7 @@ import DebriefScreen from '../screens/DebriefScreen.jsx';
 import { Button, Paper, PaperBody } from '../components/ui/index.jsx';
 import { initialState, reducer } from '../lib/gameState.js';
 import { getRole } from '../data/roles.js';
+import { clearRun, describeRun, loadRun, saveRun } from '../lib/persist.js';
 import { getDay } from '../data/days/index.js';
 import { ARCHIVE } from '../data/archive.js';
 import { APP } from '../data/copy.js';
@@ -22,6 +23,14 @@ import styles from './AppShell.module.css';
 export default function AppShell() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  /* Read once, on mount. A saved run is an offer on the title screen, never an
+     automatic restore — see src/lib/persist.js for why. */
+  const [saved, setSaved] = useState(() => loadRun());
+
+  useEffect(() => {
+    saveRun(state);
+  }, [state]);
+
   const role = getRole(state.roleId);
   const day = getDay(state.day);
 
@@ -29,8 +38,17 @@ export default function AppShell() {
     <>
       {state.screen === 'title' && (
         <TitleScreen
-          onBegin={() => dispatch({ type: 'begin' })}
+          onBegin={() => {
+            clearRun();
+            setSaved(null);
+            dispatch({ type: 'begin' });
+          }}
           onCredits={() => dispatch({ type: 'toggleCredits' })}
+          saved={saved ? describeRun(saved.state) : null}
+          onResume={() => {
+            dispatch({ type: 'resume', state: saved.state });
+            setSaved(null);
+          }}
         />
       )}
 

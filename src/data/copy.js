@@ -11,6 +11,11 @@ export const APP = {
     'Thirteen days in which the United States and the Soviet Union came closer to nuclear war than at any point before or since. You will take one seat inside it.',
   dateline: 'Cuban Missile Crisis · October 1962',
   begin: 'Begin briefing',
+  /* Shown only when this browser holds a run in progress. Naming the day is
+     what lets a student tell their own run from one somebody left behind on a
+     shared machine. */
+  resume: (day) => `Resume — you were on Day ${day}`,
+  beginFresh: 'Start a new run',
   credits: 'Sources and credits',
   creditsTitle: 'Sources and credits',
   creditsBody:

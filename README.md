@@ -97,6 +97,12 @@ npm run build    # static output in dist/
 Requires Node 18+. There is no backend, no database and no accounts — it is a static site,
 and `vite.config.js` sets `base: './'` so the build works from a subdirectory.
 
+**Deploying.** `.github/workflows/pages.yml` builds on every push to `main` and deploys to
+GitHub Pages **only when run by hand** — publishing is a decision, not a side effect of a
+commit. To put it live: make the repository public, set *Settings → Pages → Source* to
+"GitHub Actions", then run the "Build and deploy" workflow from the Actions tab. It will
+appear at `https://asd160-coder.github.io/security-council-game/`.
+
 **A run is held in the browser and is not sent anywhere.** Nothing a student writes leaves
 their machine.
 

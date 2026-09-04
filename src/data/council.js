@@ -40,6 +40,8 @@ export const COUNCIL = {
         mandate: 'trade',
         feedback: 'trade',
         source: 'Cable from the embassy in Ankara',
+        format: 'cable',
+        stamp: 'Received 27 Oct 1962 · 09:30',
         title: 'Trade the Turkish missiles and say nothing about it',
         body: [
           'Ankara has read the second letter and understands exactly what is being proposed over its head. The cable is polite and it is not a question: an alliance guarantee is worth what its smallest member believes it is worth.',
@@ -170,88 +172,236 @@ export const COUNCIL = {
    Which of the two overruled advisers speaks is decided in reckoningFor()
    below. The room does not get to agree with you afterwards; that is the
    point of having one. */
+/* Three things you can say back, whichever adviser it is.
+
+   The stances repeat across all nine so the register reads consistently —
+   own the decision, concede the part that was right, or ask the person you
+   overruled to help carry what you chose instead — and the lines are written
+   per adviser so each answer speaks to that person's argument. Each trades
+   one point between two needles: being answerable costs something, which is
+   the reason the room gets to speak at all. */
+export const ANSWER_STANCES = ['own', 'concede', 'enlist'];
+
+export const ANSWER_LABEL = {
+  own: 'Own it',
+  concede: 'Concede the point',
+  enlist: 'Ask them to help carry it',
+};
+
+export const ANSWER_EFFECTS = {
+  own: { legitimacy: 1, councilTrust: -1 },
+  concede: { councilTrust: 1, leverage: -1 },
+  enlist: { councilTrust: 1, escalation: 1 },
+};
+
 export const RECKONING = {
   'rfk-strike': {
-    line: 'He does not say he was right. He says the sites were incomplete this morning and are less incomplete tonight, and asks whether anyone intends to write down when that stops being true.',
+    line: 'He does not say he was right. “The sites were incomplete this morning. They are less incomplete tonight.” Then, to the room rather than to you: “Does anyone intend to write down when that stops being true?”',
     tails: {
-      trade: 'He has read the terms. He wants it recorded that the price was paid in a place he cannot defend.',
-      selective: 'He notes that answering one letter does not stop work under the other one.',
-      delay: 'He asks what changes tomorrow that has not changed today. Nobody answers him.',
+      trade: 'He has read the terms. “I want it recorded that the price was paid somewhere I cannot defend.”',
+      selective: '“Answering one letter,” he says, “does not stop work under the other one.”',
+      delay: '“What changes tomorrow that has not changed today?” Nobody answers him.',
       ultimatum: 'This, at least, he understands. He says so, and does not sound pleased about it.',
+    },
+    answers: {
+      own: {
+        line: 'I heard the case and I decided against it. That is what the chair is for, and it is what the chair will be blamed for if you are right.',
+        close: '“A fair answer,” he says. “Not a reassuring one.” He will keep the wing on alert regardless.',
+      },
+      concede: {
+        line: 'You were right that the sites are further along tonight than they were this morning, and I still would not do it. I want you to know I did the arithmetic.',
+        close: 'He allows that the arithmetic was done. “I would like to see it again in the morning,” he says, “when the sites have moved.”',
+      },
+      enlist: {
+        line: 'Then help me carry it. If this has failed by first light I want your plan on the table, and I want it to be one I can defend afterwards.',
+        close: '“It has been on the table since Tuesday,” he says. “I will bring it back with the pages in order.”',
+      },
     },
   },
   'rfk-trade': {
-    line: 'She points out that Ankara will learn what was decided here from someone else, and that the cable in front of you was the courtesy of an ally telling you first.',
+    line: '“Ankara will learn what was decided here from somebody else,” she says. “The cable in front of you was the courtesy of an ally telling us first.”',
     tails: {
-      trade: 'She is not relieved. She asks who tells them, and when, and whether it is in writing.',
-      selective: 'She asks what happens when the second letter is raised again, because it will be.',
-      delay: 'She observes that a delay is a decision Ankara will also have to be told about.',
-      ultimatum: 'She asks whether the alliance was consulted about the risk it is now carrying.',
+      trade: 'She is not relieved. “Who tells them? When? And is it in writing?”',
+      selective: '“What happens when the second letter is raised again?” she asks. It will be.',
+      delay: '“A delay is a decision,” she says. “Ankara will have to be told about that one too.”',
+      ultimatum: '“Was the alliance consulted,” she asks, “about the risk it is now carrying?”',
+    },
+    answers: {
+      own: {
+        line: 'I heard Ankara and I decided against telling them. That is what the chair is for, and it is what the chair will answer for if they find out first.',
+        close: '“They will find out first,” she says. “I will draft the apology tonight, so that it is at least accurate.”',
+      },
+      concede: {
+        line: 'You were right that an ally told us first and that it deserved better than silence, and I still would not put the trade in writing. I want you to know I read the cable twice.',
+        close: '“The cable was written to be read twice,” she says. “I will tell Ankara that it was.”',
+      },
+      enlist: {
+        line: 'Then help me carry it. Draft what we tell Ankara, tonight, in language that survives being printed, and have it ready before they ask.',
+        close: '“I have been drafting it since the second letter was broadcast,” she says. “The hard part is the first sentence.”',
+      },
     },
   },
   'rfk-hold': {
-    line: 'He is careful about it, which is worse than if he were not. He says the manoeuvre was available all day and remains available, and that the room chose something harder instead.',
+    line: 'He is careful about it, which is worse than if he were not. “The manoeuvre was available all day. It remains available.” A pause. “The room chose something harder.”',
     tails: {
-      trade: 'He accepts the trade. He would have preferred it cost nothing, and notes that it did not.',
-      selective: 'He says this is what he proposed and does not press the point further.',
-      delay: 'He says a day bought without an argument is still a day, and leaves it there.',
-      ultimatum: 'He asks what the position is if the answer is no, and is told there is not one yet.',
+      trade: 'He accepts the trade. “I would have preferred it cost nothing. It did not.”',
+      selective: '“This is what I proposed,” he says, and does not press it further.',
+      delay: '“A day bought without an argument is still a day,” he says, and leaves it there.',
+      ultimatum: '“And the position if the answer is no?” He is told there is not one yet.',
+    },
+    answers: {
+      own: {
+        line: 'I heard the manoeuvre and I chose something harder. That is what the chair is for, and if it fails the failure is mine and not the room’s.',
+        close: '“The room will carry it anyway. That is what a room is for.” He does not say it as a complaint.',
+      },
+      concede: {
+        line: 'You were right that the first letter was the one with a settlement in it, and I still could not answer as though the second did not exist. I want you to know I nearly did.',
+        close: '“Nearly is the usual distance in this business,” he says. He will keep the draft reply in his pocket in case it closes.',
+      },
+      enlist: {
+        line: 'Then help me carry it. If the second letter comes back tomorrow I want a reply to it that does not concede the first, and I want it from you.',
+        close: '“I have one. Two paragraphs.” He does not smile. “The second is the difficult one.”',
+      },
     },
   },
 
   'dob-first': {
-    line: 'He does not raise his voice. He says the first letter was the one with a settlement in it, and that the embassy has now spent the hours in which it could have been confirmed cheaply.',
+    line: 'He does not raise his voice. “The first letter was the one with a settlement in it,” he says. “We have now spent the hours in which it could have been confirmed cheaply.”',
     tails: {
-      trade: 'He allows that it arrived anyway. He notes it arrived as a concession rather than an offer.',
-      selective: 'He says this is what he proposed, and asks why it took the room three hours.',
-      delay: 'He asks what the embassy will report tomorrow that it could not report today.',
-      ultimatum: 'He says the Americans do not believe the price and that they are not wrong.',
+      trade: 'He allows that it arrived anyway. “As a concession,” he says. “Not as an offer.”',
+      selective: '“This is what I proposed,” he says. “Why did it take three hours?”',
+      delay: '“What do we report tomorrow,” he asks, “that we could not report today?”',
+      ultimatum: '“The Americans do not believe the price,” he says. “They are not wrong.”',
+    },
+    answers: {
+      own: {
+        line: 'I heard you and I did not send what you wanted sent. The Ambassador answers for what leaves this building, and I will answer for it.',
+        close: '“Understood,” he says. “Moscow will still ask why the cheap hour was not used.”',
+      },
+      concede: {
+        line: 'You were right that the hours could have been used more cheaply, and I still could not confirm what I had not been told. I want you to know I counted them too.',
+        close: '“The hours are counted in Moscow too,” he says, “by people who were not in this room to hear the reasons.”',
+      },
+      enlist: {
+        line: 'Then help me carry it. Draft the cable that tells Moscow what we did and why, in language they can defend to each other, and have it encoded before midnight.',
+        close: '“The draft will be ready,” he says. “The encoding will not be the slow part.”',
+      },
     },
   },
   'dob-second': {
-    line: 'The attaché is unmoved and does not stay long. He says the Turkish missiles were the only thing worth having and that whatever was obtained instead will be described in Moscow as what was left.',
+    line: 'The attaché is unmoved and does not stay long. “The Turkish missiles were the only thing worth having,” he says. “Whatever was obtained instead will be described in Moscow as what was left.”',
     tails: {
-      trade: 'He asks whether it is in writing. Told that it is not, he says that answers the question.',
-      selective: 'He says a settlement that skips the second letter skips the reason there was one.',
-      delay: 'He observes that time was the one thing the other side had more of.',
+      trade: '“Is it in writing?” Told that it is not: “That answers the question.”',
+      selective: '“A settlement that skips the second letter,” he says, “skips the reason there was one.”',
+      delay: '“Time was the one thing the other side had more of.”',
       ultimatum: 'He does not object. He notes that he sent his own cable regardless.',
+    },
+    answers: {
+      own: {
+        line: 'I heard the case for the Turkish missiles and I did not make it. The Ambassador decides what this embassy asks for, and this embassy did not ask for that.',
+        close: '“The Ambassador decides. The Ministry remembers.” He has already reported which.',
+      },
+      concede: {
+        line: 'You were right that the second letter was the one with something in it for us, and I still would not stake the settlement on it. I want you to know I read it as carefully as you did.',
+        close: 'He allows that it was read. “Reading it was never the difficulty. Asking for it was.”',
+      },
+      enlist: {
+        line: 'Then help me carry it. If Moscow asks tomorrow why the Turkish missiles were not pressed, I want the answer to come from you, and I want it to be true.',
+        close: '“It will be true,” he says. “I cannot promise it will be kind.”',
+      },
     },
   },
   'dob-admit': {
-    line: 'She says the mission still has nothing to tell Havana, and that Cuba will read the settlement in the newspapers like everybody else.',
+    line: '“We still have nothing to tell Havana,” she says. “Cuba will read the settlement in the newspapers, like everybody else.”',
     tails: {
-      trade: 'She asks which part of it Cuba agreed to. There is no answer that survives the asking.',
-      selective: 'She notes that neither letter mentioned Havana, and that the reply does not either.',
-      delay: 'She says the questions do not stop arriving because you have stopped answering them.',
-      ultimatum: 'She asks what the embassy does if the demand is refused, and is not given a plan.',
+      trade: '“Which part of it did Cuba agree to?” There is no answer that survives the asking.',
+      selective: '“Neither letter mentioned Havana,” she says. “The reply does not either.”',
+      delay: '“The questions do not stop arriving,” she says, “because we have stopped answering them.”',
+      ultimatum: '“And if the demand is refused?” She is not given a plan.',
+    },
+    answers: {
+      own: {
+        line: 'I heard you and I did not say we had no instructions. An embassy that admits that in public stops being an embassy, and I decided it would not be this one.',
+        close: '“An embassy that cannot answer Havana has already stopped being one for Havana.” She leaves it there.',
+      },
+      concede: {
+        line: 'You were right that Havana will read this in the newspapers, and I still could not tell them what I did not know myself. I want you to know I tried to reach the mission.',
+        close: '“The mission was reached,” she says. “They had nothing to tell us either. That was rather the point.”',
+      },
+      enlist: {
+        line: 'Then help me carry it. Write to Havana tonight, from this embassy, saying what we did and what we did not know, before they read it from anyone else.',
+        close: '“I have already begun,” she says. “It is honest. It will not be enough.”',
+      },
     },
   },
 
   'uth-public': {
-    line: 'He does not argue. He says the record is the only thing the office holds, and that it was available today and will be worth less tomorrow.',
+    line: 'He does not argue. “The record is the only thing this office holds,” he says. “It was available today. It will be worth less tomorrow.”',
     tails: {
-      trade: 'He asks whose terms they were. Told it does not matter, he says it will.',
-      selective: 'He notes that a proposal with no author also has no record.',
-      delay: 'He says the gap between the two missions is now a day wider and no more visible.',
+      trade: '“Whose terms were they?” Told it does not matter: “It will.”',
+      selective: '“A proposal with no author,” he says, “also has no record.”',
+      delay: '“The gap between the two missions is a day wider,” he says, “and no more visible.”',
       ultimatum: 'He accepts it. He wanted it said in the chamber rather than in a corridor.',
+    },
+    answers: {
+      own: {
+        line: 'I heard the case for saying it publicly and I did not say it. The office decides what it puts on the record, and I decided it would not put this.',
+        close: '“The office decides,” he says. “The record will show the decision as a silence. Which is also a record.”',
+      },
+      concede: {
+        line: 'You were right that the record is the only thing this office holds, and I still would not spend it today. I want you to know I nearly took the floor.',
+        close: '“The floor was there. It will be there tomorrow, worth a little less.” He will keep the statement drafted.',
+      },
+      enlist: {
+        line: 'Then help me carry it. Draft what the office would say if both governments fail by morning, and draft it so that neither can claim we took a side.',
+        close: '“That draft is the hardest sentence in this building,” he says. “I will have it by six.”',
+      },
     },
   },
   'uth-private': {
-    line: 'She is practical about it. She says the substance was there to be carried, that neither side had to be seen to move first, and that the opening does not stay open.',
+    line: 'She is practical about it. “The substance was there to be carried. Neither side had to be seen to move first.” Then: “The opening does not stay open.”',
     tails: {
-      trade: 'She asks whether either government will admit where the terms came from. Neither will.',
-      selective: 'She says the quiet version was available and would have cost less standing.',
-      delay: 'She notes that the two missions are still not speaking, and that this was the fix.',
-      ultimatum: 'She warns that a public position leaves nobody a way to climb down.',
+      trade: '“Will either government admit where the terms came from?” Neither will.',
+      selective: '“The quiet version was available,” she says, “and would have cost less standing.”',
+      delay: '“The two missions are still not speaking,” she says. “That was the thing this would have fixed.”',
+      ultimatum: '“A public position,” she says, “leaves nobody a way to climb down.”',
+    },
+    answers: {
+      own: {
+        line: 'I heard the case for carrying the terms myself and I did not carry them. The office keeps its hands clean or it keeps nothing, and that was mine to decide.',
+        close: '“Clean hands are a fine thing to keep,” she says. “I have never seen anyone settle a crisis with them.”',
+      },
+      concede: {
+        line: 'You were right that the substance was there and that someone had to carry it, and I still would not be the one seen doing it. I want you to know I know what that cost.',
+        close: '“The cost is a day,” she says. “Days are the one thing this week has not been generous with.”',
+      },
+      enlist: {
+        line: 'Then help me carry it. Find out tonight what each mission would accept from the other if the words arrived with no name on them, and bring me the words.',
+        close: '“You will have the words by morning,” she says. “The names will be the harder part to leave off.”',
+      },
     },
   },
   'uth-stand': {
-    line: 'He does not think the office should have been spent at all. He says Ankara and Havana wrote to you because there was nowhere else to write, and that answering them is not the same as being able to help.',
+    line: 'He does not think the office should have been spent at all. “Ankara and Havana wrote to you because there was nowhere else to write,” he says. “Answering them is not the same as being able to help.”',
     tails: {
-      trade: 'He asks what the Secretariat is now responsible for enforcing. Nobody has decided.',
-      selective: 'He observes that the office has now taken a side in a dispute it cannot arbitrate.',
-      delay: 'He is content. He says the office is still available, which was the whole objective.',
-      ultimatum: 'He asks what happens to the office if the demand is refused in public.',
+      trade: '“What is the Secretariat now responsible for enforcing?” Nobody has decided.',
+      selective: '“The office has taken a side,” he says, “in a dispute it cannot arbitrate.”',
+      delay: 'He is content. “The office is still available. That was the whole objective.”',
+      ultimatum: '“And what happens to this office,” he asks, “if the demand is refused in public?”',
+    },
+    answers: {
+      own: {
+        line: 'I heard the case for keeping the office out of it and I put the office into it. That is what the office is for, and if it is spent, it was mine to spend.',
+        close: '“It was,” he says. “I hope the next Secretary-General is given something to spend.”',
+      },
+      concede: {
+        line: 'You were right that answering Ankara and Havana was not the same as being able to help them, and I still could not leave them unanswered. I want you to know I read both letters twice.',
+        close: '“They were good letters. They will be answered again next week, by somebody else.” He takes the point.',
+      },
+      enlist: {
+        line: 'Then help me carry it. Draft the reply to both missions that says what the office did today and what it could not do, and make it something they can show their governments.',
+        close: '“The drafting is easy. The showing is not.” He will do the first tonight.',
+      },
     },
   },
 };
@@ -304,6 +454,17 @@ export function reckoningFor(roleId, mandate, feedback) {
     adviser: speaker,
     line: entry?.line ?? '',
     tail: entry?.tails?.[feedback] ?? null,
+    /* What you can say back, in utterance shape. An adviser without answers
+       (there are none, but data should not have to promise that) yields an
+       empty list and the step falls back to a plain Continue. */
+    answers: ANSWER_STANCES.map((id) => ({
+      id,
+      label: ANSWER_LABEL[id],
+      feedback: id,
+      effects: ANSWER_EFFECTS[id],
+      line: entry?.answers?.[id]?.line ?? '',
+      close: entry?.answers?.[id]?.close ?? '',
+    })).filter((answer) => answer.line),
   };
 }
 

@@ -75,6 +75,13 @@
   filter: saturate(0.6) contrast(1.04);
 }
 
+/* The wrong-shaped shots sit whole inside the frame on the dark ground. */
+.contain {
+  object-fit: contain;
+  padding: 6%;
+  background: #06080b;
+}
+
 /* The Illustration marker, as everywhere a drawn face appears. */
 .illustrationMark {
   position: absolute;
@@ -255,7 +262,7 @@
 }
 
 /* The film still plays; it stops moving. Crossfades stay because a hard cut
-   between thirteen stills is its own kind of motion. The caption's typing
+   between fifteen stills is its own kind of motion. The caption's typing
    collapses on its own through --dur-teleprinter, but --dur-type is set per
    line, so it is overridden here too. */
 @media (prefers-reduced-motion: reduce) {

@@ -56,6 +56,7 @@ function CreditsPanel({ onClose }) {
               APP.creditsNote,
               APP.creditsPortraits,
               APP.creditsQuotations,
+              APP.creditsOverture,
               APP.creditsMap,
               APP.creditsRooms,
             ]}

@@ -346,3 +346,32 @@ Practical consequences:
   filled in. `whyItMatters` is not optional — the design packet requires one
   sentence of relevance after every clip, and a caption that only describes
   the picture does not do that job.
+
+## Milestone 19 — the overture
+
+Nine stills for the opening film, all works of the United States government and all
+registered in `src/data/archive.js` with `overture: true`, so the credits panel lists them
+without a second list. Sourced from Wikimedia Commons, with each file's own rights
+metadata read before download; one attribution was resolved at the holding institution.
+
+| File | What it is | Source | Basis |
+|---|---|---|---|
+| `truman-berlin-1945-07-16.jpg` | Truman, Byrnes and Leahy in Berlin, 16 July 1945 | NARA 198768, Truman Library | Federal |
+| `nagasaki-cloud-1945-08-09.jpg` | The cloud over Nagasaki | Charles Levy, USAAF — NARA | Federal |
+| `hiroshima-shadow-1945-11-20.jpg` | Flash burns on the Sumitomo Bank steps | Unidentified photographer for the United States Government, 20 Nov 1945; print at the International Center of Photography, 2006.1.411 | Federal — **attribution from the ICP's record**, not Commons, which says "unknown" |
+| `crossroads-baker-1946-07-25.jpg` | Test Baker, Bikini | US Department of Defense | Federal |
+| `shippingport-1956-10-10.jpg` | Shippingport under construction | US Nuclear Regulatory Commission | Federal |
+| `juno-i-explorer-1958-01-31.jpg` | Juno I on the pad | NASA | Federal |
+| `checkpoint-charlie-1961-10-27.jpg` | The tank standoff | US Army / USAMHI | Federal |
+| `jfk-colonnade-1962-10-29.jpg` | Kennedy with Bundy, Nitze, Taylor, McNamara | Cecil Stoughton, JFK Library ST-A26-13-62 | Federal — 760px only; the Library blocks automated download, a larger original can be dropped in by hand |
+| `duck-and-cover-1951.jpg` | Bert the Turtle, the film's opening cartoon | Federal Civil Defense Administration, LoC mbrs01836081 | Federal — **not the children-under-desks frame**; a frame can be cut from the 452 MB LoC source if wanted |
+
+**Rejected.** An Imperial War Museum photograph of Montgomery decorating Zhukov at the
+Brandenburg Gate (TR 2913) is verifiably public domain — Crown copyright expired 1995 — but
+would have been a third rights basis; the NARA Truman photograph covered the beat without
+one. The Commons Hiroshima shadow was usable only once the ICP's record named the United
+States Government as maker; "unknown author" on Commons was not accepted on its own.
+
+**The narration** is not archival and is not listed here: it is recorded by the user and
+lives at `public/overture/narration.m4a`, outside the archive.
+

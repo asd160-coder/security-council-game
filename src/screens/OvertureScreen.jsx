@@ -47,9 +47,14 @@ function Shot({ shot, beatMs }) {
 
   const item = shot.archiveId ? getArchive(shot.archiveId) : null;
   if (item?.file) {
+    /* `contain` for the two shots that are the wrong shape to fill a frame —
+       a portrait of a rocket, and a four-inch contact print that should read
+       as a print rather than be blown up to a wall. The stage's ground is
+       near-black, so the letterbox is invisible against a dark photograph. */
+    const fitClass = shot.fit === 'contain' ? styles.contain : '';
     return (
       <div className={`${styles.layer} ${moveClass}`} style={style}>
-        <img className={styles.still} src={`archive/${item.file}`} alt={shot.alt} />
+        <img className={`${styles.still} ${fitClass}`} src={`archive/${item.file}`} alt={shot.alt} />
         <div className={styles.source}>
           <SourceLine source={item.source} rights={item.rights} onBoard />
         </div>
@@ -57,13 +62,13 @@ function Shot({ shot, beatMs }) {
     );
   }
 
-  /* A slate: the shot's place held by its label until a still is sourced,
-     verified and approved. Keeps the motion reviewable before any asset
-     exists, and says plainly that it is a placeholder. */
+  /* A slate: a labelled dark frame standing in for a shot with no still —
+     none remain in the data, so reaching this now means an archiveId failed
+     to resolve, and the frame says so rather than leaving a hole. */
   return (
     <div className={`${styles.layer} ${styles.slate} ${moveClass}`} style={style} role="img" aria-label={shot.alt}>
-      <span className={styles.slateLabel}>{shot.slate}</span>
-      <span className={styles.slateNote}>{shot.source}</span>
+      <span className={styles.slateLabel}>{shot.slate ?? shot.archiveId ?? '—'}</span>
+      <span className={styles.slateNote}>{shot.source ?? 'Shot not found in the archive'}</span>
     </div>
   );
 }

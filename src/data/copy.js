@@ -36,6 +36,8 @@ export const APP = {
     'Coastlines and inland water on the situation map are drawn from Natural Earth, which is in the public domain. They are generalised for display; the range rings are computed from published missile ranges rather than drawn.',
   creditsQuotations:
     'The quotations shown between the days are real, and are attributed and dated where they appear. Two are works of the United States federal government and are in the public domain; the rest are quoted briefly, with attribution, for teaching and commentary. Each card also states how the words reached us, because several are recollections made long afterwards, and one is a translation that overstated the speaker.',
+  creditsOverture:
+    'The overture that opens the simulation is made of nine archival photographs, each a work of the United States government and each credited below with its source. One — the flash burns on the steps of a bank in Hiroshima — is attributed on the strength of the holding institution’s record, which names the United States Government as its maker; the photographer is unidentified.',
   creditsRooms:
     'The rooms behind the conversations are invented. They are drawn in the interface from simple shapes, not photographed or reconstructed, and no scene depicts a real room, meeting or document.',
   close: 'Close',

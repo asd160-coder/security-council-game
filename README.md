@@ -105,6 +105,21 @@ npm run build    # static output in dist/
 Requires Node 18+. There is no backend, no database and no accounts — it is a static site,
 and `vite.config.js` sets `base: './'` so the build works from a subdirectory.
 
+**Checking it.** Five days times three seats is more branching content than anyone can hold
+in their head, so `tools/` carries four scripts that read the real day files and check it
+for you. They are plain Node with no dependencies, and the first two exit non-zero, so they
+can gate a commit.
+
+```bash
+npm run check    # structural: is every path authored? does the reducer still behave?
+npm run audit    # the tuning: ~4.2M runs, every property the design depends on
+npm run bands    # a diagnostic — why can a seat not reach a briefing opening?
+```
+
+See [tools/README.md](tools/README.md) for what each asserts and why. They earn their keep:
+the audit is what found that two of Day 3's three briefing openings could never be seen by
+anybody.
+
 **Deploying.** `.github/workflows/pages.yml` builds on every push to `main` and deploys to
 GitHub Pages **only when run by hand** — publishing is a decision, not a side effect of a
 commit. To put it live: make the repository public, set *Settings → Pages → Source* to

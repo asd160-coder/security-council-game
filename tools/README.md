@@ -19,6 +19,31 @@ workflow. `bands` always exits 0; it explains rather than judges.
 | `engine.mjs` | Does the reducer still do what the content assumes? Drives the real reducer through a complete run per seat: costs land on entry, `lastDeltas` reports them, the reckoning stores and applies its answer, the debrief reads it all back. |
 | `audit.mjs` | Does the tuning still hold? Enumerates every combination of effect-bearing choices for all three seats and asserts four properties. |
 | `bands.mjs` | Why can't a seat reach a briefing opening? Reports the escalation range reachable entering each day, and compares candidate thresholds. |
+| `webkit-probe.html` | Does a second engine support what the CSS and JS rely on? Open it in Safari — see below. |
+
+## Checking a second engine
+
+The dev preview is Chromium, so it proves nothing about WebKit. `webkit-probe.html`
+is a single self-contained page that tests every feature the game depends on which
+differs between engines, and prints one verdict line: `inert` (support *and* whether it
+actually refuses focus, which are not the same question), `text-wrap: pretty`,
+`backdrop-filter`, `aspect-ratio`, `:focus-visible`, `clamp()`, `localStorage`, and the
+H.264 and AAC codecs the newsreel and the 22 October address need. It also renders the
+epigraph plate, a portrait frame and a blurred scrim so layout can be eyeballed.
+
+Serve it and open it in Safari:
+
+```bash
+cp tools/webkit-probe.html public/ && open -a Safari http://localhost:5173/webkit-probe.html
+# then: rm public/webkit-probe.html  -- it must not ship with the site
+```
+
+**Never leave it in `public/`** — anything there is published with the build.
+
+Last run: Safari on macOS (Darwin 25.2), 2026-09-04 — **all pass**, including the engine
+check, so it really was WebKit rather than a Chromium-based browser wearing the name.
+`text-wrap: pretty` is reported for information only; it degrades to normal wrapping, so
+it cannot fail the verdict.
 
 ## What the audit asserts
 

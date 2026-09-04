@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>October 1962 — WebKit probe</title>
+<style>
+  :root {
+    --board: #12161b; --board-raised: #1b2128; --board-inset: #0d1116;
+    --board-line: #2a323b; --stock: #e6e1d6; --brass: #a8853c;
+    --brass-bright: #c9a355; --wax-text: #d4665c; --silver-muted: #97a0aa;
+    --silver-faint: #8e96a0; --radius: 2px;
+  }
+  body { margin: 0; background: var(--board); color: var(--stock);
+         font: 15px/1.5 ui-sans-serif, system-ui, sans-serif; padding: 28px; }
+  h1 { font-size: 20px; margin: 0 0 4px; letter-spacing: -0.01em; }
+  .sub { color: var(--silver-faint); font-size: 13px; margin-bottom: 22px; }
+  h2 { font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+       color: var(--brass); margin: 26px 0 10px; font-weight: 500; }
+  table { border-collapse: collapse; width: 100%; max-width: 760px; }
+  td { padding: 7px 10px; border-bottom: 1px solid var(--board-line); font-size: 14px; }
+  td.k { color: var(--silver-muted); width: 46%; }
+  .PASS { color: #6fbf73; font-weight: 600; }
+  .FAIL { color: var(--wax-text); font-weight: 600; }
+  .INFO { color: var(--brass-bright); }
+  #verdict { margin: 22px 0 0; padding: 14px 16px; border-radius: var(--radius);
+             border: 1px solid var(--board-line); background: var(--board-raised);
+             font-size: 16px; font-weight: 600; max-width: 760px; }
+
+  /* ---- the at-risk visual patterns, copied from the real stylesheets ---- */
+  .plate { position: relative; max-width: 420px; padding: 30px 34px 20px;
+           background: linear-gradient(180deg,#131820 0%, var(--board) 100%);
+           border: 1px solid rgba(168,133,60,.4); border-radius: var(--radius); }
+  .plate::before { content:''; position:absolute; inset:5px;
+                   border:1px solid var(--board-line); border-radius:1px; }
+  .ornament { width:46px; height:2px; margin:0 auto 22px; background:var(--brass); }
+  .quote { margin:0; max-width:30rem; font-size:21px; font-weight:300;
+           line-height:1.46; color:var(--stock); text-wrap: pretty; }
+  .frame { width:180px; aspect-ratio: 4 / 3.4; background:var(--board-inset);
+           border:1px solid var(--board-line); display:flex;
+           align-items:center; justify-content:center; color:var(--silver-faint);
+           font-size:12px; }
+  .scrimDemo { position:relative; height:70px; width:420px; flex:0 0 420px;
+               background:linear-gradient(90deg,#3a5, #35a); }
+  .scrimDemo > div { position:absolute; inset:0; backdrop-filter: blur(6px);
+                     -webkit-backdrop-filter: blur(6px);
+                     background:rgba(9,12,16,.45); display:flex;
+                     align-items:center; justify-content:center; font-size:13px; }
+</style>
+</head>
+<body>
+<h1>October 1962 — WebKit engine probe</h1>
+<p class="sub">Everything the game relies on that differs between engines. Read the verdict line, then glance at the two panels below it.</p>
+
+<h2>Engine</h2>
+<table id="env"></table>
+
+<h2>Features the code depends on</h2>
+<table id="feat"></table>
+
+<div id="verdict">running…</div>
+
+<h2>Does the plate look right? (double brass frame, centred rule, even wrapping)</h2>
+<div class="plate">
+  <div class="ornament"></div>
+  <p class="quote">“We will not prematurely or unnecessarily risk the costs of worldwide nuclear war in which even the fruits of victory would be ashes in our mouth.”</p>
+</div>
+
+<h2>Portrait frame (should be a wide 4:3.4 box, not collapsed) and a blurred scrim</h2>
+<div style="display:flex; gap:18px; align-items:flex-start; flex-wrap:wrap;">
+  <div class="frame">4 / 3.4</div>
+  <div class="scrimDemo"><div>backdrop-filter — this strip should look blurred</div></div>
+</div>
+
+<script>
+const rows = (id, pairs) => {
+  document.getElementById(id).innerHTML = pairs.map(([k, v, cls]) =>
+    `<tr><td class="k">${k}</td><td class="${cls || 'INFO'}">${v}</td></tr>`).join('');
+};
+
+// Engine identification — WebKit but not Chrome/Chromium.
+const ua = navigator.userAgent;
+const isWebKit = /AppleWebKit/.test(ua) && !/Chrome|Chromium|Edg\//.test(ua);
+const ver = (ua.match(/Version\/([\d.]+)/) || [,'unknown'])[1];
+rows('env', [
+  ['Engine', isWebKit ? 'WebKit (Safari) — correct engine for this test' : 'NOT WebKit — open this in Safari', isWebKit ? 'PASS' : 'FAIL'],
+  ['Safari version', ver],
+]);
+
+// inert: the focus fix rests entirely on this.
+const probe = document.createElement('div');
+const inertSupported = 'inert' in probe;
+let inertWorks = 'not tested';
+if (inertSupported) {
+  probe.inert = true;
+  const b = document.createElement('button');
+  b.textContent = 'x'; probe.appendChild(b); document.body.appendChild(probe);
+  b.focus();
+  inertWorks = (document.activeElement !== b) ? 'yes — focus refused, as required' : 'NO — element still focusable';
+  document.body.removeChild(probe);
+}
+
+const feats = [
+  ['inert attribute (focus trap depends on it)', inertSupported ? 'supported' : 'MISSING', inertSupported ? 'PASS' : 'FAIL'],
+  ['inert actually blocks focus', inertWorks, /^yes/.test(inertWorks) ? 'PASS' : 'FAIL'],
+  ['text-wrap: pretty (epigraph + quote cards)', CSS.supports('text-wrap','pretty') ? 'supported' : 'not supported — wraps normally, which is fine', CSS.supports('text-wrap','pretty') ? 'PASS' : 'INFO'],
+  ['backdrop-filter (dialog scrims)', CSS.supports('backdrop-filter','blur(4px)') || CSS.supports('-webkit-backdrop-filter','blur(4px)') ? 'supported' : 'MISSING', (CSS.supports('backdrop-filter','blur(4px)') || CSS.supports('-webkit-backdrop-filter','blur(4px)')) ? 'PASS' : 'FAIL'],
+  ['aspect-ratio (portrait frames)', CSS.supports('aspect-ratio','4 / 3'), CSS.supports('aspect-ratio','4 / 3') ? 'PASS' : 'FAIL'],
+  ['CSS nesting is NOT used — n/a', 'n/a', 'INFO'],
+  [':focus-visible (focus rings)', CSS.supports('selector(:focus-visible)') ? 'supported' : 'MISSING', CSS.supports('selector(:focus-visible)') ? 'PASS' : 'FAIL'],
+  ['clamp() (type scale)', CSS.supports('font-size','clamp(1px,2vw,3px)') ? 'supported' : 'MISSING', CSS.supports('font-size','clamp(1px,2vw,3px)') ? 'PASS' : 'FAIL'],
+  ['localStorage (a run survives reload)', (() => { try { localStorage.setItem('_p','1'); localStorage.removeItem('_p'); return 'available'; } catch { return 'BLOCKED — private window?'; } })(), (() => { try { localStorage.setItem('_p','1'); localStorage.removeItem('_p'); return 'PASS'; } catch { return 'FAIL'; } })()],
+];
+
+// Media: the newsreel is H.264 in MP4, the address is AAC in M4A.
+const v = document.createElement('video'), a = document.createElement('audio');
+const mp4 = v.canPlayType('video/mp4; codecs="avc1.42E01E"');
+const m4a = a.canPlayType('audio/mp4; codecs="mp4a.40.2"');
+const mp3 = a.canPlayType('audio/mpeg');
+feats.push(
+  ['H.264 MP4 (the U Thant newsreel)', mp4 || 'no', mp4 ? 'PASS' : 'FAIL'],
+  ['AAC audio (the 22 Oct address)', m4a || 'no', m4a ? 'PASS' : 'FAIL'],
+  ['MP3 audio', mp3 || 'no', mp3 ? 'PASS' : 'INFO'],
+);
+rows('feat', feats);
+
+const failed = feats.filter((f) => f[2] === 'FAIL');
+const el = document.getElementById('verdict');
+el.textContent = failed.length
+  ? `${failed.length} FAILURE(S): ` + failed.map((f) => f[0]).join('; ')
+  : 'ALL PASS — every feature the game depends on works in this engine.';
+el.style.color = failed.length ? 'var(--wax-text)' : '#6fbf73';
+</script>
+</body>
+</html>

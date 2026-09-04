@@ -10,8 +10,6 @@ export const DAYS = [day1, day2, day3, day4, day5];
 
 export const getDay = (number) => DAYS.find((day) => day.number === number) ?? null;
 
-export const hasDay = (number) => Boolean(getDay(number));
-
 export const LAST_BUILT_DAY = DAYS[DAYS.length - 1].number;
 
 /* The full scenario is five days plus a debrief. Only some are built; the

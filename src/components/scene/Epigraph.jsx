@@ -7,13 +7,13 @@ import styles from './Epigraph.module.css';
 
 /* A real voice, between the days.
 
-   The sibling of DayCard and its opposite in every rule that matters. DayCard
-   is a dateline flash: decorative, hidden from assistive technology, gone in
-   2.2 seconds, and skipped entirely under prefers-reduced-motion. All three
-   are right for a chapter mark and wrong for a sentence somebody actually said
-   and you want read. So this one is content — it is in the accessibility
-   tree, it waits to be dismissed, and it appears whatever the motion
-   preference, because a quotation is not an animation.
+   It replaced a dateline flash, and is its opposite in every rule that
+   matters. That card was decoration: hidden from assistive technology, gone
+   in 2.2 seconds, and skipped entirely under prefers-reduced-motion. All
+   three are right for a chapter mark and wrong for a sentence somebody
+   actually said and you want read. So this one is content — it is in the
+   accessibility tree, it waits to be dismissed, and it appears whatever the
+   motion preference, because a quotation is not an animation.
 
    It gets a register of its own, which is load-bearing rather than
    decorative. Everything the game puts in quotation marks in a scene is
@@ -31,8 +31,10 @@ import styles from './Epigraph.module.css';
    apparatus — attribution, provenance, source — descending in weight beneath
    it. The register is still the disclaimer; it is now the right register.
 
-   A day shows this or the DayCard, never both, so the epigraph carries the
-   dateline itself and the chapter break is not lost. */
+   It carries the dateline itself, which is what made the flash redundant and
+   is why the flash is gone. Every day has one; tools/walk.mjs asserts it, so
+   a day added without an epigraph fails the check rather than quietly opening
+   with no chapter break at all. */
 
 export default function Epigraph({ epigraph, day, onDone }) {
   /* Escape is left to the handler below rather than taken by the hook, because

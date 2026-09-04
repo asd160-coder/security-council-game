@@ -18,7 +18,6 @@ import ArchiveRail from '../components/panels/ArchiveRail.jsx';
 import TrackerColumn from '../components/panels/TrackerColumn.jsx';
 import DraftingTray from '../components/panels/DraftingTray.jsx';
 import MapPanel from '../components/panels/MapPanel.jsx';
-import DayCard, { dayCardWanted } from '../components/scene/DayCard.jsx';
 import Epigraph from '../components/scene/Epigraph.jsx';
 import { epigraphFor } from '../data/epigraphs.js';
 import { moodFor } from '../data/scene.js';
@@ -136,22 +135,27 @@ export default function DayView({ day, role, state, dispatch }) {
   /* The board's temperature for the day. */
   const mood = moodFor(day.number);
 
-  /* A date card between days: shown once when a new day opens, dismissed by
-     time or by hand, and never under reduced motion. Not a step, so the day
-     files and the progress pips are untouched; `stepIndex` is read on purpose
-     only at the moment the day changes. */
-  /* An interstitial when a day opens: the epigraph where the day has one,
-     otherwise the dateline flash. Never both — the epigraph carries its own
-     dateline. The epigraph is content rather than decoration, so unlike the
-     dateline card it is shown whatever the motion preference; `dayCardWanted`
-     only gates the flash. Day 1 has an epigraph and no flash, which is why
-     the day-number test moved inside. */
+  /* The interstitial when a day opens.
+
+     This used to choose between the epigraph and a dateline flash, and the
+     flash has been unreachable since every day gained an epigraph — the
+     branch was never taken, and unreachable code is also untested code, so
+     DayCard is gone rather than kept against a day that might one day want
+     it. The epigraph carries its own dateline, which is what made the flash
+     redundant in the first place.
+
+     Not a step, so the day files and the progress pips are untouched, and
+     `stepIndex` is read on purpose only at the moment the day changes.
+
+     A day without an epigraph now simply opens without an interstitial.
+     tools/walk.mjs asserts that no such day exists, so the chapter break
+     cannot go missing quietly. */
   const [card, setCard] = useState(null);
   const dismissCard = useCallback(() => setCard(null), []);
   const epigraph = epigraphFor(day.number);
   useEffect(() => {
     if (state.stepIndex !== 0) return;
-    if (epigraph || (day.number > 1 && dayCardWanted())) setCard(day.number);
+    if (epigraph) setCard(day.number);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [day.number]);
 
@@ -214,12 +218,9 @@ export default function DayView({ day, role, state, dispatch }) {
 
   return (
     <div className={styles.view} style={{ '--board-tint': mood.tint }}>
-      {card === day.number &&
-        (epigraph ? (
-          <Epigraph epigraph={epigraph} day={day} onDone={dismissCard} />
-        ) : (
-          <DayCard day={day} onDone={dismissCard} />
-        ))}
+      {card === day.number && epigraph && (
+        <Epigraph epigraph={epigraph} day={day} onDone={dismissCard} />
+      )}
       <header className={styles.header}>
         <div className={styles.identity}>
           <span className={styles.wordmark}>{APP.title}</span>

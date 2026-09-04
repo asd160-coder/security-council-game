@@ -58,6 +58,15 @@ for (const day of DAYS) for (const step of day.steps) if (step.kind === 'witness
 }
 console.log(`reckoning answers: ${Object.keys(RECKONING).length} advisers × ${ANSWER_STANCES.length} stances`);
 
+/* Every day must have an epigraph. The dateline flash that used to cover a
+   day without one has been removed as unreachable, so a day added without an
+   epigraph would open with no chapter break at all — and nothing on screen
+   would say so. */
+const { epigraphFor } = await import(`${R}/data/epigraphs.js`);
+for (const day of DAYS) {
+  if (!epigraphFor(day.number)) { problems++; console.log(`  ✗ day ${day.number} has no epigraph, so it would open with no interstitial`); }
+}
+
 /* The teacher notes are keyed to the same pattern ids the student's debrief
    uses, so a pattern added without its note would leave a teacher reading
    about a trade the notes do not cover — and nothing would say so. */

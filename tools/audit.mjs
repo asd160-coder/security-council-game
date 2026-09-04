@@ -5,7 +5,7 @@
    design depends on. It is slow by construction: sampling would hide exactly
    the rare paths that turn out to be dead.
 
-   Four things are asserted, and breaching any of them exits non-zero:
+   Five things are asserted, and breaching any of them exits non-zero:
 
    1. Escalation and civilian risk must not collapse into one axis. If they
       correlate too tightly the player is really moving one needle with two
@@ -17,6 +17,8 @@
       of how they got there.
    4. Every authored variant must be reachable by somebody. Text nobody can
       see is text that was written for nothing.
+   5. Every resolution must have an ending and a debrief reading, so a run
+      cannot resolve to something with nothing written for it.
 
    Per-seat gaps are reported but do not fail: U Thant cannot reach a high
    escalation band on any day, and that is the design working rather than a
@@ -203,7 +205,24 @@ for (const roleId of ROLES) {
     console.log(`    ${day.id} briefing bands: ${authored.map((b) => `${b} ${reached[b] ? 'reached' : 'UNREACHABLE'}`).join(', ')}${missing.length ? '  <-- ' + missing.join(',') : ''}`);
   }
 }
-const ALL_MODS = ['legitimacy-high','legitimacy-low','trust-spent','leverage-high','risk-high','risk-protected','escalation-low'];
+/* Read from the source rather than restated. This was a hardcoded list, which
+   meant a modifier added to src/data/endings.js would not be covered by the
+   very check that exists to find unreachable ones — the audit quietly grading
+   its own homework. */
+const { MODIFIERS } = await import(`${R}/data/endings.js`);
+/* The outcome vocabulary, checked rather than merely declared. RESOLUTIONS in
+   src/lib/outcome.js listed the four valid resolutions and nothing read it, so
+   a fifth could have been resolved to with no ending written for it. */
+const { RESOLUTIONS } = await import(`${R}/lib/outcome.js`);
+const { RESOLUTION_ENDINGS } = await import(`${R}/data/endings.js`);
+const { ENDING_CONDITIONS } = await import(`${R}/data/debrief.js`);
+for (const r of RESOLUTIONS) {
+  require(Boolean(RESOLUTION_ENDINGS[r]), `resolution "${r}" has no ending in data/endings.js`);
+  require(Boolean(ENDING_CONDITIONS[r]), `resolution "${r}" has no debrief reading in data/debrief.js`);
+}
+console.log(`  resolutions: ${RESOLUTIONS.length}, each with an ending and a debrief reading`);
+
+const ALL_MODS = Object.keys(MODIFIERS);
 const dead = ALL_MODS.filter((m) => !seenMod[m]);
 require(!dead.length, `modifiers no seat can reach: ${dead.join(', ')}`);
 console.log(dead.length ? `\n  UNREACHABLE MODIFIERS: ${dead}` : '\n  every modifier is reachable by at least one role');

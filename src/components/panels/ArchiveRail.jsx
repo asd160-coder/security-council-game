@@ -25,7 +25,7 @@ const KIND_CLASS = {
   document: 'kindDocument',
 };
 
-export function archiveUpTo(dayNumber) {
+function archiveUpTo(dayNumber) {
   return DAYS.filter((day) => day.number <= dayNumber)
     .flatMap((day) =>
       day.steps

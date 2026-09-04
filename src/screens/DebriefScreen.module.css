@@ -487,7 +487,10 @@
   font-size: 13px;
   font-style: italic;
   line-height: 1.5;
-  color: var(--ink-faint);
+  /* --ink-faint is a paper token — "labels and attributions on paper" — and
+     this line sits on the board, where it measured 3.02:1. The other ink uses
+     in this file are on genuine paper and pass; this one had wandered. */
+  color: var(--silver-faint);
 }
 
 /* The reckoning's answer, quoted after the decisive line. */

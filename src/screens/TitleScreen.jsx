@@ -13,7 +13,9 @@ export default function TitleScreen({ onBegin, onCredits, onBackground, saved, o
         />
       </div>
 
-      <div className={styles.inner}>
+      {/* A main landmark, because a screen-reader user navigating by landmark
+          had nothing to jump to on this screen at all. */}
+      <main className={styles.inner}>
         <Reveal delay={60}>
           <span className={styles.dateline}>{APP.dateline}</span>
         </Reveal>
@@ -46,7 +48,7 @@ export default function TitleScreen({ onBegin, onCredits, onBackground, saved, o
             </Button>
           )}
         </Reveal>
-      </div>
+      </main>
 
       <div className={styles.foot}>
         <p className={styles.footNote}>{APP.footNote}</p>

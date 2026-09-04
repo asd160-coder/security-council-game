@@ -115,7 +115,7 @@
   text-align: right;
 }
 
-.markerEnd .markerLabel { color: var(--wax-bright); }
+.markerEnd .markerLabel { color: var(--wax-text); }
 
 /* The interval draws itself once, left to right. Slow enough to be a
    statement, short enough not to be a wait. */
@@ -139,7 +139,7 @@
   font-family: var(--font-mono);
   font-size: 13px;
   letter-spacing: var(--track-label-tight);
-  color: var(--wax-bright);
+  color: var(--wax-text);
 }
 
 /* ------------------------------------------------------ The ledger */

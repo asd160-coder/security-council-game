@@ -92,7 +92,7 @@
   font-size: var(--fs-label);
   letter-spacing: var(--track-eyebrow);
   text-transform: uppercase;
-  color: var(--wax-bright);
+  color: var(--wax-text);
   display: block;
   margin-bottom: 24px;
 }

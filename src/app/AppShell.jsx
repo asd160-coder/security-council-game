@@ -1,4 +1,5 @@
 import { useEffect, useReducer, useState } from 'react';
+import { createPortal } from 'react-dom';
 import TitleScreen from '../screens/TitleScreen.jsx';
 import RoleSelect from '../screens/RoleSelect.jsx';
 import BackgroundScreen from '../screens/BackgroundScreen.jsx';
@@ -7,6 +8,7 @@ import DayStub from '../screens/DayStub.jsx';
 import EndingScreen from '../screens/EndingScreen.jsx';
 import DebriefScreen from '../screens/DebriefScreen.jsx';
 import { Button, Paper, PaperBody } from '../components/ui/index.jsx';
+import useDialog from '../components/ui/useDialog.js';
 import { initialState, reducer } from '../lib/gameState.js';
 import { getRole } from '../data/roles.js';
 import { clearRun, describeRun, loadRun, saveRun } from '../lib/persist.js';
@@ -20,6 +22,60 @@ import styles from './AppShell.module.css';
    All state lives in the reducer in lib/gameState.js. Nothing persists: a
    classroom run starts clean each time, which the design packet asks for so
    repeat play is comparable between students. */
+
+/* The credits, as their own component and their own portal.
+
+   Both are for focus. A hook cannot be called conditionally, so the panel has
+   to be a component before useDialog can manage it — and useDialog marks
+   `#root` inert while a dialog is open, which only works if the dialog is
+   outside `#root`. This used to render inline, as a sibling of the screens,
+   which is why it is portalled now: it joins the other three dialogs on
+   `document.body` rather than being the one exception. */
+function CreditsPanel({ onClose }) {
+  const dialogRef = useDialog(onClose);
+
+  return createPortal(
+    <div
+      ref={dialogRef}
+      tabIndex={-1}
+      className={styles.credits}
+      role="dialog"
+      aria-modal="true"
+      aria-label={APP.creditsTitle}
+      onClick={(event) => {
+        if (event.target === event.currentTarget) onClose();
+      }}
+    >
+      <div className={styles.creditsInner}>
+        <Paper title={APP.creditsTitle}>
+          <PaperBody
+            paragraphs={[
+              APP.creditsBody,
+              APP.creditsNote,
+              APP.creditsPortraits,
+              APP.creditsQuotations,
+              APP.creditsMap,
+              APP.creditsRooms,
+            ]}
+          />
+
+          <div className={styles.creditsList}>
+            {ARCHIVE.map((item) => (
+              <p key={item.id} className={styles.creditsItem}>
+                <span className={styles.creditsItemTitle}>{item.title}</span>
+                {item.source} · {item.rights}
+              </p>
+            ))}
+          </div>
+        </Paper>
+        <Button className={styles.creditsClose} onClick={onClose}>
+          {APP.close}
+        </Button>
+      </div>
+    </div>,
+    document.body,
+  );
+}
 
 export default function AppShell() {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -88,46 +144,7 @@ export default function AppShell() {
       )}
 
       {state.creditsOpen && (
-        <div
-          className={styles.credits}
-          role="dialog"
-          aria-modal="true"
-          aria-label={APP.creditsTitle}
-          onClick={(event) => {
-            if (event.target === event.currentTarget) dispatch({ type: 'toggleCredits' });
-          }}
-        >
-          <div className={styles.creditsInner}>
-            <Paper title={APP.creditsTitle}>
-              <PaperBody
-                paragraphs={[
-                  APP.creditsBody,
-                  APP.creditsNote,
-                  APP.creditsPortraits,
-                  APP.creditsQuotations,
-                  APP.creditsMap,
-                  APP.creditsRooms,
-                ]}
-              />
-
-              <div className={styles.creditsList}>
-                {ARCHIVE.map((item) => (
-                  <p key={item.id} className={styles.creditsItem}>
-                    <span className={styles.creditsItemTitle}>{item.title}</span>
-                    {item.source} · {item.rights}
-                  </p>
-                ))}
-              </div>
-            </Paper>
-            <Button
-              className={styles.creditsClose}
-              onClick={() => dispatch({ type: 'toggleCredits' })}
-              autoFocus
-            >
-              {APP.close}
-            </Button>
-          </div>
-        </div>
+        <CreditsPanel onClose={() => dispatch({ type: 'toggleCredits' })} />
       )}
     </>
   );

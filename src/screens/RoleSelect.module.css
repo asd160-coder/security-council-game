@@ -80,7 +80,7 @@
 }
 
 .seatUssr {
-  --seat-color: var(--wax);
+  --seat-color: var(--wax-text);
 }
 
 .seatUn {

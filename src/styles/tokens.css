@@ -28,9 +28,17 @@
   /* Text on the board. Four steps, because a plotting board is mostly
      metadata and it needs a hierarchy that never reaches full white. */
   --silver: #c3c9d0; /* primary text on board */
-  --silver-muted: #97a0aa; /* secondary text on board */
-  --silver-faint: #6f7883; /* labels, inactive ticks */
-  --silver-fainter: #4d555f; /* dividers, disabled */
+  /* The recessive end of the scale, lifted to clear WCAG AA.
+     An accessibility pass measured the rendered text against its actual
+     backdrop and found the bottom two steps well under the 4.5:1 that normal
+     text needs: --silver-faint sat at 3.62 and --silver-fainter at 2.15, both
+     against --board-raised, and both are used at 9-13px for the labels that
+     say what a thing is. Lifting them along their own hue keeps the three-step
+     hierarchy the design reads by — 6.35 / 5.43 / 4.62 — while putting the
+     floor above the line. --silver-muted already passed and has not moved. */
+  --silver-muted: #97a0aa; /* secondary text on board — 6.35:1 */
+  --silver-faint: #8e96a0; /* labels, inactive ticks — 5.43:1 */
+  --silver-fainter: #7f8a97; /* dividers, disabled — 4.62:1 */
 
   /* -------------------------------------------------------------------- Ink */
   /* Text on paper. */
@@ -46,6 +54,15 @@
   --wax: #b23a2f;
   --wax-bright: #d2564a; /* the moment a delta lands */
   --wax-dim: rgba(178, 58, 47, 0.16); /* arc fills, danger wash */
+  /* The danger red is too dark to read as text: --wax is 2.73:1 on the raised
+     board and --wax-bright only 3.99:1, both under the 4.5 that normal text
+     needs, and it is used at 10px for the delegation labels. This is the one
+     to set `color` to. --wax itself is deliberately unchanged — its other uses
+     are borders, arc fills and washes, which carry no contrast requirement,
+     and lifting the base token would wash the depth out of the whole danger
+     register. Of the four seat accents only this one failed: --signal is
+     4.75:1 and --brass 4.70:1. */
+  --wax-text: #d4665c; /* danger as text — 4.52:1 */
 
   /* Brass is the institutional register: legitimacy, council trust, the UN.
      Restraint applies here too, but it is allowed to be a little warmer. */

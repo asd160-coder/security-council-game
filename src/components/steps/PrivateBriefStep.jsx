@@ -21,7 +21,7 @@ export default function PrivateBriefStep({ role, step, onAdvance }) {
       </Reveal>
 
       <Reveal delay={160}>
-        <Paper eyebrow={step.eyebrow} title="Your position">
+        <Paper eyebrow={step.eyebrow} title="Your position" titleAs="h2">
           <Field label="Immediate objective">{brief.objective}</Field>
           <Field label="Pressure">{brief.pressure}</Field>
           <Field label="Advantage">{brief.advantage}</Field>

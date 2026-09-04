@@ -151,7 +151,7 @@
 }
 
 .flagUssr {
-  --seat-color: var(--wax);
+  --seat-color: var(--wax-text);
 }
 
 .flagUn {

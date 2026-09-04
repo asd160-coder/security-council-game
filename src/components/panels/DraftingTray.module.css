@@ -75,6 +75,8 @@
   font-size: var(--fs-label-sm);
   letter-spacing: var(--track-label-tight);
   text-transform: uppercase;
+  /* Paper, not board: --wax is 4.55:1 on --stock where the board-calibrated
+     --wax-text is only 2.75:1. The ground decides which red is legible. */
   color: var(--wax);
 }
 

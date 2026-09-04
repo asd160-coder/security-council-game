@@ -270,6 +270,14 @@ export default function DayView({ day, role, state, dispatch }) {
         </div>
 
         <main className={styles.centre}>
+          {/* The day view had no h1 at all — its outline began at h3, so a
+              screen-reader user jumping by heading landed inside a scene with
+              nothing above it saying which day they were on. Visually hidden
+              because the dateline already says this on screen. */}
+          <h1 className="sr-only">
+            {PLAY.dayLabel(day.number)} · {day.dateline} — {day.title}
+          </h1>
+
           <div className={styles.progress} aria-hidden="true">
             {day.steps.map((s, index) => (
               <span

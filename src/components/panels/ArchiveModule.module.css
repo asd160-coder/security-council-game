@@ -87,11 +87,11 @@
 
 .awaitingFailed .awaitingMark {
   border-color: var(--wax);
-  color: var(--wax-bright);
+  color: var(--wax-text);
 }
 
 .awaitingFailed .awaitingTitle {
-  color: var(--wax-bright);
+  color: var(--wax-text);
 }
 
 .awaitingMark {

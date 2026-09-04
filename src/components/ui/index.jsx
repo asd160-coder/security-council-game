@@ -14,8 +14,24 @@ const PAPER_FORMAT = {
 
 /* `format` is the kind of paper this is — a cable arrives in the teleprinter
    register and carries a received stamp; a memo carries a clip — and it is
-   data, declared on the card, never inferred from its words. */
-export function Paper({ eyebrow, title, aged = false, format, stamp, className = '', children }) {
+   data, declared on the card, never inferred from its words.
+
+   `titleAs` sets the heading level, because the right level depends on where
+   the card sits rather than on what a card is. Inside a day the paper is the
+   step's own heading and belongs directly under the day's h1, so those pass
+   'h2'; a card in a rail or a dialog sits below something else and keeps the
+   h3 default. Getting this wrong is not cosmetic — a screen-reader user moving
+   by heading reads the outline as the structure of the page. */
+export function Paper({
+  eyebrow,
+  title,
+  titleAs: Title = 'h3',
+  aged = false,
+  format,
+  stamp,
+  className = '',
+  children,
+}) {
   const formatClass = PAPER_FORMAT[format] ? styles[PAPER_FORMAT[format]] : '';
   return (
     <article className={`${styles.paper} ${aged ? styles.paperAged : ''} ${formatClass} ${className}`}>
@@ -25,7 +41,7 @@ export function Paper({ eyebrow, title, aged = false, format, stamp, className =
         </span>
       )}
       {eyebrow && <span className={styles.paperEyebrow}>{eyebrow}</span>}
-      {title && <h3 className={styles.paperTitle}>{title}</h3>}
+      {title && <Title className={styles.paperTitle}>{title}</Title>}
       {children}
     </article>
   );

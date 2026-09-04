@@ -12,7 +12,7 @@
   font-size: var(--fs-label);
   letter-spacing: var(--track-eyebrow);
   text-transform: uppercase;
-  color: var(--wax-bright);
+  color: var(--wax-text);
 }
 
 /* Where it came from, and when. */

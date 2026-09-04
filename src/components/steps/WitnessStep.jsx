@@ -40,7 +40,7 @@ export default function WitnessStep({ step, role, onAdvance }) {
       <div className={styles.witnessStack}>
         {cards.map((card, index) => (
           <Reveal key={card.title} delay={120 + index * 110}>
-            <Paper eyebrow={card.source} title={card.title} format={card.format} stamp={card.stamp}>
+            <Paper eyebrow={card.source} title={card.title} format={card.format} stamp={card.stamp} titleAs="h2">
               <PaperBody paragraphs={card.body} />
               <Field label={card.weighLabel ?? step.weighLabel}>{card.weigh}</Field>
             </Paper>

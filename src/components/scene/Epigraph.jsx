@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { Button, SourceLine } from '../ui/index.jsx';
+import useDialog from '../ui/useDialog.js';
 import { EPIGRAPH, PLAY } from '../../data/copy.js';
 import styles from './Epigraph.module.css';
 
@@ -34,6 +35,13 @@ import styles from './Epigraph.module.css';
    dateline itself and the chapter break is not lost. */
 
 export default function Epigraph({ epigraph, day, onDone }) {
+  /* Escape is left to the handler below rather than taken by the hook, because
+     here every key does the same thing and one place should own that. What the
+     hook adds is the part this could not do for itself: focus moves inside,
+     Tab cannot leave, the board behind goes inert, and focus returns to
+     whatever the player was on when the day opened. */
+  const dialogRef = useDialog(onDone, { closeOnEscape: false });
+
   useEffect(() => {
     const onKey = (event) => {
       /* Any key continues, as on the dateline card. Tab is the exception:
@@ -47,6 +55,8 @@ export default function Epigraph({ epigraph, day, onDone }) {
 
   return createPortal(
     <div
+      ref={dialogRef}
+      tabIndex={-1}
       className={styles.screen}
       role="dialog"
       aria-modal="true"
@@ -93,7 +103,7 @@ export default function Epigraph({ epigraph, day, onDone }) {
         </blockquote>
 
         <div className={styles.actions}>
-          <Button variant="primary" onClick={onDone} autoFocus>
+          <Button variant="primary" onClick={onDone}>
             {EPIGRAPH.continue}
           </Button>
         </div>

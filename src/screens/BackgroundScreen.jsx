@@ -89,7 +89,11 @@ function Figure({ figure }) {
 
 export default function BackgroundScreen({ onBack }) {
   return (
-    <div className={styles.screen}>
+    /* `main`, and the section labels are real headings: this page had no
+       landmark at all, and its outline jumped h1 -> h3 because every section
+       label was a styled span. Both leave a screen-reader user without a way
+       to move through a long read. */
+    <main className={styles.screen}>
       <Reveal className={styles.head}>
         <span className="eyebrow">{BACKGROUND.eyebrow}</span>
         <h1 className={styles.title}>{BACKGROUND.title}</h1>
@@ -101,7 +105,7 @@ export default function BackgroundScreen({ onBack }) {
           cannot carry either of them — see the note at the foot of this page —
           so they are quoted, with how each reached us. */}
       <Reveal delay={100} className={styles.sectionHead}>
-        <span className="eyebrow">{EPIGRAPH.backgroundLabel}</span>
+        <h2 className="eyebrow">{EPIGRAPH.backgroundLabel}</h2>
         <p className={styles.sectionNote}>{EPIGRAPH.backgroundNote}</p>
       </Reveal>
 
@@ -129,7 +133,7 @@ export default function BackgroundScreen({ onBack }) {
       </div>
 
       <Reveal delay={120} className={styles.sectionHead}>
-        <span className="eyebrow">{BACKGROUND.roadLabel}</span>
+        <h2 className="eyebrow">{BACKGROUND.roadLabel}</h2>
         <p className={styles.sectionNote}>{BACKGROUND.roadNote}</p>
       </Reveal>
 
@@ -158,7 +162,7 @@ export default function BackgroundScreen({ onBack }) {
       {FIGURE_GROUPS.map((group) => (
         <section key={group.id} className={styles.group}>
           <Reveal className={styles.sectionHead}>
-            <span className="eyebrow">{group.label}</span>
+            <h2 className="eyebrow">{group.label}</h2>
             <p className={styles.sectionNote}>{group.note}</p>
           </Reveal>
 
@@ -186,6 +190,6 @@ export default function BackgroundScreen({ onBack }) {
           {BACKGROUND.back}
         </Button>
       </Reveal>
-    </div>
+    </main>
   );
 }

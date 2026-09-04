@@ -87,6 +87,8 @@
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+  /* On paper, not on the board: --wax is 4.55:1 on --stock, while the
+     board-calibrated --wax-text is only 2.75:1 there. The ground decides. */
   color: var(--wax);
   border: 1.5px solid var(--wax);
   border-radius: 1px;

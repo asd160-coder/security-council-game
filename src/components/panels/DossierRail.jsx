@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { KIND_LABEL, resolveEntry } from '../../lib/entries.js';
 import { PLAY } from '../../data/copy.js';
 import { Button, Eyebrow, Field, Paper, PaperBody } from '../ui/index.jsx';
+import useDialog from '../ui/useDialog.js';
 import styles from './DossierRail.module.css';
 
 const KIND_CLASS = {
@@ -34,6 +35,33 @@ export function EntryCard({ entry }) {
       <PaperBody paragraphs={entry.body} />
       <Field label={PLAY.soWhat}>{entry.soWhat}</Field>
     </Paper>
+  );
+}
+
+/* Its own component so useDialog can manage it — a hook cannot be called
+   conditionally, and this viewer only exists while an entry is open. */
+function DossierViewer({ entry, onClose }) {
+  const dialogRef = useDialog(onClose);
+
+  return (
+    <div
+      ref={dialogRef}
+      tabIndex={-1}
+      className={styles.viewer}
+      role="dialog"
+      aria-modal="true"
+      aria-label={entry.type === 'card' ? entry.name : entry.title}
+      onClick={(event) => {
+        if (event.target === event.currentTarget) onClose();
+      }}
+    >
+      <div className={styles.viewerInner}>
+        <EntryCard entry={entry} />
+        <Button className={styles.viewerClose} onClick={onClose}>
+          {PLAY.close}
+        </Button>
+      </div>
+    </div>
   );
 }
 
@@ -96,22 +124,7 @@ export default function DossierRail({ unlocked, unlockedToday = [] }) {
           context paints beneath its siblings whatever its z-index. */}
       {open &&
         createPortal(
-          <div
-            className={styles.viewer}
-            role="dialog"
-            aria-modal="true"
-            aria-label={open.type === 'card' ? open.name : open.title}
-            onClick={(event) => {
-              if (event.target === event.currentTarget) close();
-            }}
-          >
-            <div className={styles.viewerInner}>
-              <EntryCard entry={open} />
-              <Button className={styles.viewerClose} onClick={close} autoFocus>
-                {PLAY.close}
-              </Button>
-            </div>
-          </div>,
+          <DossierViewer entry={open} onClose={close} />,
           document.body,
         )}
     </>

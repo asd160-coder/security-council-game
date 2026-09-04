@@ -70,7 +70,7 @@ export default function ReckoningStep({ day, step, role, mandate, choice, onChoo
         </div>
 
         <Reveal delay={120}>
-          <Paper eyebrow={PLAY.overruled} title={reckoning.adviser.title}>
+          <Paper eyebrow={PLAY.overruled} title={reckoning.adviser.title} titleAs="h2">
             <PaperBody paragraphs={[reckoning.line]} />
             {reckoning.tail && <Field label={step.weighLabel}>{reckoning.tail}</Field>}
           </Paper>

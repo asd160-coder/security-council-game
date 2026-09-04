@@ -57,6 +57,59 @@
   margin-top: 10px;
 }
 
+/* A cable: what a teleprinter puts on paper. Mono, tighter, the title in
+   caps — the reader should know from across the room that this arrived by
+   wire and not by hand. */
+.paperCable .paperTitle {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.35;
+}
+
+.paperCable .paperBody {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+}
+
+/* Received: a rubber stamp, slightly askew, in the one red the paper is
+   allowed. Decorative — the eyebrow already says where the paper came from. */
+.paperStamp {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  transform: rotate(-7deg);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--wax);
+  border: 1.5px solid var(--wax);
+  border-radius: 1px;
+  padding: 3px 6px;
+  opacity: 0.68;
+  pointer-events: none;
+}
+
+/* A memo has been clipped to something: the loop of a paperclip over the
+   top edge. */
+.paperMemo::after {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: 20px;
+  width: 9px;
+  height: 28px;
+  border: 2px solid var(--stock-edge);
+  border-bottom-color: transparent;
+  border-radius: 5px 5px 0 0;
+  opacity: 0.9;
+}
+
 /* ----------------------------------------------------------------- Fields */
 /* The label/value pairs that make up a dossier or a perspective card. */
 

@@ -102,6 +102,7 @@
   --dur-quick: 0.18s;
   --dur-reveal: 0.5s;
   --dur-needle: 0.9s; /* a needle should look weighted, not snappy */
+  --dur-teleprinter: 1.6s; /* the answer typing itself onto the board */
 
   /* --------------------------------------------------------------- Spacing */
   --gutter: 32px;
@@ -131,5 +132,6 @@
     --dur-quick: 0.01s;
     --dur-reveal: 0.01s;
     --dur-needle: 0.01s;
+    --dur-teleprinter: 0.01s;
   }
 }

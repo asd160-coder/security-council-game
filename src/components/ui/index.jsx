@@ -7,9 +7,23 @@ export function Eyebrow({ children, className = '' }) {
   return <span className={`eyebrow ${className}`}>{children}</span>;
 }
 
-export function Paper({ eyebrow, title, aged = false, className = '', children }) {
+const PAPER_FORMAT = {
+  cable: 'paperCable',
+  memo: 'paperMemo',
+};
+
+/* `format` is the kind of paper this is — a cable arrives in the teleprinter
+   register and carries a received stamp; a memo carries a clip — and it is
+   data, declared on the card, never inferred from its words. */
+export function Paper({ eyebrow, title, aged = false, format, stamp, className = '', children }) {
+  const formatClass = PAPER_FORMAT[format] ? styles[PAPER_FORMAT[format]] : '';
   return (
-    <article className={`${styles.paper} ${aged ? styles.paperAged : ''} ${className}`}>
+    <article className={`${styles.paper} ${aged ? styles.paperAged : ''} ${formatClass} ${className}`}>
+      {stamp && (
+        <span className={styles.paperStamp} aria-hidden="true">
+          {stamp}
+        </span>
+      )}
       {eyebrow && <span className={styles.paperEyebrow}>{eyebrow}</span>}
       {title && <h3 className={styles.paperTitle}>{title}</h3>}
       {children}

@@ -166,7 +166,7 @@ const day2 = {
         },
         opening: {
           text: 'You have left a route open in front of witnesses. Some delegations read that as seriousness about a settlement; others begin calculating what else might be conceded.',
-          unlocks: 'note-channel-limits',
+          unlocks: 'note-chamber',
         },
         sovereignty: {
           text: 'Raising the smaller state changes who the argument is about. It wins standing among delegations that fear being disposed of by larger powers, and irritates both principals.',

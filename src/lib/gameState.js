@@ -27,6 +27,7 @@ export const initialState = {
   choices: {},
   unlocked: [], // ids from cards.js and dossiers.js, in the order filed
   unlockedToday: [],
+  lastUnlock: null, // what the most recent filing actually added, or null
   draft: [], // { dayNumber, optionId, label, fragment }
   /* The student's own closing. Not scored, carried into the ending and quoted
      back — which is honest, and is what a debrief will be built from. */
@@ -40,12 +41,20 @@ export const initialState = {
   creditsOpen: false,
 };
 
+/* `lastUnlock` records what this filing actually added — the id if it was
+   new, null if the file already held it. The consequence screen reads it to
+   decide whether to announce NEW IN YOUR FILE, because a dossier the player
+   was handed two scenes ago is not new, however the day file is wired. Day 2
+   did exactly that once: two consequences pointed at the same note, and the
+   second presented it as a discovery. */
 const fileUnlock = (state, id) => {
-  if (!id || state.unlocked.includes(id)) return state;
+  if (!id) return state;
+  if (state.unlocked.includes(id)) return { ...state, lastUnlock: null };
   return {
     ...state,
     unlocked: [...state.unlocked, id],
     unlockedToday: [...state.unlockedToday, id],
+    lastUnlock: id,
   };
 };
 
@@ -153,9 +162,10 @@ export function reducer(state, action) {
       /* One fragment per day. Re-choosing on the same day replaces rather than
          appends, so a player who changes their mind does not end up with two. */
       const kept = state.draft.filter((entry) => entry.dayNumber !== dayNumber);
-      /* From Day 2 the drafting choice carries weight of its own: how strongly
-         a clause commits you is a decision with a cost. Day 1's tone options
-         have no effects and are unaffected by this. */
+      /* A drafting choice carries weight of its own: how strongly a clause
+         commits you is a decision with a cost. That includes Day 1's tone —
+         this comment used to say the tones had no effects, and the day file
+         has carried them since Milestone 2. */
       const after = option.effects ? applyEffects(state.trackers, option.effects) : state.trackers;
       return enter({
         ...state,

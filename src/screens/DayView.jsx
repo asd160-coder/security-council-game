@@ -199,6 +199,9 @@ export default function DayView({ day, role, state, dispatch }) {
     onOpenArchive: (unlockId) => dispatch({ type: 'unlock', id: unlockId }),
     adviserTaken: state.unlocked.includes(adviserStep?.adviser?.unlocks),
     choice: chosen,
+    /* Whether the choice just made actually added its dossier to the file,
+       or the file already held it. See fileUnlock in lib/gameState.js. */
+    lastUnlock: state.lastUnlock ?? null,
     /* The consequence panel wants the movement from the choice just made; the
        summary wants the whole day's. diffTrackers has been sitting in
        lib/trackers.js unused since Milestone 1 waiting for a day with more

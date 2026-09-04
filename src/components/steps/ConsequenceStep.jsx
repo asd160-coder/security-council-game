@@ -12,9 +12,13 @@ import styles from './steps.module.css';
    has a few minutes. It gets its own heading and its own reveal, so it still
    reads as a distinct moment. */
 
-export default function ConsequenceStep({ step, choice, onAdvance }) {
+export default function ConsequenceStep({ step, choice, lastUnlock, onAdvance }) {
   const variant = step.variants[choice.feedback];
-  const unlocked = variant?.unlocks ? resolveEntry(variant.unlocks) : null;
+  /* Announced only if this choice genuinely filed it. A note the player was
+     handed earlier in the day is in the rail already; presenting it as NEW a
+     second time is not a beat, it is a mistake. */
+  const unlocked =
+    variant?.unlocks && lastUnlock === variant.unlocks ? resolveEntry(variant.unlocks) : null;
 
   return (
     <div className={styles.step}>

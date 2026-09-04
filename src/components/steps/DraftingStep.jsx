@@ -9,7 +9,9 @@ import styles from './steps.module.css';
    here is wording frames, revision, assembly, and finally original writing on
    Day 5. */
 
-export default function DraftingStep({ step, onChoose }) {
+export default function DraftingStep({ step, role, onChoose }) {
+  /* Per-seat where the day file provides it, shared where it does not. */
+  const options = step.optionsByRole?.[role.id] ?? step.options;
   return (
     <div className={styles.step}>
       <Reveal className={styles.head}>
@@ -26,7 +28,7 @@ export default function DraftingStep({ step, onChoose }) {
 
       <Reveal delay={260}>
         <div className={styles.draftOptions} role="group" aria-label={step.prompt}>
-          {step.options.map((option) => (
+          {options.map((option) => (
             <button
               key={option.id}
               type="button"

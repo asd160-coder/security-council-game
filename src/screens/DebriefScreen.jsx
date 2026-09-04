@@ -78,7 +78,7 @@ export default function DebriefScreen({ state, role, onRestart }) {
   const reflection = ROLE_REFLECTIONS[role.id];
 
   return (
-    <div className={styles.screen}>
+    <main className={styles.screen}>
       <Reveal className={styles.head}>
         <Eyebrow>{OPENING.eyebrow}</Eyebrow>
         <h1 className={styles.title}>{OPENING.title}</h1>
@@ -404,6 +404,6 @@ export default function DebriefScreen({ state, role, onRestart }) {
 
         <p className={styles.tcFoot}>{DEBRIEF.teacherCopyFoot}</p>
       </div>
-    </div>
+    </main>
   );
 }

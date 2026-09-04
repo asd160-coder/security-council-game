@@ -124,7 +124,7 @@ can gate a commit.
 
 ```bash
 npm run check    # structural: is every path authored? does the reducer still behave?
-npm run audit    # the tuning: ~4.2M runs, every property the design depends on
+npm run audit    # the tuning: ~16.8M runs, about three minutes, every property the design depends on
 npm run bands    # a diagnostic — why can a seat not reach a briefing opening?
 ```
 

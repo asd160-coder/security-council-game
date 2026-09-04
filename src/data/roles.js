@@ -31,6 +31,10 @@ export const ROLES = [
     standfirst:
       'Close to the room where the decision will be made, and close enough to the President to say what others cannot.',
     privateBrief: {
+      /* The one fact true for this seat this morning and for no other. */
+      standing:
+        'You are in the room where this will be decided, and you are not the one who decides. Every argument you win has to be won again the next morning, against people who are not wrong and are getting less wrong each day the sites come closer to working.',
+
       objective:
         'Help shape a response that protects US credibility without triggering uncontrollable escalation.',
       pressure:
@@ -56,6 +60,10 @@ export const ROLES = [
     standfirst:
       'The channel between Moscow and Washington runs through this embassy — and through a man not always told everything by his own government.',
     privateBrief: {
+      /* The one fact true for this seat this morning and for no other. */
+      standing:
+        'You have not been told. Your government has placed weapons in Cuba and has not informed its own ambassador, and the assurances you have already given in this city were given in good faith on information you had no reason to doubt. You will learn what is true from the Americans or from the overnight traffic, and this morning it is not clear which will come first.',
+
       objective:
         'Protect Soviet interests and strategic standing while avoiding a disastrous breakdown in communication.',
       pressure: 'Public retreat would be humiliating; hardline posturing may increase danger.',
@@ -80,6 +88,10 @@ export const ROLES = [
     standfirst:
       'No army, no veto, and no guarantee that either superpower will listen — only the standing to ask them both to stop.',
     privateBrief: {
+      /* The one fact true for this seat this morning and for no other. */
+      standing:
+        'You will learn of this when the world does. The office has no army, no veto and no power to compel, and it is told what the powers have decided they are willing to say. What it has is the standing to be believed in two rooms at once — and every hour it waits to spend that is an hour the powers spend without it.',
+
       objective: 'Create space for de-escalation before public positions harden beyond repair.',
       pressure: 'The major powers may treat the UN as symbolic unless it acts quickly and credibly.',
       advantage:

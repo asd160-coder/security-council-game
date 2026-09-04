@@ -6,7 +6,7 @@ the real day files, so there is nothing to keep in sync with the game.
 
 ```bash
 npm run check     # walk + engine — structural, ~1s, run this often
-npm run audit     # the tuning audit — ~4.2M runs, ~30s, run after content changes
+npm run audit     # the tuning audit — ~16.8M runs, ~3 min, run after content changes
 npm run bands     # a diagnostic, not a check — run when audit reports a dead band
 ```
 
@@ -17,7 +17,7 @@ workflow. `bands` always exits 0; it explains rather than judges.
 |---|---|
 | `walk.mjs` | Is every path through the content authored? Every choice-bearing step yields options for every seat; every consequence covers every feedback its source can produce; every reckoning has three complete answers; every witness has a card for every seat. |
 | `engine.mjs` | Does the reducer still do what the content assumes? Drives the real reducer through a complete run per seat: costs land on entry, `lastDeltas` reports them, the reckoning stores and applies its answer, the debrief reads it all back. |
-| `audit.mjs` | Does the tuning still hold? Enumerates every combination of effect-bearing choices for all three seats and asserts four properties. |
+| `audit.mjs` | Does the tuning still hold? Enumerates every combination of effect-bearing choices for all three seats — Day 1's tone included, which quadrupled the run count — and asserts five properties. |
 | `bands.mjs` | Why can't a seat reach a briefing opening? Reports the escalation range reachable entering each day, and compares candidate thresholds. |
 | `webkit-probe.html` | Does a second engine support what the CSS and JS rely on? Open it in Safari — see below. |
 
@@ -57,6 +57,9 @@ it cannot fail the verdict.
    reading of how they got there.
 4. **Every authored variant is reachable by somebody** — modifiers and briefing
    bands alike. Text nobody can see is text written for nothing.
+5. **Every resolution has an ending and a debrief reading** — the four names in
+   `RESOLUTIONS` are checked against `data/endings.js` and `data/debrief.js`, so
+   a fifth cannot be resolved to with nothing written for it.
 
 Point 4 is deliberately *by somebody*, not *by everybody*. U Thant cannot reach
 a high escalation band on any day — his ceiling entering Day 4 is −1 — because

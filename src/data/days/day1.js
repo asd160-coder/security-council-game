@@ -354,44 +354,114 @@ const day1 = {
       eyebrow: 'Drafting — opening line',
       prompt: 'Choose the tone of your opening diplomatic line.',
       note: 'This becomes the first fragment of the statement you will build across the crisis.',
-      options: [
+      /* Per seat, as Days 2 and 4 already are. These used to be one shared list,
+         so the Soviet ambassador was offered "Condemnatory and urgent" with
+         nothing to condemn. Same four tones, same four effect vectors — only
+         the wording belongs to the chair. */
+      optionsByRole: {
+        rfk: [
         {
           id: 'condemnatory',
           label: 'Condemnatory and urgent',
-          description:
-            'Frame the crisis as unacceptable and requiring immediate correction.',
-        effects: { leverage: 1, escalation: 1, legitimacy: 0, councilTrust: -1, civilianRisk: -1 },
+          description: 'Frame the crisis as unacceptable and requiring immediate correction.',
+          effects: { leverage: 1, escalation: 1, legitimacy: 0, councilTrust: -1, civilianRisk: -1 },
           fragment:
             'The installation of offensive weapons in Cuba is an unacceptable act that demands immediate correction.',
-        },
-        {
+          },
+          {
           id: 'measured',
           label: 'Measured but firm',
-          description:
-            'Acknowledge the seriousness of the threat while preserving disciplined control.',
-        effects: { leverage: 1, escalation: 0, legitimacy: 1, councilTrust: 0, civilianRisk: 0 },
+          description: 'Acknowledge the seriousness of the threat while preserving disciplined control.',
+          effects: { leverage: 1, escalation: 0, legitimacy: 1, councilTrust: 0, civilianRisk: 0 },
           fragment:
             'The developments in Cuba are of the gravest seriousness, and they require a response that is firm, deliberate, and proportionate.',
-        },
-        {
+          },
+          {
           id: 'procedural',
           label: 'Procedural and investigative',
-          description:
-            'Emphasise verification, process, and the need to establish a credible path forward.',
-        effects: { leverage: 0, escalation: -1, legitimacy: 2, councilTrust: 1, civilianRisk: 0 },
+          description: 'Emphasise verification, process, and the need to establish a credible path forward.',
+          effects: { leverage: 0, escalation: -1, legitimacy: 2, councilTrust: 1, civilianRisk: 0 },
           fragment:
             'The facts in Cuba must be established by means all parties can credit, and a process to verify them should begin without delay.',
-        },
-        {
+          },
+          {
           id: 'deescalatory',
           label: 'De-escalatory and diplomatic',
-          description:
-            'Reduce public temperature and protect room for future negotiation.',
-        effects: { leverage: -1, escalation: -1, legitimacy: 1, councilTrust: 1, civilianRisk: 1 },
+          description: 'Reduce public temperature and protect room for future negotiation.',
+          effects: { leverage: -1, escalation: -1, legitimacy: 1, councilTrust: 1, civilianRisk: 1 },
           fragment:
             'However serious these developments, the immediate task is to reduce the danger of miscalculation and to keep open every channel through which a settlement might be found.',
-        },
-      ],
+          },
+        ],
+        dobrynin: [
+        {
+          id: 'condemnatory',
+          label: 'Denounce the interference',
+          description: 'Treat any interception at sea as aggression, and say so before it happens.',
+          effects: { leverage: 1, escalation: 1, legitimacy: 0, councilTrust: -1, civilianRisk: -1 },
+          fragment:
+            'The interception of vessels on the high seas would be an act of aggression, and the Soviet Government will regard it as one.',
+          },
+          {
+          id: 'measured',
+          label: 'Firm, and deliberate',
+          description: 'Take the measures announced seriously without answering them in haste.',
+          effects: { leverage: 1, escalation: 0, legitimacy: 1, councilTrust: 0, civilianRisk: 0 },
+          fragment:
+            'The Soviet Government regards the measures announced as of the gravest seriousness, and will answer them with deliberation rather than haste.',
+          },
+          {
+          id: 'procedural',
+          label: 'Refuse assertion in place of evidence',
+          description: 'Insist that the facts be established before anything is conceded about them.',
+          effects: { leverage: 0, escalation: -1, legitimacy: 2, councilTrust: 1, civilianRisk: 0 },
+          fragment:
+            'The Soviet Government does not accept assertion in place of evidence, and calls for the facts to be established by means all parties can credit.',
+          },
+          {
+          id: 'deescalatory',
+          label: 'De-escalatory and diplomatic',
+          description: 'Lower the public temperature and keep the channels open.',
+          effects: { leverage: -1, escalation: -1, legitimacy: 1, councilTrust: 1, civilianRisk: 1 },
+          fragment:
+            'However serious these developments, the immediate task is to reduce the danger of miscalculation and to keep open every channel through which a settlement might be found.',
+          },
+        ],
+        uthant: [
+        {
+          id: 'condemnatory',
+          label: 'Name the danger plainly',
+          description: 'Say that both the weapons and the response to them endanger the peace.',
+          effects: { leverage: 1, escalation: 1, legitimacy: 0, councilTrust: -1, civilianRisk: -1 },
+          fragment:
+            'The Secretary-General regards the introduction of these weapons, and the measures taken in answer to them, as placing the peace in immediate danger.',
+          },
+          {
+          id: 'measured',
+          label: 'Grave, and even-handed',
+          description: 'Call on all parties for restraint without taking a side.',
+          effects: { leverage: 1, escalation: 0, legitimacy: 1, councilTrust: 0, civilianRisk: 0 },
+          fragment:
+            'The Secretary-General regards the situation as of the utmost gravity and calls on all parties to exercise the restraint the moment requires.',
+          },
+          {
+          id: 'procedural',
+          label: 'Put verification first',
+          description: 'Propose that the facts be established under United Nations auspices.',
+          effects: { leverage: 0, escalation: -1, legitimacy: 2, councilTrust: 1, civilianRisk: 0 },
+          fragment:
+            'The Secretary-General proposes that the facts be established under United Nations auspices before any further measure is taken.',
+          },
+          {
+          id: 'deescalatory',
+          label: 'Ask both to stop',
+          description: 'Appeal to both Governments to suspend what is in train and give talks time.',
+          effects: { leverage: -1, escalation: -1, legitimacy: 1, councilTrust: 1, civilianRisk: 1 },
+          fragment:
+            'The Secretary-General appeals to both Governments to suspend the measures now in train and to give negotiation the days it needs.',
+          },
+        ],
+      },
     },
 
     {

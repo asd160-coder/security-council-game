@@ -11,7 +11,7 @@ const SEAT_CLASS = {
 
 export default function RoleSelect({ onSelect }) {
   return (
-    <div className={styles.screen}>
+    <main className={styles.screen}>
       <Reveal className={styles.head}>
         <span className="eyebrow">{ROLE_SELECT.eyebrow}</span>
         <h1 className={styles.title}>{ROLE_SELECT.title}</h1>
@@ -64,6 +64,6 @@ export default function RoleSelect({ onSelect }) {
           </Reveal>
         ))}
       </div>
-    </div>
+    </main>
   );
 }

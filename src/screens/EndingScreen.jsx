@@ -30,7 +30,7 @@ export default function EndingScreen({ state, role, onRestart, onDebrief }) {
   const closer = getRoleCloser(resolution, role.id);
 
   return (
-    <div className={styles.screen}>
+    <main className={styles.screen}>
       {/* The answer arriving: the resolution types itself onto the board
           under a wire line before the prose fades in. Same words as before. */}
       <Teleprinter
@@ -148,6 +148,6 @@ export default function EndingScreen({ state, role, onRestart, onDebrief }) {
           </Button>
         </div>
       </Reveal>
-    </div>
+    </main>
   );
 }

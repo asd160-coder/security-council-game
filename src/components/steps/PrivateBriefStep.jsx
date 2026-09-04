@@ -22,6 +22,11 @@ export default function PrivateBriefStep({ role, step, onAdvance }) {
 
       <Reveal delay={160}>
         <Paper eyebrow={step.eyebrow} title="Your position" titleAs="h2">
+          {/* Leads with the seat's defining fact, because the four fields below
+              describe an office and this describes a morning. A Dobrynin player
+              used to meet "ambiguity, private contact" before anything told
+              them the thing that shaped their whole week: nobody had told him. */}
+          {brief.standing && <Field label="This morning">{brief.standing}</Field>}
           <Field label="Immediate objective">{brief.objective}</Field>
           <Field label="Pressure">{brief.pressure}</Field>
           <Field label="Advantage">{brief.advantage}</Field>

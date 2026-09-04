@@ -57,14 +57,22 @@ quoted back to them, in their own document, and never marked.
 ## Sources and what is in the archive
 
 The simulation deploys publicly, so it uses only material that is verifiably in the public
-domain — in practice, **works of the United States federal government**. That means CIA and
-NPIC reconnaissance photography, White House photography, the President's broadcast address,
-and federal documents via NARA, the JFK Presidential Library, and the Office of the
-Historian. Every item carries its source and rights where it appears.
+domain. That rests on two bases, and the difference is worth keeping straight.
 
-The archive currently holds six photographs, one audio excerpt, and three primary source
-texts: National Security Action Memorandum 196, Proclamation 3504, and President Kennedy's
-reply to Chairman Khrushchev of 27 October 1962.
+Most of it consists of **works of the United States federal government**: CIA and NPIC
+reconnaissance photography, White House photography, the President's broadcast address, and
+federal documents via NARA, the JFK Presidential Library, and the Office of the Historian.
+
+The photographs of Khrushchev and Castro on the background tab are not federal works. They
+come from the **U.S. News & World Report collection at the Library of Congress**, whose
+rights the magazine dedicated to the public when it donated the collection. That is a
+donor's dedication rather than a federal authorship, and it is named here rather than
+folded into the sentence above. Every item carries its source and rights where it
+appears.
+
+The archive currently holds six photographs, one audio excerpt, one newsreel film, and
+three primary source texts: National Security Action Memorandum 196, Proclamation 3504, and
+President Kennedy's reply to Chairman Khrushchev of 27 October 1962.
 
 **One limitation, stated rather than hidden.** Khrushchev's letters of 26, 27 and 28 October
 are the documents the endgame actually turns on, and they cannot be used here: they are
@@ -121,7 +129,8 @@ their machine.
 - **One rule governs the palette**, stated at the top of `src/styles/tokens.css`: *the board
   is the present, the paper is 1962.* Anything that is the modern interface reading the
   crisis sits on a dark plotting board; anything that **is** a 1962 document is archival
-  paper laid on top of it.
+  paper laid on top of it. The documentary quotations are the one exception — they span
+  1956 to 2003, so they are neither, and get a third treatment of their own.
 
 ```
 src/data/       days, roles, trackers, endings, archive, dossiers, the council

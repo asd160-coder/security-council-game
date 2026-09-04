@@ -2,7 +2,7 @@ import { Button, Reveal } from '../components/ui/index.jsx';
 import { APP } from '../data/copy.js';
 import styles from './TitleScreen.module.css';
 
-export default function TitleScreen({ onBegin, onCredits, saved, onResume }) {
+export default function TitleScreen({ onBegin, onCredits, onBackground, saved, onResume }) {
   return (
     <div className={styles.screen}>
       <div className={styles.backdrop} aria-hidden="true">
@@ -49,13 +49,15 @@ export default function TitleScreen({ onBegin, onCredits, saved, onResume }) {
       </div>
 
       <div className={styles.foot}>
-        <p className={styles.footNote}>
-          An educational simulation. Artwork is illustrated, not photographic. Dialogue is authored
-          in the register of the historical figures and is not quoted.
-        </p>
-        <Button variant="quiet" onClick={onCredits}>
-          {APP.credits}
-        </Button>
+        <p className={styles.footNote}>{APP.footNote}</p>
+        <div className={styles.footActions}>
+          <Button variant="quiet" onClick={onBackground}>
+            {APP.background}
+          </Button>
+          <Button variant="quiet" onClick={onCredits}>
+            {APP.credits}
+          </Button>
+        </div>
       </div>
     </div>
   );

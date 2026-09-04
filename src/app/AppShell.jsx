@@ -1,6 +1,7 @@
 import { useEffect, useReducer, useState } from 'react';
 import TitleScreen from '../screens/TitleScreen.jsx';
 import RoleSelect from '../screens/RoleSelect.jsx';
+import BackgroundScreen from '../screens/BackgroundScreen.jsx';
 import DayView from '../screens/DayView.jsx';
 import DayStub from '../screens/DayStub.jsx';
 import EndingScreen from '../screens/EndingScreen.jsx';
@@ -44,12 +45,17 @@ export default function AppShell() {
             dispatch({ type: 'begin' });
           }}
           onCredits={() => dispatch({ type: 'toggleCredits' })}
+          onBackground={() => dispatch({ type: 'openBackground' })}
           saved={saved ? describeRun(saved.state) : null}
           onResume={() => {
             dispatch({ type: 'resume', state: saved.state });
             setSaved(null);
           }}
         />
+      )}
+
+      {state.screen === 'background' && (
+        <BackgroundScreen onBack={() => dispatch({ type: 'closeBackground' })} />
       )}
 
       {state.screen === 'roleSelect' && (
@@ -98,6 +104,7 @@ export default function AppShell() {
                   APP.creditsBody,
                   APP.creditsNote,
                   APP.creditsPortraits,
+                  APP.creditsQuotations,
                   APP.creditsMap,
                   APP.creditsRooms,
                 ]}

@@ -121,6 +121,18 @@ buttons — sits on a cold dark **plotting board**. Anything that *is* a documen
 — dossiers, briefing memos, witness cards, the drafting tray — is **archival paper** laid on
 top of it. Mixing the two registers is how the whole thing stops looking deliberate.
 
+**One exception, added with the epigraphs: the plate.** The seven quotations are neither
+register. They run from 1956 to 2003 — a memoir written after a fall from power, a private
+remark recalled twenty-three years later, a documentary filmed forty-one years after the
+night it describes — and only the two Kennedy speeches are contemporaneous documents.
+Setting a 2003 recollection on 1962 stock would be a small lie about what it is, and putting
+it on the board would make a real sentence look like the interface talking. So testimony
+gets a third treatment: a **double-ruled brass frame** on the dark field, a printer's
+ornament, the largest type in the game, and the apparatus — attribution, provenance, source
+— descending in weight beneath it. The double frame is the tell; every other border in the
+game is a single line. See `src/components/scene/Epigraph.module.css` and the matching
+`.quoteCard` family in `src/screens/BackgroundScreen.module.css`.
+
 ```css
 /* board */            /* paper */              /* accents */
 --board:      #12161b  --stock:      #e6e1d6    --wax:    #b23a2f  /* danger only */

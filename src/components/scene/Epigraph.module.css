@@ -1,0 +1,263 @@
+/* A real voice, between the days — and a third register.
+
+   The game has had two: the board is the present, the paper is 1962. These
+   quotations are neither. They run from 1956 to 2003 — a memoir written after
+   a fall from power, a remark recalled twenty-three years later, a documentary
+   filmed forty-one years after the night it describes — so setting them on
+   1962 stock would be a small lie about what they are. They are testimony,
+   gathered at various removes, and they get their own treatment.
+
+   That treatment is a plate: a double-ruled frame, a centred quotation set
+   larger than anything else in the game, and a printer's rule above it. The
+   game is flush-left everywhere and never centres, so centring alone says
+   "this is not the interface talking". The apparatus — attribution,
+   provenance, source — sits below the lower rule in descending weight, so the
+   sentence is the moment and the scholarship is the footnote. */
+
+.screen {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5vh var(--gutter);
+  overflow-y: auto;
+  background: rgba(6, 8, 11, 0.975);
+  animation: fade var(--dur-reveal) var(--ease) both;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: min(44rem, 100%);
+  margin: auto;
+  animation: lift var(--dur-reveal) var(--ease) both;
+}
+
+.dateline {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+/* The plate. A double frame — brass outside, a hairline set in from it —
+   which exists nowhere else in this interface, where every border is a single
+   line. It is the most formal object in the game, deliberately. */
+.plate {
+  position: relative;
+  margin: 0;
+  padding: 46px 52px 30px;
+  width: 100%;
+  background: linear-gradient(180deg, #131820 0%, var(--board) 100%);
+  border: 1px solid rgba(168, 133, 60, 0.4);
+  border-radius: var(--radius);
+}
+
+.plate::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border: 1px solid var(--board-line);
+  border-radius: 1px;
+  pointer-events: none;
+}
+
+/* A printer's ornament above the quotation: short, centred, brass. */
+.rule {
+  width: 46px;
+  height: 2px;
+  margin: 0 auto 30px;
+  background: var(--brass);
+}
+
+/* The sentence, and the largest type in the game.
+
+   The block is centred on a narrow measure with visible margin either side,
+   which is what makes it read as a pull-quote — but the text inside it is
+   flush-left. Two of the seven run past forty words, and forty words centred
+   is eight ragged lines with no fixed point for the eye to return to. The
+   ornament above and the attribution below hold the ceremonial axis instead;
+   they are three to six words each, so centring costs them nothing. */
+.quote {
+  margin: 0;
+  text-align: left;
+  max-width: 30rem;
+  margin-inline: auto;
+  font-family: var(--font-body);
+  font-size: clamp(20px, 2.4vw, 27px);
+  font-weight: 300;
+  line-height: 1.46;
+  letter-spacing: -0.005em;
+  color: var(--stock);
+  text-wrap: pretty;
+}
+
+.quote::before {
+  content: '“';
+}
+
+.quote::after {
+  content: '”';
+}
+
+/* Below the lower rule the register drops to apparatus. */
+.attribution {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  margin-top: 30px;
+  padding-top: 22px;
+  border-top: 1px solid var(--board-line);
+}
+
+.speaker {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--brass-bright);
+}
+
+.role {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-style: italic;
+  line-height: 1.45;
+  color: var(--silver-muted);
+  text-align: center;
+}
+
+.date {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  line-height: 1.5;
+  color: var(--silver-faint);
+  text-align: center;
+  margin-top: 2px;
+}
+
+/* How it reached us. Flush-left and inset, because it is the one part here
+   that is prose to be read rather than a line to be looked at — and because a
+   centred paragraph of ninety words is unreadable. Quieter than the wax-washed
+   block it replaces: this is a footnote, not a warning. */
+.provenance {
+  margin-top: 26px;
+  padding: 16px 18px;
+  background: var(--board-inset);
+  border: 1px solid var(--board-line);
+  border-radius: var(--radius);
+  text-align: left;
+}
+
+.provenanceLabel {
+  display: block;
+  margin-bottom: 7px;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+.provenanceText {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.62;
+  color: var(--silver-muted);
+}
+
+.source {
+  margin-top: 18px;
+  text-align: left;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes lift {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 620px) {
+  .plate {
+    padding: 32px 24px 22px;
+  }
+
+  .quote {
+    font-size: 19px;
+  }
+}
+
+/* A 13" laptop is 1280×720, and the longest of the seven — Kennedy on Day 3,
+   forty-two words over seven lines — pushed Continue to y=814 there, below the
+   fold. The overlay scrolls and any key dismisses, so it was never a trap, but
+   the only visible control should not have to be discovered. Tightening the
+   vertical rhythm on short viewports brings it back on screen without touching
+   the wide case, which has room to spare. */
+@media (max-height: 820px) {
+  .screen {
+    padding: 3vh var(--gutter);
+  }
+
+  .inner {
+    gap: 16px;
+  }
+
+  .plate {
+    padding: 30px 52px 24px;
+  }
+
+  .rule {
+    margin-bottom: 20px;
+  }
+
+  .quote {
+    font-size: clamp(18px, 1.7vw, 21px);
+  }
+
+  .attribution {
+    margin-top: 20px;
+    padding-top: 16px;
+  }
+
+  .provenance {
+    margin-top: 18px;
+  }
+}
+
+/* Shown under reduced motion like everything else here — it is content, not
+   an animation. It simply arrives without moving. */
+@media (prefers-reduced-motion: reduce) {
+  .screen,
+  .inner {
+    animation: none;
+  }
+}

@@ -2,6 +2,9 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  /* The day's colour temperature: one faint gradient from the top, on the
+     view rather than the body so it changes with the day and nothing else. */
+  background: radial-gradient(120% 56% at 50% 0%, var(--board-tint, transparent) 0%, transparent 62%);
 }
 
 /* ------------------------------------------------------------------ Header */

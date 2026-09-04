@@ -31,7 +31,11 @@ export function saveRun(state) {
     /* A run that has not started is not worth keeping, and saving from the
        title screen would mean a fresh visitor is immediately offered their own
        empty session to resume. */
-    if (state.screen === 'title' || state.screen === 'roleSelect') {
+    /* `background` belongs with these: it is a reading surface reached from
+       the title, not a state a run can be resumed into. Without it here a
+       player who opened the tab would overwrite their saved run with a state
+       `loadRun` then refuses, losing the run to a screen they only read. */
+    if (state.screen === 'title' || state.screen === 'roleSelect' || state.screen === 'background') {
       window.localStorage.removeItem(KEY);
       return;
     }

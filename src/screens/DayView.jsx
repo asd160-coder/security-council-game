@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import BriefingStep from '../components/steps/BriefingStep.jsx';
 import PrivateBriefStep from '../components/steps/PrivateBriefStep.jsx';
 import DialogueStep from '../components/steps/DialogueStep.jsx';
@@ -14,9 +14,14 @@ import DraftingAssembleStep from '../components/steps/DraftingAssembleStep.jsx';
 import WritingStep from '../components/steps/WritingStep.jsx';
 import SummaryStep from '../components/steps/SummaryStep.jsx';
 import DossierRail from '../components/panels/DossierRail.jsx';
+import ArchiveRail from '../components/panels/ArchiveRail.jsx';
 import TrackerColumn from '../components/panels/TrackerColumn.jsx';
 import DraftingTray from '../components/panels/DraftingTray.jsx';
 import MapPanel from '../components/panels/MapPanel.jsx';
+import DayCard, { dayCardWanted } from '../components/scene/DayCard.jsx';
+import Epigraph from '../components/scene/Epigraph.jsx';
+import { epigraphFor } from '../data/epigraphs.js';
+import { moodFor } from '../data/scene.js';
 import { PLANNED_DAYS, getDay } from '../data/days/index.js';
 import { band, diffTrackers } from '../lib/trackers.js';
 import { APP, PLAY } from '../data/copy.js';
@@ -63,7 +68,10 @@ export default function DayView({ day, role, state, dispatch }) {
      teacher pointing at an indicator mid-scene should not have to leave the
      scene to read it. */
   const inConversation =
-    step?.kind === 'dialogue' || step?.kind === 'exchange' || step?.kind === 'council';
+    step?.kind === 'dialogue' ||
+    step?.kind === 'exchange' ||
+    step?.kind === 'council' ||
+    step?.kind === 'reckoning';
 
   const stepById = useMemo(
     () => Object.fromEntries(day.steps.map((s) => [s.id, s])),
@@ -125,6 +133,28 @@ export default function DayView({ day, role, state, dispatch }) {
 
   const Renderer = step ? STEP_RENDERERS[step.kind] : null;
 
+  /* The board's temperature for the day. */
+  const mood = moodFor(day.number);
+
+  /* A date card between days: shown once when a new day opens, dismissed by
+     time or by hand, and never under reduced motion. Not a step, so the day
+     files and the progress pips are untouched; `stepIndex` is read on purpose
+     only at the moment the day changes. */
+  /* An interstitial when a day opens: the epigraph where the day has one,
+     otherwise the dateline flash. Never both — the epigraph carries its own
+     dateline. The epigraph is content rather than decoration, so unlike the
+     dateline card it is shown whatever the motion preference; `dayCardWanted`
+     only gates the flash. Day 1 has an epigraph and no flash, which is why
+     the day-number test moved inside. */
+  const [card, setCard] = useState(null);
+  const dismissCard = useCallback(() => setCard(null), []);
+  const epigraph = epigraphFor(day.number);
+  useEffect(() => {
+    if (state.stepIndex !== 0) return;
+    if (epigraph || (day.number > 1 && dayCardWanted())) setCard(day.number);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [day.number]);
+
   /* The summary is the last step of the day, so its action ends the day
      rather than stepping past the end of the list. */
   const advance = () =>
@@ -136,7 +166,10 @@ export default function DayView({ day, role, state, dispatch }) {
     role,
     onAdvance: advance,
     onChoose:
-      step?.kind === 'dialogue' || step?.kind === 'exchange' || step?.kind === 'council'
+      step?.kind === 'dialogue' ||
+      step?.kind === 'exchange' ||
+      step?.kind === 'council' ||
+      step?.kind === 'reckoning'
         ? (choice) =>
             dispatch({
               type: 'chooseLine',
@@ -180,7 +213,13 @@ export default function DayView({ day, role, state, dispatch }) {
   };
 
   return (
-    <div className={styles.view}>
+    <div className={styles.view} style={{ '--board-tint': mood.tint }}>
+      {card === day.number &&
+        (epigraph ? (
+          <Epigraph epigraph={epigraph} day={day} onDone={dismissCard} />
+        ) : (
+          <DayCard day={day} onDone={dismissCard} />
+        ))}
       <header className={styles.header}>
         <div className={styles.identity}>
           <span className={styles.wordmark}>{APP.title}</span>
@@ -220,8 +259,14 @@ export default function DayView({ day, role, state, dispatch }) {
           <MapPanel
             inspected={state.mapInspected}
             onInspect={() => dispatch({ type: 'inspectMap' })}
+            day={day.number}
+            progress={day.steps.length ? (state.stepIndex + 1) / day.steps.length : 0}
           />
           <DossierRail unlocked={state.unlocked} unlockedToday={state.unlockedToday} />
+          {/* Every primary source shown so far, still open. A line gated on
+              having read a document is only fair if the document can still
+              be read on the day the line is offered. */}
+          <ArchiveRail day={day} unlocked={state.unlocked} onOpen={stepProps.onOpenArchive} />
         </div>
 
         <main className={styles.centre}>
@@ -249,7 +294,12 @@ export default function DayView({ day, role, state, dispatch }) {
         <div className={`${styles.right} ${inConversation ? styles.recede : ''}`}>
           <TrackerColumn
             trackers={state.trackers}
-            deltas={step?.kind === 'consequence' ? state.lastDeltas : {}}
+            history={state.history}
+            deltas={
+              /* A step that bears a cost shows it the way a consequence does:
+                 the needles move while the reason is on screen. */
+              step?.kind === 'consequence' || step?.bearsByRole ? state.lastDeltas : {}
+            }
           />
         </div>
       </div>

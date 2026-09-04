@@ -1,0 +1,277 @@
+/* The overture.
+
+   Board register: this is the present making a documentary about 1962, not a
+   1962 document, so it sits on the dark field with mono labels and the title
+   face for the words. The film's own devices — a slow move on every shot,
+   grain, a vignette, a crossfade between beats — are the vocabulary of the
+   documentary the design packet asks this to resemble, and they are all
+   removed under prefers-reduced-motion except the crossfade. */
+
+.screen {
+  position: relative;
+  min-height: 100vh;
+  background: #06080b;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ------------------------------------------------------------- The stage */
+
+.stage {
+  position: absolute;
+  inset: 0;
+}
+
+.frame {
+  position: absolute;
+  inset: 0;
+  animation: fadeIn 900ms var(--ease) both;
+}
+
+.frameLeaving {
+  animation: fadeOut 900ms var(--ease) both;
+  pointer-events: none;
+}
+
+/* A layer is one plane of a shot. The move runs for the whole beat, set
+   through --beat by the component, so a long hold moves slowly and a short
+   one faster — the camera never rushes and never stalls. */
+.layer {
+  position: absolute;
+  inset: -6%;
+  will-change: transform;
+}
+
+.move-in {
+  animation: kbIn var(--beat, 5000ms) linear both;
+}
+
+.move-out {
+  animation: kbOut var(--beat, 5000ms) linear both;
+}
+
+.move-left {
+  animation: kbLeft var(--beat, 5000ms) linear both;
+}
+
+.move-right {
+  animation: kbRight var(--beat, 5000ms) linear both;
+}
+
+.move-still {
+  transform: scale(1.02);
+}
+
+.still,
+.portrait {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.72) contrast(1.06);
+}
+
+.portrait {
+  filter: saturate(0.6) contrast(1.04);
+}
+
+/* The Illustration marker, as everywhere a drawn face appears. */
+.illustrationMark {
+  position: absolute;
+  left: calc(6% + 22px);
+  bottom: calc(6% + 22px);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--silver-faint);
+}
+
+.source {
+  position: absolute;
+  right: calc(6% + 22px);
+  bottom: calc(6% + 18px);
+  max-width: 44%;
+  opacity: 0.75;
+}
+
+/* ------------------------------------------------------------- The slate */
+
+/* A dark frame carrying the shot's label until the still exists. Given a
+   faint diagonal so the move is visible on it — a flat black would show no
+   motion at all. */
+.slate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background:
+    linear-gradient(135deg, #10151b 0%, #0a0d11 55%, #0e1218 100%);
+  border: 1px solid var(--board-line);
+}
+
+.slateLabel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--silver-faint);
+}
+
+.slateNote {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: var(--track-label-tight);
+  color: var(--silver-fainter);
+  max-width: 34rem;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* ------------------------------------------------- Grain and the vignette */
+
+/* Film grain from a tiny turbulence texture, drifting so it does not read as
+   a fixed screen. Kept very faint: it is atmosphere, not a filter. */
+.grain {
+  position: absolute;
+  inset: -20%;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.9 0'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>");
+  animation: grainDrift 1.1s steps(4, end) infinite;
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at center, transparent 40%, rgba(6, 8, 11, 0.55) 78%, rgba(6, 8, 11, 0.92) 100%),
+    linear-gradient(to top, rgba(6, 8, 11, 0.85) 0%, transparent 42%);
+}
+
+/* ---------------------------------------------------------- The captions */
+
+.captions {
+  position: relative;
+  z-index: 1;
+  margin-top: auto;
+  padding: 0 var(--gutter) 15vh;
+  max-width: 46rem;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+/* The words arrive the way the ending's do — a stepped clip, one step per
+   character. --dur-type is set per line from its length, so a short line
+   does not crawl and a long one does not snap. */
+.line {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.6vw, 30px);
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  line-height: 1.32;
+  color: var(--stock);
+  text-wrap: pretty;
+  display: inline-block;
+  animation: type var(--dur-type, var(--dur-teleprinter)) steps(var(--chars, 24), end) both;
+}
+
+/* ----------------------------------------------------------- The controls */
+
+.controls {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 22px var(--gutter);
+}
+
+.counter {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  font-variant-numeric: tabular-nums;
+  color: var(--silver-fainter);
+}
+
+/* ------------------------------------------------------------- Keyframes */
+
+@keyframes kbIn {
+  from { transform: scale(1); }
+  to { transform: scale(1.09); }
+}
+
+@keyframes kbOut {
+  from { transform: scale(1.09); }
+  to { transform: scale(1); }
+}
+
+@keyframes kbLeft {
+  from { transform: scale(1.06) translateX(1.8%); }
+  to { transform: scale(1.06) translateX(-1.8%); }
+}
+
+@keyframes kbRight {
+  from { transform: scale(1.06) translateX(-1.8%); }
+  to { transform: scale(1.06) translateX(1.8%); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes grainDrift {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-3%, 2%); }
+  50% { transform: translate(2%, -3%); }
+  75% { transform: translate(-2%, -2%); }
+  100% { transform: translate(3%, 1%); }
+}
+
+@keyframes type {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+/* The film still plays; it stops moving. Crossfades stay because a hard cut
+   between thirteen stills is its own kind of motion. The caption's typing
+   collapses on its own through --dur-teleprinter, but --dur-type is set per
+   line, so it is overridden here too. */
+@media (prefers-reduced-motion: reduce) {
+  .move-in,
+  .move-out,
+  .move-left,
+  .move-right {
+    animation: none;
+    transform: scale(1.02);
+  }
+
+  .grain {
+    animation: none;
+  }
+
+  .line {
+    animation-duration: 0.01s;
+  }
+}

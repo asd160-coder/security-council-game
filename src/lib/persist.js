@@ -39,7 +39,7 @@ const VERSION = 1;
    screen of this kind. Anything reachable from the title without starting a
    run belongs in it, and forgetting is silent: the loss shows up as a missing
    resume prompt long after the mistake. */
-const NOT_A_RUN = new Set(['title', 'roleSelect', 'background', 'teachers']);
+const NOT_A_RUN = new Set(['title', 'roleSelect', 'background', 'teachers', 'overture']);
 
 export function saveRun(state) {
   try {

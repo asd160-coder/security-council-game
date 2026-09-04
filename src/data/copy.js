@@ -205,6 +205,13 @@ export const ENDING = {
   restart: 'Play again as a different role',
 };
 
+/* The overture, before the seat is taken. */
+export const OVERTURE = {
+  eyebrow: 'October 1962',
+  srTitle: 'Overture — before the seat is taken',
+  skip: 'Skip',
+};
+
 export const DEBRIEF = {
   day: (n) => `Day ${n}`,
   noChoice: 'No decisive exchange was recorded for this day.',

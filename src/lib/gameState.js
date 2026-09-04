@@ -81,7 +81,13 @@ const enter = (state, stepIndex) => {
 
 export function reducer(state, action) {
   switch (action.type) {
+    /* Begin plays the overture first. It is a screen and not a run — see the
+       guard in src/lib/persist.js — and it is left by finishing or by skipping,
+       both of which are the same action. Resume never passes through it. */
     case 'begin':
+      return { ...state, screen: 'overture' };
+
+    case 'overtureDone':
       return { ...state, screen: 'roleSelect' };
 
     /* Optional reading, reached from the title and returning to it. Not part

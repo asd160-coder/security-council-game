@@ -13,8 +13,10 @@ It is not a quiz and it does not keep score.
 **How long.** About 40 minutes for one playthrough — roughly 25 minutes of reading plus
 time to decide. It fits a single period.
 
-**What the student actually does.** They take one of three seats and live five days of
-October 1962. Each day they read a briefing, meet someone, and choose what to say. Their
+**What the student actually does.** Pressing Begin plays a short overture — about seventy
+seconds of archival footage with a narration that states the stakes — which can be skipped
+at any moment with the Skip button or Escape. Then they take one of three seats and live
+five days of October 1962. Each day they read a briefing, meet someone, and choose what to say. Their
 choices assemble a diplomatic statement: Day 1 sets its tone, Day 2 composes a clause, Day 3
 revises that clause, Day 4 assembles the terms of a bargain, and Day 5 asks them to write
 its closing paragraph themselves. The run ends with that finished document, an outcome, and
@@ -137,6 +139,12 @@ GitHub Pages **only when run by hand** — publishing is a decision, not a side 
 commit. To put it live: make the repository public, set *Settings → Pages → Source* to
 "GitHub Actions", then run the "Build and deploy" workflow from the Actions tab. It will
 appear at `https://asd160-coder.github.io/security-council-game/`.
+
+**The overture's voice.** The narration is recorded, not synthesised, and the file is not in
+the repository. Record it, save it as `public/overture/narration.m4a`, and set each beat's
+`at` in `src/data/overture.js` to the second at which its line begins in the recording. Until
+every beat is timed the film runs on its own clock and the captions carry the words; once
+they are, the recording drives the beats. Nothing else changes.
 
 **A run is held in the browser and is not sent anywhere.** Nothing a student writes leaves
 their machine.

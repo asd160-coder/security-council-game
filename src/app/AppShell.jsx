@@ -2,6 +2,7 @@ import { useEffect, useReducer, useState } from 'react';
 import { createPortal } from 'react-dom';
 import TitleScreen from '../screens/TitleScreen.jsx';
 import RoleSelect from '../screens/RoleSelect.jsx';
+import OvertureScreen from '../screens/OvertureScreen.jsx';
 import BackgroundScreen from '../screens/BackgroundScreen.jsx';
 import TeachersScreen from '../screens/TeachersScreen.jsx';
 import DayView from '../screens/DayView.jsx';
@@ -118,6 +119,10 @@ export default function AppShell() {
 
       {state.screen === 'teachers' && (
         <TeachersScreen onBack={() => dispatch({ type: 'closeTeachers' })} />
+      )}
+
+      {state.screen === 'overture' && (
+        <OvertureScreen onDone={() => dispatch({ type: 'overtureDone' })} />
       )}
 
       {state.screen === 'roleSelect' && (

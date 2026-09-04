@@ -106,7 +106,7 @@ export default function DayView({ day, role, state, dispatch }) {
      into state itself. Escalation is the band that matters for scene text; the
      channel category is the compressed form of what happened in the previous
      day's private exchange. */
-  const standing = band(state.trackers.escalation);
+  const standing = band(state.trackers.escalation, day.number);
 
   /* The course you agreed to take into the negotiation, if this day has a
      council. `history.channelCategory` cannot serve here — it is hardcoded to

@@ -24,6 +24,20 @@ export default function ArchiveOverlay({ item, onClose }) {
           ))}
           {item.excerpt && <p className={styles.documentCut}>{PLAY.excerpted}</p>}
         </div>
+      ) : item.kind === 'video' ? (
+        <div className={styles.videoWrap}>
+          <video className={styles.video} controls preload="metadata" playsInline src={`archive/${item.file}`}>
+            Your browser does not support video playback.
+          </video>
+        </div>
+      ) : item.kind === 'audio' ? (
+        /* Reached from the archive rail. Nothing to enlarge; the overlay is
+           simply where the player goes back to listen. */
+        <div className={styles.audioWrap}>
+          <audio className={styles.audio} controls preload="none" src={`archive/${item.file}`}>
+            Your browser does not support audio playback.
+          </audio>
+        </div>
       ) : (
         <div className={styles.imageWrap}>
           <img className={styles.image} src={`archive/${item.file}`} alt={item.caption} />

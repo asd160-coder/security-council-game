@@ -7,11 +7,59 @@ before its file exists, and the app plays correctly on designed empty states.
 ## The rights rule for this project
 
 The game is intended for public deployment, so it uses **only material that is
-verifiably public domain**. In practice that means works of the United States
-federal government: CIA and NPIC reconnaissance product, White House
-photography, US Navy and Air Force photography, and the President's own
-broadcasts. Every item renders with a visible source and rights line, and a
-credits panel lists them all.
+verifiably public domain**. Two mechanisms qualify, and the manifest keeps them
+apart rather than letting one sentence cover both.
+
+**1 · Works of the United States federal government.** CIA and NPIC
+reconnaissance product, White House photography, US Navy and Air Force
+photography, and the President's own broadcasts. This covers everything in the
+archive proper, plus the Stoughton portrait of Kennedy on the background tab.
+
+**2 · Rights dedicated to the public by the copyright holder.** Three items,
+all privately made and none of them federal works, which is why the README and
+the credits panel name two bases instead of one:
+
+- the photographs of **Khrushchev** at the United Nations and **Castro** in
+  Washington, from the **U.S. News & World Report collection at the Library of
+  Congress**. USN&WR dedicated to the public all rights it held when it
+  donated the collection, so staff photographers' frames carry no known
+  restrictions.
+- the **Universal Newsreel** film of 29 October 1962 on Day 5. MCA/Universal
+  donated the newsreel library to the National Archives and deeded its rights
+  and title to the US Government in 1974 without copyright restriction. NARA
+  notes that an individual story may still contain underlying third-party
+  material, so the excerpt actually used was checked rather than the reel as a
+  whole: it is UN Secretariat exteriors, Kuznetsov arriving, and U Thant
+  receiving him. The De Gaulle item in the reel's second half is cut.
+  Excerpted with `.design/clip-video.swift`, the sibling of the audio tool,
+  so any later clip is cut the same way.
+
+Every item renders with a visible source and rights line, and a credits panel
+lists them all.
+
+### Quotation is not reproduction
+
+The rule above governs **reproducing a whole work** — a photograph, an audio
+clip, a reel of film, the facsimile text of a document. The epigraphs added in
+Milestone 16 are a different thing and rest on a different footing: brief
+attributed quotation of a sentence or two, for teaching and commentary.
+
+Two of the seven are public domain on rule 1 anyway, both being Kennedy
+speeches. The other five are copyrighted or Soviet or Cuban in origin — the
+same category this manifest excludes from the archive — and are quoted rather
+than reproduced. That distinction is the reason the title footnote and the
+credits panel now describe three categories instead of two: dialogue invented
+for the simulation, archival material reproduced in full, and real quotation
+attributed where it appears.
+
+Each epigraph also carries **how it reached us**, which matters more here than
+the rights question. Three of the seven are not documents: Power's line is a
+private remark recalled by its addressee and published twenty-three years
+later; McNamara is remembering a night forty years afterwards; and "we will
+bury you" is a translation that overstated Khrushchev badly enough that he
+complained about it himself in 1963. Printing those flat, as though each were
+as well attested as a transcript, would teach something false about how
+history is known. See `src/data/epigraphs.js`.
 
 Exact catalogue identifiers, dimensions and file sizes are confirmed at the
 point of download, not asserted here.

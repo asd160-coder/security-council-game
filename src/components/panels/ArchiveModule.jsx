@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { getArchive, isPresent } from '../../data/archive.js';
 import { PLAY } from '../../data/copy.js';
 import ArchiveOverlay from './ArchiveOverlay.jsx';
@@ -24,6 +24,32 @@ export default function ArchiveModule({ id, onOpen }) {
   /* Correcting a filename should recover without a reload. */
   useEffect(() => setFailed(false), [item?.file]);
 
+  /* Reading a document to its end files it, the same as opening it.
+
+     The text is set inline in full, so a student who reads it there has
+     examined it in every sense that matters — and until this existed the
+     game disagreed: the unlock fired only on the click that opens the
+     overlay, and a line gated on the document three days later told a
+     student who had read every word that they had not. A sentinel at the
+     foot of the text fires once when it scrolls into view. The click path
+     stays; this is in addition to it, not instead. */
+  const endRef = useRef(null);
+  const onOpenRef = useRef(onOpen);
+  onOpenRef.current = onOpen;
+  useEffect(() => {
+    const target = endRef.current;
+    if (!target || item?.kind !== 'document' || !item.unlocks) return undefined;
+    if (typeof IntersectionObserver === 'undefined') return undefined;
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        onOpenRef.current?.(item.unlocks);
+        observer.disconnect();
+      }
+    });
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, [item?.id, item?.kind, item?.unlocks]);
+
   if (!item) return null;
 
   const present = isPresent(item);
@@ -40,6 +66,23 @@ export default function ArchiveModule({ id, onOpen }) {
 
       <div className={styles.body}>
         <p className={styles.title}>{item.title}</p>
+
+        {/* Moving image. `preload="none"` for the same reason as the audio: a
+            three-megabyte newsreel should not be fetched by a classroom that
+            never presses play. `playsInline` so iPad does not hijack it into
+            fullscreen. */}
+        {present && !failed && item.kind === 'video' && (
+          <video
+            className={styles.video}
+            controls
+            preload="none"
+            playsInline
+            src={`archive/${item.file}`}
+            onError={() => setFailed(true)}
+          >
+            Your browser does not support video playback.
+          </video>
+        )}
 
         {present && !failed && item.kind === 'audio' && (
           <audio
@@ -79,6 +122,13 @@ export default function ArchiveModule({ id, onOpen }) {
                 nine hundred words; taking the part that argues and marking the
                 cut is better than silently abridging. */}
             {item.excerpt && <p className={styles.documentCut}>{PLAY.excerpted}</p>}
+            <span
+              ref={endRef}
+              className={styles.readMark}
+              data-read-mark=""
+              data-unlocks={item.unlocks ?? ''}
+              aria-hidden="true"
+            />
             <span className={styles.documentMark} aria-hidden="true" />
           </button>
         )}
@@ -106,7 +156,7 @@ export default function ArchiveModule({ id, onOpen }) {
         {showPlaceholder && (
           <div className={`${styles.awaiting} ${failed ? styles.awaitingFailed : ''}`}>
             <div className={styles.awaitingMark} aria-hidden="true">
-              {failed ? '!' : item.kind === 'audio' ? '♪' : '▢'}
+              {failed ? '!' : item.kind === 'audio' ? '♪' : item.kind === 'video' ? '▷' : '▢'}
             </div>
             <p className={styles.awaitingTitle}>
               {failed ? PLAY.missingAsset : PLAY.awaitingAsset}

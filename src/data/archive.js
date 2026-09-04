@@ -90,6 +90,25 @@ export const ARCHIVE = [
       'The crisis was argued in a room this size. The people in it disagreed sharply, and the record of their disagreement survives.',
   },
   {
+    /* The one moving image in the game, and the only place U Thant's seat is
+       shown paying off. Universal Newsreel is public domain on the second of
+       this project's two bases — MCA/Universal deeded the collection and its
+       rights to the US Government in 1974 — which is the same mechanism as the
+       U.S. News & World Report photographs, not federal authorship. The
+       De Gaulle item that follows in the original reel is cut. */
+    id: 'un-crisis-eases',
+    kind: 'video',
+    file: 'un-crisis-eases-1962-10-29.mp4',
+    title: 'Crisis eases: Kuznetsov arrives at the United Nations',
+    date: '29 October 1962',
+    caption:
+      'A newsreel item filmed the day after the terms were accepted. The Secretariat building, the Soviet deputy foreign minister arriving through a scrum of press, and U Thant receiving him. Forty-seven seconds, cut from a reel whose second half is a French referendum.',
+    source: 'Universal Newsreel, 29 October 1962 — National Archives, via the Internet Archive',
+    rights: 'Public domain — rights deeded to the US Government by MCA/Universal, 1974',
+    whyItMatters:
+      'The office with no army and no veto, receiving the government that had to climb down. Whatever the two capitals settled between themselves, this is the room they used to be seen doing it in.',
+  },
+  {
     id: 'jfk-address',
     kind: 'audio',
     file: 'jfk-address-1962-10-22.m4a',
@@ -210,5 +229,6 @@ export const getArchive = (id) => ARCHIVE.find((item) => item.id === id) ?? null
 /* A media item is present when its file has been added; a document is present
    when it has text. Documents are never "awaiting" — they ship in the bundle,
    so the placeholder state simply does not apply to them. */
+/* Video is present on the same terms as any other file-backed item. */
 export const isPresent = (item) =>
   Boolean(item && (item.kind === 'document' ? item.text?.length : item.file));

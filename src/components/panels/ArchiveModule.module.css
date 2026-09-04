@@ -244,3 +244,19 @@
 .document:focus-visible .documentMark {
   opacity: 1;
 }
+
+/* The foot of a document. One pixel tall so an intersection observer can see
+   it arrive; invisible otherwise. */
+.readMark {
+  display: block;
+  height: 1px;
+}
+
+/* Moving image. Same treatment as the still: full width of the module, seated
+   on the board's own inset so it does not float. */
+.video {
+  display: block;
+  width: 100%;
+  background: var(--board-inset);
+  border-radius: var(--radius);
+}

@@ -52,6 +52,18 @@ congratulates and nothing warns.
 **The student's writing is not assessed.** The closing paragraph they write on Day 5 is
 quoted back to them, in their own document, and never marked.
 
+**Facilitation notes are in the game, not in this file.** The **For teachers** tab on the
+title screen carries the part that needs the game open: discussion questions tied to the
+decision each day actually turns on, and how to read what a student finished with — the
+debrief names up to two trades at the end of a run, and the tab says what each reveals and
+what to ask the student who got it.
+
+**Collecting the work.** At the foot of the debrief there is a **Save as PDF** button. It
+produces a one-page record of the run — seat, outcome, the five decisions in the student's
+own words, the trade the run made, and their closing paragraph. It uses the browser's own
+*Save as PDF*, so there is nothing to install. Nothing is transmitted: the run has been in
+the student's browser throughout, and they choose whether to hand the file over.
+
 ---
 
 ## Sources and what is in the archive

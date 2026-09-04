@@ -83,6 +83,16 @@ export function reducer(state, action) {
     case 'closeBackground':
       return { ...state, screen: 'title' };
 
+    /* The facilitation notes, on the same terms as the background reading:
+       reached from the title, returning to it, and not part of a run. Both are
+       named in the guard in src/lib/persist.js, and a screen that is not named
+       there will destroy a saved run rather than merely fail to save. */
+    case 'openTeachers':
+      return { ...state, screen: 'teachers' };
+
+    case 'closeTeachers':
+      return { ...state, screen: 'title' };
+
     case 'selectRole': {
       const role = getRole(action.roleId);
       if (!role) return state;

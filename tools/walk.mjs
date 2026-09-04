@@ -57,6 +57,23 @@ for (const day of DAYS) for (const step of day.steps) if (step.kind === 'witness
   if (step.bearsByRole && !step.bearsByRole[r]) { problems++; console.log(`  ✗ ${day.id}/${step.id}/${r} bears nothing`); }
 }
 console.log(`reckoning answers: ${Object.keys(RECKONING).length} advisers × ${ANSWER_STANCES.length} stances`);
+
+/* The teacher notes are keyed to the same pattern ids the student's debrief
+   uses, so a pattern added without its note would leave a teacher reading
+   about a trade the notes do not cover — and nothing would say so. */
+const { PATTERNS } = await import(`${R}/data/debrief.js`);
+const { READING_A_RUN, DAY_PROMPTS } = await import(`${R}/data/teaching.js`);
+for (const id of Object.keys(PATTERNS)) {
+  if (!READING_A_RUN[id]) { problems++; console.log(`  ✗ pattern "${id}" has no teacher note in data/teaching.js`); }
+}
+for (const id of Object.keys(READING_A_RUN)) {
+  if (!PATTERNS[id]) { problems++; console.log(`  ✗ teacher note "${id}" matches no pattern the debrief can show`); }
+}
+for (const day of DAYS) {
+  if (!DAY_PROMPTS[day.number]) { problems++; console.log(`  ✗ day ${day.number} has no teacher prompts`); }
+}
+console.log(`teacher notes: ${Object.keys(READING_A_RUN).length} patterns, ${Object.keys(DAY_PROMPTS).length} days`);
+
 if (problems) {
   console.log(`\n${problems} problem${problems > 1 ? 's' : ''}`);
   process.exit(1);

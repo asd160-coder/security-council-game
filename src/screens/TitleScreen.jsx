@@ -2,7 +2,7 @@ import { Button, Reveal } from '../components/ui/index.jsx';
 import { APP } from '../data/copy.js';
 import styles from './TitleScreen.module.css';
 
-export default function TitleScreen({ onBegin, onCredits, onBackground, saved, onResume }) {
+export default function TitleScreen({ onBegin, onCredits, onBackground, onTeachers, saved, onResume }) {
   return (
     <div className={styles.screen}>
       <div className={styles.backdrop} aria-hidden="true">
@@ -55,6 +55,9 @@ export default function TitleScreen({ onBegin, onCredits, onBackground, saved, o
         <div className={styles.footActions}>
           <Button variant="quiet" onClick={onBackground}>
             {APP.background}
+          </Button>
+          <Button variant="quiet" onClick={onTeachers}>
+            {APP.teachers}
           </Button>
           <Button variant="quiet" onClick={onCredits}>
             {APP.credits}

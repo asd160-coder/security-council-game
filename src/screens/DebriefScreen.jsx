@@ -346,8 +346,64 @@ export default function DebriefScreen({ state, role, onRestart }) {
           <Button variant="primary" onClick={onRestart}>
             {DEBRIEF.restart}
           </Button>
+          {/* The browser's own Save as PDF, reached through the print dialog.
+              No library: the print engine sets better text than a client-side
+              PDF builder, which either rasterises the page or needs its layout
+              built by hand. Nothing is transmitted — the run has been in this
+              browser all along and the student chooses who gets the file. */}
+          <Button variant="quiet" onClick={() => window.print()}>
+            {DEBRIEF.savePdf}
+          </Button>
         </div>
       </Reveal>
+
+      {/* ------------------------------------- The teacher's copy, for print */}
+      {/* A different selection of the same run, not a second copy of its text:
+          seat, outcome, the five decisions in the student's own words, the
+          trade, and the closing they wrote. One page, so thirty of them can be
+          collected.
+
+          `display: none` on screen and shown only inside @media print, which
+          also keeps it out of the accessibility tree — a screen reader should
+          not read the run twice. */}
+      <div className={styles.teacherCopy} data-print="teachers">
+        <h2 className={styles.tcTitle}>{DEBRIEF.teacherCopyTitle}</h2>
+        <p className={styles.tcMeta}>
+          {role.name} · {role.title} — {ending.label}
+        </p>
+
+        <ol className={styles.tcDays}>
+          {path.map((entry) => (
+            <li key={entry.day} className={styles.tcDay}>
+              <span className={styles.tcDayLabel}>
+                {DEBRIEF.day(entry.day)} · {entry.title}
+              </span>
+              {entry.label && <span className={styles.tcChoice}>{entry.label}</span>}
+              {entry.line ? (
+                <p className={styles.tcLine}>“{entry.line}”</p>
+              ) : (
+                <p className={styles.tcLine}>{DEBRIEF.noChoice}</p>
+              )}
+            </li>
+          ))}
+        </ol>
+
+        {patterns.length > 0 && (
+          <p className={styles.tcTrade}>
+            <span className={styles.tcLabel}>{DEBRIEF.teacherCopyTrade}</span>
+            {patterns.map((key) => PATTERNS[key].title).join(' · ')}
+          </p>
+        )}
+
+        {state.closing && (
+          <div className={styles.tcClosing}>
+            <span className={styles.tcLabel}>{DEBRIEF.teacherCopyClosing}</span>
+            <p className={styles.tcClosingText}>{state.closing}</p>
+          </div>
+        )}
+
+        <p className={styles.tcFoot}>{DEBRIEF.teacherCopyFoot}</p>
+      </div>
     </div>
   );
 }

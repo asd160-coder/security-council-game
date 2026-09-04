@@ -62,9 +62,28 @@ body {
     visibility: hidden;
   }
 
+  /* Two print targets, and they never coexist: the statement lives on the
+     ending screen and the teacher's copy on the debrief, so no mode switch is
+     needed to choose between them. */
   [data-print='statement'],
-  [data-print='statement'] * {
+  [data-print='statement'] *,
+  [data-print='teachers'],
+  [data-print='teachers'] * {
     visibility: visible;
+  }
+
+  /* Hidden outright on screen — it is a print duplicate of the run, and a
+     screen reader should not read the same five days twice. `display` rather
+     than `visibility` is what keeps it out of the accessibility tree. */
+  [data-print='teachers'] {
+    display: block;
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+    max-width: 44rem;
+    margin: 0;
+    background: #fff;
+    color: #1a1815;
   }
 
   [data-print='statement'] {

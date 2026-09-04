@@ -628,3 +628,114 @@
     display: none;
   }
 }
+
+/* ------------------------------------------- The teacher's copy, for print */
+
+/* Absent on screen and shown only by the print rules in globals.css. Hidden
+   with `display` rather than `visibility` deliberately: it duplicates the run,
+   and a screen reader should not read the same five days twice.
+
+   Ink on white throughout, because it is going onto paper — this is the one
+   place in the codebase where --ink-* is the correct choice rather than a
+   token that has wandered off the board. */
+.teacherCopy {
+  display: none;
+}
+
+.tcTitle {
+  font-family: var(--font-display);
+  font-size: 17pt;
+  font-weight: 600;
+  color: #1a1815;
+  margin-bottom: 4pt;
+}
+
+.tcMeta {
+  font-family: var(--font-mono);
+  font-size: 9pt;
+  letter-spacing: 0.04em;
+  color: #4a453c;
+  padding-bottom: 10pt;
+  margin-bottom: 12pt;
+  border-bottom: 1px solid #c4bcaa;
+}
+
+.tcDays {
+  list-style: none;
+  margin: 0 0 14pt;
+  padding: 0;
+}
+
+.tcDay {
+  padding: 7pt 0;
+  border-bottom: 1px solid #e0dad0;
+  /* Never split a day across a page break — a decision and the words that
+     made it belong together on the sheet. */
+  break-inside: avoid;
+}
+
+.tcDayLabel {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 8pt;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6b6252;
+}
+
+.tcChoice {
+  display: block;
+  margin-top: 3pt;
+  font-family: var(--font-display);
+  font-size: 10.5pt;
+  font-weight: 600;
+  color: #1a1815;
+}
+
+.tcLine {
+  margin-top: 2pt;
+  font-family: var(--font-body);
+  font-size: 10.5pt;
+  font-style: italic;
+  line-height: 1.45;
+  color: #2c2820;
+}
+
+.tcTrade,
+.tcClosing {
+  margin-top: 10pt;
+  break-inside: avoid;
+}
+
+.tcLabel {
+  display: block;
+  margin-bottom: 3pt;
+  font-family: var(--font-mono);
+  font-size: 8pt;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6b6252;
+}
+
+.tcTrade {
+  font-family: var(--font-body);
+  font-size: 10.5pt;
+  color: #2c2820;
+}
+
+.tcClosingText {
+  font-family: var(--font-body);
+  font-size: 11pt;
+  line-height: 1.5;
+  color: #1a1815;
+}
+
+.tcFoot {
+  margin-top: 14pt;
+  padding-top: 8pt;
+  border-top: 1px solid #c4bcaa;
+  font-family: var(--font-mono);
+  font-size: 7.5pt;
+  line-height: 1.55;
+  color: #6b6252;
+}

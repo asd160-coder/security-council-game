@@ -26,16 +26,24 @@ const KEY = 'october-1962:run';
    annoying; resurrecting one is worse. */
 const VERSION = 1;
 
+/* Screens that are not a run, and must never be written to storage.
+
+   A run that has not started is not worth keeping, and saving from the title
+   would offer a fresh visitor their own empty session to resume. The reading
+   surfaces belong here for a sharper reason: they are reached from the title
+   and are not states a run can be resumed into, so saving one overwrites a
+   real run with a state `loadRun` then refuses — losing the run to a screen
+   the student only read.
+
+   This was a chain of `===` and is a named set because `teachers` is the third
+   screen of this kind. Anything reachable from the title without starting a
+   run belongs in it, and forgetting is silent: the loss shows up as a missing
+   resume prompt long after the mistake. */
+const NOT_A_RUN = new Set(['title', 'roleSelect', 'background', 'teachers']);
+
 export function saveRun(state) {
   try {
-    /* A run that has not started is not worth keeping, and saving from the
-       title screen would mean a fresh visitor is immediately offered their own
-       empty session to resume. */
-    /* `background` belongs with these: it is a reading surface reached from
-       the title, not a state a run can be resumed into. Without it here a
-       player who opened the tab would overwrite their saved run with a state
-       `loadRun` then refuses, losing the run to a screen they only read. */
-    if (state.screen === 'title' || state.screen === 'roleSelect' || state.screen === 'background') {
+    if (NOT_A_RUN.has(state.screen)) {
       window.localStorage.removeItem(KEY);
       return;
     }

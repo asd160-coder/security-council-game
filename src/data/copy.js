@@ -24,6 +24,7 @@ export const APP = {
   beginFresh: 'Start a new run',
   credits: 'Sources and credits',
   background: 'Background and the people in it',
+  teachers: 'For teachers',
   creditsTitle: 'Sources and credits',
   creditsBody:
     'Archival photographs and audio in this simulation are in the public domain, on one of two bases: most are works of the United States federal government, and the photographs of Khrushchev and Castro come from the U.S. News & World Report collection, whose rights the magazine dedicated to the public when it gave the collection to the Library of Congress. Each item carries its source where it appears.',
@@ -207,6 +208,15 @@ export const ENDING = {
 export const DEBRIEF = {
   day: (n) => `Day ${n}`,
   noChoice: 'No decisive exchange was recorded for this day.',
+  /* The teacher's copy. "Save as PDF" rather than "Print" because saving is
+     what a student is actually being asked to do, and every current print
+     dialog offers it. */
+  savePdf: 'Save as PDF',
+  teacherCopyTitle: 'October 1962 — record of a run',
+  teacherCopyTrade: 'What the run traded',
+  teacherCopyClosing: 'Closing paragraph, written by the student',
+  teacherCopyFoot:
+    'Produced by the student from their own browser. The five days are quoted as they were chosen; the closing paragraph is the student’s own writing and has not been assessed.',
   draftNote: (action, label) => {
     if (action === 'wrote') return 'Drafting — you wrote the closing';
     if (action === 'revised') return `Drafting — rewrote the clause as ${label}`;

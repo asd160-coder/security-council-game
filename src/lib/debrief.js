@@ -1,5 +1,6 @@
 import { DAYS, getDay } from '../data/days/index.js';
 import { councilFor, reckoningFor } from '../data/council.js';
+import { historyFor } from '../data/history.js';
 import { resolveOutcome } from './outcome.js';
 import { TRACKER_KEYS } from '../data/trackers.js';
 
@@ -128,6 +129,11 @@ export function readPath(state, roleId) {
             : added
               ? 'added'
               : null,
+      /* What the person in this chair actually did on this day. Keyed by role
+         as well as by day, because the three seats were not in the same
+         crisis. Independent of whether the student chose anything here, so it
+         still appears on a day they walked past. */
+      history: historyFor(roleId, day.number),
       movement: state.history.find((h) => h.day === day.number)?.deltas ?? {},
     };
   });

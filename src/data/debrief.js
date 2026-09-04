@@ -133,6 +133,18 @@ export const SECTIONS = {
   words: 'Your own words',
   role: 'The office you held',
   trackers: 'What the run traded',
+  history: 'What actually happened',
+};
+
+/* The label on the per-day comparison. Deliberately flat: "in the event" and
+   "actually" both carry a faint suggestion that the record is the correct
+   answer, and the whole point of the section is that it is a second data
+   point rather than a mark scheme. */
+export const HISTORY_NOTE = {
+  label: (name) => `What ${name} did`,
+  then: 'And then',
+  caveat:
+    'This is what the person in your chair did on the same day. It is offered for comparison, not as the right answer — several of these decisions were argued over at the time and are still argued over now.',
 };
 
 export const NOTES = {

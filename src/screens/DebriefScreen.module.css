@@ -388,7 +388,10 @@
   font-size: 13px;
   font-style: italic;
   line-height: 1.5;
-  color: var(--ink-faint);
+  /* Board, like the rest of the day row — .dayRow's own border is
+     --board-line. This was --ink-faint, a paper token, and escaped the
+     contrast sweep only because it renders on Day 4 alone. */
+  color: var(--silver-faint);
 }
 
 /* The earlier of a day's two conversations, set back from the later one so the
@@ -497,7 +500,8 @@
 .answered {
   margin-top: 14px;
   padding-top: 12px;
-  border-top: 1px solid var(--stock-edge);
+  /* Board too — same wandering paper token as .mandateNote above. */
+  border-top: 1px solid var(--board-line);
 }
 
 .answeredLabel {
@@ -507,7 +511,69 @@
   font-size: var(--fs-label-sm);
   letter-spacing: var(--track-label-tight);
   text-transform: uppercase;
-  color: var(--ink-faint);
+  color: var(--silver-faint);
+}
+
+/* ------------------------------------------------- What actually happened */
+
+/* The record, beside the run. Deliberately an aside rather than a panel: the
+   student's own quoted words stay the thing being read on this row, and this
+   is the second data point set against them.
+
+   It borrows the background tab's "what it left" idiom — a brass rule down the
+   left — because it is the same kind of statement in the same register: the
+   present interface reporting a consequence. Board throughout; nothing here is
+   a 1962 document. */
+.history {
+  margin-top: 14px;
+  padding-left: 16px;
+  border-left: 2px solid var(--brass-dim);
+}
+
+.historyLabel {
+  display: block;
+  margin-bottom: 6px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+.historyText {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.62;
+  color: var(--silver-muted);
+}
+
+.historyThen {
+  margin-top: 8px;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--silver-faint);
+}
+
+.historyThenLabel {
+  display: block;
+  margin-bottom: 3px;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--silver-fainter);
+}
+
+/* Not a rights line — this is prose written for the simulation, not a
+   reproduction — but a teacher should be able to check it. */
+.historySource {
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: var(--track-label-tight);
+  line-height: 1.6;
+  color: var(--silver-fainter);
 }
 
 /* The five-day line beside each ledger row. */

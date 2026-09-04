@@ -2,6 +2,7 @@ import { readDocument, readEndingConditions, readMovement, readPath, readPattern
 import {
   DISCUSSION,
   ENDING_CONDITIONS,
+  HISTORY_NOTE,
   NOTES,
   OPENING,
   PATTERNS,
@@ -9,6 +10,7 @@ import {
   ROLE_REFLECTIONS,
   SECTIONS,
 } from '../data/debrief.js';
+import { AFTERWARDS } from '../data/history.js';
 import { getResolution } from '../data/endings.js';
 import { getArchive } from '../data/archive.js';
 import { getTracker } from '../data/trackers.js';
@@ -181,10 +183,28 @@ export default function DebriefScreen({ state, role, onRestart }) {
                     {DEBRIEF.draftNote(entry.draftAction, entry.draftLabel)}
                   </span>
                 )}
+
+                {/* What the person in this chair actually did, beside what the
+                    student did. Set apart and subordinate: the student's own
+                    words stay the thing being read, and this is the second
+                    data point rather than the answer. Rendered whatever the
+                    student chose, including on a day they walked past. */}
+                {entry.history && (
+                  <div className={styles.history}>
+                    <span className={styles.historyLabel}>{HISTORY_NOTE.label(role.name)}</span>
+                    <p className={styles.historyText}>{entry.history.did}</p>
+                    <p className={styles.historyThen}>
+                      <span className={styles.historyThenLabel}>{HISTORY_NOTE.then}</span>
+                      {entry.history.then}
+                    </p>
+                    <p className={styles.historySource}>{entry.history.source}</p>
+                  </div>
+                )}
               </div>
             </div>
           ))}
         </div>
+        <p className={styles.caveat}>{HISTORY_NOTE.caveat}</p>
       </Reveal>
 
       {/* ------------------------------------------------ The document */}
@@ -283,8 +303,26 @@ export default function DebriefScreen({ state, role, onRestart }) {
         <p className={styles.caveat}>{NOTES.trackerCaveat}</p>
       </Reveal>
 
-      {/* ------------------------------------------------ For discussion */}
+      {/* ------------------------------------------------ What followed */}
+      {/* The game had a rich "before" — the background tab's road from 1961 —
+          a simulated middle, and no "after" at all. This is the after, and it
+          sits before the discussion prompts because two of them are much
+          better questions once the student knows how it actually ended. */}
       <Reveal delay={480} className={styles.section}>
+        <div className={styles.sectionHead}>
+          <Eyebrow>{SECTIONS.history}</Eyebrow>
+          <span className={styles.dayTitle}>{AFTERWARDS.title}</span>
+        </div>
+        <div className={styles.prose}>
+          {AFTERWARDS.body.map((paragraph) => (
+            <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+          ))}
+        </div>
+        <p className={styles.caveat}>{AFTERWARDS.note}</p>
+      </Reveal>
+
+      {/* ------------------------------------------------ For discussion */}
+      <Reveal delay={540} className={styles.section}>
         <div className={styles.sectionHead}>
           <Eyebrow>{DISCUSSION.eyebrow}</Eyebrow>
         </div>
@@ -302,7 +340,7 @@ export default function DebriefScreen({ state, role, onRestart }) {
         </div>
       </Reveal>
 
-      <Reveal delay={540} className={styles.foot}>
+      <Reveal delay={600} className={styles.foot}>
         <p className={styles.caveat}>{NOTES.teacherBridge}</p>
         <div className={styles.actions}>
           <Button variant="primary" onClick={onRestart}>

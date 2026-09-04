@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import { Button, Field, Paper, PaperBody, Reveal } from '../ui/index.jsx';
 import { PLAY } from '../../data/copy.js';
 import { reckoningFor } from '../../data/council.js';
 import { moodFor } from '../../data/scene.js';
 import { roomFor } from '../../data/rooms.js';
+import RoleAnchor from '../scene/RoleAnchor.jsx';
 import RoomPlate from '../scene/rooms/RoomPlate.jsx';
+import UtteranceList from '../scene/UtteranceList.jsx';
 import scene from '../scene/scene.module.css';
 import styles from './steps.module.css';
 
@@ -14,11 +17,18 @@ import styles from './steps.module.css';
    reckoningFor() — because a room that agrees with you afterwards is not a
    room worth having.
 
-   No choice here. This is the same beat as a witness: someone who is not
-   deciding, and who will carry the decision anyway. Giving it a choice would
-   turn being answerable into another lever. */
+   And then you answer. Until Milestone 11 this was a card and a Continue
+   button: the emotional payoff of the whole cabinet cycle, and the player
+   clicked past it. Now the three things you can say back are the ordinary
+   utterance list, each trading a point between two needles, and the adviser
+   gets the last word. The choice is dispatched from Continue rather than on
+   the click, so their reply is read before the room moves on — the same
+   two-beat shape as an exchange with the seats reversed: this time it is you
+   being answered back. */
 
-export default function ReckoningStep({ day, step, role, mandate, choice, onAdvance }) {
+export default function ReckoningStep({ day, step, role, mandate, choice, onChoose, onAdvance }) {
+  const [answer, setAnswer] = useState(null);
+
   /* The negotiation's own category. `choice` is the resolved follow-up for the
      step this one names with `after`, which is how consequence steps already
      find what they report on. */
@@ -46,6 +56,7 @@ export default function ReckoningStep({ day, step, role, mandate, choice, onAdva
     '--scene-light': mood.light,
     '--scene-tone': mood.tone,
   };
+  const answers = reckoning.answers ?? [];
 
   return (
     <div className={`${styles.step} ${styles.stepScene}`} style={style}>
@@ -65,11 +76,52 @@ export default function ReckoningStep({ day, step, role, mandate, choice, onAdva
           </Paper>
         </Reveal>
 
-        <Reveal delay={320} className={scene.actions}>
-          <Button variant="primary" onClick={onAdvance}>
-            {PLAY.continue}
-          </Button>
-        </Reveal>
+        {answers.length === 0 ? (
+          /* Data without answers falls back to the old beat. */
+          <Reveal delay={320} className={scene.actions}>
+            <Button variant="primary" onClick={onAdvance}>
+              {PLAY.continue}
+            </Button>
+          </Reveal>
+        ) : !answer ? (
+          <Reveal delay={320} className={scene.near}>
+            <div className={scene.nearHead}>
+              <span className={scene.nearLabel}>{PLAY.reckoningPrompt}</span>
+              <RoleAnchor role={role} />
+            </div>
+            <UtteranceList options={answers} label={PLAY.reckoningPrompt} onChoose={setAnswer} />
+          </Reveal>
+        ) : (
+          <>
+            <div className={scene.near}>
+              <div className={scene.said}>
+                <span className={scene.saidLabel}>{PLAY.youSaid}</span>
+                <p className={scene.saidLine}>{answer.line}</p>
+              </div>
+            </div>
+
+            {/* Their last word. Announced, as a reply is. */}
+            <Reveal delay={220} className={scene.far}>
+              <div className={scene.farReply}>
+                <span className={scene.replyLabel}>{reckoning.adviser.source}</span>
+                <p className={scene.replyLine} aria-live="polite">
+                  {answer.close}
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={520} className={scene.actions}>
+              <Button variant="primary" onClick={() => onChoose(answer)}>
+                {PLAY.continue}
+              </Button>
+            </Reveal>
+            <Reveal delay={600} className={scene.actions}>
+              <Button variant="quiet" onClick={() => setAnswer(null)}>
+                {PLAY.reconsider}
+              </Button>
+            </Reveal>
+          </>
+        )}
       </div>
     </div>
   );

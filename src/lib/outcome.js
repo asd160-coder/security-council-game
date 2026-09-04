@@ -68,9 +68,10 @@ function resolveCategory(posture, { escalation, councilTrust, legitimacy, civili
      already hot enough that nothing will, or standing has been spent so far
      that nobody's word can.
 
-     The second condition is not decoration. The Secretary-General has no
-     escalatory instrument at all — across every path his escalation never
-     exceeds +1 — so without it his own choices could never break the frame,
+     The second condition is not decoration. The Secretary-General has almost
+     no escalatory instrument — before the Day 3 and Day 4 events his
+     escalation never exceeded +1 on any path, and they add at most +1 to it —
+     so without it his own choices could never break the frame,
      only be present while it broke. What he can spend is his standing, and a
      mediator who declares failure publicly with none left has removed the last
      thing holding this inside diplomacy. The same is true of the other two:

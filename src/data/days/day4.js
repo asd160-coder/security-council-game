@@ -60,6 +60,65 @@ const day4 = {
       ],
     },
 
+    /* ------------------------------------------------------- The aircraft */
+    /* The one thing on this day nobody in the room chose. A witness card with
+       a cost on it: the loss lands whether you strike, trade or wait, which is
+       the difference between an event and an option. Until this step existed
+       the pilot was a sentence in the briefing and moved nothing, and a
+       careful player could finish five days without a single needle moving
+       against them. The aides are invented; the pilot stays unnamed, as in
+       the briefing. */
+    {
+      kind: 'witness',
+      id: 'aircraft',
+      eyebrow: 'Reached your desk',
+      weighLabel: 'What it asks of you',
+      bearsByRole: {
+        rfk: { escalation: 2, civilianRisk: 1 },
+        dobrynin: { escalation: 2, councilTrust: -1 },
+        /* Havana declining the appeal in writing is a blow to the office's
+           standing with the missions, which is the one thing the
+           Secretary-General's outcome actually turns on. */
+        uthant: { civilianRisk: 2, councilTrust: -1, escalation: 1 },
+      },
+      byRole: {
+        rfk: {
+          source: 'From the Secretary of Defense’s office',
+          format: 'cable',
+          stamp: 'Received 27 Oct 1962 · 11:20',
+          title: 'The aircraft is confirmed lost, and there is a standing order about it',
+          body: [
+            'The reconnaissance flight over the eastern sites did not return. Cuban radar tracked it into the surface-to-air envelope and the signal stopped. The pilot’s family has not yet been told, and the officer writing asks that the room remember there is a family at the other end of this before it becomes a number.',
+            'He adds, because it is his job to add it, that the committee agreed in advance that a site which fires on our aircraft will be struck. That order exists. It has not been given, and nobody has yet said for how long it can go on not being given.',
+          ],
+          weigh:
+            'Something happened this morning that you did not decide and cannot take back. Everything you argue today is argued in the hour after it.',
+        },
+        dobrynin: {
+          source: 'Embassy cipher room',
+          format: 'cable',
+          stamp: 'Received 27 Oct 1962 · 12:05',
+          title: 'The Americans say a plane is down. Moscow has said nothing.',
+          body: [
+            'The first account of the aircraft reached the embassy from the American side, by telephone, in a call that was not angry and was worse for it. The caller wished the Ambassador to know what his own side’s forces had done before he read it in the afternoon papers.',
+            'The cipher room has nothing from Moscow on the subject. Either the order was given without the capital knowing, or it was given and the capital would prefer the embassy did not. Neither can be said to the Americans, and both are now assumed by them.',
+          ],
+          weigh:
+            'You are being held to account for a thing you did not know had happened, by people who assume you did. Whatever you say today, that is what it is heard through.',
+        },
+        uthant: {
+          source: 'From the Cuban mission, by hand',
+          title: 'Havana has ordered its guns to fire on aircraft in its airspace',
+          body: [
+            'The Cuban mission delivers a note rather than sending it. It states that the Republic has instructed its forces to engage any aircraft violating its airspace, that the population has been mobilised, and that the Secretary-General’s appeal for restraint was received with respect and cannot be acted on while the island is overflown daily.',
+            'The officer who brought it stays long enough to say, unofficially, that the hospitals in the western provinces have stopped admitting anyone who is not an emergency, in order to keep the beds.',
+          ],
+          weigh:
+            'The office asked for restraint and was answered with a reason. The people the reason is about are not in this building, and are not in either capital.',
+        },
+      },
+    },
+
     /* --------------------------------------- The parties who were not asked */
     /* The cabinet, before the other side.
 
@@ -79,6 +138,8 @@ const day4 = {
     {
       kind: 'exchange',
       id: 'negotiation',
+      /* The slate on the establishing card. */
+      clock: '27 OCT · 16:00',
       eyebrow: 'The decisive conversation',
       /* Where this happens. One line, read before anyone speaks. */
       place:
@@ -150,21 +211,21 @@ const day4 = {
             label: 'Ask which letter he intends to answer',
             line: 'My government has sent two letters. Before you tell me your terms, tell me which of them you are treating as the offer.',
             reply:
-              'He says the first, and does not pretend the choice is anything but deliberate. His government intends to answer the letter it prefers and to behave as though the second had not arrived — and he asks, without embarrassment, whether Moscow would object to being taken at its more reasonable word.',
+              '“The first,” he says, and does not pretend the choice is anything but deliberate. “We intend to answer the letter we prefer and behave as though the second had not arrived.” Then, without embarrassment: “Would Moscow object to being taken at its more reasonable word?”',
           },
           {
             id: 'dob4p-pilot',
             label: 'Raise the aircraft first',
             line: 'A man was killed over Cuba this morning by a weapon my country supplied. I have no instructions about it and I am not going to pretend otherwise.',
             reply:
-              'He tells you that there are people in his government who consider the matter already settled and are waiting only for the morning, and that the President has not agreed and cannot hold that position for very long. He says it as a fact rather than a threat, which is what makes it one.',
+              '“There are people in my government who consider the matter settled and are waiting only for the morning,” he tells you. “The President has not agreed. He cannot hold that position for very long.” He says it as a fact rather than a threat, which is what makes it one.',
           },
           {
             id: 'dob4p-turkey',
             label: 'Press the Turkish point',
             line: 'The second letter asks for nothing your government has not privately conceded is militarily worthless. Why is it impossible?',
             reply:
-              'He does not dispute the military point. He says the difficulty is that it cannot be agreed publicly, because an alliance that trades one member’s security publicly has stopped being one — and then he says something more interesting, which is that this is a statement about publicity rather than about substance.',
+              'He does not dispute the military point. “The difficulty is that it cannot be agreed publicly. An alliance that trades one member’s security in public has stopped being one.” Then something more interesting. “Which is a statement about publicity. Not about substance.”',
           },
         ],
         uthant: [
@@ -289,7 +350,7 @@ const day4 = {
           feedback: 'selective',
           requires: 'note-quarantine-law',
           requiresNote:
-            'Available once you have examined the quarantine proclamation. The argument is in the document, not in the summary of it.',
+            'Available once you have read the quarantine proclamation — it is in your archive. The argument is in the document, not in the summary of it.',
           lineByRole: {
             rfk: 'The quarantine is not a blockade and I can tell you exactly why it is not: a congressional resolution, a vote of the American republics, named categories of materiel and an hour it began. Every one of those is on the record and none of them is mine alone.',
             dobrynin: 'Your Government drafted that proclamation carefully, and I have read it carefully. It rests on a vote of your hemisphere and it interdicts named categories only. I am prepared to treat it as what it says it is, and to expect it to stay that.',

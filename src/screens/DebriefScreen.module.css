@@ -297,7 +297,7 @@
 
 .ledgerRow {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 60px 90px;
+  grid-template-columns: minmax(0, 1fr) 160px 60px 90px;
   gap: 14px;
   align-items: baseline;
   padding: 9px 0;
@@ -425,7 +425,7 @@
   font-size: var(--fs-label-sm);
   letter-spacing: var(--track-label);
   text-transform: uppercase;
-  color: var(--ink-faint);
+  color: var(--silver-faint);
 }
 
 .conditionsRow {
@@ -445,13 +445,13 @@
   font-size: var(--fs-label-sm);
   letter-spacing: var(--track-label-tight);
   text-transform: uppercase;
-  color: var(--ink-faint);
+  color: var(--silver-faint);
 }
 
 .conditionValue {
   font-family: var(--font-mono);
   font-size: var(--fs-readout);
-  color: var(--ink);
+  color: var(--silver);
 }
 
 .conditionsFinal {
@@ -477,4 +477,85 @@
 .partCitationMark {
   margin-right: 8px;
   opacity: 0.7;
+}
+
+/* What reached the desk before anything was said, and what it moved. */
+.boreNote {
+  display: block;
+  margin-bottom: 8px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--ink-faint);
+}
+
+/* The reckoning's answer, quoted after the decisive line. */
+.answered {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--stock-edge);
+}
+
+.answeredLabel {
+  display: block;
+  margin-bottom: 6px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* The five-day line beside each ledger row. */
+.chart {
+  display: block;
+  overflow: visible;
+}
+
+.chartZero {
+  stroke: var(--board-line-bright);
+  stroke-width: 1;
+}
+
+.chartTick {
+  stroke: var(--board-line-bright);
+  stroke-width: 1;
+}
+
+.chartLine {
+  fill: none;
+  stroke: var(--chart-color);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  opacity: 0.8;
+}
+
+.chartPoint {
+  fill: var(--chart-color);
+  stroke: var(--board);
+  stroke-width: 1.5;
+}
+
+.chartDanger {
+  --chart-color: var(--wax-bright);
+}
+
+.chartLegitimacy {
+  --chart-color: var(--brass-bright);
+}
+
+.chartNeutral {
+  --chart-color: var(--signal-bright);
+}
+
+@media (max-width: 620px) {
+  .ledgerRow {
+    grid-template-columns: minmax(0, 1fr) 60px 90px;
+  }
+
+  .chart {
+    display: none;
+  }
 }

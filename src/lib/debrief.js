@@ -1,5 +1,5 @@
 import { DAYS, getDay } from '../data/days/index.js';
-import { councilFor } from '../data/council.js';
+import { councilFor, reckoningFor } from '../data/council.js';
 import { resolveOutcome } from './outcome.js';
 import { TRACKER_KEYS } from '../data/trackers.js';
 
@@ -78,6 +78,26 @@ export function readPath(state, roleId) {
     const revisedHere = state.draft.find((d) => d.revisedOnDay === day.number);
     const heldHere = state.draft.find((d) => d.heldOnDay === day.number);
     const wroteClosing = Boolean(state.closing) && day.steps.some((s) => s.kind === 'writing');
+    /* What reached the desk and cost something before anything was said. */
+    const witness = day.steps.find((s) => s.kind === 'witness' && s.bearsByRole?.[roleId]);
+    const bore = witness
+      ? {
+          title:
+            witness.byRole?.[roleId]?.title ?? witness.cardsByRole?.[roleId]?.[0]?.title ?? null,
+          effects: witness.bearsByRole[roleId],
+        }
+      : null;
+    /* What you said back to the adviser you overruled, on the day that had
+       one. Resolved through the same function the step used, so the debrief
+       quotes the reply the player actually read. */
+    const reckoning = day.steps.find((s) => s.kind === 'reckoning');
+    const answerStored = reckoning ? state.choices[`${day.id}:${reckoning.id}`] : null;
+    const spoken =
+      answerStored && mandate ? reckoningFor(roleId, mandate.mandate, stored?.feedback) : null;
+    const found = spoken?.answers?.find((a) => a.id === answerStored.id) ?? null;
+    const answer = found
+      ? { adviser: spoken.adviser.title, label: found.label, line: found.line, close: found.close }
+      : null;
     return {
       day: day.number,
       title: day.title,
@@ -94,6 +114,8 @@ export function readPath(state, roleId) {
       label: choice?.label ?? null,
       line: choice?.line ?? null,
       consequence: stored ? consequenceFor(day, step.id, stored.feedback) : null,
+      bore,
+      answer,
       /* The composing day is named by what it originally chose; the revising
          day by what it changed the clause to. */
       draftLabel: revisedHere ? revisedHere.label : (added?.originalLabel ?? added?.label ?? null),

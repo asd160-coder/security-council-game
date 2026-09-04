@@ -701,3 +701,23 @@
   font-style: italic;
   color: var(--silver-faint);
 }
+
+/* Under a witness card that bears a cost: the board, not the paper, reading
+   what the document did. The paper is 1962 and says what happened; the cost
+   is the present interface saying what it moved. */
+.bore {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  padding: 0 4px;
+}
+
+.boreLabel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--silver-muted);
+}

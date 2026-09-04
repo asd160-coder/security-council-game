@@ -60,9 +60,22 @@ const day3 = {
       id: 'witness',
       eyebrow: 'Reached your desk this morning',
       weighLabel: 'What it asks of you',
+      /* What reached your desk costs something whether or not you answer it —
+         a step can bear a cost when it is reached (src/lib/gameState.js).
+         Written to the axis rule in src/data/trackers.js: the eleven minutes
+         on the line heat the crisis and show the policy's seams; a cable that
+         instructs nothing leaves an ambassador with nothing to offer; an
+         island told to expect invasion is exposure, not temperature. */
+      bearsByRole: {
+        rfk: { escalation: 2, legitimacy: -1 },
+        dobrynin: { leverage: -2, escalation: 1 },
+        uthant: { civilianRisk: 2, legitimacy: -1 },
+      },
       byRole: {
         rfk: {
           source: 'Signal relayed from the quarantine line',
+          format: 'cable',
+          stamp: 'Received 25 Oct 1962 · 07:40',
           title: 'A destroyer captain asks what he is authorised to do',
           body: [
             'A commanding officer on the line reports that a vessel failed to answer signals for eleven minutes and then complied. He states that his orders tell him what to do if a ship refuses to stop, and do not tell him how long to wait before deciding that it has refused.',
@@ -73,6 +86,8 @@ const day3 = {
         },
         dobrynin: {
           source: 'Embassy cipher room',
+          format: 'cable',
+          stamp: 'Received 25 Oct 1962 · 08:15',
           title: 'A clerk brings a cable he has been told not to discuss',
           body: [
             'A junior cipher clerk delivers a cable marked for the Ambassador alone. It instructs the embassy to maintain its present position. It does not say what the present position is, and it does not answer either of the questions you sent.',
@@ -98,6 +113,8 @@ const day3 = {
     {
       kind: 'exchange',
       id: 'pressure',
+      /* The slate on the establishing card. */
+      clock: '25 OCT · 10:10',
       eyebrow: 'Not a meeting anyone will minute',
       /* Where this happens. One line, read before anyone speaks. */
       place:
@@ -116,16 +133,32 @@ const day3 = {
           name: 'A senior military adviser',
           title: 'Speaking for those who want the sites struck',
           presence: 'individual',
+          /* Invented, and deliberately not the general the record would
+             suggest: a composite of the case for striking, not a likeness of
+             the man who made it. Marked as an illustration like every other
+             face here. */
+          portrait: 'us-military-adviser.jpg',
+          portraitFocus: '50% 22%',
         },
         dobrynin: {
           name: 'The embassy military attaché',
           title: 'Reporting separately to Moscow',
           presence: 'individual',
+          /* Invented. The tunic carries no insignia of any real formation,
+             which is the rule for every face in this game: a likeness of
+             nobody, marked as an illustration. */
+          portrait: 'soviet-attache.jpg',
+          portraitFocus: '50% 22%',
         },
         uthant: {
           name: 'A permanent representative',
           title: 'Speaking for a delegation losing patience',
           presence: 'individual',
+          /* Invented, and his delegation is deliberately unnamed — the lapel
+             pin carries no crest and there is no flag anywhere in the frame,
+             because the writing never says which country instructed him. */
+          portrait: 'un-permanent-representative.jpg',
+          portraitFocus: '50% 22%',
         },
       },
       framingByRole: {
@@ -146,7 +179,7 @@ const day3 = {
             label: 'Hear the case out',
             line: 'Tell me what you would do, and tell me what you think happens on the third day.',
             reply:
-              'He is precise, which is what makes it difficult. Strike the sites while they are still incomplete, accept that some will survive, accept that Soviet technicians will be killed, and accept that the response is likely to fall on Berlin rather than on Florida. He does not claim it ends well. He claims the alternative ends worse.',
+              'He is precise, which is what makes it difficult. “Strike the sites while they are incomplete. Accept that some survive. Accept that Soviet technicians are killed. Accept that the answer falls on Berlin rather than Florida.” He does not claim it ends well. He claims the alternative ends worse.',
             follow: [
               {
                 id: 'rfk3f-hold',
@@ -169,7 +202,7 @@ const day3 = {
             label: 'Put the clock to him',
             line: 'How long before those sites are operational, and how confident are you in that number?',
             reply:
-              'He gives you a range of days rather than a number and does not pretend it is better than that. Then he says the thing you were hoping he would not: that the estimate has been revised toward the shorter end twice this week, and that revisions have only ever gone one way.',
+              'He gives you a range of days rather than a number, and does not pretend it is better than that. Then the thing you were hoping he would not say. “It has been revised toward the shorter end twice this week. Revisions have only ever gone one way.”',
             follow: [
               {
                 id: 'rfk3f-buy',
@@ -192,7 +225,7 @@ const day3 = {
             label: 'Ask what it costs the other side to stop',
             line: 'Set aside what we can do to them. Tell me what it would cost Khrushchev to take those weapons out, and whether he could survive it.',
             reply:
-              'He answers that this is not a military question and he is not the man to ask, which is fair — and then answers it anyway. A government that retreats under an ultimatum in public does not usually remain the government. He observes that this is an argument for giving them something, and that he does not like where that argument goes.',
+              '“That is not a military question, and I am not the man to ask,” he says, which is fair. Then he answers it anyway. “A government that retreats under a public ultimatum does not usually remain the government.” He notes that this is an argument for giving them something, and that he does not like where the argument goes.',
             follow: [
               {
                 id: 'rfk3f-facesave',
@@ -217,7 +250,7 @@ const day3 = {
             label: 'Ask what he intends to send',
             line: 'You are entitled to report what you like. I would prefer to know what it is before Moscow does.',
             reply:
-              'He tells you plainly. He intends to report that the embassy is being outmanoeuvred, that the American quarantine is being permitted to establish a precedent, and that the political line has been too accommodating. He does not appear to think this is an accusation.',
+              'He tells you plainly. “That the embassy is being outmanoeuvred. That the American quarantine is being allowed to set a precedent. That the political line has been too accommodating.” He does not appear to think any of it is an accusation.',
             follow: [
               {
                 id: 'dob3f-record',
@@ -240,7 +273,7 @@ const day3 = {
             label: 'Establish who speaks for the embassy',
             line: 'While we are being direct: do you consider yourself under my authority in this building, or not?',
             reply:
-              'He says that in matters of policy he does, and in matters of military assessment he does not, and that he assumes you would not want it otherwise. It is said without hostility, which is worse. He is describing an arrangement, not defying one.',
+              '“In matters of policy, yes. In matters of military assessment, no.” He says it without hostility, which is worse. “I assume you would not want it otherwise.” He is describing an arrangement, not defying one.',
             follow: [
               {
                 id: 'dob3f-accept',
@@ -263,7 +296,7 @@ const day3 = {
             label: 'Tell him what you saw across the table',
             line: 'You have read the cables. I have sat with them. Let me tell you what I do not think Moscow understands.',
             reply:
-              'He listens, and asks one question: whether you believe the Americans would actually strike, or whether you believe they are constructing a position from which to be talked down. He says the whole of his report depends on the answer, and that he genuinely does not know.',
+              'He listens, and asks one question. “Do you believe the Americans would actually strike — or that they are building a position from which to be talked down?” The whole of his report depends on your answer, he says, and he does not know it himself.',
             follow: [
               {
                 id: 'dob3f-honest',
@@ -288,7 +321,7 @@ const day3 = {
             label: 'Ask what changed',
             line: 'You supported the appeal on Tuesday. Tell me what your government heard between then and now.',
             reply:
-              'He says his capital has concluded that the Secretary-General is being used — that appeals for restraint delay a resolution which will happen anyway, and that being the party who asked everyone to wait is not a position with a future. He adds that he argued against this view and lost.',
+              '“My capital has concluded that the Secretary-General is being used,” he says. “That appeals for restraint delay a resolution which will happen anyway, and that being the party who asked everyone to wait is not a position with a future.” He adds that he argued against this and lost.',
             follow: [
               {
                 id: 'uth3f-persist',
@@ -311,7 +344,7 @@ const day3 = {
             label: 'Count the room',
             line: 'Before I answer you, tell me how many delegations you speak for this morning.',
             reply:
-              'He is candid: four certainly, perhaps seven. Not a majority, but enough that a proposal from your office would now be argued over rather than agreed to. He observes that this is not the same as opposition, and that it is worse, because it is procedural.',
+              'He is candid. “Four certainly. Perhaps seven.” Not a majority, but enough that a proposal from your office would now be argued over rather than agreed to. “It is not opposition,” he says. “It is worse than that. It is procedural.”',
             follow: [
               {
                 id: 'uth3f-narrow',
@@ -334,7 +367,7 @@ const day3 = {
             label: 'Put the island in front of him',
             line: 'A member of my staff returned from Havana this morning. Before you tell me what your instructions are, I would like you to hear what she saw.',
             reply:
-              'He hears it out properly, which you did not expect. Then he says that everything she describes is true and that none of it will change a single vote in this building, and that he is sorry, and that both of those statements are his honest position.',
+              'He hears it out properly, which you did not expect. “Everything she describes is true,” he says. “None of it will change a single vote in this building. I am sorry. Both of those are my honest position.”',
             follow: [
               {
                 id: 'uth3f-record',

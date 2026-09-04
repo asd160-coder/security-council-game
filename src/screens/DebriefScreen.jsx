@@ -12,7 +12,7 @@ import {
 import { getResolution } from '../data/endings.js';
 import { getArchive } from '../data/archive.js';
 import { getTracker } from '../data/trackers.js';
-import { formatValue } from '../lib/format.js';
+import { formatDelta, formatValue } from '../lib/format.js';
 import { Button, Eyebrow, Reveal } from '../components/ui/index.jsx';
 import { DEBRIEF, PLAY } from '../data/copy.js';
 import styles from './DebriefScreen.module.css';
@@ -26,6 +26,42 @@ import styles from './DebriefScreen.module.css';
 
    Its job is to make a twenty-five minute session worth discussing for
    another twenty. */
+
+/* Five days as a line. Zero at the left, then where each completed day left
+   the tracker; day ticks along the baseline; the register colour of the
+   tracker; native titles on the points so a hover names the day and value.
+   The ledger's numbers beside it remain the accessible reading. */
+const CHART_CLASS = { danger: 'chartDanger', legitimacy: 'chartLegitimacy', neutral: 'chartNeutral' };
+
+function DayChart({ series, register }) {
+  const W = 160;
+  const H = 36;
+  const pad = 4;
+  const x = (i) => pad + (i / Math.max(1, series.length - 1)) * (W - pad * 2);
+  const y = (v) => H / 2 - (Math.max(-20, Math.min(20, v)) / 20) * (H / 2 - 4);
+  const points = series.map((v, i) => `${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(' ');
+  return (
+    <svg
+      className={`${styles.chart} ${styles[CHART_CLASS[register]] ?? ''}`}
+      viewBox={`0 0 ${W} ${H}`}
+      width={W}
+      height={H}
+      aria-hidden="true"
+      focusable="false"
+    >
+      <line x1={pad} y1={H / 2} x2={W - pad} y2={H / 2} className={styles.chartZero} />
+      {series.map((v, i) => (
+        <line key={`t${i}`} x1={x(i)} y1={H / 2 - 2} x2={x(i)} y2={H / 2 + 2} className={styles.chartTick} />
+      ))}
+      <polyline points={points} className={styles.chartLine} />
+      {series.map((v, i) => (
+        <circle key={`p${i}`} cx={x(i)} cy={y(v)} r={i === series.length - 1 ? 3 : 2} className={styles.chartPoint}>
+          <title>{i === 0 ? 'Start · 0' : `Day ${i} · ${formatValue(v)}`}</title>
+        </circle>
+      ))}
+    </svg>
+  );
+}
 
 const KIND_LABEL = { selected: 'Selected', revised: 'Revised', written: 'Written by you' };
 const KIND_CLASS = { selected: 'kindSelected', revised: 'kindRevised', written: 'kindWritten' };
@@ -98,6 +134,17 @@ export default function DebriefScreen({ state, role, onRestart }) {
                 <span className={styles.dayTitle}>{entry.title}</span>
               </div>
               <div className={styles.dayBody}>
+                {/* What the day did to you before you said anything. */}
+                {entry.bore && (
+                  <span className={styles.boreNote}>
+                    {DEBRIEF.bore(entry.bore.title)}
+                    {' — '}
+                    {Object.entries(entry.bore.effects)
+                      .filter(([, value]) => value !== 0)
+                      .map(([key, value]) => `${getTracker(key)?.label} ${formatDelta(value)}`)
+                      .join(' · ')}
+                  </span>
+                )}
                 {/* Only Day 4 has a council. Reading the mandate above the
                     choice is the point: what you agreed to do, then what you
                     did. */}
@@ -120,6 +167,15 @@ export default function DebriefScreen({ state, role, onRestart }) {
                   <p className={styles.consequence}>{DEBRIEF.noChoice}</p>
                 )}
                 {entry.consequence && <p className={styles.consequence}>{entry.consequence}</p>}
+                {/* The reckoning's answer: what you said to the adviser you
+                    overruled, and what they said last. */}
+                {entry.answer && (
+                  <div className={styles.answered}>
+                    <span className={styles.answeredLabel}>{DEBRIEF.answered}</span>
+                    <p className={styles.choiceLine}>“{entry.answer.line}”</p>
+                    <p className={styles.consequence}>{entry.answer.close}</p>
+                  </div>
+                )}
                 {entry.draftAction && (
                   <span className={styles.draftNote}>
                     {DEBRIEF.draftNote(entry.draftAction, entry.draftLabel)}
@@ -215,6 +271,10 @@ export default function DebriefScreen({ state, role, onRestart }) {
           {movement.map((row) => (
             <div key={row.key} className={styles.ledgerRow}>
               <span className={styles.ledgerLabel}>{getTracker(row.key)?.label}</span>
+              <DayChart
+                series={[0, ...state.history.map((h) => h.trackers[row.key])]}
+                register={getTracker(row.key)?.register}
+              />
               <span className={styles.ledgerValue}>{formatValue(row.total)}</span>
               <span className={styles.ledgerTravel}>{DEBRIEF.travelled(row.travelled)}</span>
             </div>

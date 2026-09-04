@@ -54,7 +54,7 @@ export default function DialogueStep({ day, step, role, onChoose, onConsultAdvis
 
   return (
     <div className={`${styles.step} ${styles.stepScene}`} style={style}>
-      <div className={scene.scene}>
+      <div className={`${scene.scene} ${scene.iris}`}>
         {/* The room stays present during the conversation as a strip behind
             the head — the same drawing cropped to its top and pushed down in
             contrast, so no utterance is ever read over scenery. */}

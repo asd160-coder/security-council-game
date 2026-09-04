@@ -14,6 +14,20 @@ export default function BriefingStep({ day, step, onAdvance, standing, history, 
   const callback = step.channelCallback?.[history?.channelCategory] ?? null;
   const archive = step.archiveIds ?? (step.archiveId ? [step.archiveId] : []);
 
+  /* Leaving the briefing is the last chance to notice what was read. The
+     archive module files a document when its foot scrolls into view, but that
+     relies on an intersection observer, which a throttled or backgrounded tab
+     can starve. This is the check that needs no rendering: if the foot of a
+     document is at or above the bottom of the viewport when Continue is
+     pressed, the student reached it. */
+  const leave = () => {
+    document.querySelectorAll('[data-read-mark][data-unlocks]').forEach((mark) => {
+      const id = mark.getAttribute('data-unlocks');
+      if (id && mark.getBoundingClientRect().top <= window.innerHeight) onOpenArchive?.(id);
+    });
+    onAdvance();
+  };
+
   return (
     <div className={`${styles.step} ${styles.stepWide}`}>
       <Reveal delay={0} className={styles.head}>
@@ -51,7 +65,7 @@ export default function BriefingStep({ day, step, onAdvance, standing, history, 
       ))}
 
       <Reveal delay={460} className={styles.actions}>
-        <Button variant="primary" onClick={onAdvance}>
+        <Button variant="primary" onClick={leave}>
           {PLAY.continue}
         </Button>
       </Reveal>

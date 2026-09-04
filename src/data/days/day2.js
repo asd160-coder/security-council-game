@@ -38,6 +38,8 @@ const day2 = {
     {
       kind: 'dialogue',
       id: 'public-exchange',
+      /* The slate on the establishing card. */
+      clock: '23 OCT · 16:00',
       eyebrow: 'Security Council · on the record',
       /* Where this happens. One line, read before anyone speaks. */
       place:
@@ -179,6 +181,8 @@ const day2 = {
     {
       kind: 'exchange',
       id: 'back-channel',
+      /* The slate on the establishing card. */
+      clock: '23 OCT · 21:30',
       eyebrow: 'Private channel · not for the record',
       /* Where this happens. One line, read before anyone speaks. */
       place:
@@ -228,7 +232,7 @@ const day2 = {
             label: 'Ask him directly',
             line: 'I am going to ask you once more, and I would like you to think before answering. Are there offensive weapons in Cuba?',
             reply:
-              'He does not answer quickly. When he does, it is careful: he has received no information from his government that would let him say anything different from what he has said before — and he does not say that nothing is there.',
+              'He does not answer quickly. “I have received nothing from my government that would let me say anything different from what I have already said,” he tells you. He does not say that nothing is there.',
             follow: [
               {
                 id: 'rfk2f-press',
@@ -251,7 +255,7 @@ const day2 = {
             label: 'Deliver the warning',
             line: 'I have not come to negotiate. I have come so that no one in Moscow can say afterwards that they did not understand what will happen if those sites become operational.',
             reply:
-              'He receives it without protest and writes nothing down. He asks one question: whether the message carries the President’s authority, or whether it is the opinion of a brother.',
+              'He receives it without protest and writes nothing down. Then one question. “Does this carry the President’s authority — or is it the opinion of a brother?”',
             follow: [
               {
                 id: 'rfk2f-authority',
@@ -274,7 +278,7 @@ const day2 = {
             label: 'Test what is possible',
             line: 'Suppose those sites came out under inspection. What would your government need to be able to say about it afterwards?',
             reply:
-              'He does not dismiss the question, which is itself an answer. He observes, without committing to anything, that his government has often noted the presence of American missiles on its own borders — and that a country which had received an assurance about invasion would have less need of defences.',
+              'He does not dismiss the question, which is itself an answer. “My government has often noted the presence of American missiles on its own borders,” he says, committing to nothing. “And a country that had received an assurance about invasion would have less need of defences.”',
             follow: [
               {
                 id: 'rfk2f-explore',
@@ -299,7 +303,7 @@ const day2 = {
             label: 'Hold the line you were given',
             line: 'I have told you what my government has told me. If you have evidence that contradicts it, then it contradicts what I was also given to believe.',
             reply:
-              'He looks at you for a moment longer than is comfortable, and says he believes you — which is worse than being disbelieved, because it means he has concluded that Moscow lied to its own ambassador.',
+              'He looks at you for a moment longer than is comfortable. “I believe you,” he says. It is worse than being disbelieved: he has concluded that Moscow lied to its own ambassador.',
             follow: [
               {
                 id: 'dob2f-admit',
@@ -322,7 +326,7 @@ const day2 = {
             label: 'Raise the obvious comparison',
             line: 'Before we discuss what is ninety miles from your coast, perhaps you will tell me what is stationed on my country’s western frontier, and by whose leave.',
             reply:
-              'He does not pretend not to understand. He says that comparison will be made by others soon enough, and that in his judgement it is a matter which could be dealt with — but that it cannot be dealt with under a public ultimatum without destroying the government that agreed to it.',
+              'He does not pretend not to understand. “That comparison will be made by others soon enough, and in my judgement it is a matter that could be dealt with,” he says. “It cannot be dealt with under a public ultimatum without destroying the government that agreed to it.”',
             follow: [
               {
                 id: 'dob2f-press-parity',
@@ -345,7 +349,7 @@ const day2 = {
             label: 'Speak about the ships',
             line: 'Your quarantine begins at dawn. My government has not told me what its captains have been ordered to do. I am telling you that I do not know, and that this should frighten you.',
             reply:
-              'He goes very quiet. He tells you that the same uncertainty exists on his side of the water, that men are being asked to make decisions at sea that ought to be made in capitals, and that neither of you can guarantee what happens at the line.',
+              'He goes very quiet. “The same uncertainty exists on our side of the water,” he tells you. “Men are being asked to make decisions at sea that ought to be made in capitals. Neither of us can guarantee what happens at that line.”',
             follow: [
               {
                 id: 'dob2f-slow',

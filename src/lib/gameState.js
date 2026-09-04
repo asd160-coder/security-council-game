@@ -49,10 +49,39 @@ const fileUnlock = (state, id) => {
   };
 };
 
+/* Landing on a step can cost something the player did not choose.
+
+   A step may carry `bearsByRole`: an effect vector applied the moment the
+   step is reached, before anything on it is read. Day 3's cable and Day 4's
+   lost aircraft use it. Until Milestone 11 every movement of every needle
+   was a consequence of the player's own choice, so a careful player finished
+   five days without one ever moving against them — a crisis in which nothing
+   simply happens. Applied on entry rather than on exit so the indicators show
+   the loss while the card is in front of you. */
+const enter = (state, stepIndex) => {
+  const step = getDay(state.day)?.steps[stepIndex];
+  const effects = step?.bearsByRole?.[state.roleId];
+  if (!effects) return { ...state, stepIndex };
+  return {
+    ...state,
+    stepIndex,
+    trackers: applyEffects(state.trackers, effects),
+    lastDeltas: effects,
+  };
+};
+
 export function reducer(state, action) {
   switch (action.type) {
     case 'begin':
       return { ...state, screen: 'roleSelect' };
+
+    /* Optional reading, reached from the title and returning to it. Not part
+       of a run: see the guard in src/lib/persist.js. */
+    case 'openBackground':
+      return { ...state, screen: 'background' };
+
+    case 'closeBackground':
+      return { ...state, screen: 'title' };
 
     case 'selectRole': {
       const role = getRole(action.roleId);
@@ -66,7 +95,7 @@ export function reducer(state, action) {
     }
 
     case 'advance':
-      return { ...state, stepIndex: state.stepIndex + 1 };
+      return enter(state, state.stepIndex + 1);
 
     case 'chooseLine': {
       const { stepKey, choice, unlockId } = action;
@@ -76,26 +105,28 @@ export function reducer(state, action) {
          made, not when the consequence screen happens to render it. The
          consequence step shows what was filed; it does not do the filing. */
       return fileUnlock(
-        {
-          ...state,
-          trackers: after,
-          lastDeltas: choice.effects,
-          choices: {
-            ...state.choices,
-            [stepKey]: {
-              id: choice.id,
-              feedback: choice.feedback,
-              /* Day 5's final choice carries a posture the outcome logic
-                 reads. Earlier days do not set one. */
-              ...(choice.posture ? { posture: choice.posture } : {}),
-              /* Day 4's council choice carries the course you agreed to take
-                 into the negotiation. The reckoning reads it back to work out
-                 whom you overruled. Same guarded shape as posture. */
-              ...(choice.mandate ? { mandate: choice.mandate } : {}),
+        enter(
+          {
+            ...state,
+            trackers: after,
+            lastDeltas: choice.effects,
+            choices: {
+              ...state.choices,
+              [stepKey]: {
+                id: choice.id,
+                feedback: choice.feedback,
+                /* Day 5's final choice carries a posture the outcome logic
+                   reads. Earlier days do not set one. */
+                ...(choice.posture ? { posture: choice.posture } : {}),
+                /* Day 4's council choice carries the course you agreed to take
+                   into the negotiation. The reckoning reads it back to work out
+                   whom you overruled. Same guarded shape as posture. */
+                ...(choice.mandate ? { mandate: choice.mandate } : {}),
+              },
             },
           },
-          stepIndex: state.stepIndex + 1,
-        },
+          state.stepIndex + 1,
+        ),
         unlockId,
       );
     }
@@ -116,7 +147,7 @@ export function reducer(state, action) {
          a clause commits you is a decision with a cost. Day 1's tone options
          have no effects and are unaffected by this. */
       const after = option.effects ? applyEffects(state.trackers, option.effects) : state.trackers;
-      return {
+      return enter({
         ...state,
         trackers: after,
         lastDeltas: option.effects ?? state.lastDeltas,
@@ -137,8 +168,7 @@ export function reducer(state, action) {
             citation: option.citation,
           },
         ],
-        stepIndex: state.stepIndex + 1,
-      };
+      }, state.stepIndex + 1);
     }
 
     case 'reviseDraft': {
@@ -148,7 +178,7 @@ export function reducer(state, action) {
          the tray show that the document has a history. */
       const { targetDay, option } = action;
       const after = option.effects ? applyEffects(state.trackers, option.effects) : state.trackers;
-      return {
+      return enter({
         ...state,
         trackers: after,
         lastDeltas: option.effects ?? state.lastDeltas,
@@ -182,12 +212,11 @@ export function reducer(state, action) {
             originalLabel: entry.originalLabel ?? entry.label,
           };
         }),
-        stepIndex: state.stepIndex + 1,
-      };
+      }, state.stepIndex + 1);
     }
 
     case 'setClosing':
-      return { ...state, closing: action.text, stepIndex: state.stepIndex + 1 };
+      return enter({ ...state, closing: action.text }, state.stepIndex + 1);
 
     case 'endDay': {
       /* The day boundary. Trackers and the file carry forward; everything
@@ -208,15 +237,19 @@ export function reducer(state, action) {
         const finished = state.day >= PLANNED_DAYS[PLANNED_DAYS.length - 1].number;
         return { ...state, history, screen: finished ? 'ending' : 'stub' };
       }
-      return {
-        ...state,
-        history,
-        day: next,
-        stepIndex: 0,
-        unlockedToday: [],
-        lastDeltas: {},
-        dayStartTrackers: state.trackers,
-      };
+      /* The new day's first step may bear a cost of its own; `enter` looks the
+         day up from the state it is handed, so the day is set first. */
+      return enter(
+        {
+          ...state,
+          history,
+          day: next,
+          unlockedToday: [],
+          lastDeltas: {},
+          dayStartTrackers: state.trackers,
+        },
+        0,
+      );
     }
 
     case 'openDebrief':

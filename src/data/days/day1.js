@@ -55,6 +55,8 @@ const day1 = {
     {
       kind: 'exchange',
       id: 'first-response',
+      /* The slate on the establishing card. */
+      clock: '16 OCT · 09:40',
       eyebrow: 'First formal response',
       place:
         'The room where the first words are chosen. Outside it, nobody yet knows there is anything to choose.',
@@ -74,11 +76,21 @@ const day1 = {
           name: 'The counsellor',
           title: 'Who has read the traffic, and knows what is not in it',
           presence: 'individual',
+          /* A likeness of nobody: this man is invented, so the portrait is not
+             an interpretation of a subject the way the three seats' are. It
+             carries the same illustration marker and the same folder. */
+          portrait: 'soviet-counsellor.jpg',
+          portraitFocus: '50% 22%',
         },
         uthant: {
           name: 'A deputy',
           title: 'Who will still be here when both governments have finished',
           presence: 'individual',
+          /* Invented, like the counsellor: a likeness of nobody, marked as an
+             illustration wherever it appears. The lamp in the frame is the one
+             in his room — see `desk`/`lamp` for this scene in src/data/rooms.js. */
+          portrait: 'un-deputy.jpg',
+          portraitFocus: '50% 25%',
         },
       },
       framingByRole: {
@@ -99,7 +111,7 @@ const day1 = {
             label: 'Ask what the photographs establish',
             line: 'Before anyone tells me what to do about it — what do we actually know, and how certain are the people who know it?',
             reply:
-              'He tells you what the interpreters told him, in their words rather than his: medium-range sites, not yet operational, construction moving faster than anyone budgeted for. Then he adds the part that is his own. They were certain enough to wake him, and he has not been given a second opinion because there is not one.',
+              'He gives you the interpreters’ words rather than his own. “Medium-range sites. Not operational yet. Construction moving faster than anyone budgeted for.” Then he adds the part that is his. “They were certain enough to wake me. There is no second opinion, because there is not one to have.”',
             follow: [
               {
                 id: 'rfk1f-firm',
@@ -122,7 +134,7 @@ const day1 = {
             label: 'Ask how long there is',
             line: 'How long before those sites can do what they were built to do? Give me the number you would defend, not the one that sounds calm.',
             reply:
-              'He does not have a number and will not invent one. What he has is a range, and the fact that the range has been revised twice since the first frame was read — both times toward the shorter end. He says nobody has told him revisions ever go the other way.',
+              'He does not have a number and will not invent one. “What I have is a range,” he says, “and it has been revised twice since the first frame was read. Both times toward the shorter end.” Nobody, he adds, has told him revisions ever go the other way.',
             follow: [
               {
                 id: 'rfk1f-legitimacy',
@@ -145,7 +157,7 @@ const day1 = {
             label: 'Say what you think before he asks',
             line: 'I will tell you what I think and you can decide what it is worth. Whatever we do first is the thing everyone else will have to live inside.',
             reply:
-              'He lets you finish, which is not always what happens. Then he asks the question you were hoping to be spared: whether you would say the same thing with the Chiefs in the room, and whether you would say it tomorrow when the room is larger and the recommendation is already on the table.',
+              'He lets you finish, which is not always what happens. Then he asks the question you were hoping to be spared. “Would you say that with the Chiefs in the room? Would you say it tomorrow, when the room is larger and the recommendation is already on the table?”',
             follow: [
               {
                 id: 'rfk1f-diplomatic',
@@ -170,7 +182,7 @@ const day1 = {
             label: 'Ask what the traffic shows',
             line: 'Tell me what came in overnight, and then tell me what did not come in that you expected to.',
             reply:
-              'The traffic is ordinary, and that is his point. No instruction, no warning, no request for a reading of the American mood — on a morning when the American mood has plainly changed. He says an embassy that is not being told anything is usually an embassy whose government has decided something.',
+              'The traffic is ordinary, and that is his point. “No instruction. No warning. Nobody has asked us to read the American mood — on a morning when the American mood has plainly changed.” He lets that sit. “An embassy that is not being told anything is usually an embassy whose government has decided something.”',
             follow: [
               {
                 id: 'dob1f-controlled',
@@ -193,7 +205,7 @@ const day1 = {
             label: 'Ask what you are authorised to say',
             line: 'If I am asked today — directly, by someone who already knows the answer — what am I permitted to say?',
             reply:
-              'He is careful, because the honest answer is unhelpful. You are authorised to repeat what you have already said, which is that there are no offensive weapons in Cuba. He notes, without emphasis, that you were given that line by people who did not tell you what it was for.',
+              '“You are authorised to repeat what you have already said,” he tells you. “There are no offensive weapons in Cuba.” He does not say who decided the line, or why — only that it holds.',
             follow: [
               {
                 id: 'dob1f-diplomatic',
@@ -216,7 +228,7 @@ const day1 = {
             label: 'Say plainly that you have not been told',
             line: 'I want it recorded, here, between us, that I do not know what my own government has done. I would rather find that out from you than from an American.',
             reply:
-              'He does not pretend to be surprised, and he does not offer comfort. He says the embassy has been in this position before and that the ambassadors who survived it were the ones who did not guess. Then he asks what you want him to do with the conversation you have just had.',
+              'He does not pretend to be surprised, and he does not offer comfort. “This embassy has been here before,” he says. “The ambassadors who survived it were the ones who did not guess.” Then he asks what you want him to do with the conversation you have just had.',
             follow: [
               {
                 id: 'dob1f-legitimacy',
@@ -241,7 +253,7 @@ const day1 = {
             label: 'Ask what the office can actually do',
             line: 'Before we decide what to say — what is it, precisely, that this office can do that neither of them can do for themselves?',
             reply:
-              'He gives you the short list because it is short. You can convene, you can ask, and you can put something on the record that both of them will have to answer. You cannot compel, you cannot verify without consent, and you cannot make either of them take a call. He adds that the list has never been longer than this and has occasionally been enough.',
+              'He gives you the list, which is short. “You can convene. You can ask. You can put something on the record that both of them will have to answer.” Then the other half. “You cannot compel, you cannot verify without consent, and you cannot make either of them take a call.” He adds that the list has never been longer than this, and has occasionally been enough.',
             follow: [
               {
                 id: 'uth1f-restraint',
@@ -264,7 +276,7 @@ const day1 = {
             label: 'Ask who has told you what',
             line: 'Who has actually informed this office of anything? Not what we have inferred — what we have been told.',
             reply:
-              'Nobody has. He has the list of what was cancelled and by whom, and the observation that the cancellations are all on one side of the building. He says the office is being managed rather than consulted, and that this is usually the last quiet morning before it is asked to do something impossible.',
+              'Nobody has. He has a list of what was cancelled and by whom, and the cancellations are all on one side of the building. “We are being managed rather than consulted,” he says. “In my experience this is the last quiet morning before the office is asked to do something impossible.”',
             follow: [
               {
                 id: 'uth1f-procedure',
@@ -287,7 +299,7 @@ const day1 = {
             label: 'Say you intend to move before being asked',
             line: 'I do not intend to wait to be invited into this. Tell me what it costs the office if I am early and wrong.',
             reply:
-              'He tells you plainly: if you are early and wrong you have spent the only thing the office holds, and you will be asked to sit down by people who were glad of you last week. Then he says the other half, which he clearly does not enjoy saying. If you are late and right, the same thing happens, and later.',
+              '“If you are early and wrong, you have spent the only thing this office holds,” he says, “and you will be asked to sit down by people who were glad of you last week.” Then the other half, which he does not enjoy saying. “If you are late and right, the same thing happens. Later.”',
             follow: [
               {
                 id: 'uth1f-harden',

@@ -66,6 +66,12 @@ export const REGISTERS = {
   /* probe — a question that has not decided what it wants yet */
   evidence: 'probe',
   ambiguity: 'probe',
+
+  /* The reckoning's three answers: owning a decision is weight applied,
+     conceding is an offer both ways, enlisting is the long view. */
+  own: 'press',
+  concede: 'bridge',
+  enlist: 'measure',
 };
 
 /* Day 4 and Day 5 openings carry no `feedback` at all — they are probes by
@@ -89,12 +95,16 @@ export const registerFor = (feedback) => REGISTERS[feedback] ?? DEFAULT_REGISTER
 
    `light` positions the scene's single raking gradient. */
 
+/* `tint` is the colour temperature of the whole board for the day, laid over
+   the ground as one faint gradient from the top: overcast signal on the day of
+   discovery, flat daylight for the chamber, sodium brass for the night the
+   bargain is struck, stock-rose for the dawn that waits on an answer. */
 export const SCENE_MOODS = {
-  1: { axis: 56, light: '18% 0%', tone: 0.05, note: 'Discovery — evidence on a table' },
-  2: { axis: 64, light: '50% 0%', tone: 0.06, note: 'The chamber, and the room behind it' },
-  3: { axis: 48, light: '78% 0%', tone: 0.08, note: 'Enclosed. The clock is in the room' },
-  4: { axis: 72, light: '50% 0%', tone: 0.07, note: 'Bargaining space — two sides, squared' },
-  5: { axis: 40, light: '30% 0%', tone: 0.04, note: 'Waiting. Mostly your own company' },
+  1: { axis: 56, light: '18% 0%', tone: 0.05, tint: 'rgba(111, 143, 166, 0.1)', note: 'Discovery — evidence on a table' },
+  2: { axis: 64, light: '50% 0%', tone: 0.06, tint: 'rgba(195, 201, 208, 0.08)', note: 'The chamber, and the room behind it' },
+  3: { axis: 48, light: '78% 0%', tone: 0.08, tint: 'rgba(111, 143, 166, 0.06)', note: 'Enclosed. The clock is in the room' },
+  4: { axis: 72, light: '50% 0%', tone: 0.07, tint: 'rgba(168, 133, 60, 0.1)', note: 'Bargaining space — two sides, squared' },
+  5: { axis: 40, light: '30% 0%', tone: 0.04, tint: 'rgba(216, 209, 194, 0.09)', note: 'Waiting. Mostly your own company' },
 };
 
 export const DEFAULT_MOOD = SCENE_MOODS[1];

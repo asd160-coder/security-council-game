@@ -16,6 +16,7 @@
 
 export const RESOLUTION_ENDINGS = {
   settled: {
+    wire: 'Radio Moscow · 17:00 Moscow time · 28 October',
     label: 'Settled',
     standfirst: 'The terms were accepted.',
     body: [
@@ -25,6 +26,7 @@ export const RESOLUTION_ENDINGS = {
   },
 
   fragile: {
+    wire: 'Radio Moscow · 17:00 Moscow time · 28 October',
     label: 'Settled, on thin ground',
     standfirst: 'The terms were accepted, and the agreement is weaker than it looks.',
     body: [
@@ -34,6 +36,7 @@ export const RESOLUTION_ENDINGS = {
   },
 
   contained: {
+    wire: 'Washington · the line holds · 28 October',
     label: 'Contained',
     standfirst: 'Nothing was settled. Nothing broke.',
     body: [
@@ -43,6 +46,7 @@ export const RESOLUTION_ENDINGS = {
   },
 
   ruptured: {
+    wire: 'Flash · 28 October',
     label: 'The frame breaks',
     standfirst: 'It stopped being a negotiation.',
     body: [

@@ -61,7 +61,7 @@ export default function CouncilStep({ day, step, role, onChoose }) {
         <div className={styles.witnessStack}>
           {cabinet.advisers.map((adviser, index) => (
             <Reveal key={adviser.id} delay={180 + index * 110}>
-              <Paper eyebrow={adviser.source} title={adviser.title}>
+              <Paper eyebrow={adviser.source} title={adviser.title} format={adviser.format} stamp={adviser.stamp}>
                 <PaperBody paragraphs={adviser.body} />
                 <Field label={step.weighLabel}>{adviser.weigh}</Field>
               </Paper>

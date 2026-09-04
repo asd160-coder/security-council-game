@@ -530,14 +530,45 @@
   border-left: 2px solid var(--brass-dim);
 }
 
+/* The summary is the whole affordance when the block is closed, so it has to
+   read as openable on its own: a caret that turns, a pointer, and the brass
+   of the record rather than the silver of the apparatus. The native marker is
+   removed and drawn again in the mono register, so it matches the label. */
 .historyLabel {
   display: block;
-  margin-bottom: 6px;
+  cursor: pointer;
+  list-style: none;
   font-family: var(--font-mono);
   font-size: var(--fs-label-sm);
   letter-spacing: var(--track-label);
   text-transform: uppercase;
   color: var(--brass);
+  user-select: none;
+}
+
+.historyLabel::-webkit-details-marker {
+  display: none;
+}
+
+.historyLabel::before {
+  content: '▸';
+  display: inline-block;
+  width: 1.1em;
+  color: var(--brass-dim);
+  transition: transform var(--dur-quick) var(--ease);
+}
+
+.history[open] > .historyLabel {
+  margin-bottom: 6px;
+}
+
+.history[open] > .historyLabel::before {
+  content: '▾';
+  color: var(--brass);
+}
+
+.historyLabel:hover {
+  color: var(--brass-bright);
 }
 
 .historyText {

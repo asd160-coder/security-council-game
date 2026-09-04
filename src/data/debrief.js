@@ -144,7 +144,7 @@ export const HISTORY_NOTE = {
   label: (name) => `What ${name} did`,
   then: 'And then',
   caveat:
-    'This is what the person in your chair did on the same day. It is offered for comparison, not as the right answer — several of these decisions were argued over at the time and are still argued over now.',
+    'Folded under each day is what the person in your chair did on the same day; open the ones you want. It is offered for comparison, not as the right answer — several of these decisions were argued over at the time and are still argued over now.',
 };
 
 export const NOTES = {

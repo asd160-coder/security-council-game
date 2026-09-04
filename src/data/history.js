@@ -26,6 +26,14 @@
    reading mostly about Kennedy, which answers "what happened" but not "how did
    what I did compare".
 
+   PRESENTATION. Folded under each day by default, and opened by a click. A
+   full playthrough measured the debrief at roughly 2,300 words — 43% of
+   everything a student reads, arriving last, after half an hour of play —
+   and these five blocks were five hundred of them. A tired student skims
+   exactly the part meant to cement the learning. A disclosure keeps each one
+   beside the decision it compares against without putting it in the way,
+   and nothing is removed.
+
    SOURCING. This is factual prose, written here, summarising documented
    events — not reproduction of anyone's text, so it carries no rights line.
    Each entry names where it comes from so a teacher can check it, which is the

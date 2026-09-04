@@ -190,15 +190,21 @@ export default function DebriefScreen({ state, role, onRestart }) {
                     data point rather than the answer. Rendered whatever the
                     student chose, including on a day they walked past. */}
                 {entry.history && (
-                  <div className={styles.history}>
-                    <span className={styles.historyLabel}>{HISTORY_NOTE.label(role.name)}</span>
+                  /* Folded by default. The debrief is the longest thing a
+                     student reads and this is a thousand words of it, arriving
+                     last — a native disclosure keeps the record beside the
+                     choice without putting it in the way. `details` is
+                     keyboard-operable and announced as expandable without any
+                     script, which is why it is that and not a state toggle. */
+                  <details className={styles.history}>
+                    <summary className={styles.historyLabel}>{HISTORY_NOTE.label(role.name)}</summary>
                     <p className={styles.historyText}>{entry.history.did}</p>
                     <p className={styles.historyThen}>
                       <span className={styles.historyThenLabel}>{HISTORY_NOTE.then}</span>
                       {entry.history.then}
                     </p>
                     <p className={styles.historySource}>{entry.history.source}</p>
-                  </div>
+                  </details>
                 )}
               </div>
             </div>

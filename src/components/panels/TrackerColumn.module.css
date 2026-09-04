@@ -186,3 +186,45 @@
     opacity: 0.85;
   }
 }
+
+/* --------------------------------------------------------------- Sparkline */
+
+/* Sits between the label and the readout, right-leaning. Decorative: the
+   readout is the value, this is its memory. */
+.spark {
+  display: block;
+  margin-left: auto;
+  margin-right: 8px;
+  flex: none;
+  overflow: visible;
+}
+
+.sparkZero {
+  stroke: var(--board-line-bright);
+  stroke-width: 1;
+}
+
+.sparkLine {
+  fill: none;
+  stroke: var(--spark-color);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  opacity: 0.75;
+}
+
+.sparkEnd {
+  fill: var(--spark-color);
+}
+
+.sparkDanger {
+  --spark-color: var(--wax-bright);
+}
+
+.sparkLegitimacy {
+  --spark-color: var(--brass-bright);
+}
+
+.sparkNeutral {
+  --spark-color: var(--signal-bright);
+}

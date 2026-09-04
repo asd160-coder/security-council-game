@@ -24,9 +24,9 @@ export default function Chamber({ occupancy = 'full', vantage = 'floor' }) {
       {/* Two tiers, because a chamber is people behind people. */}
       <ChairRank y={horizon + 4} count={seats} height={54} spread={940} />
       <ChairRank y={horizon + 62} count={seats - 2} height={66} spread={880} />
-      <TableEdge y={dais ? 402 : 418} curve={dais ? 96 : 74} inset={30} />
+      <TableEdge y={dais ? 402 : 418} curve={dais ? 110 : 96} inset={30} />
       <PlacardRow y={dais ? 372 : 388} count={dais ? 7 : 6} spread={840} />
-      <MicBank y={dais ? 372 : 388} count={dais ? 7 : 6} spread={840} height={42} />
+      <MicBank y={dais ? 372 : 388} count={dais ? 7 : 6} spread={840} height={42} lit />
     </>
   );
 }

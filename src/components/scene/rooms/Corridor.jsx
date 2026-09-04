@@ -22,6 +22,14 @@ export default function Corridor({ light = 'overhead', occupancy = 'bilateral' }
       <Shell />
       <Receding inset={268} />
       <Doorway x={446} width={108} top={78} open={open} />
+      {/* Light from the one place you are not: a bright sill, and its spill
+          down the floor toward you. The corridor's only light is a door. */}
+      {open && (
+        <>
+          <line x1={446} y1={250} x2={554} y2={250} className={styles.sill} />
+          <path d="M 446 250 L 554 250 L 660 440 L 340 440 Z" className={styles.spill} />
+        </>
+      )}
       {/* Floor rule, running to the vanishing point. */}
       <Hatching y={250} height={370} step={44} vertical={false} />
       <Clock x={232} y={104} r={26} />

@@ -18,7 +18,7 @@ import styles from './MapPanel.module.css';
    maps, and a labelled control beneath it, because a corner mark alone is
    easy to miss. */
 
-export default function MapPanel({ inspected, onInspect }) {
+export default function MapPanel({ inspected, onInspect, day = 1, progress = 0 }) {
   const [open, setOpen] = useState(false);
   const frame = useDelayedFrame(inspected);
 
@@ -43,7 +43,7 @@ export default function MapPanel({ inspected, onInspect }) {
         >
           {/* No labels in the rail: at this width they are unreadable, and they
               are what made the panel feel cluttered. They return at full size. */}
-          <CrisisMap frame={frame} showRings={inspected} labels={false} />
+          <CrisisMap frame={frame} showRings={inspected} labels={false} day={day} progress={progress} />
           <span className={styles.expandMark} aria-hidden="true" />
         </button>
 
@@ -69,11 +69,17 @@ export default function MapPanel({ inspected, onInspect }) {
               </div>
             ))}
 
+          {day >= 2 && (
+            <div className={styles.legendItem}>
+              <span className={styles.swatchArc} aria-hidden="true" />
+              <span className={styles.legendText}>{PLAY.mapQuarantine}</span>
+            </div>
+          )}
           <span className={styles.schematic}>{PLAY.mapScale}</span>
         </div>
       </section>
 
-      {open && <MapOverlay onClose={() => setOpen(false)} />}
+      {open && <MapOverlay onClose={() => setOpen(false)} day={day} />}
     </>
   );
 }

@@ -130,3 +130,11 @@
   text-transform: uppercase;
   color: var(--brass-bright);
 }
+
+.swatchArc {
+  flex: none;
+  width: 14px;
+  height: 0;
+  border-top: 2px dashed var(--signal-bright);
+  margin-top: 5px;
+}

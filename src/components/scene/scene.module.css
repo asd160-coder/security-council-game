@@ -223,3 +223,18 @@
     align-items: flex-start;
   }
 }
+
+/* Entry into a conversation. A single iris from the head of the scene; under
+   reduced motion --dur-reveal is 0.01s and the scene is simply there. */
+.iris {
+  animation: iris var(--dur-reveal) var(--ease) both;
+}
+
+@keyframes iris {
+  from {
+    clip-path: circle(0% at 50% 24%);
+  }
+  to {
+    clip-path: circle(150% at 50% 24%);
+  }
+}

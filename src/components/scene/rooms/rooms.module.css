@@ -321,3 +321,44 @@
     animation: none;
   }
 }
+
+/* ------------------------------------------------------- Signatures (M12) */
+
+/* The cabinet room's pendant lights: cord, shade, and a cone of the warm
+   colour stacked three times for falloff, like the lamp. */
+.pendantCord {
+  stroke: var(--room-edge);
+  stroke-width: 1.5;
+}
+
+.pendantShade {
+  fill: var(--room-warm);
+  opacity: 0.72;
+}
+
+.pendantCone {
+  fill: var(--room-warm);
+}
+
+/* The corridor's door: a bright sill and the spill of its light on the floor. */
+.sill {
+  stroke: var(--room-glass-lit);
+  stroke-width: 3;
+}
+
+.spill {
+  fill: var(--room-glass-lit);
+  opacity: 0.13;
+}
+
+/* Rain on the desk room's window at dawn. */
+.rain line {
+  stroke: var(--room-edge);
+  stroke-width: 0.8;
+  opacity: 0.45;
+}
+
+/* Mic heads catching the chamber's daylight. */
+.micLit {
+  fill: var(--room-glass-lit);
+}

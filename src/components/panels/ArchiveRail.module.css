@@ -1,0 +1,99 @@
+/* The archive rail: the same tabbed-folder idiom as the file beside it, so
+   the two read as one cabinet with two drawers. */
+.rail {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--board-line);
+}
+
+.count {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  color: var(--silver-fainter);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.item {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--board-line);
+  border-left: 2px solid var(--tab-color);
+  border-radius: var(--radius);
+  background: var(--board-raised);
+  transition:
+    background var(--dur-quick) var(--ease),
+    border-color var(--dur-quick) var(--ease);
+}
+
+.item:hover {
+  background: #232b34;
+  border-color: var(--board-line-bright);
+  border-left-color: var(--tab-color);
+}
+
+/* Documents are the items that can unlock something, so they carry the
+   institutional colour; photography and audio are reference. */
+.kindDocument {
+  --tab-color: var(--brass);
+}
+
+.kindImage {
+  --tab-color: var(--signal);
+}
+
+.kindAudio {
+  --tab-color: var(--silver-fainter);
+}
+
+.itemKind {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--silver-fainter);
+  flex-shrink: 0;
+  width: 52px;
+  line-height: 1.6;
+}
+
+.itemName {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--silver);
+  line-height: 1.35;
+}
+
+/* The counterpart of the file's "New": a document whose lesson has not
+   been filed yet, because it has not been read to the end. */
+.isUnread {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--brass-bright);
+  flex-shrink: 0;
+}

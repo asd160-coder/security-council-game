@@ -64,6 +64,9 @@ export const MARKERS = [
   { id: 'moscow', label: 'Moscow', lon: 37.62, lat: 55.75, frames: ['hemispheric'] },
   { id: 'havana', label: 'Havana', lon: -82.38, lat: 23.13, frames: ['caribbean'] },
   { id: 'san-cristobal', label: 'San Cristóbal', sub: 'Missile site', lon: -83.05, lat: 22.72, site: true, frames: ['hemispheric', 'caribbean', 'regional'] },
+  /* The price named in the second letter. It appears the morning the letter
+     does, and only on the frame wide enough to hold it. */
+  { id: 'izmir', label: 'Jupiter missiles', sub: 'İzmir, Turkey', lon: 27.05, lat: 38.5, anchor: 'end', frames: ['hemispheric'], fromDay: 4 },
 ];
 
 const EARTH_RADIUS_MI = 3958.8;
@@ -129,6 +132,48 @@ export const RANGE_RINGS = [
 ];
 
 export const LAUNCH_POINT = { lon: -83.05, lat: 22.72 };
+
+/* The quarantine line: 500 nautical miles from Cape Maisí, the eastern tip of
+   Cuba, as fixed on 24 October after the original 800 was cut back to give
+   ships at sea time to turn. Drawn as the ocean-facing arc only — a full ring
+   would cross the island and the Caribbean, which is not where the line was. */
+export const QUARANTINE = {
+  lon: -74.15,
+  lat: 20.25,
+  distanceMi: 575, // 500 nautical miles
+};
+
+export function quarantineArc(frame, from = 330, to = 125, steps = 90) {
+  const sweep = (to - from + 360) % 360;
+  const points = [];
+  for (let i = 0; i <= steps; i += 1) {
+    const bearing = (from + (sweep * i) / steps) % 360;
+    const point = destination(QUARANTINE.lon, QUARANTINE.lat, QUARANTINE.distanceMi, bearing);
+    points.push(project(point.lon, point.lat, frame));
+  }
+  return points;
+}
+
+/* Ships, by day. Positions are indicative — the legend says so — but the
+   events are the record: the missile carriers turned back on the 24th, the
+   tanker was let through on the 25th, and in November the freighters went
+   home with their deck cargo uncovered to be counted. */
+export const SEA_MARKERS = [
+  { id: 'poltava', label: 'Poltava', sub: 'held east of the line', lon: -58.5, lat: 27.6, days: [2], frames: ['regional'] },
+  { id: 'kimovsk', label: 'Kimovsk', sub: 'turned back', lon: -50.5, lat: 31.0, days: [2, 3], frames: ['regional'] },
+  { id: 'bucharest', label: 'Bucharest', sub: 'tanker · passed the line', lon: -67.5, lat: 24.4, days: [3], frames: ['regional'] },
+  { id: 'outbound', label: 'Freighter', sub: 'outbound · cargo counted from the air', lon: -70.5, lat: 24.6, days: [5], frames: ['regional'] },
+];
+
+/* One ship on the small map, making for the line across the day. Interpolated
+   between a start well out in the Atlantic and the arc's north-east reach, so
+   the rail shows something moving toward the thing the day is about. */
+export function shipAt(progress, frame) {
+  const start = { lon: -48, lat: 31.5 };
+  const end = destination(QUARANTINE.lon, QUARANTINE.lat, QUARANTINE.distanceMi, 55);
+  const t = Math.max(0, Math.min(1, progress));
+  return project(start.lon + (end.lon - start.lon) * t, start.lat + (end.lat - start.lat) * t, frame);
+}
 
 /* A frame as a lon/lat box, for deciding what can possibly be on screen. */
 const frameBox = (frame) => [frame.lon0, frame.lat0, frame.lon1, frame.lat1];

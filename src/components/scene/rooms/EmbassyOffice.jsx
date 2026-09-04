@@ -20,7 +20,7 @@ export default function EmbassyOffice({ occupancy = 'bilateral', light = 'lamp' 
     <>
       <Shell />
       <Hatching step={34} />
-      <Window x={96} width={188} top={40} bottom={214} />
+      <Window x={96} width={188} top={40} bottom={214} blinds />
       {/* Drapes, drawn as two heavy verticals rather than a curtain shape —
           the set does not have folds in its vocabulary and does not need them. */}
       <rect x={78} y={34} width={26} height={186} className={styles.drape} />
@@ -29,7 +29,7 @@ export default function EmbassyOffice({ occupancy = 'bilateral', light = 'lamp' 
       <Desk x={470} y={392} width={452} depth={162} />
       <Papers x={520} y={430} count={3} />
       {occupancy === 'solitary' && <Telephone x={690} y={436} />}
-      {light === 'lamp' && <DeskLamp x={846} y={402} />}
+      {light === 'lamp' && <DeskLamp x={846} y={402} pool={1.35} />}
     </>
   );
 }

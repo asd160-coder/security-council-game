@@ -98,3 +98,19 @@
   }
 }
 
+
+.swatchArc {
+  flex: none;
+  width: 18px;
+  height: 0;
+  border-top: 2px dashed var(--signal-bright);
+  margin-top: 6px;
+}
+
+.swatchShip {
+  flex: none;
+  width: 8px;
+  height: 4px;
+  background: var(--silver);
+  margin-top: 5px;
+}

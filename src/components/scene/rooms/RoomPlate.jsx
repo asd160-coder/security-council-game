@@ -39,10 +39,10 @@ const ROOMS = {
    different rooms to be in. */
 const LIGHTING = {
   day: { x: '50%', y: '4%', r: '78%', warm: 0.05, lift: 0.16 },
-  evening: { x: '74%', y: '10%', r: '66%', warm: 0.09, lift: 0.09 },
+  evening: { x: '74%', y: '10%', r: '66%', warm: 0.12, lift: 0.09 },
   night: { x: '50%', y: '2%', r: '58%', warm: 0.04, lift: 0.05 },
   dawn: { x: '24%', y: '14%', r: '70%', warm: 0.13, lift: 0.11 },
-  lamp: { x: '78%', y: '52%', r: '52%', warm: 0.17, lift: 0.07 },
+  lamp: { x: '78%', y: '52%', r: '52%', warm: 0.22, lift: 0.07 },
   overhead: { x: '50%', y: '0%', r: '62%', warm: 0.03, lift: 0.13 },
 };
 
@@ -93,7 +93,9 @@ export default function RoomPlate({
 
         <rect x="0" y="0" width={FIELD.w} height={FIELD.h} className={styles.ground} />
 
-        <g className={styles.structure} style={{ opacity: 0.72 + lit.lift }}>
+        {/* The card is where a room has to be recognised, so its structure sits
+            higher than the band's, which only has to stay present. */}
+        <g className={styles.structure} style={{ opacity: (band ? 0.72 : 0.84) + lit.lift }}>
           <Room occupancy={occupancy} light={light} vantage={vantage} />
         </g>
 

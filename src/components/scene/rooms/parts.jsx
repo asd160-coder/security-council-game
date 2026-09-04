@@ -50,8 +50,16 @@ export function Hatching({ y = 0, height = FIELD.horizon, step = 26, vertical = 
 
 /* A tall window. `blinds` draws slats across it — the cabinet room's are
    always half-drawn, which is most of why that room reads as institutional. */
-export function Window({ x, width = 150, top = 34, bottom = 210, blinds = false, lit = false }) {
+export function Window({ x, width = 150, top = 34, bottom = 210, blinds = false, lit = false, rain = false }) {
   const slats = [];
+  /* Rain on the glass: thin diagonals, the desk room's signature at dawn. */
+  const drops = [];
+  if (rain) {
+    for (let i = 0; i < 9; i += 1) {
+      const dx = x + 12 + i * ((width - 24) / 8);
+      drops.push(<line key={`r${i}`} x1={dx + 7} y1={top + 8} x2={dx - 7} y2={bottom - 8} />);
+    }
+  }
   if (blinds) {
     for (let y = top + 12; y < bottom - 8; y += 15) {
       slats.push(<line key={y} x1={x + 5} y1={y} x2={x + width - 5} y2={y} />);
@@ -68,6 +76,7 @@ export function Window({ x, width = 150, top = 34, bottom = 210, blinds = false,
       />
       <rect x={x} y={top} width={width} height={bottom - top} className={styles.windowFrame} />
       {blinds && <g className={styles.blinds}>{slats}</g>}
+      {rain && <g className={styles.rain}>{drops}</g>}
     </g>
   );
 }
@@ -168,7 +177,7 @@ export function PlacardRow({ y = 396, count = 6, spread = 820 }) {
 
 /* Microphone stalks. Institutional, and the clearest single signal that what
    is said here is on the record. */
-export function MicBank({ y = 396, count = 6, spread = 820, height = 46 }) {
+export function MicBank({ y = 396, count = 6, spread = 820, height = 46, lit = false }) {
   const mics = [];
   const gap = spread / count;
   const start = (FIELD.w - spread) / 2 + gap / 2;
@@ -177,7 +186,7 @@ export function MicBank({ y = 396, count = 6, spread = 820, height = 46 }) {
     mics.push(
       <g key={i} className={styles.mic}>
         <path d={`M ${x} ${y} L ${x + 13} ${y - height}`} />
-        <circle cx={x + 13} cy={y - height} r="5" />
+        <circle cx={x + 13} cy={y - height} r="5" className={lit ? styles.micLit : undefined} />
       </g>,
     );
   }
@@ -199,7 +208,7 @@ export function Desk({ x = 520, y = 400, width = 420, depth = 150 }) {
 
 /* The one warm thing in the whole set. Rationed deliberately: a lamp is what
    makes a room private, and if every room had one none of them would be. */
-export function DeskLamp({ x = 760, y = 392 }) {
+export function DeskLamp({ x = 760, y = 392, pool = 1 }) {
   /* The glow is four stacked circles rather than one disc or a blur filter.
      A single flat circle read as an orb hanging in the room, and a blur would
      be the project's first SVG filter — four rings of falling opacity get the
@@ -214,7 +223,7 @@ export function DeskLamp({ x = 760, y = 392 }) {
           key={i}
           cx={x}
           cy={y - 74}
-          r={34 + i * 26}
+          r={(34 + i * 26) * pool}
           className={styles.lampGlow}
           style={{ opacity: step * 0.5 }}
         />
@@ -222,6 +231,31 @@ export function DeskLamp({ x = 760, y = 392 }) {
       <path d={`M ${x - 26} ${y} L ${x + 26} ${y} L ${x + 14} ${y - 8} L ${x - 14} ${y - 8} Z`} className={styles.lampBase} />
       <line x1={x} y1={y - 8} x2={x - 6} y2={y - 52} className={styles.lampStem} />
       <path d={`M ${x - 34} ${y - 52} L ${x + 20} ${y - 52} L ${x + 8} ${y - 78} L ${x - 22} ${y - 78} Z`} className={styles.lampShade} />
+    </g>
+  );
+}
+
+/* A single hanging light over a table. A cone of the set's one warm colour,
+   stacked like the lamp's glow so it stays geometry rather than a filter. The
+   cabinet room's signature: the long table lit from above, and nothing else
+   in the room lit at all. */
+export function Pendant({ x = 500, y = 30, drop = 110, spread = 300, floor = 424 }) {
+  const cone = [1, 0.66, 0.4];
+  return (
+    <g>
+      <line x1={x} y1={y} x2={x} y2={y + drop} className={styles.pendantCord} />
+      <path
+        d={`M ${x - 22} ${y + drop} L ${x + 22} ${y + drop} L ${x + 34} ${y + drop + 16} L ${x - 34} ${y + drop + 16} Z`}
+        className={styles.pendantShade}
+      />
+      {cone.map((step, i) => (
+        <path
+          key={i}
+          d={`M ${x - 30 - i * 10} ${y + drop + 16} L ${x + 30 + i * 10} ${y + drop + 16} L ${x + spread / 2 + i * 40} ${floor} L ${x - spread / 2 - i * 40} ${floor} Z`}
+          className={styles.pendantCone}
+          style={{ opacity: step * 0.2 }}
+        />
+      ))}
     </g>
   );
 }

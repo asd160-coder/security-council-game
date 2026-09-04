@@ -30,7 +30,7 @@ export function EntryCard({ entry }) {
   }
 
   return (
-    <Paper eyebrow={entry.label} title={entry.title}>
+    <Paper eyebrow={entry.label} title={entry.title} format={entry.kind === 'memo' ? 'memo' : undefined}>
       <PaperBody paragraphs={entry.body} />
       <Field label={PLAY.soWhat}>{entry.soWhat}</Field>
     </Paper>

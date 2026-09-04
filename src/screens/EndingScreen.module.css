@@ -125,6 +125,12 @@
   padding-bottom: 14px;
   margin-bottom: 16px;
   border-bottom: 1px solid var(--stock-edge);
+  /* Room on the right for the "as delivered" stamp, which is absolutely
+     positioned in the paper's top corner: the head stacks and stops short
+     of it rather than running underneath. */
+  flex-direction: column;
+  align-items: flex-start;
+  padding-right: 220px;
 }
 
 .statementTitle {
@@ -239,4 +245,26 @@
 .citationMark {
   margin-right: 8px;
   opacity: 0.7;
+}
+
+/* "As delivered": the stamp that turns the draft into the record. */
+.delivered {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  transform: rotate(-6deg);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--wax);
+  border: 1.5px solid var(--wax);
+  border-radius: 1px;
+  padding: 4px 7px;
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+.statement {
+  position: relative;
 }

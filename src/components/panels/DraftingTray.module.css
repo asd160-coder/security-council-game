@@ -28,6 +28,25 @@
   padding: 16px 18px;
   box-shadow: var(--shadow-paper);
   max-width: var(--measure-scene);
+  position: relative;
+  overflow: hidden;
+}
+
+/* A draft, and it says so — faintly, in the corner, the way a working copy
+   is marked. The ending's statement carries the stamp that replaces it. */
+.sheet::before {
+  content: 'DRAFT';
+  position: absolute;
+  right: 12px;
+  bottom: 2px;
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+  opacity: 0.06;
+  transform: rotate(-12deg);
+  pointer-events: none;
 }
 
 .fragment + .fragment {

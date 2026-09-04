@@ -3,6 +3,7 @@ import { getModifier, getResolution, getRoleCloser } from '../data/endings.js';
 import { TRACKERS } from '../data/trackers.js';
 import { formatValue } from '../lib/format.js';
 import ConsequencePanel from '../components/ending/ConsequencePanel.jsx';
+import Teleprinter from '../components/ending/Teleprinter.jsx';
 import { Button, Reveal } from '../components/ui/index.jsx';
 import { DEBRIEF, ENDING, PLAY } from '../data/copy.js';
 import { getArchive } from '../data/archive.js';
@@ -30,11 +31,14 @@ export default function EndingScreen({ state, role, onRestart, onDebrief }) {
 
   return (
     <div className={styles.screen}>
-      <Reveal className={styles.head}>
-        <span className={styles.label}>{ENDING.eyebrow}</span>
-        <h1 className={styles.title}>{ending.label}</h1>
-        <p className={styles.standfirst}>{ending.standfirst}</p>
-      </Reveal>
+      {/* The answer arriving: the resolution types itself onto the board
+          under a wire line before the prose fades in. Same words as before. */}
+      <Teleprinter
+        eyebrow={ENDING.eyebrow}
+        wire={ending.wire}
+        label={ending.label}
+        standfirst={ending.standfirst}
+      />
 
       <Reveal delay={140} className={styles.prose}>
         {ending.body.map((paragraph) => (
@@ -85,7 +89,12 @@ export default function EndingScreen({ state, role, onRestart, onDebrief }) {
 
       {/* The statement, whole. */}
       <Reveal delay={520}>
-        <div className={styles.statement}>
+        <div className={styles.statement} data-print="statement">
+          {/* Stamped, because the draft in the tray has finally stopped being
+              a draft. */}
+          <span className={styles.delivered} aria-hidden="true">
+            {ENDING.delivered}
+          </span>
           <div className={styles.statementHead}>
             <span className={styles.statementTitle}>{ENDING.statementTitle}</span>
             <span className={styles.statementRole}>
@@ -134,6 +143,9 @@ export default function EndingScreen({ state, role, onRestart, onDebrief }) {
             {DEBRIEF.enter}
           </Button>
           <Button onClick={onRestart}>{ENDING.restart}</Button>
+          <Button variant="quiet" onClick={() => window.print()}>
+            {ENDING.print}
+          </Button>
         </div>
       </Reveal>
     </div>

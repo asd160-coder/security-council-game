@@ -30,7 +30,12 @@ export default function SceneEstablish({ step, role, counterpart, room, onEnter 
 
       <div className={styles.head}>
         {step.place && <span className={styles.place}>{step.place}</span>}
-        <span className={styles.eyebrow}>{step.eyebrow}</span>
+        <span className={styles.eyebrowRow}>
+          {/* A slate: the day and the hour, in the readout register, so the
+              scene is dated the way a frame of documentary footage is. */}
+          {step.clock && <span className={styles.slate}>{step.clock}</span>}
+          <span className={styles.eyebrow}>{step.eyebrow}</span>
+        </span>
       </div>
 
       <div className={styles.stage}>
@@ -42,7 +47,7 @@ export default function SceneEstablish({ step, role, counterpart, room, onEnter 
             drawn twice. */}
         {counterpart ? (
           <div className={`${styles.side} ${styles.sideFar}`}>
-            <SpeakerPresence counterpart={counterpart} />
+            <SpeakerPresence counterpart={counterpart} light={room?.light} />
           </div>
         ) : (
           <div className={`${styles.side} ${styles.sideFar} ${styles.sideEmpty}`} aria-hidden="true" />

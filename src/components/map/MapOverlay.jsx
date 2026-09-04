@@ -12,17 +12,17 @@ import styles from './MapOverlay.module.css';
    reading column carries the same geography note that gets filed — the file
    keeps the record on paper, this is the live instrument. */
 
-export default function MapOverlay({ onClose }) {
+export default function MapOverlay({ onClose, day = 1 }) {
   const note = getDossier('note-geography');
 
   return (
     <Overlay
-      eyebrow={PLAY.mapOverlayDay(1)}
+      eyebrow={PLAY.mapOverlayDay(day)}
       title={PLAY.mapOverlayTitle}
       onClose={onClose}
     >
       <div className={styles.mapWrap}>
-        <CrisisMap frame="regional" showRings />
+        <CrisisMap frame="regional" showRings day={day} />
       </div>
 
       <aside className={styles.aside}>
@@ -40,6 +40,23 @@ export default function MapOverlay({ onClose }) {
               </span>
             </div>
           ))}
+          {day >= 2 && (
+            <div className={styles.legendItem}>
+              <span className={styles.swatchArc} aria-hidden="true" />
+              <span className={styles.legendText}>
+                {PLAY.mapQuarantine}
+                <span className={styles.legendNote}>{PLAY.mapQuarantineNote}</span>
+              </span>
+            </div>
+          )}
+          {day >= 2 && (
+            <div className={styles.legendItem}>
+              <span className={styles.swatchShip} aria-hidden="true" />
+              <span className={styles.legendText}>
+                {PLAY.mapPositions}
+              </span>
+            </div>
+          )}
         </div>
 
         {note && (
@@ -50,6 +67,7 @@ export default function MapOverlay({ onClose }) {
           </div>
         )}
 
+        {day >= 4 && <p className={styles.scale}>{PLAY.mapTurkey}</p>}
         <p className={styles.scale}>{PLAY.mapScale}</p>
       </aside>
     </Overlay>

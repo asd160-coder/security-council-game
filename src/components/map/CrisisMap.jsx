@@ -4,11 +4,14 @@ import {
   LAUNCH_POINT,
   MARKERS,
   RANGE_RINGS,
+  SEA_MARKERS,
   landFor,
   lakesFor,
   project,
+  quarantineArc,
   rangeRing,
   ringPath,
+  shipAt,
 } from './geography.js';
 import styles from './CrisisMap.module.css';
 
@@ -36,6 +39,10 @@ export default function CrisisMap({
      projection. Labels behind a headline compete with it and lose. */
   labels = true,
   cover = false,
+  /* From Day 2 the line at sea is drawn; ships appear by day; on the small
+     map one of them makes for the line as the day goes on. */
+  day = 1,
+  progress = 0,
 }) {
   const gradientId = useId();
   const frameSpec = FRAMES[frame] ?? FRAMES.hemispheric;
@@ -54,15 +61,25 @@ export default function CrisisMap({
   /* Which rings belong to a frame is decided by their bounding boxes rather
      than by a hand-kept list, so adding a frame needs no bookkeeping. */
   const land = useMemo(() => landFor(frameSpec), [frameSpec]);
+  const arc = useMemo(() => (day >= 2 ? ringPath(quarantineArc(frameSpec)) : null), [frameSpec, day]);
+  const ships = useMemo(
+    () =>
+      SEA_MARKERS.filter((s) => s.days.includes(day) && s.frames.includes(frame)).map((s) => ({
+        ...s,
+        ...project(s.lon, s.lat, frameSpec),
+      })),
+    [frame, frameSpec, day],
+  );
+  const underway = !labels && (day === 2 || day === 3) ? shipAt(progress, frameSpec) : null;
   const lakes = useMemo(() => lakesFor(frameSpec), [frameSpec]);
 
   const markers = useMemo(
     () =>
-      MARKERS.filter((marker) => marker.frames.includes(frame)).map((marker) => ({
+      MARKERS.filter((marker) => marker.frames.includes(frame) && (!marker.fromDay || day >= marker.fromDay)).map((marker) => ({
         ...marker,
         ...project(marker.lon, marker.lat, frameSpec),
       })),
-    [frame, frameSpec],
+    [frame, frameSpec, day],
   );
 
   return (
@@ -130,6 +147,30 @@ export default function CrisisMap({
           ))}
         </g>
       )}
+
+      {arc && <path d={arc} className={styles.arc} />}
+
+      {ships.length > 0 && (
+        <g>
+          {ships.map((ship) => (
+            <g key={ship.id} className={styles.ship}>
+              <rect x={ship.x - 4} y={ship.y - 2} width="8" height="4" className={styles.shipMark} />
+              {labels && (
+                <>
+                  <text x={ship.x + 8} y={ship.y - 1} className={styles.label}>
+                    {ship.label}
+                  </text>
+                  <text x={ship.x + 8} y={ship.y + 11} className={styles.sub}>
+                    {ship.sub}
+                  </text>
+                </>
+              )}
+            </g>
+          ))}
+        </g>
+      )}
+
+      {underway && <circle cx={underway.x} cy={underway.y} r="2.6" className={styles.underway} />}
 
       <g>
         {markers.map((marker) => (

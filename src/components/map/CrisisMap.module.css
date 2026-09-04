@@ -142,3 +142,27 @@
     animation: none;
   }
 }
+
+/* ---------------------------------------------------------- The line at sea */
+
+.arc {
+  fill: none;
+  stroke: var(--signal-bright);
+  stroke-width: 1.5;
+  stroke-dasharray: 7 5;
+  opacity: 0.85;
+}
+
+.shipMark {
+  fill: var(--silver);
+  stroke: var(--board-inset);
+  stroke-width: 1;
+}
+
+/* The one moving thing on the small map. */
+.underway {
+  fill: var(--silver);
+  stroke: var(--board-inset);
+  stroke-width: 1;
+  transition: cx var(--dur-needle) var(--ease), cy var(--dur-needle) var(--ease);
+}

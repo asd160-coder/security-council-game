@@ -17,7 +17,7 @@ export default function DeskRoom({ light = 'lamp', occupancy = 'solitary' }) {
     <>
       <Shell />
       <Hatching step={36} />
-      <Window x={598} width={230} top={30} bottom={228} lit={dawn} />
+      <Window x={598} width={230} top={30} bottom={228} lit={dawn} rain={dawn} />
       <ChairRank y={318} count={1} height={82} pushedIn={occupancy === 'empty'} spread={190} />
       <Desk x={150} y={398} width={470} depth={168} />
       <Papers x={214} y={432} count={occupancy === 'empty' ? 2 : 4} />

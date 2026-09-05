@@ -13,8 +13,8 @@ It is not a quiz and it does not keep score.
 **How long.** About 40 minutes for one playthrough — roughly 25 minutes of reading plus
 time to decide. It fits a single period.
 
-**What the student actually does.** Pressing Begin plays a short overture — about seventy
-seconds of archival footage with a narration that states the stakes — which can be skipped
+**What the student actually does.** Pressing Begin plays a short overture — about a minute
+of archival photographs with a narration that states the stakes — which can be skipped
 at any moment with the Skip button or Escape. Then they take one of three seats and live
 five days of October 1962. Each day they read a briefing, meet someone, and choose what to say. Their
 choices assemble a diplomatic statement: Day 1 sets its tone, Day 2 composes a clause, Day 3
@@ -140,11 +140,17 @@ commit. To put it live: make the repository public, set *Settings → Pages → 
 "GitHub Actions", then run the "Build and deploy" workflow from the Actions tab. It will
 appear at `https://asd160-coder.github.io/security-council-game/`.
 
-**The overture's voice.** The narration is recorded, not synthesised, and the file is not in
-the repository. Record it, save it as `public/overture/narration.m4a`, and set each beat's
-`at` in `src/data/overture.js` to the second at which its line begins in the recording. Until
-every beat is timed the film runs on its own clock and the captions carry the words; once
-they are, the recording drives the beats. Nothing else changes.
+**The overture's voice.** The narration is synthesised — generated with ElevenLabs from the
+script in `src/data/overture.js`, in a stock voice — and the credits say so. The delivered
+take is kept as `.design/narration-source.mp3`; the film plays `public/overture/narration.m4a`,
+which is that take with a longer pause after every line, rebuilt by `.design/pad-narration.swift`
+from the cut points that `.design/speech-segments.swift` finds. Each beat's `at` is the second
+at which its line begins in the rebuilt file, read from the detector's output on it, and its
+`hold` is the gap to the next beat, so the timer plays the same film if the audio cannot start.
+To re-voice it: replace the source, run the detector on it, run the padder with the pause table
+in `docs/asset-manifest.md`, run the detector on the result, and copy the twelve starts into
+`overture.js`. `npm run check` refuses a beat out of order or a hold that no longer matches
+its gap.
 
 **A run is held in the browser and is not sent anywhere.** Nothing a student writes leaves
 their machine.

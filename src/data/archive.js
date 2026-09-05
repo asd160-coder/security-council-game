@@ -66,6 +66,8 @@ export const ARCHIVE = [
   {
     id: 'ss4-reference',
     kind: 'image',
+    /* Also the overture's shot for "under threat from nuclear arsenals". */
+    overture: true,
     file: 'ss4-reference-red-square.jpg',
     title: 'SS-4 medium-range ballistic missile, Moscow parade',
     date: 'Reference photograph, early 1960s',

@@ -37,7 +37,9 @@ export const APP = {
   creditsQuotations:
     'The quotations shown between the days are real, and are attributed and dated where they appear. Two are works of the United States federal government and are in the public domain; the rest are quoted briefly, with attribution, for teaching and commentary. Each card also states how the words reached us, because several are recollections made long afterwards, and one is a translation that overstated the speaker.',
   creditsOverture:
-    'The overture that opens the simulation is made of nine archival photographs, each a work of the United States government and each credited below with its source. One — the flash burns on the steps of a bank in Hiroshima — is attributed on the strength of the holding institution’s record, which names the United States Government as its maker; the photographer is unidentified.',
+    'The overture that opens the simulation is made of eleven archival photographs, each a work of the United States government and each credited below with its source. One — the flash burns on the steps of a bank in Hiroshima — is attributed on the strength of the holding institution’s record, which names the United States Government as its maker; the photographer is unidentified.',
+  creditsVoice:
+    'The voice that speaks the overture is synthetic. It was generated with ElevenLabs from the written script, in a stock voice with a Boston accent, and is not a recording of any person; the words appear on the screen as they are spoken.',
   creditsRooms:
     'The rooms behind the conversations are invented. They are drawn in the interface from simple shapes, not photographed or reconstructed, and no scene depicts a real room, meeting or document.',
   close: 'Close',

@@ -22,7 +22,7 @@ import styles from './OvertureScreen.module.css';
    and collapse to instant under the same preference through --dur-teleprinter.
 
    SKIP is a button with focus, and Escape. Deliberately not any-key: this is
-   seventy seconds, not a quotation, and a keyboard user reaching for Skip
+   a minute of film, not a quotation, and a keyboard user reaching for Skip
    must be able to get there without dismissing what they meant to keep. */
 
 const CROSSFADE = 900;

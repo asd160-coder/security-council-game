@@ -83,6 +83,26 @@ for (const day of DAYS) {
 }
 console.log(`teacher notes: ${Object.keys(READING_A_RUN).length} patterns, ${Object.keys(DAY_PROMPTS).length} days`);
 
+/* The overture's beats are timed to the narration by numbers copied from the
+   detector's output (.design/speech-segments.swift), so a slip — a beat out of
+   order, a hold that no longer matches its gap, an archive id that stopped
+   resolving — would only ever show as a film that jumps. The two clocks must
+   describe one film: each hold within a tenth of the gap to the next `at`. */
+const { BEATS } = await import(`${R}/data/overture.js`);
+const { getArchive } = await import(`${R}/data/archive.js`);
+BEATS.forEach((b, i) => {
+  if (b.shot.archiveId && !getArchive(b.shot.archiveId)?.file) { problems++; console.log(`  ✗ overture beat "${b.id}" names archive "${b.shot.archiveId}", which has no file`); }
+  if (!b.shot.archiveId && !b.shot.portrait) { problems++; console.log(`  ✗ overture beat "${b.id}" has no shot`); }
+  if (typeof b.at !== 'number') return;
+  if (i === 0 && b.at > 0.5) { problems++; console.log(`  ✗ overture opens at ${b.at}s, not at the start of the recording`); }
+  const next = BEATS[i + 1];
+  if (!next) return;
+  if (!(next.at > b.at)) { problems++; console.log(`  ✗ overture beat "${next.id}" starts at ${next.at}s, not after "${b.id}" at ${b.at}s`); }
+  const gap = (next.at - b.at) * 1000;
+  if (Math.abs(b.hold - gap) > gap * 0.1) { problems++; console.log(`  ✗ overture beat "${b.id}" holds ${b.hold}ms but the recording gives it ${Math.round(gap)}ms`); }
+});
+console.log(`overture: ${BEATS.length} beats, ${BEATS.every(b => typeof b.at === 'number') ? 'timed to the recording' : 'on the timer'}`);
+
 if (problems) {
   console.log(`\n${problems} problem${problems > 1 ? 's' : ''}`);
   process.exit(1);

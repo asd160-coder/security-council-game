@@ -53,7 +53,7 @@
 
 .seat {
   font-family: var(--font-display);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--stock);
   white-space: nowrap;

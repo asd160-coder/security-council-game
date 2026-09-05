@@ -1,4 +1,5 @@
 import { ARCHIVE_NOTE, FIGURE_GROUPS, ROAD } from '../data/background.js';
+import { getArchive } from '../data/archive.js';
 import { BACKGROUND_EPIGRAPHS } from '../data/epigraphs.js';
 import { BACKGROUND, EPIGRAPH, PLAY } from '../data/copy.js';
 import { Button, Reveal, SourceLine } from '../components/ui/index.jsx';
@@ -21,6 +22,29 @@ const DELEGATION_CLASS = {
   'United Nations': styles.flagUn,
   Cuba: styles.flagCuba,
 };
+
+/* A still on a road beat: the photograph, what it is, and where it came from,
+   credited the way every archival image in the game is credited. */
+function RoadFigure({ beat }) {
+  const item = getArchive(beat.archiveId);
+  if (!item?.file) return null;
+  const fitClass = beat.fit === 'contain' ? styles.beatFigureContain : '';
+  return (
+    <figure className={`${styles.beatFigure} ${fitClass}`}>
+      <img
+        className={styles.beatStill}
+        src={`archive/${item.file}`}
+        style={beat.focus ? { objectPosition: beat.focus } : undefined}
+        alt={beat.alt}
+        loading="lazy"
+      />
+      <figcaption className={styles.beatCaption}>
+        {beat.caption && <p className={styles.beatCaptionText}>{beat.caption}</p>}
+        <SourceLine source={item.source} rights={item.rights} onBoard />
+      </figcaption>
+    </figure>
+  );
+}
 
 function Figure({ figure }) {
   return (
@@ -144,6 +168,7 @@ export default function BackgroundScreen({ onBack }) {
               <span className={styles.beatDate}>{beat.date}</span>
               <div className={styles.beatBody}>
                 <h3 className={styles.beatTitle}>{beat.title}</h3>
+                {beat.archiveId && <RoadFigure beat={beat} />}
                 {beat.body.map((paragraph) => (
                   <p key={paragraph.slice(0, 40)} className={styles.beatText}>
                     {paragraph}

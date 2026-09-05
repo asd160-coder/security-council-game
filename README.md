@@ -14,7 +14,8 @@ It is not a quiz and it does not keep score.
 time to decide. It fits a single period.
 
 **What the student actually does.** Pressing Begin plays a short overture — about a minute
-of archival photographs with a narration that states the stakes — which can be skipped
+of archival photographs, closing on the three seats as they were photographed in 1962, with a
+narration that states the stakes — which can be skipped
 at any moment with the Skip button or Escape. Then they take one of three seats and live
 five days of October 1962. Each day they read a briefing, meet someone, and choose what to say. Their
 choices assemble a diplomatic statement: Day 1 sets its tone, Day 2 composes a clause, Day 3

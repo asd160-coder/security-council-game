@@ -62,7 +62,7 @@
    wire and not by hand. */
 .paperCable .paperTitle {
   font-family: var(--font-mono);
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -71,7 +71,7 @@
 
 .paperCable .paperBody {
   font-family: var(--font-mono);
-  font-size: 12.5px;
+  font-size: 13.5px;
   line-height: 1.6;
   letter-spacing: 0.01em;
 }
@@ -84,7 +84,7 @@
   right: 16px;
   transform: rotate(-7deg);
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   /* On paper, not on the board: --wax is 4.55:1 on --stock, while the

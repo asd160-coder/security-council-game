@@ -23,7 +23,7 @@
 
 .empty {
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 14px;
   font-style: italic;
   line-height: 1.5;
   color: var(--silver-fainter);
@@ -90,7 +90,7 @@
 
 .itemKind {
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: var(--track-label);
   text-transform: uppercase;
   color: var(--silver-fainter);
@@ -101,7 +101,7 @@
 
 .itemName {
   font-family: var(--font-display);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   color: var(--silver);
   line-height: 1.35;
@@ -110,7 +110,7 @@
 .isNew {
   margin-left: auto;
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: var(--track-label);
   text-transform: uppercase;
   color: var(--brass-bright);

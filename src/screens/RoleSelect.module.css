@@ -129,7 +129,7 @@
   bottom: 10px;
   z-index: 1;
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: var(--track-label);
   text-transform: uppercase;
   color: var(--silver-faint);
@@ -163,7 +163,7 @@
 
 .role {
   font-family: var(--font-body);
-  font-size: 13.5px;
+  font-size: 14.5px;
   font-style: italic;
   line-height: 1.45;
   color: var(--silver-faint);
@@ -172,7 +172,7 @@
 
 .standfirstCard {
   font-family: var(--font-body);
-  font-size: 14.5px;
+  font-size: 15.5px;
   line-height: 1.6;
   color: var(--silver-muted);
   padding-bottom: 18px;
@@ -195,7 +195,7 @@
 
 .fieldLabel {
   font-family: var(--font-mono);
-  font-size: 9.5px;
+  font-size: 10.5px;
   letter-spacing: var(--track-label);
   text-transform: uppercase;
   color: var(--silver-fainter);
@@ -203,7 +203,7 @@
 
 .fieldValue {
   font-family: var(--font-body);
-  font-size: 13.5px;
+  font-size: 14.5px;
   line-height: 1.5;
   color: var(--silver-muted);
 }

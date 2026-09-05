@@ -103,7 +103,7 @@
 
 .modifierText {
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.65;
   color: var(--silver-muted);
 }
@@ -135,7 +135,7 @@
 
 .statementTitle {
   font-family: var(--font-display);
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 600;
   color: var(--ink);
 }
@@ -150,7 +150,7 @@
 
 .line {
   font-family: var(--font-body);
-  font-size: 15.5px;
+  font-size: 16.5px;
   line-height: 1.66;
   color: var(--ink);
 }
@@ -217,7 +217,7 @@
 
 .next {
   font-family: var(--font-body);
-  font-size: 13.5px;
+  font-size: 14.5px;
   font-style: italic;
   line-height: 1.55;
   color: var(--silver-fainter);
@@ -256,7 +256,7 @@
   right: 18px;
   transform: rotate(-6deg);
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   /* Paper, not board: --wax is 4.55:1 on --stock where the board-calibrated

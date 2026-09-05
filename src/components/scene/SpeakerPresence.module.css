@@ -139,14 +139,14 @@
 
 .name {
   font-family: var(--font-display);
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 600;
   line-height: 1.2;
   color: var(--stock);
 }
 
 .presenceCompact .name {
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .title {
@@ -165,7 +165,7 @@
 .illustrationMark {
   margin-top: 2px;
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: var(--track-label);
   text-transform: uppercase;
   color: var(--silver-fainter);
@@ -191,7 +191,7 @@
   }
 
   .name {
-    font-size: 15px;
+    font-size: 16px;
   }
 }
 

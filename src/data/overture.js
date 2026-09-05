@@ -50,12 +50,19 @@
    still's source and rights, so the credits panel lists every shot with no
    second list to keep in step. The component still renders a labelled slate
    rather than a hole if an id ever fails to resolve. The five closing beats
-   are the seats' own portraits, already credited as illustrations.
+   are photographs of the three men — the record is not silent about them —
+   each an archive item with its source; two are details cut from a wider
+   frame, and the archive says so. They are shown as plates (see Shot),
+   whole, after the first playthrough found the painted portraits cropped
+   to nothing but face. The portraits remain everywhere else in the game.
 
    Sixteen beats from twelve lines: four lines hand over to a wordless shot
-   inside their pause — the shadow at Hiroshima, the rocket, Bert the Turtle,
-   the president with the Chiefs — and the engine is simpler with one shot per
-   beat than with two shots inside one. */
+   inside their pause — the shadow at Hiroshima, the rocket, a classroom
+   under its desks, the president with the Chiefs — and the engine is simpler
+   with one shot per beat than with two shots inside one. The classroom is a
+   frame of the 1951 film Duck and Cover, cut with .design/frame-grab.swift;
+   the first cut used the film's opening cartoon, and the first playthrough
+   asked for the children instead. */
 
 export const BEATS = [
   {
@@ -114,7 +121,7 @@ export const BEATS = [
     line: '',
     at: 24.1,
     hold: 3500,
-    shot: { archiveId: 'ov-duck-and-cover', alt: 'Bert the Turtle, the cartoon from the 1951 civil-defence film Duck and Cover, as a monkey dangles a firecracker over him.', move: 'in' },
+    shot: { archiveId: 'ov-duck-and-cover-classroom', alt: 'Two schoolchildren curled under their desks with their hands over their necks, a frame from the 1951 civil-defence film Duck and Cover.', move: 'in', fit: 'contain' },
   },
   {
     id: 'arsenals',
@@ -142,35 +149,35 @@ export const BEATS = [
     line: 'And we are all that stand in their way.',
     at: 38.3,
     hold: 4950,
-    shot: { portrait: 'anatoly-dobrynin.jpg', focus: '50% 34%', name: 'Anatoly Dobrynin', move: 'in' },
+    shot: { archiveId: 'ov-dobrynin-kennedy', alt: 'Ambassador Dobrynin seated across from President Kennedy in the Oval Office, March 1962, photographers behind them.', move: 'in', fit: 'plate' },
   },
   {
     id: 'cowards',
     line: 'Some call us cowards.',
     at: 43.25,
     hold: 4200,
-    shot: { portrait: 'anatoly-dobrynin.jpg', focus: '50% 34%', name: 'Anatoly Dobrynin', move: 'still' },
+    shot: { archiveId: 'ov-dobrynin', alt: 'Anatoly Dobrynin, seated, a folder on his knee.', move: 'still', fit: 'plate' },
   },
   {
     id: 'negotiate',
     line: 'But we negotiate. We compromise, in back rooms.',
     at: 47.45,
     hold: 5450,
-    shot: { portrait: 'u-thant.jpg', focus: '50% 24%', name: 'U Thant', move: 'in' },
+    shot: { archiveId: 'ov-u-thant-kennedy-stevenson', alt: 'President Kennedy, U Thant and Adlai Stevenson side by side on a sofa in a hotel suite, January 1962.', move: 'in', fit: 'plate' },
   },
   {
     id: 'know',
     line: 'Because we know — if we don’t find a way',
     at: 52.9,
     hold: 4750,
-    shot: { portrait: 'u-thant.jpg', focus: '50% 24%', name: 'U Thant', move: 'still' },
+    shot: { archiveId: 'ov-u-thant', alt: 'U Thant, seated, hands folded.', move: 'still', fit: 'plate' },
   },
   {
     id: 'end',
     line: 'it’ll be the end of all things.',
     at: 57.65,
     hold: 5800,
-    shot: { portrait: 'robert-kennedy.jpg', focus: '50% 12%', name: 'Robert Kennedy', move: 'in' },
+    shot: { archiveId: 'ov-rfk', alt: 'Robert Kennedy seated in the Oval Office, looking towards the President, February 1962.', move: 'in', fit: 'plate' },
   },
 ];
 

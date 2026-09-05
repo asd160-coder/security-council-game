@@ -16,7 +16,7 @@
 
 .empty {
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 14px;
   font-style: italic;
   color: var(--silver-fainter);
 }
@@ -82,7 +82,7 @@
 
 .fragmentText {
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.6;
   color: var(--ink);
 }
@@ -107,7 +107,7 @@
   padding-top: 8px;
   border-top: 1px dashed var(--stock-edge);
   font-family: var(--font-body);
-  font-size: 13.5px;
+  font-size: 14.5px;
   line-height: 1.5;
   color: var(--ink-faint);
   text-decoration: line-through;
@@ -131,7 +131,7 @@
   padding-top: 9px;
   border-top: 1px solid var(--stock-edge);
   font-family: var(--font-body);
-  font-size: 12.5px;
+  font-size: 13.5px;
   font-style: italic;
   line-height: 1.55;
   color: var(--ink-faint);
@@ -152,7 +152,7 @@
   display: block;
   margin-top: 4px;
   font-family: var(--font-mono);
-  font-size: 9.5px;
+  font-size: 10.5px;
   font-style: normal;
   letter-spacing: var(--track-label-tight);
   text-transform: uppercase;

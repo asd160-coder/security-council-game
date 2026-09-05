@@ -53,7 +53,7 @@
 .label {
   fill: var(--silver-muted);
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 14px;
   letter-spacing: var(--track-label-tight);
   text-transform: uppercase;
 }
@@ -61,7 +61,7 @@
 .sub {
   fill: var(--silver-fainter);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: var(--track-label-tight);
   text-transform: uppercase;
 }

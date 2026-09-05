@@ -82,13 +82,28 @@
   background: #06080b;
 }
 
+/* A plate: a photograph of a person, shown whole — contained with an inset,
+   over the same file blurred and darkened to fill the frame. The backdrop is
+   its own layer on a slower clock (see Shot), so the two drift apart. The
+   inset is generous because the move scales the layer by up to 9%, and the
+   picture should still have air around it at the end of the beat. */
+.plate {
+  object-fit: contain;
+  padding: 7%;
+}
+
+.plateBack {
+  filter: blur(28px) brightness(0.42) saturate(0.55);
+  transform: scale(1.12);
+}
+
 /* The Illustration marker, as everywhere a drawn face appears. */
 .illustrationMark {
   position: absolute;
   left: calc(6% + 22px);
   bottom: calc(6% + 22px);
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: var(--track-label);
   text-transform: uppercase;
   color: var(--silver-faint);
@@ -128,7 +143,7 @@
 
 .slateNote {
   font-family: var(--font-mono);
-  font-size: 9.5px;
+  font-size: 10.5px;
   letter-spacing: var(--track-label-tight);
   color: var(--silver-fainter);
   max-width: 34rem;

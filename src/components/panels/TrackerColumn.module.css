@@ -16,7 +16,7 @@
 
 .note {
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: 13px;
   font-style: italic;
   color: var(--silver-fainter);
   line-height: 1.4;
@@ -132,7 +132,7 @@
    because it is a note about a change, not a permanent part of the readout. */
 .delta {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: var(--track-label-tight);
   font-variant-numeric: tabular-nums;
   margin-left: 8px;
@@ -174,7 +174,7 @@
 
 .meaning {
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.45;
   color: var(--silver-fainter);
   margin-top: 8px;

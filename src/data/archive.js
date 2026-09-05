@@ -328,17 +328,156 @@ export const ARCHIVE = [
     whyItMatters: 'The chairman of the Joint Chiefs and the Secretary of Defense, in the same frame as the man who had overruled the advice to strike.',
   },
   {
-    id: 'ov-duck-and-cover',
+    /* A frame of the film, not its cartoon. The first cut used Bert the
+       Turtle, the film's opening; the first playthrough asked for the
+       children, and the film has them — cut at 186.8 s with
+       .design/frame-grab.swift from the Internet Archive's copy. */
+    id: 'ov-duck-and-cover-classroom',
     kind: 'image',
     overture: true,
-    file: 'duck-and-cover-1951.jpg',
-    title: 'Bert the Turtle, from Duck and Cover, 1951',
+    file: 'duck-and-cover-1951-classroom.jpg',
+    title: 'Schoolchildren under their desks, from Duck and Cover, 1951',
     date: '1951',
-    caption: 'The cartoon that opens the civil-defence film shown to American schoolchildren: a monkey dangles a lit firecracker over Bert, who ducks into his shell.',
-    source: 'Federal Civil Defense Administration — Library of Congress, mbrs01836081',
+    caption: 'Two children curled under their desks with their hands over their necks, in the drill the Federal Civil Defense Administration filmed for every American classroom.',
+    source: 'Duck and Cover, Federal Civil Defense Administration, 1951 — frame at 186.8 s of the Internet Archive copy, gov.ntis.ava11109vnb1',
     rights: 'Public domain — work of the US federal government',
-    whyItMatters: 'How a generation of children was taught to think about the bomb: as something you could duck.',
+    whyItMatters: 'This is what living under the spectre looked like at nine years old, and the government made the film.',
   },
+
+  /* The three seats, photographed. Milestone 20 put real photographs of the
+     three men into the overture's closing beats, where the painted portraits
+     had been — the record is not silent about these three, so the film shows
+     the record. The portraits remain everywhere else, under the rule in
+     roles.js. Two of the beats are details cut from a wider frame, and each
+     says so. */
+  {
+    id: 'ov-dobrynin-kennedy',
+    kind: 'image',
+    overture: true,
+    file: 'dobrynin-kennedy-1962-03-30.jpg',
+    title: 'Ambassador Dobrynin with President Kennedy in the Oval Office, 30 March 1962',
+    date: '30 March 1962',
+    caption: 'Dobrynin, a fortnight into his posting, with the President in the rocking chair and the press behind, on the day he presented his credentials.',
+    source: 'Robert Knudsen, White House Photographs; John F. Kennedy Presidential Library, KN-C20738',
+    rights: 'Public domain — work of the US federal government',
+    whyItMatters: 'The channel the endgame ran through began here, in front of photographers, as a courtesy call.',
+  },
+  {
+    id: 'ov-dobrynin',
+    kind: 'image',
+    overture: true,
+    file: 'dobrynin-1962-03-30-crop.jpg',
+    title: 'Anatoly Dobrynin, 30 March 1962 (detail)',
+    date: '30 March 1962',
+    caption: 'A detail of the same photograph, cut to the Ambassador.',
+    source: 'Robert Knudsen, White House Photographs; John F. Kennedy Presidential Library, KN-C20738 — detail',
+    rights: 'Public domain — work of the US federal government',
+    whyItMatters: 'Forty-three years old, and the only man in Washington who could be sure a message reached Khrushchev unedited.',
+  },
+  {
+    id: 'ov-u-thant-kennedy-stevenson',
+    kind: 'image',
+    overture: true,
+    file: 'u-thant-kennedy-stevenson-1962-01-19.jpg',
+    title: 'President Kennedy, U Thant and Adlai Stevenson at the Waldorf-Astoria, New York, 19 January 1962',
+    date: '19 January 1962',
+    caption: 'The President, the Acting Secretary-General and the American ambassador to the United Nations on a sofa in a hotel suite — the kind of room the crisis would actually be settled in.',
+    source: 'Cecil Stoughton, White House Photographs; John F. Kennedy Presidential Library, JFKWHP-1962-01-19-B',
+    rights: 'Public domain — work of the US federal government',
+    whyItMatters: 'U Thant had been Acting Secretary-General for eleven weeks, with no army and a standing that depended on rooms like this one.',
+  },
+  {
+    id: 'ov-u-thant',
+    kind: 'image',
+    overture: true,
+    file: 'u-thant-1962-01-19-crop.jpg',
+    title: 'U Thant, 19 January 1962 (detail)',
+    date: '19 January 1962',
+    caption: 'A detail of the same photograph, cut to the Secretary-General.',
+    source: 'Cecil Stoughton, White House Photographs; John F. Kennedy Presidential Library, JFKWHP-1962-01-19-B — detail',
+    rights: 'Public domain — work of the US federal government',
+    whyItMatters: 'The one seat in the game with nothing to threaten and nothing to offer but a way out.',
+  },
+  {
+    id: 'ov-rfk',
+    kind: 'image',
+    overture: true,
+    file: 'rfk-oval-office-1962-02-28-crop.jpg',
+    title: 'Attorney General Robert Kennedy in the Oval Office, 28 February 1962 (detail)',
+    date: '28 February 1962',
+    caption: 'A detail of a photograph of the President hearing his brother’s report on a month’s tour abroad, with the Vice-President and the Secretary of State: the Attorney General, seated, looking towards the President.',
+    source: 'Abbie Rowe, White House Photographs; John F. Kennedy Presidential Library, JFKWHP-1962-02-28-D — detail',
+    rights: 'Public domain — work of the US federal government',
+    whyItMatters: 'The back channel had a face. Thirty-six years old, and the one man in the room the President would believe without a memorandum.',
+  },
+
+  /* ------------------------------------------------- The road's stills.
+     Milestone 20: a photograph on each beat of the Background tab's road,
+     flagged `road: true` — informational, like `overture: true`. The credits
+     list them because they are here; the day rails never show them. Not
+     every still is a photograph of the event named — one is an Army chart,
+     one a satellite frame from the year before — and the captions say so. */
+  {
+    id: 'road-camp-david',
+    kind: 'image',
+    road: true,
+    file: 'camp-david-1961-04-22.jpg',
+    title: 'President Kennedy with General Eisenhower at Camp David, 22 April 1961',
+    date: '22 April 1961',
+    caption: 'Kennedy and Eisenhower walking from the helicopter at Camp David five days after the Bay of Pigs landing, hats in hand, military aides behind.',
+    source: 'Robert Knudsen, White House Photographs; US National Archives and Records Administration, 194198 (John F. Kennedy Library)',
+    rights: 'Public domain — work of the US federal government',
+    whyItMatters: 'The new president went to the old one to be seen taking advice. The failure was eleven weeks in, and the photograph was part of the apology.',
+  },
+  {
+    id: 'road-vienna',
+    kind: 'image',
+    road: true,
+    file: 'vienna-1961-06-03.jpg',
+    title: 'Kennedy and Khrushchev at the Vienna summit, 3 June 1961',
+    date: '3 June 1961',
+    caption: 'The two men at the American ambassador’s residence in Vienna on the first day of their only meeting.',
+    source: 'US Department of State photograph; John F. Kennedy Presidential Library, PX 96-33:12',
+    rights: 'Public domain — work of the US federal government',
+    whyItMatters: 'Two days, one reading of each other, and neither revised it before October.',
+  },
+  {
+    id: 'road-potsdamer-platz',
+    kind: 'image',
+    road: true,
+    file: 'potsdamer-platz-1961-11-22.jpg',
+    title: 'Border fortifications at Potsdamer Platz, Berlin, 22 November 1961',
+    date: '22 November 1961',
+    caption: 'Wire, tank traps and the first concrete across Potsdamer Platz, photographed by the US Army’s Berlin Brigade three months after the border closed. The numeral is the Army’s own, from the report the print was made for.',
+    source: 'US Army Europe, Berlin Brigade; US National Archives and Records Administration, 6003846',
+    rights: 'Public domain — work of the US federal government',
+    whyItMatters: 'The confrontation everyone expected to be decisive was frozen instead — and a frozen one can be reached for at any time.',
+  },
+  {
+    id: 'road-corona',
+    kind: 'image',
+    road: true,
+    file: 'corona-mys-shmidta-1960-08-18.jpg',
+    title: 'The first CORONA satellite photograph: Mys Shmidta airfield, 18 August 1960',
+    date: '18 August 1960',
+    caption: 'The first usable frame returned by a CORONA reconnaissance satellite: an airfield on the Soviet Arctic coast, labelled by the analysts who read it. Satellite photography, not the U-2, is what told Washington how few missiles the Soviet Union had.',
+    source: 'National Reconnaissance Office',
+    rights: 'Public domain — work of the US federal government',
+    whyItMatters: 'A missile gap could only be disproved by counting. This is how the counting was done.',
+  },
+  {
+    id: 'road-jupiter-chart',
+    kind: 'image',
+    road: true,
+    file: 'jupiter-turkey-deployment-chart.jpg',
+    title: 'Jupiter deployment chart for Turkey, US Army Missile Command',
+    date: 'About 1960; declassified',
+    caption: 'Not a photograph: an Army briefing chart for the Turkish deployment, its classification stamps struck through on release. One squadron, fifteen missiles, at Çiğli near Izmir, under an agreement dated 28 October 1959.',
+    source: 'US Army Aviation and Missile Command, Jupiter missile history collection',
+    rights: 'Public domain — work of the US federal government',
+    whyItMatters: 'The other doorstep. The chart names the site the whole crisis would end by quietly emptying.',
+  },
+
 ];
 
 export const getArchive = (id) => ARCHIVE.find((item) => item.id === id) ?? null;

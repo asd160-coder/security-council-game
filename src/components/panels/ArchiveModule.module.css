@@ -103,7 +103,7 @@
   display: grid;
   place-items: center;
   font-family: var(--font-mono);
-  font-size: 15px;
+  font-size: 16px;
   color: var(--silver-fainter);
 }
 
@@ -118,7 +118,7 @@
 
 .awaitingNote {
   font-family: var(--font-body);
-  font-size: 12.5px;
+  font-size: 13.5px;
   font-style: italic;
   line-height: 1.5;
   color: var(--silver-fainter);
@@ -128,7 +128,7 @@
 
 .title {
   font-family: var(--font-display);
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--silver);
   margin-bottom: 6px;
@@ -137,7 +137,7 @@
 
 .caption {
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.55;
   color: var(--silver-muted);
   margin-top: 12px;
@@ -161,7 +161,7 @@
 
 .whyText {
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.55;
   color: var(--silver-muted);
 }
@@ -200,7 +200,7 @@
 
 .documentLine {
   font-family: var(--font-body);
-  font-size: 14.5px;
+  font-size: 15.5px;
   line-height: 1.62;
   color: var(--ink-muted);
 }

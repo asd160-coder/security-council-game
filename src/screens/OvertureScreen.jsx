@@ -30,46 +30,56 @@ const CROSSFADE = 900;
 function Shot({ shot, beatMs }) {
   const style = { '--beat': `${beatMs}ms` };
   const moveClass = styles[`move-${shot.move ?? 'still'}`] ?? '';
-
-  if (shot.portrait) {
-    return (
-      <div className={`${styles.layer} ${moveClass}`} style={style}>
-        <img
-          className={styles.portrait}
-          src={`portraits/${shot.portrait}`}
-          style={{ objectPosition: shot.focus }}
-          alt={`${shot.name} — ${PLAY.illustration}`}
-        />
-        <span className={styles.illustrationMark}>{PLAY.illustration}</span>
-      </div>
-    );
-  }
-
   const item = shot.archiveId ? getArchive(shot.archiveId) : null;
-  if (item?.file) {
-    /* `contain` for the two shots that are the wrong shape to fill a frame —
-       a portrait of a rocket, and a four-inch contact print that should read
-       as a print rather than be blown up to a wall. The stage's ground is
-       near-black, so the letterbox is invisible against a dark photograph. */
-    const fitClass = shot.fit === 'contain' ? styles.contain : '';
-    return (
-      <div className={`${styles.layer} ${moveClass}`} style={style}>
-        <img className={`${styles.still} ${fitClass}`} src={`archive/${item.file}`} alt={shot.alt} />
-        <div className={styles.source}>
-          <SourceLine source={item.source} rights={item.rights} onBoard />
-        </div>
-      </div>
-    );
-  }
+  const src = shot.portrait ? `portraits/${shot.portrait}` : item?.file ? `archive/${item.file}` : null;
 
   /* A slate: a labelled dark frame standing in for a shot with no still —
      none remain in the data, so reaching this now means an archiveId failed
      to resolve, and the frame says so rather than leaving a hole. */
+  if (!src) {
+    return (
+      <div className={`${styles.layer} ${styles.slate} ${moveClass}`} style={style} role="img" aria-label={shot.alt}>
+        <span className={styles.slateLabel}>{shot.slate ?? shot.archiveId ?? '—'}</span>
+        <span className={styles.slateNote}>{shot.source ?? 'Shot not found in the archive'}</span>
+      </div>
+    );
+  }
+
+  /* Three fits. Cover fills the frame and is the default. `contain` sits a
+     wrong-shaped print whole on the dark ground — a rocket, a four-inch
+     contact print, a frame of 1951 film. `plate` is for people: the whole
+     photograph, contained with an inset, over a blurred and darkened copy of
+     itself that fills the frame on a slower clock. The two layers drift
+     apart as the beat runs, which is the parallax the design packet asked
+     for — and the answer to the first playthrough's note that the closing
+     faces had been cropped to nothing but face. */
+  const fitClass = shot.fit === 'contain' ? styles.contain : shot.fit === 'plate' ? styles.plate : '';
+  const isPortrait = Boolean(shot.portrait);
+  const alt = isPortrait ? `${shot.name} — ${PLAY.illustration}` : shot.alt;
+
   return (
-    <div className={`${styles.layer} ${styles.slate} ${moveClass}`} style={style} role="img" aria-label={shot.alt}>
-      <span className={styles.slateLabel}>{shot.slate ?? shot.archiveId ?? '—'}</span>
-      <span className={styles.slateNote}>{shot.source ?? 'Shot not found in the archive'}</span>
-    </div>
+    <>
+      {shot.fit === 'plate' && (
+        <div className={`${styles.layer} ${moveClass}`} style={{ '--beat': `${Math.round(beatMs * 1.6)}ms` }} aria-hidden="true">
+          <img className={`${styles.still} ${styles.plateBack}`} src={src} alt="" />
+        </div>
+      )}
+      <div className={`${styles.layer} ${moveClass}`} style={style}>
+        <img
+          className={`${styles.still} ${isPortrait ? styles.portrait : ''} ${fitClass}`}
+          src={src}
+          style={shot.focus ? { objectPosition: shot.focus } : undefined}
+          alt={alt}
+        />
+        {isPortrait ? (
+          <span className={styles.illustrationMark}>{PLAY.illustration}</span>
+        ) : (
+          <div className={styles.source}>
+            <SourceLine source={item.source} rights={item.rights} onBoard />
+          </div>
+        )}
+      </div>
+    </>
   );
 }
 

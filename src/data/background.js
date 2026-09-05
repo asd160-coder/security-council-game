@@ -15,6 +15,13 @@ import { ROLES } from './roles.js';
    from it. Asking one set of questions of six people is the whole
    instrument. It does not rank the answers.
 
+   Each road beat carries an `archiveId` — a still registered in archive.js
+   with its source and rights, shown above the prose with a caption that says
+   what it is. Not every still is a photograph of the event named — one is
+   an Army chart, one a satellite frame from the year before, one the same
+   square three months on — and each caption says which. `focus` is the crop origin for a cover
+   fit; `fit: 'contain'` shows a small print whole rather than blown up.
+
    Rights: the prose is authored, like every other word the game writes in its
    own voice. The images are not, and they split two ways. The three playable
    seats carry generated `portrait` illustrations under the rule in roles.js —
@@ -25,6 +32,10 @@ import { ROLES } from './roles.js';
 export const ROAD = [
   {
     id: 'bay-of-pigs',
+    archiveId: 'road-camp-david',
+    focus: '50% 30%',
+    alt: 'President Kennedy and General Eisenhower walking side by side at Camp David, hats in hand, a helicopter and uniformed aides behind them.',
+    caption: 'Camp David, 22 April 1961: five days after the landing, the President went to be photographed taking the old general’s advice.',
     date: 'April 1961',
     title: 'The Bay of Pigs',
     body: [
@@ -34,6 +45,10 @@ export const ROAD = [
   },
   {
     id: 'vienna',
+    archiveId: 'road-vienna',
+    focus: '50% 40%',
+    alt: 'Khrushchev and Kennedy seated facing each other in armchairs, Kennedy gesturing as he speaks.',
+    caption: 'Vienna, 3 June 1961. The photograph is the State Department’s own; the conversation went worse than it looks.',
     date: 'June 1961',
     title: 'Vienna',
     body: [
@@ -43,6 +58,10 @@ export const ROAD = [
   },
   {
     id: 'berlin',
+    archiveId: 'road-potsdamer-platz',
+    focus: '50% 62%',
+    alt: 'Coils of wire and steel tank traps across an empty square, bomb-damaged buildings behind.',
+    caption: 'Potsdamer Platz, 22 November 1961, photographed by the US Army’s Berlin Brigade: by November the wire of August had become this.',
     date: 'August 1961',
     title: 'The Wall',
     body: [
@@ -52,6 +71,10 @@ export const ROAD = [
   },
   {
     id: 'the-gap',
+    archiveId: 'road-corona',
+    fit: 'contain',
+    alt: 'A grainy satellite photograph of a coastline with a small airfield, labelled Runway and Parking Apron.',
+    caption: 'The first CORONA satellite frame, August 1960: a Soviet airfield on the Arctic coast. Counting from orbit is what turned the missile gap inside out.',
     date: 'October 1961',
     title: 'The missile gap, in reverse',
     body: [
@@ -61,6 +84,10 @@ export const ROAD = [
   },
   {
     id: 'jupiters',
+    archiveId: 'road-jupiter-chart',
+    fit: 'contain',
+    alt: 'A hand-lettered Army briefing chart headed Deployment (Turkey), with a map of Turkey marking Çiğli and Izmir, and the words one squadron, fifteen missiles.',
+    caption: 'Not a photograph but the Army’s own chart: one squadron, fifteen missiles, at Çiğli near Izmir, under an agreement dated 28 October 1959.',
     date: 'Spring 1962',
     title: 'The Jupiters in Turkey',
     body: [
@@ -71,6 +98,10 @@ export const ROAD = [
   },
   {
     id: 'anadyr',
+    archiveId: 'u2-mrbm-launch-site',
+    focus: '50% 50%',
+    alt: 'An annotated aerial reconnaissance photograph of a missile launch site among fields.',
+    caption: 'The readout board dated 15 October, from the U-2 flight of the day before: the photograph that ended the secret.',
     date: 'May–September 1962',
     title: 'Operation Anadyr',
     body: [

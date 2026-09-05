@@ -398,3 +398,40 @@ to tune the film's pace:
 63.45 s in all. The beat times in `overture.js` were read from `.design/speech-segments.swift`
 run on the rebuilt file, not typed from the table.
 
+## Milestone 20 — after the first playthrough
+
+The first playthrough asked for photographs on the Background tab's road, real photographs
+of the three seats in the overture in place of the painted portraits (which were also
+cropped to nothing but face — they are now shown whole, as plates over a blurred copy of
+themselves), the film's cartoon replaced by its real classroom, and type one step larger.
+Every still below is a work of the United States federal government. Each was checked on
+its Commons file page for photographer, source, licence template and size before download;
+the John F. Kennedy Library items were fetched from the Commons copies because the Library
+blocks automated download. The downloads were approved as a list in the plan of 5 September
+2026.
+
+| File | What it is | Source | Basis / note |
+|---|---|---|---|
+| `camp-david-1961-04-22.jpg` | Kennedy and Eisenhower at Camp David, 22 April 1961, five days after the Bay of Pigs landing | Robert Knudsen, White House; NARA 194198 | Federal — downscaled from 2966px to 1600 |
+| `vienna-1961-06-03.jpg` | Kennedy and Khrushchev, Vienna, 3 June 1961 | US Department of State; JFK Library PX 96-33:12 | Federal — downscaled from 2894px to 1600 |
+| `potsdamer-platz-1961-11-22.jpg` | Border fortifications at Potsdamer Platz, 22 November 1961 | US Army Berlin Brigade; NARA 6003846 | Federal — 1460px as found; the numeral is the Army's own report mark, kept |
+| `corona-mys-shmidta-1960-08-18.jpg` | The first CORONA satellite frame: Mys Shmidta airfield, 18 August 1960 | National Reconnaissance Office | Federal — 499×640 as found, shown whole, never upscaled; nro.gov refuses automated fetches, so no larger print was found |
+| `jupiter-turkey-deployment-chart.jpg` | The Army's briefing chart of the Turkish Jupiter deployment: Çiğli, one squadron, fifteen missiles | US Army Aviation and Missile Command | Federal — **a chart, not a photograph**, 558×440, captioned as such; the Commons file is titled as if it were a photograph |
+| `dobrynin-kennedy-1962-03-30.jpg` | Dobrynin with Kennedy in the Oval Office, 30 March 1962 | Robert Knudsen, White House; JFK Library KN-C20738 | Federal — downscaled from 2524px to 1800 |
+| `dobrynin-1962-03-30-crop.jpg` | Detail of the same: the Ambassador | as above | Federal — crop 1034×1525 of the original |
+| `u-thant-kennedy-stevenson-1962-01-19.jpg` | Kennedy, U Thant and Stevenson at the Waldorf-Astoria, 19 January 1962 | Cecil Stoughton, White House; JFK Library JFKWHP-1962-01-19-B | Federal — downscaled from 3000px to 1600 |
+| `u-thant-1962-01-19-crop.jpg` | Detail of the same: the Secretary-General | as above | Federal — crop 900×1410 |
+| `rfk-oval-office-1962-02-28-crop.jpg` | Detail: Attorney General Robert Kennedy in the Oval Office, 28 February 1962, with Rusk, Johnson and the President | Abbie Rowe, White House; JFK Library JFKWHP-1962-02-28-D | Federal — crop 750×1100 of a 3000px original |
+| `duck-and-cover-1951-classroom.jpg` | Two children under their desks: a frame of *Duck and Cover*, 1951 | Federal Civil Defense Administration; Internet Archive `gov.ntis.ava11109vnb1`, h.264 copy, frame at 186.8 s | Federal — 640×480, cut with `.design/frame-grab.swift`; replaces `duck-and-cover-1951.jpg` (Bert the Turtle), which is removed |
+
+The Anadyr beat reuses `u2-mrbm-launch-site-1962-10-15.jpg` from Milestone 4.
+
+**Rejected or set aside.** "Robert Kennedy (1962)" on Commons is an Anefo photograph under
+CC BY-SA 3.0 NL — not public domain. "U Thant and John F. Kennedy" (PNG) rests on Myanmar's
+copyright term. "AG RFK" and "Robert Kennedy" are Getty scans under a non-renewal claim —
+not a basis this project accepts. A 1962 New York World-Telegram & Sun photograph of a
+Brooklyn school drill (LC-DIG-ds-01489) would have been the stronger children-under-desks
+picture but a third rights basis, and the Library's rights page could not be read from here
+(bot wall); the film frame under the federal basis was preferred. The Stoughton photograph of
+the Kennedy brothers on the West Wing Colonnade (3 October 1962, NARA 194239) was downloaded
+and set aside: in it the faces are too small to serve a beat whose point is a face.

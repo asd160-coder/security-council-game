@@ -28,7 +28,7 @@
 
 .standfirst {
   font-family: var(--font-body);
-  font-size: 15.5px;
+  font-size: 16.5px;
   line-height: 1.65;
   color: var(--silver-muted);
   max-width: 44rem;
@@ -46,7 +46,7 @@
 
 .prose p {
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.68;
   color: var(--silver-muted);
   max-width: 44rem;
@@ -95,7 +95,7 @@
 
 .markerNote {
   font-family: var(--font-body);
-  font-size: 11.5px;
+  font-size: 12.5px;
   font-style: italic;
   line-height: 1.4;
   color: var(--silver-fainter);
@@ -129,7 +129,7 @@
 .timelineFoot {
   margin-top: 62px;
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.65;
   color: var(--silver-muted);
   max-width: 44rem;
@@ -137,7 +137,7 @@
 
 .minutes {
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 14px;
   letter-spacing: var(--track-label-tight);
   color: var(--wax-text);
 }
@@ -168,7 +168,7 @@
 
 .unit {
   font-family: var(--font-mono);
-  font-size: 9.5px;
+  font-size: 10.5px;
   letter-spacing: var(--track-label-tight);
   text-transform: uppercase;
   color: var(--silver-faint);
@@ -179,7 +179,7 @@
 
 .rowNote {
   font-family: var(--font-body);
-  font-size: 14.5px;
+  font-size: 15.5px;
   line-height: 1.6;
   color: var(--silver-muted);
 }
@@ -198,7 +198,7 @@
   padding-top: 18px;
   border-top: 1px solid var(--board-line);
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 14px;
   font-style: italic;
   line-height: 1.55;
   color: var(--silver-fainter);
@@ -268,7 +268,7 @@
 
 .posterMark {
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: var(--track-label);
   text-transform: uppercase;
   color: var(--silver-fainter);
@@ -295,7 +295,7 @@
 
 .posterNote {
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 14px;
   font-style: italic;
   line-height: 1.6;
   color: var(--silver-fainter);

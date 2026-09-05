@@ -49,7 +49,7 @@
 
 .prose p {
   font-family: var(--font-body);
-  font-size: 15.5px;
+  font-size: 16.5px;
   line-height: 1.68;
   color: var(--silver-muted);
   max-width: 42rem;
@@ -61,7 +61,7 @@
 
 .caveat {
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 14px;
   font-style: italic;
   line-height: 1.55;
   color: var(--silver-fainter);
@@ -109,7 +109,7 @@
 
 .dayTitle {
   font-family: var(--font-body);
-  font-size: 12.5px;
+  font-size: 13.5px;
   font-style: italic;
   line-height: 1.4;
   color: var(--silver-fainter);
@@ -133,7 +133,7 @@
 /* What you said, in your own words at the time. */
 .choiceLine {
   font-family: var(--font-body);
-  font-size: 15.5px;
+  font-size: 16.5px;
   font-style: italic;
   line-height: 1.6;
   color: var(--silver);
@@ -141,7 +141,7 @@
 
 .consequence {
   font-family: var(--font-body);
-  font-size: 13.5px;
+  font-size: 14.5px;
   line-height: 1.6;
   color: var(--silver-fainter);
 }
@@ -188,7 +188,7 @@
 /* Three provenances, three marks: chosen, rewritten, written. */
 .partKind {
   font-family: var(--font-mono);
-  font-size: 9.5px;
+  font-size: 10.5px;
   letter-spacing: var(--track-label);
   text-transform: uppercase;
   padding: 2px 7px;
@@ -213,7 +213,7 @@
 
 .partText {
   font-family: var(--font-body);
-  font-size: 15.5px;
+  font-size: 16.5px;
   line-height: 1.66;
   color: var(--ink);
   white-space: pre-wrap;
@@ -234,7 +234,7 @@
   padding-top: 10px;
   border-top: 1px dashed var(--stock-edge);
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.5;
   color: var(--ink-faint);
   text-decoration: line-through;
@@ -253,7 +253,7 @@
 
 .ownWordsText {
   font-family: var(--font-body);
-  font-size: 17px;
+  font-size: 18px;
   line-height: 1.7;
   color: var(--ink);
   white-space: pre-wrap;
@@ -274,14 +274,14 @@
 
 .patternTitle {
   font-family: var(--font-display);
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 600;
   color: var(--stock);
 }
 
 .patternText {
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.65;
   color: var(--silver-muted);
   max-width: 42rem;
@@ -351,7 +351,7 @@
 
 .promptQ {
   font-family: var(--font-body);
-  font-size: 16.5px;
+  font-size: 17.5px;
   line-height: 1.55;
   color: var(--silver);
   margin-bottom: 6px;
@@ -359,7 +359,7 @@
 
 .promptNote {
   font-family: var(--font-body);
-  font-size: 13.5px;
+  font-size: 14.5px;
   line-height: 1.6;
   color: var(--silver-fainter);
   max-width: 40rem;
@@ -385,7 +385,7 @@
   display: block;
   margin-bottom: 8px;
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 14px;
   font-style: italic;
   line-height: 1.5;
   /* Board, like the rest of the day row — .dayRow's own border is
@@ -460,7 +460,7 @@
 .conditionsFinal {
   margin-top: 12px;
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 14px;
   font-style: italic;
   line-height: 1.55;
   color: var(--ink-muted);
@@ -487,7 +487,7 @@
   display: block;
   margin-bottom: 8px;
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 14px;
   font-style: italic;
   line-height: 1.5;
   /* --ink-faint is a paper token — "labels and attributions on paper" — and
@@ -573,7 +573,7 @@
 
 .historyText {
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.62;
   color: var(--silver-muted);
 }
@@ -581,7 +581,7 @@
 .historyThen {
   margin-top: 8px;
   font-family: var(--font-body);
-  font-size: 13.5px;
+  font-size: 14.5px;
   line-height: 1.6;
   color: var(--silver-faint);
 }
@@ -590,7 +590,7 @@
   display: block;
   margin-bottom: 3px;
   font-family: var(--font-mono);
-  font-size: 9.5px;
+  font-size: 10.5px;
   letter-spacing: var(--track-label);
   text-transform: uppercase;
   color: var(--silver-fainter);
@@ -601,7 +601,7 @@
 .historySource {
   margin-top: 10px;
   font-family: var(--font-mono);
-  font-size: 9.5px;
+  font-size: 10.5px;
   letter-spacing: var(--track-label-tight);
   line-height: 1.6;
   color: var(--silver-fainter);

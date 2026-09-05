@@ -118,7 +118,7 @@
 
 .speaker {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
   font-style: normal;
   letter-spacing: var(--track-label);
@@ -128,7 +128,7 @@
 
 .role {
   font-family: var(--font-body);
-  font-size: 13.5px;
+  font-size: 14.5px;
   font-style: italic;
   line-height: 1.45;
   color: var(--silver-muted);
@@ -162,7 +162,7 @@
   display: block;
   margin-bottom: 7px;
   font-family: var(--font-mono);
-  font-size: 9.5px;
+  font-size: 10.5px;
   letter-spacing: var(--track-label);
   text-transform: uppercase;
   color: var(--brass);
@@ -171,7 +171,7 @@
 .provenanceText {
   margin: 0;
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.62;
   color: var(--silver-muted);
 }
@@ -212,7 +212,7 @@
   }
 
   .quote {
-    font-size: 19px;
+    font-size: 20px;
   }
 }
 

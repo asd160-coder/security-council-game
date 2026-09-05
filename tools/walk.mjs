@@ -101,6 +101,11 @@ BEATS.forEach((b, i) => {
   const gap = (next.at - b.at) * 1000;
   if (Math.abs(b.hold - gap) > gap * 0.1) { problems++; console.log(`  ✗ overture beat "${b.id}" holds ${b.hold}ms but the recording gives it ${Math.round(gap)}ms`); }
 });
+const { ROAD } = await import(`${R}/data/background.js`);
+for (const beat of ROAD) {
+  if (beat.archiveId && !getArchive(beat.archiveId)?.file) { problems++; console.log(`  ✗ road beat "${beat.id}" names archive "${beat.archiveId}", which has no file`); }
+}
+console.log(`road: ${ROAD.filter(b => b.archiveId).length} of ${ROAD.length} beats illustrated`);
 console.log(`overture: ${BEATS.length} beats, ${BEATS.every(b => typeof b.at === 'number') ? 'timed to the recording' : 'on the timer'}`);
 
 if (problems) {

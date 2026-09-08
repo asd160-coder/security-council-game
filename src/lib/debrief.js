@@ -37,7 +37,7 @@ function findChoice(step, roleId, choiceId) {
   if (!step || !choiceId) return null;
   const shared = step.sharedFollow?.find((o) => o.id === choiceId);
   if (shared) {
-    return { id: shared.id, label: shared.label, line: shared.lineByRole[roleId], feedback: shared.feedback };
+    return { id: shared.id, label: shared.label, line: shared.lineByRole[roleId], feedback: shared.feedback, posture: shared.posture ?? null };
   }
   const pool =
     step.kind === 'exchange'
@@ -112,6 +112,13 @@ export function readPath(state, roleId) {
       /* Only Day 4 has a council, so this is null on every other day and the
          screen simply does not render the line. */
       mandate: mandate?.title ?? null,
+      /* The categories the summary line is composed from (data/debrief.js
+         SUMMARY): the day's decisive category, Day 2's chamber category, Day
+         4's mandate, and Day 5's posture. */
+      feedback: stored?.feedback ?? null,
+      alsoFeedback: earlierStored?.feedback ?? null,
+      mandateKey: mandate?.mandate ?? null,
+      posture: choice?.posture ?? null,
       label: choice?.label ?? null,
       line: choice?.line ?? null,
       consequence: stored ? consequenceFor(day, step.id, stored.feedback) : null,

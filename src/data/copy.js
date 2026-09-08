@@ -20,7 +20,12 @@ export const APP = {
   /* Shown only when this browser holds a run in progress. Naming the day is
      what lets a student tell their own run from one somebody left behind on a
      shared machine. */
-  resume: (day) => `Resume — you were on Day ${day}`,
+  resume: (day, stage) =>
+    stage === 'debrief'
+      ? 'Resume — you were at the debrief'
+      : stage === 'ending'
+        ? 'Resume — you had reached the ending'
+        : `Resume — you were on Day ${day}`,
   beginFresh: 'Start a new run',
   credits: 'Sources and credits',
   background: 'Background and the people in it',
@@ -150,6 +155,7 @@ export const PLAY = {
   sinceYesterday: 'Since yesterday',
   situationLabel: 'Where things stand',
   situationToday: 'What you are deciding today',
+  explainersLabel: 'In other words',
   revised: 'Revised',
   previously: 'Previously — ',
   keepAsWritten: 'Leave the clause as written',
@@ -209,6 +215,10 @@ export const ENDING = {
   print: 'Print the statement',
   delivered: 'As delivered · 28 October 1962',
   restart: 'Play again as a different role',
+  /* The settled endings carry the photograph of the deal being kept, and
+     the newsreel that used to sit in the Day 5 briefing before the answer
+     had come. */
+  newsreelLabel: 'What the newsreels showed',
 };
 
 /* The overture, before the seat is taken. */
@@ -241,6 +251,11 @@ export const DEBRIEF = {
   bore: (title) => `Reached your desk: ${title.toLowerCase()}`,
   /* The reckoning's answer, read back against the person it was said to. */
   answered: 'What you said afterwards, to the adviser you overruled',
+  /* The five days, summarised — the quotes are folded under each. */
+  whatYouSaid: 'What you said',
+  answerLabel: 'Your answer (optional)',
+  answerPlaceholder: 'Write as much or as little as you like. It is saved in this browser and goes into the PDF.',
+  teacherCopyAnswers: 'The student’s answers to the discussion questions',
   conditionsLabel: 'Where you stood when the question was put',
   finalWas: (label) => `The last thing you did was: ${label.toLowerCase()}.`,
   superseded: 'Superseded',

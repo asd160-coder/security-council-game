@@ -57,6 +57,57 @@
   border: none;
 }
 
+/* The photograph of the deal being kept, above the wire. A plate, not a
+   hero: dimmed and desaturated so the teleprinter's words stay the event,
+   with the source line where every archival image carries one. */
+.backdrop {
+  margin: -3vh 0 -6px;
+}
+
+.backdropFigure {
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--board-line);
+  border-radius: var(--radius);
+  background: var(--board-inset);
+}
+
+.backdropImage {
+  display: block;
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  object-fit: cover;
+  object-position: 50% 45%;
+  filter: saturate(0.55) contrast(1.05) brightness(0.72);
+}
+
+.backdropCaption {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 26px 18px 12px;
+  background: linear-gradient(to top, rgba(13, 17, 22, 0.92), rgba(13, 17, 22, 0.55) 60%, transparent);
+}
+
+.backdropTitle {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  text-transform: uppercase;
+  color: var(--silver);
+}
+
+/* The newsreel, after the words and before the office's own line. */
+.newsreel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 42rem;
+}
+
 /* The role's own last line. Set apart, because what each of the three is left
    holding is not the same thing. */
 .closer {

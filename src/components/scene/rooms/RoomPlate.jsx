@@ -38,12 +38,15 @@ const ROOMS = {
    than any other: the same cabinet room at `dawn` and at `night` is two
    different rooms to be in. */
 const LIGHTING = {
-  day: { x: '50%', y: '4%', r: '78%', warm: 0.05, lift: 0.16 },
-  evening: { x: '74%', y: '10%', r: '66%', warm: 0.12, lift: 0.09 },
-  night: { x: '50%', y: '2%', r: '58%', warm: 0.04, lift: 0.05 },
-  dawn: { x: '24%', y: '14%', r: '70%', warm: 0.13, lift: 0.11 },
-  lamp: { x: '78%', y: '52%', r: '52%', warm: 0.22, lift: 0.07 },
-  overhead: { x: '50%', y: '0%', r: '62%', warm: 0.03, lift: 0.13 },
+  /* Doubled from the first cut (warm 0.03–0.22, lift 0.05–0.16), which lit
+     the rooms so faintly that a teacher's screenshot showed a black screen.
+     A lamp now makes a pool; a day scene now has a wall. */
+  day: { x: '50%', y: '4%', r: '78%', warm: 0.1, lift: 0.28 },
+  evening: { x: '74%', y: '10%', r: '66%', warm: 0.24, lift: 0.18 },
+  night: { x: '50%', y: '2%', r: '58%', warm: 0.08, lift: 0.1 },
+  dawn: { x: '24%', y: '14%', r: '70%', warm: 0.26, lift: 0.2 },
+  lamp: { x: '78%', y: '52%', r: '52%', warm: 0.44, lift: 0.14 },
+  overhead: { x: '50%', y: '0%', r: '62%', warm: 0.06, lift: 0.24 },
 };
 
 export default function RoomPlate({
@@ -95,7 +98,7 @@ export default function RoomPlate({
 
         {/* The card is where a room has to be recognised, so its structure sits
             higher than the band's, which only has to stay present. */}
-        <g className={styles.structure} style={{ opacity: (band ? 0.72 : 0.84) + lit.lift }}>
+        <g className={styles.structure} style={{ opacity: Math.min(1, (band ? 0.72 : 0.95) + lit.lift) }}>
           <Room occupancy={occupancy} light={light} vantage={vantage} />
         </g>
 

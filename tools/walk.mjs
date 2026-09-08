@@ -91,6 +91,11 @@ for (const day of DAYS) {
   if (!b?.situation?.sides || b.situation.sides.length < 3 || !b.situation.today) { problems++; console.log(`  ✗ day ${day.number} briefing has no "where things stand" block`); }
 }
 console.log(`briefings: ${DAYS.filter((d) => d.steps.find((s) => s.kind === 'briefing')?.situation).length} of ${DAYS.length} say where things stand`);
+for (const n of [1, 2, 4]) {
+  const b = DAYS.find((d) => d.number === n)?.steps.find((s) => s.kind === 'briefing');
+  if (!b?.explainers?.length) { problems++; console.log(`  ✗ day ${n} briefing has no "in other words" explainer (the Turkish missiles, the quarantine, the two letters)`); }
+}
+console.log(`explainers: ${DAYS.filter((d) => d.steps.find((s) => s.kind === 'briefing')?.explainers?.length).length} of ${DAYS.length} briefings explain their terms`);
 
 /* The overture's beats are timed to the narration by numbers copied from the
    detector's output (.design/speech-segments.swift), so a slip — a beat out of

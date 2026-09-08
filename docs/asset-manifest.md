@@ -509,3 +509,23 @@ line two and −30.1 dBFS after line eight, 13.5 dB under the voice's loudest hu
 milliseconds (−15.9 dBFS)**; −27.4 dBFS in the first second (fading in under "The war"),
 −38.6 dBFS in the last. The bed WAV is reproducible from the script and its arguments
 (56.711995 4 5); the gain is one argument to `mix-narration.swift`.
+
+## Milestone 24 — a room you can see, and a debrief you can answer
+
+No new sourcing beyond one still. The drawn rooms behind the establishing card were lifted
+two to three times in luminance (a palette change, not an asset). The freighter photograph
+(`soviet-ship-departing-1962-11.jpg`, November 1962) and the 29 October newsreel
+(`un-crisis-eases-1962-10-29.mp4`) moved from the Day 5 briefing, where they appeared before
+the answer had come, to the settled endings. The three principals' photographs the Background
+tab already carried (`jfk-portrait-1962-03.jpg`, `khrushchev-un-1960.jpg`,
+`castro-washington-1959.jpg`) are now registered in `src/data/archive.js` so the debrief's
+timeline and its "What followed" strip can credit them through the same path as every still.
+
+| File | What it is | Source | Basis / note |
+|---|---|---|---|
+| `test-ban-signing-1963-10-07.jpg` | President Kennedy signing the Limited Nuclear Test Ban Treaty in the Treaty Room, 7 October 1963 | Robert Knudsen, White House; JFK Library KN-C30095 | Federal — 760×694, the Library's web size (it blocks automated download of larger prints); shown at strip size only |
+
+**Rejected.** For the hotline paragraph the only federal photograph of the Washington–Moscow
+terminal on Commons ("Hotlineroom.jpg", White House/NSA) is from 2005, and the museum
+photograph of the 1963-era teleprinter is a visitor's own under a share-alike licence. The
+paragraph runs with the Test Ban signing beside it instead.

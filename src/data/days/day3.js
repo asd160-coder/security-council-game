@@ -57,6 +57,12 @@ const day3 = {
         ],
         today: 'Pressure from your own side. Someone who is supposed to be with you comes to push you toward a harder line, and you decide whether to hold. Then yesterday’s draft clause can stand, or change.',
       },
+      explainers: [
+        {
+          term: 'Why the line is not the answer',
+          text: 'The quarantine stops ships that have not yet arrived. It does nothing about the missiles already on the island, and this morning’s photographs show those being finished at the same pace. That is why the pressure today comes from your own side: every day the line holds is a day closer to the sites being ready.',
+        },
+      ],
       body: [
         'The first vessels reached the line overnight. Some stopped. Some turned back.',
         'Photography from this morning shows work continuing at the sites at the same pace as last week.',

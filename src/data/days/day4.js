@@ -56,6 +56,16 @@ const day4 = {
         ],
         today: 'First your own advisers — strike, trade, or stall — and which of their courses you carry into the room. Then the decisive conversation: which letter to answer, whether the Turkish missiles are on the table, and what can be promised in private that cannot be said in public.',
       },
+      explainers: [
+        {
+          term: 'The two letters',
+          text: 'Friday night’s letter, in Khrushchev’s own words, offers to take the missiles out of Cuba if the United States promises not to invade the island. This morning’s letter, read out on Radio Moscow, adds a second price: the American missiles in Turkey must go too. A government that sends two offers in one night is arguing with itself, and which letter you answer is a choice about which side of that argument you would rather be dealing with.',
+        },
+        {
+          term: 'Why Turkey is the hard part',
+          text: 'The Jupiters in Turkey are old, slow and worth little as weapons; Washington had already been discussing their removal. But trading an ally’s missiles in public would tell every ally that its security can be bargained away. That is why they cannot be traded openly — and why they might be removed quietly, months later, without anyone calling it a trade.',
+        },
+      ],
       channelCallback: {
         restraint: 'You held a line against your own side yesterday. That is remembered this morning. The people you held it against have not changed their minds — they have simply gained an argument they did not have before.',
         pressure: 'You let the preparation continue yesterday. It has continued. There is now a plan, a schedule, and a body of people who have worked on it, which is not the same thing as a decision but is not nothing either.',

@@ -72,6 +72,21 @@ export default function BriefingStep({ day, step, onAdvance, standing, history, 
         </Reveal>
       )}
 
+      {/* In other words: the two or three ideas a student needs to hold to act
+          today — what a quarantine is and why it is dangerous, why the Turkish
+          missiles matter, what the two letters mean — each in plain words. */}
+      {step.explainers?.length > 0 && (
+        <Reveal delay={300} className={styles.explainers}>
+          <span className={styles.explainersLabel}>{PLAY.explainersLabel}</span>
+          {step.explainers.map((entry) => (
+            <div key={entry.term} className={styles.explainer}>
+              <span className={styles.explainerTerm}>{entry.term}</span>
+              <p className={styles.explainerText}>{entry.text}</p>
+            </div>
+          ))}
+        </Reveal>
+      )}
+
       {callback && (
         <Reveal delay={320} className={styles.callback}>
           <span className={styles.callbackLabel}>{PLAY.sinceYesterday}</span>

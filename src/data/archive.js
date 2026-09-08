@@ -376,6 +376,58 @@ export const ARCHIVE = [
     whyItMatters: 'The back channel had a face. Thirty-six years old, and the one man in the room the President would believe without a memorandum.',
   },
 
+  /* ------------------------------------------------- The three principals.
+     The photographs the Background tab's cards already carry, registered
+     here as well so the debrief's timeline and its "what followed" strip can
+     credit them through getArchive like every other still. */
+  {
+    id: 'jfk-portrait-1962-03',
+    kind: 'image',
+    file: 'jfk-portrait-1962-03.jpg',
+    title: 'President Kennedy, 6 March 1962',
+    date: '6 March 1962',
+    caption: 'The President, photographed at the White House seven months before the crisis.',
+    source: 'Cecil Stoughton, White House Photographs, John F. Kennedy Presidential Library',
+    rights: 'Public domain — work of the US federal government',
+    whyItMatters: 'The only man who could order the strike or refuse it.',
+  },
+  {
+    id: 'khrushchev-un-1960',
+    kind: 'image',
+    file: 'khrushchev-un-1960.jpg',
+    title: 'Nikita Khrushchev at the United Nations General Assembly, 1960',
+    date: '1960',
+    caption: 'Khrushchev in New York two years before the crisis. The answer of 28 October came from him, by radio.',
+    source: 'Warren K. Leffler, U.S. News & World Report Collection, Library of Congress',
+    rights: 'Public domain — rights dedicated to the public by the copyright holder',
+    whyItMatters: 'Playing a weak hand quickly, on a reading of Kennedy he formed in Vienna and never updated.',
+  },
+  {
+    id: 'castro-washington-1959',
+    kind: 'image',
+    file: 'castro-washington-1959.jpg',
+    title: 'Fidel Castro in Washington, 1959',
+    date: '1959',
+    caption: 'Castro arriving in Washington in April 1959, three years before he learned of the settlement from the radio.',
+    source: 'U.S. News & World Report Collection, Library of Congress',
+    rights: 'Public domain — rights dedicated to the public by the copyright holder',
+    whyItMatters: 'Not a party to the bargain made about his island.',
+  },
+  {
+    /* What followed: the first arms-control agreement of the Cold War,
+       eleven months after the week. The Library's web size only — the
+       Library blocks automated download of larger prints. */
+    id: 'test-ban-signing-1963-10-07',
+    kind: 'image',
+    file: 'test-ban-signing-1963-10-07.jpg',
+    title: 'President Kennedy signs the Limited Nuclear Test Ban Treaty, 7 October 1963',
+    date: '7 October 1963',
+    caption: 'The signing in the Treaty Room of the White House, with senators of both parties, the Secretary of State and the Vice-President behind the President.',
+    source: 'Robert Knudsen, White House Photographs; John F. Kennedy Presidential Library, KN-C30095',
+    rights: 'Public domain — work of the US federal government',
+    whyItMatters: 'The week had shown both governments what they were risking. This was the first thing they agreed to reduce it.',
+  },
+
   /* ------------------------------------------------- The road's stills.
      Milestone 20: a photograph on each beat of the Background tab's road,
      flagged `road: true` — informational, like `overture: true`. The credits

@@ -41,6 +41,16 @@ const day1 = {
         ],
         today: 'Your first words. Nothing is public yet, so how you open — firm, careful, open to talks, or insisting on proper process — will shape how everyone else reads you for the rest of the week.',
       },
+      explainers: [
+        {
+          term: 'The missiles in Turkey',
+          text: 'Since 1961 the United States has kept fifteen Jupiter nuclear missiles in Turkey, on the Soviet Union’s southern border — about as far from Moscow as Cuba is from Washington. To Moscow, missiles in Cuba are the mirror of missiles in Turkey. Nobody can say so in public, which is exactly why they will matter in private: they are the bargaining chip of this crisis.',
+        },
+        {
+          term: 'Medium range',
+          text: 'The missiles found in Cuba could reach Washington in about thirteen minutes, and most of the eastern United States soon after. That does not change how many weapons each side has. It changes how long anyone has to think before deciding.',
+        },
+      ],
       radioCaption:
         'A brief radio bulletin signals rising public anxiety as governments move from uncertainty toward response.',
     },

@@ -18,11 +18,14 @@ of archival photographs, one for each line, closing on the three seats as they w
 narration that states the stakes — which can be skipped
 at any moment with the Skip button or Escape. Then they take one of three seats and live
 five days of October 1962. Each day they read a briefing — which opens with where things stand,
-what each side has actually done, before any prose about how it feels — meet someone, and choose what to say. Their
+what each side has actually done, before any prose about how it feels — meet someone, and choose what to say. Under the facts, an "In other words" block explains
+the two or three ideas the day turns on: the Turkish missiles, the quarantine, the two letters. Their
 choices assemble a diplomatic statement: Day 1 sets its tone, Day 2 composes a clause, Day 3
 revises that clause, Day 4 assembles the terms of a bargain, and Day 5 asks them to write
 its closing paragraph themselves. The run ends with that finished document, an outcome, and
-a debrief that reads the five days back to them.
+a debrief that reads the five days back to them in one sentence a day, with a still for each,
+the quotes folded away, a photograph beside what the person in their chair actually did, and a
+box under each discussion question that goes into the PDF.
 
 **The three seats see different material.** The crisis is identical; what changes is what
 each of them is responsible for, afraid of, and able to offer. Just over half the writing is

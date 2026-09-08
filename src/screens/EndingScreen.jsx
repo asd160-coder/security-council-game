@@ -4,7 +4,8 @@ import { TRACKERS } from '../data/trackers.js';
 import { formatValue } from '../lib/format.js';
 import ConsequencePanel from '../components/ending/ConsequencePanel.jsx';
 import Teleprinter from '../components/ending/Teleprinter.jsx';
-import { Button, Reveal } from '../components/ui/index.jsx';
+import ArchiveModule from '../components/panels/ArchiveModule.jsx';
+import { Button, Reveal, SourceLine } from '../components/ui/index.jsx';
 import { DEBRIEF, ENDING, PLAY } from '../data/copy.js';
 import { getArchive } from '../data/archive.js';
 import styles from './EndingScreen.module.css';
@@ -28,9 +29,28 @@ export default function EndingScreen({ state, role, onRestart, onDebrief }) {
 
   const ending = getResolution(resolution);
   const closer = getRoleCloser(resolution, role.id);
+  /* The two endings in which the deal was kept get the photograph of it being
+     kept — a Soviet freighter leaving Cuba with its missiles on deck, uncovered
+     so that American aircraft could count them — and the 29 October newsreel.
+     Both used to sit in the Day 5 briefing, before the answer had come, and
+     gave it away. Contained and ruptured get neither: nothing was kept. */
+  const settledOut = resolution === 'settled' || resolution === 'fragile';
+  const backdrop = settledOut ? getArchive('ship-departing') : null;
 
   return (
     <main className={styles.screen}>
+      {backdrop?.file && (
+        <Reveal className={styles.backdrop}>
+          <figure className={styles.backdropFigure}>
+            <img className={styles.backdropImage} src={`archive/${backdrop.file}`} alt={backdrop.caption} />
+            <figcaption className={styles.backdropCaption}>
+              <span className={styles.backdropTitle}>{backdrop.title}</span>
+              <SourceLine source={backdrop.source} rights={backdrop.rights} onBoard />
+            </figcaption>
+          </figure>
+        </Reveal>
+      )}
+
       {/* The answer arriving: the resolution types itself onto the board
           under a wire line before the prose fades in. Same words as before. */}
       <Teleprinter
@@ -45,6 +65,13 @@ export default function EndingScreen({ state, role, onRestart, onDebrief }) {
           <p key={paragraph.slice(0, 40)}>{paragraph}</p>
         ))}
       </Reveal>
+
+      {settledOut && (
+        <Reveal delay={200} className={styles.newsreel}>
+          <span className="eyebrow">{ENDING.newsreelLabel}</span>
+          <ArchiveModule id="un-crisis-eases" />
+        </Reveal>
+      )}
 
       {closer && (
         <Reveal delay={260} className={styles.closer}>

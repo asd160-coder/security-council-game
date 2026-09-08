@@ -641,6 +641,49 @@
   }
 }
 
+/* In other words: the ideas a student has to hold to act today, in plain
+   words, beside the facts. A brass rule like the callback's signal rule, so
+   the two blocks read as commentary on the situation rather than as more of
+   it. */
+.explainers {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-left: 18px;
+  border-left: 2px solid var(--brass-dim);
+}
+
+.explainersLabel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+.explainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.explainerTerm {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--stock);
+}
+
+.explainerText {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
+  line-height: 1.58;
+  color: var(--silver-muted);
+  max-width: 44rem;
+}
+
 /* ------------------------------------------------------------- Revision */
 .revisionCurrent {
   display: flex;

@@ -32,6 +32,11 @@ export const initialState = {
   /* The student's own closing. Not scored, carried into the ending and quoted
      back — which is honest, and is what a debrief will be built from. */
   closing: '',
+  /* The student's answers to the discussion prompts, keyed by prompt index.
+     Optional, never assessed, saved with the run so a reload keeps them, and
+     printed into the teacher's copy — which a teacher said was worth more than
+     a debrief that repeats every choice. */
+  answers: {},
   /* One snapshot per completed day: where the trackers stood and how far they
      moved that day. The only thing the debrief needs that playing does not —
      dayStartTrackers is overwritten at every boundary, so without this the run
@@ -243,6 +248,9 @@ export function reducer(state, action) {
 
     case 'setClosing':
       return enter({ ...state, closing: action.text }, state.stepIndex + 1);
+
+    case 'answerPrompt':
+      return { ...state, answers: { ...(state.answers ?? {}), [action.index]: action.text } };
 
     case 'endDay': {
       /* The day boundary. Trackers and the file carry forward; everything

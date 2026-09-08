@@ -22,8 +22,11 @@ const day5 = {
     {
       kind: 'briefing',
       id: 'update',
-      /* What was sent last night, while you were deciding. */
-      archiveIds: ['ship-departing', 'jfk-reply-27-oct', 'un-crisis-eases'],
+      /* What was sent last night, while you were deciding. The freighter
+         photograph (November) and the 29 October newsreel used to sit here
+         too, before the answer had come — they gave the ending away, and now
+         belong to it (EndingScreen). */
+      archiveIds: ['jfk-reply-27-oct'],
       bodyByBand: {
         low: [
           'The terms went to Moscow overnight. Nothing has come back. The quarantine holds, the sites are unchanged since yesterday, and for the first time in a week there is nothing scheduled to happen in the next few hours that anyone in this building controls.',
@@ -47,6 +50,12 @@ const day5 = {
         ],
         today: 'Waiting, which is a decision too. Add nothing, give a private assurance, ask for more time, or withdraw the offer — and live with which of those you chose.',
       },
+      explainers: [
+        {
+          term: 'The assurance',
+          text: 'Last night the Attorney General told the Soviet ambassador, in private, that the Turkish missiles would be gone within months — but not as part of any deal, and Washington would deny it if it were made public. A promise like that cannot be written down or enforced; it is worth exactly as much as the reputation of the man who gave it. The rest of the settlement needs inspection of the sites, which requires Cuba’s consent, and Cuba has not been asked.',
+        },
+      ],
       channelCallback: {
         selective: 'You chose which of the two letters to believe. If Moscow accepts being taken at its better word, that judgement was right. If not, you have answered a letter the other government has already moved past.',
         trade: 'You put the Turkish missiles into the bargain. Whatever comes back this morning, an ally learned yesterday that its security could be used as a bargaining chip — and allies do not forget that.',

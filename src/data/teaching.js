@@ -150,6 +150,6 @@ export const TEACHING = {
   askLabel: 'Ask them',
   copyLabel: 'Collecting the work',
   copyNote:
-    'At the end of the debrief there is a Save as PDF button. It produces a one-page record of the run — the seat, the outcome, the five decisions in the student’s own words, the trade the run made, and the closing paragraph they wrote. Nothing is transmitted anywhere: the run lives in the student’s own browser, and they choose whether to hand the file over.',
+    'At the end of the debrief there is a Save as PDF button. It produces a short record of the run — the seat, the outcome, the five decisions summarised and quoted, the trade the run made, the closing paragraph they wrote, and their answers to the discussion questions if they wrote any. Nothing is transmitted anywhere: the run lives in the student’s own browser, and they choose whether to hand the file over.',
   back: 'Back to the title',
 };

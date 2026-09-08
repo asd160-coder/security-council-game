@@ -10,17 +10,21 @@
    are, not a 1962 document. */
 
 .plate {
-  --room-void: #090d12; /* deepest ground, behind everything */
-  --room-wall: #1b232c;
-  --room-floor: #121820;
-  --room-line: #333d48; /* hairlines inside the room */
-  --room-edge: #55636f; /* lit edges, near surfaces */
-  --room-furniture: #222b34;
-  --room-far: #161d25; /* things at a distance */
-  --room-glass: #2b3742; /* window and doorway fill */
-  --room-glass-lit: #465a68;
-  --room-warm: #a8853c; /* the lamp. brass, rationed */
-  --room-warm-soft: rgba(168, 133, 60, 0.14);
+  /* Lifted two to three times from the first palette (void #090d12, wall
+     #1b232c, edge #55636f) after a teacher's screenshot showed the card as a
+     black screen with a rumour of furniture. The room has to be recognised
+     at a glance; the scrim, not the drawing, keeps the type column clear. */
+  --room-void: #0e141b; /* deepest ground, behind everything */
+  --room-wall: #2b3642;
+  --room-floor: #1b2430;
+  --room-line: #4c5866; /* hairlines inside the room */
+  --room-edge: #8b9aaa; /* lit edges, near surfaces */
+  --room-furniture: #36424f;
+  --room-far: #232d38; /* things at a distance */
+  --room-glass: #3d4c5a; /* window and doorway fill */
+  --room-glass-lit: #6b8294;
+  --room-warm: #c9a24f; /* the lamp. brass, rationed — but visible */
+  --room-warm-soft: rgba(201, 162, 79, 0.24);
 
   position: absolute;
   inset: 0;
@@ -276,14 +280,14 @@
   background:
     linear-gradient(
       104deg,
-      rgba(18, 22, 27, 0.9) 0%,
-      rgba(18, 22, 27, 0.72) 26%,
-      rgba(18, 22, 27, 0.34) 54%,
-      rgba(18, 22, 27, 0.12) 80%,
+      rgba(18, 22, 27, 0.86) 0%,
+      rgba(18, 22, 27, 0.6) 24%,
+      rgba(18, 22, 27, 0.22) 50%,
+      rgba(18, 22, 27, 0.06) 76%,
       transparent 100%
     ),
-    linear-gradient(to bottom, rgba(13, 17, 22, 0.88) 0%, rgba(13, 17, 22, 0.34) 26%, transparent 46%),
-    linear-gradient(to top, var(--board-inset) 0%, rgba(13, 17, 22, 0.3) 14%, transparent 32%);
+    linear-gradient(to bottom, rgba(13, 17, 22, 0.8) 0%, rgba(13, 17, 22, 0.24) 22%, transparent 40%),
+    linear-gradient(to top, var(--board-inset) 0%, rgba(13, 17, 22, 0.24) 12%, transparent 28%);
 }
 
 /* Under the band the type sits directly on top of the strip, so the wash is

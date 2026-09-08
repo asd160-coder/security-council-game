@@ -149,6 +149,7 @@ export default function AppShell() {
           state={state}
           role={role}
           onRestart={() => dispatch({ type: 'restart' })}
+          onAnswer={(index, text) => dispatch({ type: 'answerPrompt', index, text })}
         />
       )}
 

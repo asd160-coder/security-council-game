@@ -608,6 +608,202 @@
 }
 
 /* The five-day line beside each ledger row. */
+/* ------------------------------------------- Stills, summaries and folds */
+
+/* The picture of the day at the top of its row: 21:9 so five of them read as
+   a strip down the page rather than five posters. */
+.dayStill {
+  margin: 0 0 14px;
+}
+
+.dayStillImage {
+  display: block;
+  width: 100%;
+  max-width: 34rem;
+  aspect-ratio: 21 / 9;
+  object-fit: cover;
+  border: 1px solid var(--board-line);
+  border-radius: var(--radius);
+  background: var(--board-inset);
+  filter: saturate(0.75) contrast(1.04);
+}
+
+.dayStillCaption {
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  text-transform: uppercase;
+  color: var(--silver-faint);
+}
+
+/* One sentence for the day. The thing read; everything else folds under it. */
+.summaryLine {
+  margin: 0 0 12px;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+  color: var(--stock);
+  max-width: 34rem;
+}
+
+/* The fold that holds the quotes, styled as the history fold is. */
+.said {
+  margin-bottom: 10px;
+}
+
+.said[open] > :not(summary) + :not(summary) {
+  margin-top: 10px;
+}
+
+/* The photograph inside a history fold, with its honest note. */
+.historyStill {
+  margin: 12px 0 14px;
+  max-width: 28rem;
+}
+
+.historyStillImage {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border: 1px solid var(--board-line);
+  border-radius: var(--radius);
+  background: var(--board-inset);
+  filter: saturate(0.75) contrast(1.04);
+}
+
+.historyStillCaption {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.historyStillNote {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--silver-faint);
+}
+
+/* What followed: a still beside each paragraph. */
+.afterwards {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  max-width: 52rem;
+}
+
+.afterRow {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.afterStill {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.afterStillImage {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border: 1px solid var(--board-line);
+  border-radius: var(--radius);
+  background: var(--board-inset);
+  filter: saturate(0.75) contrast(1.04);
+}
+
+.afterStillCaption {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.afterStillTitle {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: var(--track-label-tight);
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: var(--silver-faint);
+}
+
+.afterStillEmpty {
+  min-height: 1px;
+}
+
+.afterText {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-scene);
+  line-height: 1.68;
+  color: var(--silver-muted);
+}
+
+/* The answer box under each discussion prompt. Board register: an
+   instrument, not paper — nothing the student writes here is 1962. */
+.promptBody {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.answer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.answerLabel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+.answerBox {
+  width: 100%;
+  min-height: 96px;
+  padding: 10px 12px;
+  resize: vertical;
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
+  line-height: 1.55;
+  color: var(--stock);
+  background: var(--board-inset);
+  border: 1px solid var(--board-line);
+  border-radius: var(--radius);
+}
+
+.answerBox::placeholder {
+  color: var(--silver-fainter);
+}
+
+.answerBox:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 1px;
+}
+
+@media (max-width: 620px) {
+  .afterRow {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
 .chart {
   display: block;
   overflow: visible;
@@ -769,4 +965,26 @@
   font-size: 7.5pt;
   line-height: 1.55;
   color: #6b6252;
+}
+
+/* The student's answers, in the teacher's copy. */
+.tcAnswers {
+  margin-top: 14pt;
+  display: flex;
+  flex-direction: column;
+  gap: 8pt;
+}
+
+.tcAnswer {
+  display: flex;
+  flex-direction: column;
+  gap: 3pt;
+}
+
+.tcAnswerQ {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 10.5pt;
+  font-weight: 600;
+  color: #1a1815;
 }

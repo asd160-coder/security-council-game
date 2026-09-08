@@ -69,6 +69,94 @@ export const PATTERNS = {
   },
 };
 
+/* One sentence per day, composed from the categories the run stored, so the
+   five days can be read at a glance without every choice quoted back — which
+   a teacher said was the debrief's problem. The quotes still exist, folded
+   under each day. Role-neutral by design: the categories are shared, and a
+   sentence that named the seat would need three of everything. */
+export const SUMMARY = {
+  1: {
+    firm: 'You opened with a firm warning.',
+    controlled: 'You opened firmly, but with control.',
+    diplomatic: 'You opened by leaving room for talks.',
+    legitimacy: 'You opened by insisting on process and restraint.',
+  },
+  2: {
+    chamber: {
+      evidence: 'In the chamber you argued from the evidence',
+      legalism: 'In the chamber you argued the law',
+      warning: 'In the chamber you warned about the ships',
+      opening: 'In the chamber you left a door open',
+      sovereignty: 'In the chamber you spoke for the country being argued over',
+    },
+    channel: {
+      confront: 'in private you confronted the other side.',
+      trust: 'in private you chose to trust the person across the table.',
+      ambiguity: 'in private you kept your position vague.',
+      settlement: 'in private you tested the shape of a deal.',
+      sovereignty: 'in private you insisted that Cuba be asked.',
+    },
+  },
+  3: {
+    restraint: 'You held the line against your own side.',
+    pressure: 'You let the harder course be prepared.',
+    ultimatum: 'You set a deadline.',
+    settlement: 'You asked what the other side could afford to accept.',
+    ambiguity: 'You kept your judgement to yourself.',
+  },
+  4: {
+    mandate: {
+      force: 'Advised to strike,',
+      trade: 'Advised to trade the Turkish missiles,',
+      hold: 'Advised to stall,',
+    },
+    outcome: {
+      selective: 'you answered the first letter and ignored the second.',
+      trade: 'you put the Turkish missiles into the bargain.',
+      delay: 'you asked for the two letters to be reconciled first.',
+      ultimatum: 'you put a deadline on the offer.',
+    },
+  },
+  5: {
+    hold: 'You added nothing, and waited.',
+    assure: 'You gave a private assurance, and waited.',
+    extend: 'You asked for more time.',
+    withdraw: 'You withdrew the offer.',
+  },
+  none: 'No decision was recorded for this day.',
+};
+
+export function summarise(entry) {
+  const day = entry.day;
+  if (day === 2) {
+    const chamber = SUMMARY[2].chamber[entry.alsoFeedback];
+    const channel = SUMMARY[2].channel[entry.feedback];
+    if (chamber && channel) return `${chamber}; ${channel}`;
+    if (channel) return channel.charAt(0).toUpperCase() + channel.slice(1);
+    if (chamber) return `${chamber}.`;
+    return SUMMARY.none;
+  }
+  if (day === 4) {
+    const mandate = SUMMARY[4].mandate[entry.mandateKey];
+    const outcome = SUMMARY[4].outcome[entry.feedback];
+    if (mandate && outcome) return `${mandate} ${outcome}`;
+    if (outcome) return outcome.charAt(0).toUpperCase() + outcome.slice(1);
+    return SUMMARY.none;
+  }
+  if (day === 5) return SUMMARY[5][entry.posture ?? entry.feedback] ?? SUMMARY.none;
+  return SUMMARY[day]?.[entry.feedback] ?? SUMMARY.none;
+}
+
+/* One still per day on the debrief's timeline: the picture of the day, not of
+   the choice. Archive ids, so each is credited through getArchive. */
+export const DAY_STILLS = {
+  1: 'u2-mrbm-launch-site',
+  2: 'jfk-portrait-1962-03',
+  3: 'p2-neptune',
+  4: 'excomm-cabinet-room',
+  5: 'khrushchev-un-1960',
+};
+
 /* What the office allowed. Tied to the run, not to a biography. */
 export const ROLE_REFLECTIONS = {
   rfk: {

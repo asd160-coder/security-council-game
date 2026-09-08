@@ -36,7 +36,7 @@ export default function TitleScreen({ onBegin, onCredits, onBackground, onTeache
           {saved ? (
             <>
               <Button variant="primary" onClick={onResume}>
-                {APP.resume(saved.day)}
+                {APP.resume(saved.day, saved.stage)}
               </Button>
               <Button variant="quiet" onClick={onBegin}>
                 {APP.beginFresh}

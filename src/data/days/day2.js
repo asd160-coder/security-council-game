@@ -39,6 +39,12 @@ const day2 = {
         ],
         today: 'Two things. What you say in the Security Council this afternoon, on the record and in front of cameras. Then what you say tonight, in a private meeting that neither government will admit took place.',
       },
+      explainers: [
+        {
+          term: 'The quarantine',
+          text: 'From tomorrow morning American warships will stop and search ships heading for Cuba, and turn back any carrying weapons. In law a full blockade is an act of war, so the President has called this a quarantine of offensive weapons only — a step short of war, announced as one. The danger is at the line itself: a captain with minutes to decide, a ship that will not stop, and two governments at war before either has chosen it.',
+        },
+      ],
       radioCaption:
         'The address that made the crisis public, and narrowed what either government could quietly agree to afterwards.',
     },

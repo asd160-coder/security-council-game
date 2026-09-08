@@ -1,5 +1,6 @@
 import { readDocument, readEndingConditions, readMovement, readPath, readPatterns } from '../lib/debrief.js';
 import {
+  DAY_STILLS,
   DISCUSSION,
   ENDING_CONDITIONS,
   HISTORY_NOTE,
@@ -9,13 +10,14 @@ import {
   POSTURE_NOTES,
   ROLE_REFLECTIONS,
   SECTIONS,
+  summarise,
 } from '../data/debrief.js';
-import { AFTERWARDS } from '../data/history.js';
+import { AFTERWARDS, historyStillFor } from '../data/history.js';
 import { getResolution } from '../data/endings.js';
 import { getArchive } from '../data/archive.js';
 import { getTracker } from '../data/trackers.js';
 import { formatDelta, formatValue } from '../lib/format.js';
-import { Button, Eyebrow, Reveal } from '../components/ui/index.jsx';
+import { Button, Eyebrow, Reveal, SourceLine } from '../components/ui/index.jsx';
 import { DEBRIEF, PLAY } from '../data/copy.js';
 import styles from './DebriefScreen.module.css';
 
@@ -68,7 +70,7 @@ function DayChart({ series, register }) {
 const KIND_LABEL = { selected: 'Selected', revised: 'Revised', written: 'Written by you' };
 const KIND_CLASS = { selected: 'kindSelected', revised: 'kindRevised', written: 'kindWritten' };
 
-export default function DebriefScreen({ state, role, onRestart }) {
+export default function DebriefScreen({ state, role, onRestart, onAnswer }) {
   const conditions = readEndingConditions(state, role.id);
   const ending = getResolution(conditions.resolution);
   const path = readPath(state, role.id);
@@ -76,6 +78,11 @@ export default function DebriefScreen({ state, role, onRestart }) {
   const patterns = readPatterns(state.trackers);
   const movement = readMovement(state);
   const reflection = ROLE_REFLECTIONS[role.id];
+  /* The student's answers, for the teacher's copy: only the ones written. */
+  const answered = Object.entries(state.answers ?? {})
+    .filter(([, text]) => text && text.trim())
+    .map(([index, text]) => [Number(index), text])
+    .sort((a, b) => a[0] - b[0]);
 
   return (
     <main className={styles.screen}>
@@ -124,91 +131,119 @@ export default function DebriefScreen({ state, role, onRestart }) {
       </Reveal>
 
       {/* ------------------------------------------------ The five days */}
+      {/* A still and a sentence for each day, and everything else folded:
+          the quotes, the consequence, the reckoning and the draft note sit
+          under "What you said", the record under "What Kennedy did", with a
+          photograph. A teacher's verdict on the first version was that
+          repeating every choice was worth less than a summary and a place to
+          write, and this is that verdict applied. Nothing was deleted. */}
       <Reveal delay={180} className={styles.section}>
         <div className={styles.sectionHead}>
           <Eyebrow>{SECTIONS.path}</Eyebrow>
         </div>
         <div className={styles.path}>
-          {path.map((entry) => (
-            <div key={entry.day} className={styles.dayRow}>
-              <div className={styles.dayMark}>
-                <span className={styles.dayNumber}>{DEBRIEF.day(entry.day)}</span>
-                <span className={styles.dayTitle}>{entry.title}</span>
-              </div>
-              <div className={styles.dayBody}>
-                {/* What the day did to you before you said anything. */}
-                {entry.bore && (
-                  <span className={styles.boreNote}>
-                    {DEBRIEF.bore(entry.bore.title)}
-                    {' — '}
-                    {Object.entries(entry.bore.effects)
-                      .filter(([, value]) => value !== 0)
-                      .map(([key, value]) => `${getTracker(key)?.label} ${formatDelta(value)}`)
-                      .join(' · ')}
-                  </span>
-                )}
-                {/* Only Day 4 has a council. Reading the mandate above the
-                    choice is the point: what you agreed to do, then what you
-                    did. */}
-                {entry.mandate && (
-                  <span className={styles.mandateNote}>{DEBRIEF.mandate(entry.mandate)}</span>
-                )}
-                {/* Day 2 said two things — one in the chamber and one in a room
-                    with no minute taken. Reading them together is the day. */}
-                {entry.alsoLabel && (
-                  <div className={styles.alsoSaid}>
-                    <span className={styles.alsoScene}>{entry.alsoScene}</span>
-                    <span className={styles.choiceLabel}>{entry.alsoLabel}</span>
-                    {entry.alsoLine && <p className={styles.choiceLine}>“{entry.alsoLine}”</p>}
-                  </div>
-                )}
-                {entry.label && <span className={styles.choiceLabel}>{entry.label}</span>}
-                {entry.line ? (
-                  <p className={styles.choiceLine}>“{entry.line}”</p>
-                ) : (
-                  <p className={styles.consequence}>{DEBRIEF.noChoice}</p>
-                )}
-                {entry.consequence && <p className={styles.consequence}>{entry.consequence}</p>}
-                {/* The reckoning's answer: what you said to the adviser you
-                    overruled, and what they said last. */}
-                {entry.answer && (
-                  <div className={styles.answered}>
-                    <span className={styles.answeredLabel}>{DEBRIEF.answered}</span>
-                    <p className={styles.choiceLine}>“{entry.answer.line}”</p>
-                    <p className={styles.consequence}>{entry.answer.close}</p>
-                  </div>
-                )}
-                {entry.draftAction && (
-                  <span className={styles.draftNote}>
-                    {DEBRIEF.draftNote(entry.draftAction, entry.draftLabel)}
-                  </span>
-                )}
+          {path.map((entry) => {
+            const still = getArchive(DAY_STILLS[entry.day]);
+            const record = historyStillFor(role.id, entry.day);
+            const recordStill = record ? getArchive(record.archiveId) : null;
+            return (
+              <div key={entry.day} className={styles.dayRow}>
+                <div className={styles.dayMark}>
+                  <span className={styles.dayNumber}>{DEBRIEF.day(entry.day)}</span>
+                  <span className={styles.dayTitle}>{entry.title}</span>
+                </div>
+                <div className={styles.dayBody}>
+                  {still?.file && (
+                    <figure className={styles.dayStill}>
+                      <img
+                        className={styles.dayStillImage}
+                        src={`archive/${still.file}`}
+                        alt={still.caption}
+                        loading="lazy"
+                      />
+                      <figcaption className={styles.dayStillCaption}>{still.title}</figcaption>
+                    </figure>
+                  )}
 
-                {/* What the person in this chair actually did, beside what the
-                    student did. Set apart and subordinate: the student's own
-                    words stay the thing being read, and this is the second
-                    data point rather than the answer. Rendered whatever the
-                    student chose, including on a day they walked past. */}
-                {entry.history && (
-                  /* Folded by default. The debrief is the longest thing a
-                     student reads and this is a thousand words of it, arriving
-                     last — a native disclosure keeps the record beside the
-                     choice without putting it in the way. `details` is
-                     keyboard-operable and announced as expandable without any
-                     script, which is why it is that and not a state toggle. */
-                  <details className={styles.history}>
-                    <summary className={styles.historyLabel}>{HISTORY_NOTE.label(role.name)}</summary>
-                    <p className={styles.historyText}>{entry.history.did}</p>
-                    <p className={styles.historyThen}>
-                      <span className={styles.historyThenLabel}>{HISTORY_NOTE.then}</span>
-                      {entry.history.then}
-                    </p>
-                    <p className={styles.historySource}>{entry.history.source}</p>
+                  <p className={styles.summaryLine}>{summarise(entry)}</p>
+
+                  <details className={`${styles.history} ${styles.said}`}>
+                    <summary className={styles.historyLabel}>{DEBRIEF.whatYouSaid}</summary>
+                    {/* What the day did to you before you said anything. */}
+                    {entry.bore && (
+                      <span className={styles.boreNote}>
+                        {DEBRIEF.bore(entry.bore.title)}
+                        {' — '}
+                        {Object.entries(entry.bore.effects)
+                          .filter(([, value]) => value !== 0)
+                          .map(([key, value]) => `${getTracker(key)?.label} ${formatDelta(value)}`)
+                          .join(' · ')}
+                      </span>
+                    )}
+                    {entry.mandate && (
+                      <span className={styles.mandateNote}>{DEBRIEF.mandate(entry.mandate)}</span>
+                    )}
+                    {entry.alsoLabel && (
+                      <div className={styles.alsoSaid}>
+                        <span className={styles.alsoScene}>{entry.alsoScene}</span>
+                        <span className={styles.choiceLabel}>{entry.alsoLabel}</span>
+                        {entry.alsoLine && <p className={styles.choiceLine}>“{entry.alsoLine}”</p>}
+                      </div>
+                    )}
+                    {entry.label && <span className={styles.choiceLabel}>{entry.label}</span>}
+                    {entry.line ? (
+                      <p className={styles.choiceLine}>“{entry.line}”</p>
+                    ) : (
+                      <p className={styles.consequence}>{DEBRIEF.noChoice}</p>
+                    )}
+                    {entry.consequence && <p className={styles.consequence}>{entry.consequence}</p>}
+                    {entry.answer && (
+                      <div className={styles.answered}>
+                        <span className={styles.answeredLabel}>{DEBRIEF.answered}</span>
+                        <p className={styles.choiceLine}>“{entry.answer.line}”</p>
+                        <p className={styles.consequence}>{entry.answer.close}</p>
+                      </div>
+                    )}
+                    {entry.draftAction && (
+                      <span className={styles.draftNote}>
+                        {DEBRIEF.draftNote(entry.draftAction, entry.draftLabel)}
+                      </span>
+                    )}
                   </details>
-                )}
+
+                  {/* What the person in this chair actually did, beside what
+                      the student did — the second data point, not the answer,
+                      folded by default and opening on a photograph with an
+                      honest note about its date. */}
+                  {entry.history && (
+                    <details className={styles.history}>
+                      <summary className={styles.historyLabel}>{HISTORY_NOTE.label(role.name)}</summary>
+                      {recordStill?.file && (
+                        <figure className={styles.historyStill}>
+                          <img
+                            className={styles.historyStillImage}
+                            src={`archive/${recordStill.file}`}
+                            alt={recordStill.caption}
+                            loading="lazy"
+                          />
+                          <figcaption className={styles.historyStillCaption}>
+                            <span className={styles.historyStillNote}>{record.note}</span>
+                            <SourceLine source={recordStill.source} rights={recordStill.rights} onBoard />
+                          </figcaption>
+                        </figure>
+                      )}
+                      <p className={styles.historyText}>{entry.history.did}</p>
+                      <p className={styles.historyThen}>
+                        <span className={styles.historyThenLabel}>{HISTORY_NOTE.then}</span>
+                        {entry.history.then}
+                      </p>
+                      <p className={styles.historySource}>{entry.history.source}</p>
+                    </details>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
         <p className={styles.caveat}>{HISTORY_NOTE.caveat}</p>
       </Reveal>
@@ -319,10 +354,31 @@ export default function DebriefScreen({ state, role, onRestart }) {
           <Eyebrow>{SECTIONS.history}</Eyebrow>
           <span className={styles.dayTitle}>{AFTERWARDS.title}</span>
         </div>
-        <div className={styles.prose}>
-          {AFTERWARDS.body.map((paragraph) => (
-            <p key={paragraph.slice(0, 40)}>{paragraph}</p>
-          ))}
+        <div className={styles.afterwards}>
+          {AFTERWARDS.body.map((paragraph, index) => {
+            const still = AFTERWARDS.stills?.[index] ? getArchive(AFTERWARDS.stills[index]) : null;
+            return (
+              <div key={paragraph.slice(0, 40)} className={styles.afterRow}>
+                {still?.file ? (
+                  <figure className={styles.afterStill}>
+                    <img
+                      className={styles.afterStillImage}
+                      src={`archive/${still.file}`}
+                      alt={still.caption}
+                      loading="lazy"
+                    />
+                    <figcaption className={styles.afterStillCaption}>
+                      <span className={styles.afterStillTitle}>{still.title}</span>
+                      <SourceLine source={still.source} rights={still.rights} onBoard />
+                    </figcaption>
+                  </figure>
+                ) : (
+                  <div className={styles.afterStillEmpty} aria-hidden="true" />
+                )}
+                <p className={styles.afterText}>{paragraph}</p>
+              </div>
+            );
+          })}
         </div>
         <p className={styles.caveat}>{AFTERWARDS.note}</p>
       </Reveal>
@@ -337,9 +393,21 @@ export default function DebriefScreen({ state, role, onRestart }) {
           {DISCUSSION.prompts.map((prompt, index) => (
             <div key={prompt.q} className={styles.prompt}>
               <span className={styles.promptIndex}>{String(index + 1).padStart(2, '0')}</span>
-              <div>
+              <div className={styles.promptBody}>
                 <p className={styles.promptQ}>{prompt.q}</p>
                 <p className={styles.promptNote}>{prompt.note}</p>
+                {/* Optional, never assessed, kept with the run and printed
+                    into the teacher's copy. */}
+                <label className={styles.answer}>
+                  <span className={styles.answerLabel}>{DEBRIEF.answerLabel}</span>
+                  <textarea
+                    className={styles.answerBox}
+                    rows={4}
+                    value={state.answers?.[index] ?? ''}
+                    placeholder={DEBRIEF.answerPlaceholder}
+                    onChange={(event) => onAnswer?.(index, event.target.value)}
+                  />
+                </label>
               </div>
             </div>
           ))}
@@ -384,12 +452,8 @@ export default function DebriefScreen({ state, role, onRestart }) {
               <span className={styles.tcDayLabel}>
                 {DEBRIEF.day(entry.day)} · {entry.title}
               </span>
-              {entry.label && <span className={styles.tcChoice}>{entry.label}</span>}
-              {entry.line ? (
-                <p className={styles.tcLine}>“{entry.line}”</p>
-              ) : (
-                <p className={styles.tcLine}>{DEBRIEF.noChoice}</p>
-              )}
+              <span className={styles.tcChoice}>{summarise(entry)}</span>
+              {entry.line && <p className={styles.tcLine}>“{entry.line}”</p>}
             </li>
           ))}
         </ol>
@@ -405,6 +469,18 @@ export default function DebriefScreen({ state, role, onRestart }) {
           <div className={styles.tcClosing}>
             <span className={styles.tcLabel}>{DEBRIEF.teacherCopyClosing}</span>
             <p className={styles.tcClosingText}>{state.closing}</p>
+          </div>
+        )}
+
+        {answered.length > 0 && (
+          <div className={styles.tcAnswers}>
+            <span className={styles.tcLabel}>{DEBRIEF.teacherCopyAnswers}</span>
+            {answered.map(([index, text]) => (
+              <div key={index} className={styles.tcAnswer}>
+                <p className={styles.tcAnswerQ}>{DISCUSSION.prompts[index]?.q}</p>
+                <p className={styles.tcClosingText}>{text}</p>
+              </div>
+            ))}
           </div>
         )}
 

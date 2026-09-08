@@ -83,8 +83,16 @@ export function clearRun() {
 }
 
 /* For the resume prompt. Deliberately coarse — the student needs to recognise
-   their own run, not to be told the minute they left it. */
+   their own run, not to be told the minute they left it.
+
+   A run at the ending or the debrief used to return null here, so a reload on
+   the debrief silently lost the run. Since Milestone 24 the debrief holds the
+   student's written answers to the discussion questions, and losing those to
+   a reload is exactly the failure this file exists to prevent — so those
+   screens describe themselves too, and the title offers them back. */
 export function describeRun(state) {
-  if (state.screen === 'ending' || state.screen === 'debrief') return null;
-  return { day: state.day, roleId: state.roleId };
+  if (state.screen === 'ending' || state.screen === 'debrief') {
+    return { day: state.day, roleId: state.roleId, stage: state.screen };
+  }
+  return { day: state.day, roleId: state.roleId, stage: 'play' };
 }

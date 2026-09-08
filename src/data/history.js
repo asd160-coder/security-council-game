@@ -137,6 +137,35 @@ export const HISTORY = {
   },
 };
 
+/* A still for each day's "what the person in your chair did", per seat, and
+   an honest note wherever the photograph is from another date: no photograph
+   exists of most of these moments, and the game does not pretend one does. */
+export const HISTORY_STILLS = {
+  rfk: {
+    1: { archiveId: 'u2-mrbm-launch-site', note: 'The readout board he saw that morning.' },
+    2: { archiveId: 'jfk-portrait-1962-03', note: 'The President, photographed in March 1962. The address was given on 22 October.' },
+    3: { archiveId: 'p2-neptune', note: 'A patrol aircraft over a Soviet freighter: the ships were never the danger.' },
+    4: { archiveId: 'ov-rfk', note: 'The Attorney General in the Oval Office, February 1962. No photograph of the 27 October meeting exists.' },
+    5: { archiveId: 'khrushchev-un-1960', note: 'Khrushchev at the United Nations in 1960. The answer came from him by radio.' },
+  },
+  dobrynin: {
+    1: { archiveId: 'u2-mrbm-launch-site', note: 'What Washington had, and had not told him.' },
+    2: { archiveId: 'jfk-portrait-1962-03', note: 'The President, photographed in March 1962; the address was on 22 October.' },
+    3: { archiveId: 'p2-neptune', note: 'A Soviet freighter under an American patrol aircraft.' },
+    4: { archiveId: 'ov-dobrynin-kennedy', note: 'Dobrynin with the President in March 1962. The 27 October meeting was with the Attorney General, and unphotographed.' },
+    5: { archiveId: 'khrushchev-un-1960', note: 'Khrushchev at the United Nations in 1960. He answered by radio rather than through his ambassador.' },
+  },
+  uthant: {
+    1: { archiveId: 'u2-mrbm-launch-site', note: 'What Washington held for six days before the United Nations learned of it.' },
+    2: { archiveId: 'ov-u-thant-kennedy-stevenson', note: 'U Thant with the President and Ambassador Stevenson, January 1962.' },
+    3: { archiveId: 'p2-neptune', note: 'The ships stopped short of the line — the thing nobody televised.' },
+    4: { archiveId: 'ship-departing', note: 'Verification happened at sea in November, Soviet ships uncovering their cargo, after Havana refused inspectors.' },
+    5: { archiveId: 'khrushchev-un-1960', note: 'Khrushchev at the United Nations in 1960. Both leaders thanked the office; neither gave it a role.' },
+  },
+};
+
+export const historyStillFor = (roleId, dayNumber) => HISTORY_STILLS[roleId]?.[dayNumber] ?? null;
+
 /* What followed, after the week ended. The same for every seat, because this
    part is not about the office — it is what the settlement turned out to have
    cost and bought, and several of the costs did not fall on the people who
@@ -150,6 +179,10 @@ export const AFTERWARDS = {
     'Khrushchev was removed from power in October 1964. The handling of Cuba was among the charges laid against him by the colleagues who removed him — that he had gambled and then retreated. He wrote afterwards that the point had never been to fight, and that the missiles had been withdrawn because the objective, keeping Cuba, had been achieved.',
   ],
   note: 'This is a summary written for this simulation, not a source. It is here so the week has an ending, and so the parts of the settlement that were kept secret are visible — a class reading only the public record of 1962 would conclude something different from what the participants knew.',
+  /* One still beside each paragraph, by index; null leaves a paragraph
+     without one. Milestone 24 wired the Jupiters' chart, the Test Ban
+     signing, Castro and Khrushchev. */
+  stills: ['road-jupiter-chart', 'test-ban-signing-1963-10-07', 'castro-washington-1959', 'khrushchev-un-1960'],
 };
 
 export const historyFor = (roleId, dayNumber) => HISTORY[roleId]?.[dayNumber] ?? null;

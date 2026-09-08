@@ -563,6 +563,84 @@
   color: var(--silver-muted);
 }
 
+/* Where things stand: the actions on each side since the last briefing, as
+   plain facts, so a student knows what is being responded to before the
+   prose says how it feels. Board register — the present explaining. */
+.situation {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px 20px;
+  border: 1px solid var(--board-line);
+  border-radius: var(--radius);
+  background: var(--board-raised);
+}
+
+.situationLabel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+.situationList {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.situationRow {
+  display: grid;
+  grid-template-columns: 132px minmax(0, 1fr);
+  gap: 16px;
+  align-items: baseline;
+}
+
+.situationWho {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label-tight);
+  text-transform: uppercase;
+  color: var(--silver-faint);
+}
+
+.situationDid {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.55;
+  color: var(--silver);
+}
+
+.situationToday {
+  margin: 4px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--board-line);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.55;
+  color: var(--stock);
+}
+
+.situationTodayLabel {
+  display: block;
+  margin-bottom: 4px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--signal-bright);
+}
+
+@media (max-width: 620px) {
+  .situationRow {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}
+
 /* ------------------------------------------------------------- Revision */
 .revisionCurrent {
   display: flex;

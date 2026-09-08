@@ -47,10 +47,19 @@ const day4 = {
           'At eleven o’clock a reconnaissance aircraft was shot down over eastern Cuba. The pilot is dead. There are men in both capitals who have wanted an incident of exactly this kind, and they have it, and the pressure to answer it is very close to irresistible.',
         ],
       },
+      situation: {
+        sides: [
+          { who: 'United States', did: 'The quarantine holds. This morning a U-2 was shot down over Cuba and its pilot killed; another strayed over Soviet territory by mistake. The Executive Committee is meeting again with a strike recommendation on the table, and the President must answer Moscow’s letters today.' },
+          { who: 'Soviet Union', did: 'Sent two letters. Friday night’s, private and in Khrushchev’s own words, offers to remove the missiles in return for an American promise not to invade Cuba. This morning’s, read out on Radio Moscow, adds a demand: the American missiles in Turkey must go too. Soviet crews in Cuba fired the missile that brought down the U-2, apparently without orders from Moscow.' },
+          { who: 'United Nations', did: 'The Secretary-General has offered to fly to Havana to arrange inspection. The Council is not sitting; the argument has moved to the letters.' },
+          { who: 'Cuba and Turkey', did: 'Cuba has ordered its guns to fire on low-flying American aircraft, and Castro has urged Khrushchev not to give way. Turkey has learned from the radio that its missiles are being bargained over, and has not been asked.' },
+        ],
+        today: 'First your own advisers — strike, trade, or stall — and which of their courses you carry into the room. Then the decisive conversation: which letter to answer, whether the Turkish missiles are on the table, and what can be promised in private that cannot be said in public.',
+      },
       channelCallback: {
-        restraint: 'You held a line against your own side yesterday. That is remembered this morning, and the people you held it against have not changed their minds — they have simply acquired an argument they did not have before.',
+        restraint: 'You held a line against your own side yesterday. That is remembered this morning. The people you held it against have not changed their minds — they have simply gained an argument they did not have before.',
         pressure: 'You let the preparation continue yesterday. It has continued. There is now a plan, a schedule, and a body of people who have worked on it, which is not the same thing as a decision but is not nothing either.',
-        ultimatum: 'You fixed a point of decision yesterday. It is nearer than it was, and the letters arrived inside it, which is either fortunate timing or evidence that the other side was watching the clock too.',
+        ultimatum: 'You fixed a deadline yesterday. It is nearer now, and the letters arrived inside it — either lucky timing, or a sign that the other side was watching the clock too.',
         settlement: 'You went looking yesterday for what the other side could afford to accept. One of these two letters is very close to the answer you were given.',
         ambiguity: 'You kept your judgement to yourself yesterday. Nobody has since asked you for it, and the argument has moved on without it.',
       },
@@ -178,7 +187,7 @@ const day4 = {
           'He is not here to negotiate and says so immediately. He is here because his government intends to answer one of the two letters today, and someone has to be told which.',
         ],
         uthant: [
-          'Four delegations, in three hours, saying incompatible things. Two of them are principals and two of them are the countries being spent. You are the only person who has spoken to all four.',
+          'Four delegations, in three hours, saying incompatible things. Two of them are the superpowers and two of them are the countries being bargained away. You are the only person who has spoken to all four.',
         ],
       },
       openingsByRole: {
@@ -279,7 +288,7 @@ const day4 = {
               dobrynin: { leverage: -2, escalation: -1, legitimacy: 0, councilTrust: 1, civilianRisk: -1 },
               uthant: { leverage: 0, escalation: -1, legitimacy: 1, councilTrust: -1, civilianRisk: -1 },
             },
-            note: 'Choosing which of another government’s letters to believe is a liberty. Taken from a position nobody currently trusts, it reads as convenience rather than judgement.',
+            note: 'Choosing which of another government’s letters to believe is a liberty to take. Taken by someone nobody currently trusts, it looks like convenience rather than judgement.',
           },
         },
         {
@@ -373,19 +382,19 @@ const day4 = {
       eyebrow: 'What the table did with it',
       variants: {
         selective: {
-          text: 'You chose which of two letters to believe. It is the cheapest settlement available and it rests entirely on the other government preferring to be taken at its better word — which it may, and which it has not yet said it will.',
+          text: 'You chose which of two letters to believe. It is the cheapest settlement available, and it rests entirely on the other government preferring to be taken at its better word — which it may, and which it has not yet said it will.',
           unlocks: 'note-two-letters',
         },
         trade: {
-          text: 'The bargain is now a trade rather than a demand, which makes it far likelier to be accepted and far harder to describe afterwards. Somebody will have to explain to a third country why its security was the currency.',
+          text: 'The bargain is now a trade rather than a demand. That makes it far likelier to be accepted, and far harder to describe afterwards: somebody will have to explain to a third country why its security was the price.',
           unlocks: 'note-jupiters',
         },
         delay: {
-          text: 'You asked for clarity before committing. It is the responsible position and it costs the one thing nobody has: the aircraft was lost this morning, and the argument for answering it does not pause while Moscow decides what it meant.',
+          text: 'You asked for clarity before committing. It is the responsible position, and it costs the one thing nobody has: time. The aircraft was lost this morning, and the argument for answering it does not pause while Moscow decides what it meant.',
           unlocks: 'note-two-letters',
         },
         ultimatum: {
-          text: 'A term has been placed on the offer. It concentrates both governments and it removes the possibility of quietly letting the deadline pass, which is a thing both of you might have wanted by tomorrow evening.',
+          text: 'A deadline has been put on the offer. It concentrates both governments, and it removes the possibility of quietly letting the moment pass — which both of you might have wanted by tomorrow evening.',
           unlocks: 'note-pledge',
         },
       },

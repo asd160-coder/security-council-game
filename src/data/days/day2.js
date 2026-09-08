@@ -27,9 +27,18 @@ const day2 = {
          the lawfulness line in Day 4's negotiation. */
       archiveIds: ['jfk-address', 'proclamation-3504'],
       body: [
-        'The crisis is no longer private. In a broadcast heard across the world, the United States has disclosed the installations and announced a naval quarantine of Cuba. Soviet vessels are already at sea. The Security Council has been convened.',
-        'Until last night, both governments could still move quietly. Every position taken from this morning is taken in front of an audience that will remember it.',
+        'Last night the President went on television and told the world what the photographs show. He announced a naval quarantine of Cuba: from tomorrow morning, American warships will stop any vessel carrying offensive weapons to the island and turn it back. He demanded that the missiles be removed, and asked for an emergency meeting of the Security Council. Soviet ships are already at sea.',
+        'Moscow has replied that the weapons are defensive, that the quarantine is an act of piracy, and that its ships will not turn back. Until last night, both governments could still change their minds quietly. From this morning, every position is taken in front of an audience that will remember it.',
       ],
+      situation: {
+        sides: [
+          { who: 'United States', did: 'Announced the missiles and the quarantine on television last night. Warships are moving into position; the quarantine begins tomorrow at ten in the morning. Forces have been put on higher alert.' },
+          { who: 'Soviet Union', did: 'Denies that the weapons are offensive, calls the quarantine an act of aggression, and says its ships will hold their course. Its own forces are on alert.' },
+          { who: 'United Nations', did: 'The Security Council meets today at America’s request. The Secretary-General is preparing an appeal to both leaders.' },
+          { who: 'Cuba', did: 'Has ordered a general mobilisation. Castro has told the country to expect an invasion.' },
+        ],
+        today: 'Two things. What you say in the Security Council this afternoon, on the record and in front of cameras. Then what you say tonight, in a private meeting that neither government will admit took place.',
+      },
       radioCaption:
         'The address that made the crisis public, and narrowed what either government could quietly agree to afterwards.',
     },
@@ -169,7 +178,7 @@ const day2 = {
           unlocks: 'note-chamber',
         },
         sovereignty: {
-          text: 'Raising the smaller state changes who the argument is about. It wins standing among delegations that fear being disposed of by larger powers, and irritates both principals.',
+          text: 'Raising the smaller state changes who the argument is about. It wins you standing with the delegations that fear being bargained away by larger powers, and it irritates both superpowers.',
           unlocks: 'card-cuba',
         },
       },
@@ -221,7 +230,7 @@ const day2 = {
           'You have previously assured this man that there are no offensive weapons in Cuba. You were not told otherwise.',
         ],
         uthant: [
-          'Neither delegation asked for this. You go to both within the hour, separately, and say very nearly the same thing to each — which is the whole of your standing, and the whole of your risk.',
+          'Neither delegation asked for this. You go to both within the hour, separately, and say very nearly the same thing to each. Being seen as even-handed is the whole of your standing, and it is also the whole of your risk.',
           'If you are seen to lean once, you will not be trusted by either again.',
         ],
       },
@@ -449,7 +458,7 @@ const day2 = {
       eyebrow: 'What the channel carried',
       variants: {
         confront: {
-          text: 'Nothing was conceded and nothing was disguised. The other side now knows exactly where the limit is — which removes the danger of miscalculation and removes, with it, most of the room to manoeuvre.',
+          text: 'Nothing was conceded and nothing was disguised. The other side now knows exactly where the limit is. That removes the danger of a misunderstanding — and most of the room for manoeuvre with it.',
           unlocks: 'note-channel-limits',
         },
         trust: {
@@ -457,15 +466,15 @@ const day2 = {
           unlocks: 'note-channel-limits',
         },
         ambiguity: {
-          text: 'You have left the position unclear, and kept a question in reserve. Ambiguity buys time in a private room; it is worth less every hour the public argument hardens around it.',
+          text: 'You have left your position unclear and kept a question in reserve. Vagueness buys time in a private room; it is worth less with every hour the public argument hardens.',
           unlocks: 'note-channel-limits',
         },
         settlement: {
-          text: 'The shape of an exit has been spoken aloud for the first time — deniably, by people without the authority to conclude it. That is how settlements usually begin, and it is a long way from how they are usually finished.',
+          text: 'The shape of a way out has been said aloud for the first time — deniably, by people who do not have the authority to agree it. That is how settlements usually begin, and it is a long way from how they usually finish.',
           unlocks: 'note-channel-limits',
         },
         sovereignty: {
-          text: 'You have insisted that the country being argued over is a party to the argument. It costs you time and some patience among the principals, and it is the only position taken today that the smaller state would recognise as its own.',
+          text: 'You have insisted that the country being argued over is a party to the argument. It costs you time and some patience from the two superpowers, and it is the only position taken today that the smaller state would recognise as its own.',
           unlocks: 'card-cuba',
         },
       },

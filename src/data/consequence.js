@@ -27,7 +27,7 @@ export const CONSEQUENCE = {
     label: 'Warning time',
     minutes: 13,
     caption:
-      'About thirteen minutes from launch in Cuba to impact in Washington. That interval is the whole of the difference these missiles made: it was never the balance of force that changed, it was the time available to think.',
+      'About thirteen minutes from launch in Cuba to impact in Washington. That interval is the whole of the difference these missiles made: what changed was never the balance of force, it was the time available to think.',
     /* Positions are fractions of the interval — this is a diagram of pressure,
        not a schedule anyone published. */
     steps: [
@@ -71,7 +71,7 @@ export const CONSEQUENCE = {
     label: 'Where it would have failed',
     body: [
       'An American landing would have met tactical nuclear weapons held by Soviet commanders who were under attack, out of contact with Moscow, and operating under standing instructions written for a situation nobody had anticipated.',
-      'Neither government intended that. Both had spent the week trying to avoid exactly it. The danger was never that someone would choose a nuclear war — it was that the arrangements for choosing anything would stop working, at a distance, in a few minutes, under fire.',
+      'Neither government intended that. Both had spent the week trying to avoid exactly it. The danger was never that someone would choose a nuclear war — it was that the machinery for choosing anything would stop working, far away, in a few minutes, under fire.',
     ],
   },
 

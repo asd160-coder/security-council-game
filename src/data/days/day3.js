@@ -42,11 +42,20 @@ const day3 = {
          the category, not the specific line — five variants rather than
          eighteen, and the category is what actually differed. */
       channelCallback: {
-        confront: 'The position you took in private has been reported accurately upward. Nobody on either side is now under any illusion about where the limit is, which has made the room quieter and considerably narrower.',
-        trust: 'Something was established yesterday between two people rather than two governments. It has no standing, cannot be produced, and is the only channel either capital currently trusts.',
+        confront: 'What you said in private has been reported accurately to the top. Nobody on either side is now in any doubt about where the limit is. That has made the room quieter, and much narrower.',
+        trust: 'Something was established yesterday between two people rather than two governments. It is not official, it cannot be shown to anyone, and it is the only channel either capital currently trusts.',
         ambiguity: 'You left the question open yesterday, and it has stayed open. That was worth something while the public argument was still moving. It is worth less this morning.',
-        settlement: 'The shape of an exit was spoken aloud yesterday by people without the authority to conclude it. It has not been repudiated overnight, which is the most that could be hoped for.',
-        sovereignty: 'You insisted yesterday that the country being argued over is a party to the argument. Neither principal has acknowledged it. The smaller delegations noticed.',
+        settlement: 'The shape of a way out was said aloud yesterday, by people who did not have the authority to agree it. Nobody has disowned it overnight, which is the most that could be hoped for.',
+        sovereignty: 'You insisted yesterday that the country being argued over is a party to the argument. Neither superpower has acknowledged it. The smaller delegations noticed.',
+      },
+      situation: {
+        sides: [
+          { who: 'United States', did: 'The quarantine has been in force since yesterday morning. Some Soviet ships have stopped short of the line or turned for home. Reconnaissance flights continue, and show the missile sites being finished at the same pace. The Joint Chiefs are pressing for an air strike.' },
+          { who: 'Soviet Union', did: 'Has turned back the ships carrying weapons and let the others sail on. Work at the sites goes on. Khrushchev has told the Secretary-General he accepts a pause in principle — and has not stopped building.' },
+          { who: 'United Nations', did: 'Yesterday the Secretary-General asked both leaders to suspend, for two or three weeks, all arms shipments and the quarantine. Moscow said yes in principle. Washington said no pause could leave the sites in place.' },
+          { who: 'Cuba', did: 'Mobilised. Hospitals have been told to prepare for casualties and schools in the west are closed. People have been told an invasion may come within days.' },
+        ],
+        today: 'Pressure from your own side. Someone who is supposed to be with you comes to push you toward a harder line, and you decide whether to hold. Then yesterday’s draft clause can stand, or change.',
       },
       body: [
         'The first vessels reached the line overnight. Some stopped. Some turned back.',
@@ -396,19 +405,19 @@ const day3 = {
       eyebrow: 'What it cost to answer',
       variants: {
         restraint: {
-          text: 'You held a line against people on your own side, which is more expensive than holding one against the other. It buys time you have not yet found a use for, and it will be remembered by everyone in the room if the time runs out.',
+          text: 'You held a line against people on your own side, which costs more than holding one against the other side. It buys time you have not yet found a use for, and everyone in the room will remember it if the time runs out.',
           unlocks: 'note-operational',
         },
         pressure: {
-          text: 'You moved toward the harder argument without conceding it entirely. Preparation has a way of becoming its own case for action: the further it goes, the more expensive stopping it becomes.',
+          text: 'You moved toward the harder argument without fully accepting it. Preparation tends to become its own case for action: the further it goes, the more it costs to stop.',
           unlocks: 'note-operational',
         },
         ultimatum: {
-          text: 'You fixed a point at which something must happen. A date concentrates a government and removes its excuses — including your own, and including the ones you may want later.',
+          text: 'You fixed a point at which something must happen. A deadline concentrates a government and removes its excuses — including your own, and including the ones you may want later.',
           unlocks: 'note-leverage',
         },
         settlement: {
-          text: 'You went looking for what the other side could afford to accept rather than what you could compel. That is the question a settlement is built from, and it is not a question the people around you were asking.',
+          text: 'You went looking for what the other side could afford to accept, rather than what you could force on them. That is the question a settlement is built from, and nobody around you was asking it.',
           unlocks: 'note-leverage',
         },
         ambiguity: {
@@ -500,7 +509,7 @@ const day3 = {
       id: 'summary',
       eyebrow: 'End of day',
       body: [
-        'The line held and the building continued. Both of those are true, and the second one is the reason the first is not a solution. Everyone concerned now understands that the quarantine buys days rather than an outcome.',
+        'The line held and the building continued. Both are true, and the second is why the first is not a solution. Everyone now understands that the quarantine buys days, not an outcome.',
         'The pressure today came from your own side, which is the harder kind to answer, and it will not have gone away by morning.',
       ],
       foreshadow:

@@ -17,7 +17,8 @@ time to decide. It fits a single period.
 of archival photographs, one for each line, closing on the three seats as they were photographed in 1962, with a
 narration that states the stakes — which can be skipped
 at any moment with the Skip button or Escape. Then they take one of three seats and live
-five days of October 1962. Each day they read a briefing, meet someone, and choose what to say. Their
+five days of October 1962. Each day they read a briefing — which opens with where things stand,
+what each side has actually done, before any prose about how it feels — meet someone, and choose what to say. Their
 choices assemble a diplomatic statement: Day 1 sets its tone, Day 2 composes a clause, Day 3
 revises that clause, Day 4 assembles the terms of a bargain, and Day 5 asks them to write
 its closing paragraph themselves. The run ends with that finished document, an outcome, and

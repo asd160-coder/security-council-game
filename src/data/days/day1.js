@@ -25,9 +25,22 @@ const day1 = {
       id: 'briefing',
       archiveIds: ['u2-mrbm-launch-site', 'ss4-reference'],
       body: [
-        'Reconnaissance has revealed missile installations in Cuba. What was once suspicion is becoming strategic reality. Across Washington, Moscow, and the United Nations, leaders are now weighing the same question: how can this threat be answered without pushing the world toward catastrophe?',
-        'Every public statement, every private message, and every signal of weakness or resolve may shape what comes next.',
+        'On Sunday an American U-2 reconnaissance aircraft photographed western Cuba. This morning the photo-interpreters showed the President what the pictures contain: Soviet medium-range nuclear missile sites under construction, weeks or less from being ready. Since the summer the Soviet Union has been shipping the missiles in secret, while assuring Washington that only defensive weapons were going to Cuba.',
+        'Nothing has been announced. Outside a small circle in Washington nobody knows, and the question in every capital that learns of it will be the same: how to answer without pushing the world toward war. Every public statement, every private message, and every sign of weakness or resolve will shape what comes next.',
       ],
+      /* Where things stand: what each side has actually done, as facts a
+         student can act on. The prose above says how it feels; this says what
+         is being responded to. Shared by the three seats — the facts do not
+         change with the chair. */
+      situation: {
+        sides: [
+          { who: 'United States', did: 'Has the photographs. The President was told this morning and is gathering a small committee of advisers. Nothing has been said in public.' },
+          { who: 'Soviet Union', did: 'Has been shipping missiles, troops and technicians to Cuba since the summer, in secret, while telling Washington that only defensive weapons were going there.' },
+          { who: 'United Nations', did: 'Has been told nothing. The Secretary-General knows only what the newspapers know, which is nothing.' },
+          { who: 'Cuba', did: 'Agreed to the missiles, and has expected an American invasion ever since the failed landing at the Bay of Pigs eighteen months ago.' },
+        ],
+        today: 'Your first words. Nothing is public yet, so how you open — firm, careful, open to talks, or insisting on proper process — will shape how everyone else reads you for the rest of the week.',
+      },
       radioCaption:
         'A brief radio bulletin signals rising public anxiety as governments move from uncertainty toward response.',
     },
@@ -155,7 +168,7 @@ const day1 = {
           {
             id: 'rfk1p-say',
             label: 'Say what you think before he asks',
-            line: 'I will tell you what I think and you can decide what it is worth. Whatever we do first is the thing everyone else will have to live inside.',
+            line: 'I will tell you what I think and you can decide what it is worth. Whatever we do first sets the limits everyone else will have to work within.',
             reply:
               'He lets you finish, which is not always what happens. Then he asks the question you were hoping to be spared. “Would you say that with the Chiefs in the room? Would you say it tomorrow, when the room is larger and the recommendation is already on the table?”',
             follow: [
@@ -217,7 +230,7 @@ const day1 = {
               {
                 id: 'dob1f-ambiguity',
                 label: 'Preserve ambiguity',
-                line: 'Then I say very little, carefully, until I know what I am defending. Certainty offered early becomes a trap sprung late.',
+                line: 'Then I say very little, carefully, until I know what I am defending. Say too much too early and it becomes a trap later.',
                 feedback: 'diplomatic',
                 effects: { leverage: 0, escalation: -1, legitimacy: 0, councilTrust: 1, civilianRisk: 1 },
               },

@@ -83,6 +83,15 @@ for (const day of DAYS) {
 }
 console.log(`teacher notes: ${Object.keys(READING_A_RUN).length} patterns, ${Object.keys(DAY_PROMPTS).length} days`);
 
+/* Every day's briefing must say where things stand — what each side has
+   done — before any prose about how it feels. A teacher's playthrough found
+   the briefings gave a mood and not a situation. */
+for (const day of DAYS) {
+  const b = day.steps.find((s) => s.kind === 'briefing');
+  if (!b?.situation?.sides || b.situation.sides.length < 3 || !b.situation.today) { problems++; console.log(`  ✗ day ${day.number} briefing has no "where things stand" block`); }
+}
+console.log(`briefings: ${DAYS.filter((d) => d.steps.find((s) => s.kind === 'briefing')?.situation).length} of ${DAYS.length} say where things stand`);
+
 /* The overture's beats are timed to the narration by numbers copied from the
    detector's output (.design/speech-segments.swift), so a slip — a beat out of
    order, a hold that no longer matches its gap, an archive id that stopped

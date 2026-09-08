@@ -48,6 +48,30 @@ export default function BriefingStep({ day, step, onAdvance, standing, history, 
         ))}
       </Reveal>
 
+      {/* Where things stand: what each side has actually done, as plain facts,
+          before any prose about how it feels. The first playthrough by a
+          teacher found the briefings gave a mood and not a situation — the
+          student could not tell what was being responded to. */}
+      {step.situation && (
+        <Reveal delay={280} className={styles.situation}>
+          <span className={styles.situationLabel}>{PLAY.situationLabel}</span>
+          <dl className={styles.situationList}>
+            {step.situation.sides.map(({ who, did }) => (
+              <div key={who} className={styles.situationRow}>
+                <dt className={styles.situationWho}>{who}</dt>
+                <dd className={styles.situationDid}>{did}</dd>
+              </div>
+            ))}
+          </dl>
+          {step.situation.today && (
+            <p className={styles.situationToday}>
+              <span className={styles.situationTodayLabel}>{PLAY.situationToday}</span>
+              {step.situation.today}
+            </p>
+          )}
+        </Reveal>
+      )}
+
       {callback && (
         <Reveal delay={320} className={styles.callback}>
           <span className={styles.callbackLabel}>{PLAY.sinceYesterday}</span>

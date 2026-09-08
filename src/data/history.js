@@ -83,7 +83,7 @@ export const HISTORY = {
   dobrynin: {
     1: {
       did: 'He did not know. The Soviet ambassador in Washington had not been told that missiles were being placed in Cuba, and spent the first days giving American officials assurances he believed were true.',
-      then: 'When the photographs became public those assurances read as lies. His personal credibility was spent by his own government, without his knowledge, before the crisis properly began — and it was the instrument he most needed in the week that followed.',
+      then: 'When the photographs became public, those assurances read as lies. His government had spent his personal credibility without telling him, before the crisis properly began — and credibility was the tool he most needed in the week that followed.',
       source: 'Anatoly Dobrynin, In Confidence (1995)',
     },
     2: {

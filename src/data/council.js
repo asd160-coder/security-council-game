@@ -116,7 +116,7 @@ export const COUNCIL = {
   uthant: {
     room: 'The Secretariat',
     setting:
-      'The people who will still be here when the two governments have finished. Four delegations have said incompatible things to you in three hours and two of them are the countries being spent.',
+      'The people who will still be here when the two governments have finished. Four delegations have said incompatible things to you in three hours, and two of them are the countries being bargained away.',
     advisers: [
       {
         id: 'uth-public',

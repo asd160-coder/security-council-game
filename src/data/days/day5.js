@@ -38,9 +38,18 @@ const day5 = {
           'What was possible to do has been done. The remainder of today belongs to a decision being taken four thousand miles away by people you cannot reach.',
         ],
       },
+      situation: {
+        sides: [
+          { who: 'United States', did: 'Last night the reply went to Moscow: accept the first letter — the missiles out under United Nations inspection, in return for a promise not to invade. In private, the Attorney General told the Soviet ambassador that the Turkish missiles would be gone within months, but not as a trade, and that Moscow had about a day to answer. Reconnaissance flies at first light. The strike plan is written.' },
+          { who: 'Soviet Union', did: 'Has the reply and the private message. Nothing has come back. Radio Moscow is expected to broadcast something this morning.' },
+          { who: 'United Nations', did: 'The Secretary-General is ready to fly to Havana to arrange inspection of the sites, if there is anything to inspect.' },
+          { who: 'Cuba', did: 'Has not been consulted about the terms, and will learn of the answer from the radio like everyone else.' },
+        ],
+        today: 'Waiting, which is a decision too. Add nothing, give a private assurance, ask for more time, or withdraw the offer — and live with which of those you chose.',
+      },
       channelCallback: {
-        selective: 'You chose which of the two letters to believe. If Moscow accepts being taken at its better word, that judgement was correct; if it does not, you will have answered a letter the other government has already moved past.',
-        trade: 'You put the Turkish missiles into the bargain. Whatever comes back this morning, an ally learned yesterday that its security was available as currency, and allies do not unlearn that.',
+        selective: 'You chose which of the two letters to believe. If Moscow accepts being taken at its better word, that judgement was right. If not, you have answered a letter the other government has already moved past.',
+        trade: 'You put the Turkish missiles into the bargain. Whatever comes back this morning, an ally learned yesterday that its security could be used as a bargaining chip — and allies do not forget that.',
         delay: 'You asked for the two letters to be reconciled before committing. Moscow has not reconciled them. The morning has arrived with the question still open and less time in which to close it.',
         ultimatum: 'You put a term on the offer. It expires today, in front of witnesses, and neither government can now let it pass quietly.',
       },
@@ -110,7 +119,7 @@ const day5 = {
             label: 'Return to the pilot',
             line: 'We have still not answered for the aircraft yesterday. Tell me what we lose by continuing not to.',
             reply:
-              'Credibility, in the judgement of most of the room, and less than they think in the judgement of the rest. What is agreed is that answering it now would end the negotiation, and that not answering it costs something with the people who fly the next mission.',
+              'Credibility, most of the room thinks — and less than they think, in the view of the rest. What everyone agrees is that answering it now would end the negotiation, and that not answering it costs something with the people who fly the next mission.',
           },
           {
             id: 'rfk5p-what',
@@ -210,7 +219,7 @@ const day5 = {
               dobrynin: { leverage: -2, escalation: -1, legitimacy: 0, councilTrust: 1, civilianRisk: -1 },
               uthant: { leverage: -1, escalation: -1, legitimacy: 0, councilTrust: 1, civilianRisk: -1 },
             },
-            note: 'An assurance is worth the record of the person giving it. Yours has been inconsistent this week, and a private promise from a party that has already moved twice will be weighed rather than taken.',
+            note: 'An assurance is worth the track record of the person giving it. Yours has been inconsistent this week, and a private promise from someone who has already changed position twice will be weighed, not simply accepted.',
           },
         },
         {
@@ -261,7 +270,7 @@ const day5 = {
           unlocks: 'note-waiting',
         },
         assure: {
-          text: 'The message goes privately, to one person, with nothing behind it but the standing of whoever sends it. It is the smallest instrument used all week and it may be the one that carries.',
+          text: 'The message goes privately, to one person, with nothing behind it but the reputation of whoever sends it. It is the smallest tool used all week, and it may be the one that gets through.',
           unlocks: 'note-assurance',
         },
         extend: {

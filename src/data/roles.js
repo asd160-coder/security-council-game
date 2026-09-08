@@ -22,9 +22,9 @@ export const ROLES = [
     name: 'Robert Kennedy',
     title: 'Attorney General of the United States',
     delegation: 'United States',
-    perspective: 'US executive pressure and back-channel diplomacy',
-    emphasis: 'Strategic credibility, private flexibility, managing escalation',
-    tension: 'Balancing firmness against catastrophic escalation',
+    perspective: 'Pressure inside the White House, and quiet diplomacy outside it',
+    emphasis: 'Keeping America credible, keeping a private way out, and keeping the crisis from escalating',
+    tension: 'Being firm without starting a war',
     startingUnlock: 'card-us',
     /* Shown on the role card at selection — short enough to compare three of
        them side by side without reading. */
@@ -33,7 +33,7 @@ export const ROLES = [
     privateBrief: {
       /* The one fact true for this seat this morning and for no other. */
       standing:
-        'You are in the room where this will be decided, and you are not the one who decides. Every argument you win has to be won again the next morning, against people who are not wrong and are getting less wrong each day the sites come closer to working.',
+        'You are in the room where this will be decided, and you are not the one who decides. Every argument you win has to be won again the next morning, against people who are not wrong — and who get less wrong every day the missile sites come closer to working.',
 
       objective:
         'Help shape a response that protects US credibility without triggering uncontrollable escalation.',
@@ -53,16 +53,16 @@ export const ROLES = [
     name: 'Anatoly Dobrynin',
     title: 'Soviet Ambassador to the United States',
     delegation: 'Soviet Union',
-    perspective: 'Soviet signaling and strategic parity',
-    emphasis: 'Guarded bargaining, prestige, reciprocal concessions',
-    tension: 'Protecting Soviet standing without humiliation or uncontrolled escalation',
+    perspective: 'Speaking for Moscow, and keeping level with America',
+    emphasis: 'Careful bargaining, prestige, and matching concession for concession',
+    tension: 'Protecting Soviet standing without humiliation, and without losing control',
     startingUnlock: 'card-ussr',
     standfirst:
       'The channel between Moscow and Washington runs through this embassy — and through a man not always told everything by his own government.',
     privateBrief: {
       /* The one fact true for this seat this morning and for no other. */
       standing:
-        'You have not been told. Your government has placed weapons in Cuba and has not informed its own ambassador, and the assurances you have already given in this city were given in good faith on information you had no reason to doubt. You will learn what is true from the Americans or from the overnight traffic, and this morning it is not clear which will come first.',
+        'You have not been told. Your government has put weapons in Cuba without informing its own ambassador. The assurances you have already given in Washington were given in good faith, on information you had no reason to doubt. You will learn the truth either from the Americans or from tonight’s cables, and this morning it is not clear which will come first.',
 
       objective:
         'Protect Soviet interests and strategic standing while avoiding a disastrous breakdown in communication.',
@@ -81,16 +81,16 @@ export const ROLES = [
     name: 'U Thant',
     title: 'Secretary-General of the United Nations',
     delegation: 'United Nations',
-    perspective: 'UN mediation and international legitimacy',
-    emphasis: 'De-escalation, procedural legitimacy, bridge-building',
-    tension: 'Seeking peace and procedural legitimacy amid great-power confrontation',
+    perspective: 'Mediating between the two, with the United Nations’ standing as the only tool',
+    emphasis: 'Calming things down, proper process, and building bridges',
+    tension: 'Seeking peace and proper process while two superpowers face off',
     startingUnlock: 'card-un',
     standfirst:
       'No army, no veto, and no guarantee that either superpower will listen — only the standing to ask them both to stop.',
     privateBrief: {
       /* The one fact true for this seat this morning and for no other. */
       standing:
-        'You will learn of this when the world does. The office has no army, no veto and no power to compel, and it is told what the powers have decided they are willing to say. What it has is the standing to be believed in two rooms at once — and every hour it waits to spend that is an hour the powers spend without it.',
+        'You will learn of this when the world does. The office has no army, no veto and no power to force anyone, and it is told only what the great powers have decided they are willing to say. What it has is the standing to be believed in Washington and Moscow at the same time — and every hour it waits to use that standing is an hour the powers spend without it.',
 
       objective: 'Create space for de-escalation before public positions harden beyond repair.',
       pressure: 'The major powers may treat the UN as symbolic unless it acts quickly and credibly.',

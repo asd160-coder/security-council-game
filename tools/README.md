@@ -78,3 +78,13 @@ game looked correct; it was simply always telling you the same middle story.
 
 Re-running these is cheap. Reading five days of branching content for holes is
 not.
+
+## `npm run readability`
+
+A report, not a gate. Scores every authored sentence in `src/data` for reading grade,
+abstract nouns and rhetorical devices, prints a per-file table and the hardest sentences,
+and skips nothing — the archive's 1962 documents are listed but are primary sources and are
+never rewritten. Reading grade cannot see idiom, which is what a student actually trips on;
+it finds the long, abstract sentences where idiom lives. Run it before and after a
+plain-words pass to see whether anything moved. `node tools/readability.mjs --file
+days/day2.js` lists one file's sentences, hardest first.

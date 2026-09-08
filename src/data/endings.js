@@ -20,8 +20,8 @@ export const RESOLUTION_ENDINGS = {
     label: 'Settled',
     standfirst: 'The terms were accepted.',
     body: [
-      'The answer came in the morning, broadcast rather than delivered, which was itself the concession: a government that means to keep an agreement says so where it cannot later be denied. The weapons would be dismantled under observation and returned. In exchange, an undertaking not to invade the island.',
-      'It reads, set down afterwards, as an obvious bargain. It was available on the first day and nobody could reach it, because reaching it required each side to believe the other would rather settle than win. That belief was the thing actually under construction all week.',
+      'The answer came in the morning, by radio broadcast rather than by letter — and the broadcast was itself the concession: a government that means to keep an agreement says so where it cannot later deny having said it. The weapons would be dismantled under observation and shipped home. In exchange, a promise not to invade the island.',
+      'Written down afterwards, it looks like an obvious bargain. It was available on the first day and nobody could reach it, because reaching it required each side to believe the other would rather settle than win. That belief is what was actually being built all week.',
     ],
   },
 
@@ -30,8 +30,8 @@ export const RESOLUTION_ENDINGS = {
     label: 'Settled, on thin ground',
     standfirst: 'The terms were accepted, and the agreement is weaker than it looks.',
     body: [
-      'The answer came, and it was yes. The weapons will come out. But the undertaking rests on assurances given in rooms with no record, by people who may not be in office to honour them, and both governments have described the arrangement to their own publics in terms the other would dispute.',
-      'Agreements of this kind hold for as long as neither side needs them not to. This one has removed the missiles and has not removed the reason they were sent, and everyone who negotiated it knows the difference.',
+      'The answer came, and it was yes. The weapons will come out. But the promise rests on assurances given in rooms with no record, by people who may not be in office to honour them, and each government has described the deal to its own public in words the other would dispute.',
+      'Agreements like this hold for as long as neither side needs them not to. This one has removed the missiles without removing the reason they were sent, and everyone who negotiated it knows the difference.',
     ],
   },
 
@@ -41,7 +41,7 @@ export const RESOLUTION_ENDINGS = {
     standfirst: 'Nothing was settled. Nothing broke.',
     body: [
       'No answer came, or none that closed the question. The quarantine holds. The sites are still there, further along than they were. Both governments have stepped back from the edge of a decision without stepping away from it, and the machinery that brought them here is still running.',
-      'This is not failure and it is not resolution. It is the crisis postponed at a higher level of readiness than it began — which buys time, and spends the thing time was supposed to buy.',
+      'This is not failure and it is not a resolution. It is the crisis postponed, with both sides more ready to fight than when it began — which buys time, and spends the thing time was supposed to buy: the chance to settle.',
     ],
   },
 
@@ -72,12 +72,12 @@ export const ROLE_CLOSERS = {
   contained: {
     rfk: 'The recommendation on the table has not gone away. It has simply been postponed again, and it will be back in the morning with a better argument than it had today.',
     dobrynin: 'You are still an ambassador without instructions, in a capital that now watches you for signs, representing a government still deciding what it wants.',
-    uthant: 'You have kept a channel open that neither party will admit to using. It is worth more than it appears and considerably less than what was needed.',
+    uthant: 'You have kept open a channel that neither side will admit to using. It is worth more than it looks, and much less than what was needed.',
   },
   ruptured: {
     rfk: 'You were in the room for every decision that led here, including the ones you argued against. That distinction will matter to you and to almost nobody else.',
     dobrynin: 'The embassy is being emptied of paper. You have spent the week telling Moscow what Washington would do, and you were believed too late for it to help.',
-    uthant: 'The office you hold exists for exactly this, and it was not enough, and it is worth being precise about why rather than concluding that it never could be.',
+    uthant: 'The office you hold exists for exactly this, and it was not enough. It is worth being precise about why, rather than concluding that it never could have been.',
   },
 };
 
@@ -86,31 +86,31 @@ export const ROLE_CLOSERS = {
 export const MODIFIERS = {
   'legitimacy-high': {
     label: 'Legitimacy',
-    text: 'What you did is defensible in public, in detail, by people who were not there. That is rarer than it sounds and it is the part of this that will still be standing in thirty years.',
+    text: 'What you did can be defended in public, in detail, by people who were not there. That is rarer than it sounds, and it is the part of this that will still be standing in thirty years.',
   },
   'legitimacy-low': {
     label: 'Legitimacy',
-    text: 'The result may be sound and the route to it will not bear examination. Governments that reach good outcomes by means they cannot describe tend to be asked about the means long after the outcome has stopped being interesting.',
+    text: 'The result may be sound, but the route to it will not bear examination. Governments that reach good outcomes by means they cannot describe tend to be asked about the means long after the outcome has stopped being interesting.',
   },
   'trust-spent': {
     label: 'Council trust',
-    text: 'You will not be taken at your word again quickly. Every position you took this week was defensible on the day and the pattern of them has taught the other delegations to check rather than to assume — which costs nothing now and costs a great deal in the next crisis.',
+    text: 'You will not be taken at your word again quickly. Every position you took this week could be defended on the day. Taken together, they taught the other delegations to check rather than assume — which costs nothing now and a great deal in the next crisis.',
   },
   'leverage-high': {
     label: 'Leverage',
-    text: 'You finished holding more than you began with. That is a victory in the terms this was conducted in, and it is the reason the other side will spend the coming years making sure it is never in this position again.',
+    text: 'You finished holding more than you began with. In the terms this was fought in, that is a victory. It is also why the other side will spend the coming years making sure it is never in this position again.',
   },
   'risk-high': {
     label: 'Civilian risk',
-    text: 'The people whose lives were the stake in this were never party to it, were not consulted, and were closer to the consequence at the end of the week than at the beginning. Whatever else was achieved, that was the cost carried by those least able to affect it.',
+    text: 'The people whose lives were at stake were never party to this, were not consulted, and were closer to the consequences at the end of the week than at the beginning. Whatever else was achieved, that cost fell on the people least able to affect it.',
   },
   'risk-protected': {
     label: 'Civilian risk',
-    text: 'Through every decision, the exposure of people who had no part in this went down rather than up. It is the least visible thing achieved this week and it is the one that would have mattered most.',
+    text: 'Through every decision, the danger to people who had no part in this went down rather than up. It is the least visible thing achieved this week, and the one that would have mattered most.',
   },
   'escalation-low': {
     label: 'Escalation',
-    text: 'At no point did either side have to act on an assumption about the other under time pressure. That is the condition under which this kind of crisis kills people, and it did not arise.',
+    text: 'At no point did either side have to act on a guess about the other under time pressure. That is the condition in which this kind of crisis kills people, and it did not arise.',
   },
 };
 

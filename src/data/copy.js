@@ -148,6 +148,8 @@ export const PLAY = {
   stageTwo: 'Two',
   standing: 'Where you stand',
   sinceYesterday: 'Since yesterday',
+  situationLabel: 'Where things stand',
+  situationToday: 'What you are deciding today',
   revised: 'Revised',
   previously: 'Previously — ',
   keepAsWritten: 'Leave the clause as written',

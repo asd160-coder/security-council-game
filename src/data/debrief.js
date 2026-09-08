@@ -17,18 +17,18 @@ export const OPENING = {
 /* Why it ended this way, said as facts about the run. */
 export const ENDING_CONDITIONS = {
   settled:
-    'It settled because the terms on the table were ones both sides could accept and because, at the last, there was enough standing between you for the acceptance to be believed. Neither of those was inevitable.',
+    'It settled because the terms on the table were ones both sides could accept, and because, at the end, there was enough trust between you for the acceptance to be believed. Neither of those was inevitable.',
   fragile:
-    'It settled, and the ground under it is thin. The terms were reached, but the standing that would make them durable had been spent elsewhere, and an agreement resting on assurances that cannot be produced holds only while both sides want it to.',
+    'It settled, and the ground under it is thin. The terms were reached, but the trust that would make them last had been spent elsewhere, and an agreement resting on assurances nobody can produce holds only while both sides want it to.',
   contained:
-    'Nothing closed. The crisis did not break and it did not end, which leaves the danger postponed at a higher level of readiness than it began — the outcome that is easiest to defend at the time and hardest to defend afterwards.',
+    'Nothing closed. The crisis did not break and it did not end. That leaves the danger postponed, with both sides more ready to fight than when it began — the outcome that is easiest to defend at the time and hardest to defend afterwards.',
   ruptured:
-    'The frame broke. Withdrawing the offer removed the last thing holding this inside diplomacy, and by that point there was neither enough calm nor enough trust remaining for anything to catch it.',
+    'The frame broke. Withdrawing the offer removed the last thing keeping this inside diplomacy, and by then there was neither enough calm nor enough trust left for anything to catch it.',
 };
 
 export const POSTURE_NOTES = {
-  hold: 'Your final act was to add nothing. Silence at the end is a position, and it reads as confidence only if what preceded it earned that reading.',
-  assure: 'Your final act was a private word with nothing behind it but your own standing. It is the smallest instrument available and it works only for people who spent the week being careful.',
+  hold: 'Your final act was to add nothing. Silence at the end is a position, and it reads as confidence only if everything before it earned that reading.',
+  assure: 'Your final act was a private word with nothing behind it but your own reputation. It is the smallest tool available, and it works only for people who spent the week being careful.',
   extend: 'Your final act was to buy time. Time has never made this worse and has rarely, on its own, made anyone agree to anything.',
   withdraw: 'Your final act was to close the offer. It is the only move in the scenario that cannot be taken back.',
 };
@@ -37,35 +37,35 @@ export const POSTURE_NOTES = {
 export const PATTERNS = {
   'trust-for-leverage': {
     title: 'You gained standing and gave up room to press',
-    text: 'Other delegations came to take your word, and you arrived at the last day with little left to push with. That is the mediator’s bargain, and it is only a good one if somebody with leverage is willing to use it on your behalf.',
+    text: 'Other delegations came to take your word, and you reached the last day with little left to push with. That is the mediator’s bargain, and it only pays if somebody with leverage is willing to use it on your behalf.',
   },
   'leverage-for-trust': {
     title: 'You held position and spent credibility to hold it',
-    text: 'You finished with more room to press than anyone and less benefit of the doubt. Positions won this way tend to hold for exactly as long as the pressure behind them does.',
+    text: 'You finished with more room to press than anyone, and less benefit of the doubt. Positions won this way tend to hold for exactly as long as the pressure behind them.',
   },
   'legitimate-but-doubted': {
     title: 'Defensible in public, doubted in the room',
-    text: 'What you did stands up to description — and the people across the table stopped assuming your stated position was your real one. Those two can coexist for a surprisingly long time, and they are not the same asset.',
+    text: 'What you did can be defended in public — and the people across the table stopped assuming your stated position was your real one. Those two things can go on together for a surprisingly long time, and they are not the same asset.',
   },
   'effective-but-indefensible': {
     title: 'Effective, and hard to account for',
-    text: 'You got results by means that will not survive being written down. That is often how crises are actually resolved, and it is why the accounts written afterwards are so frequently disputed.',
+    text: 'You got results by means that will not survive being written down. That is often how crises are actually resolved, and it is why the accounts written afterwards are so often disputed.',
   },
   'cooled-and-protected': {
     title: 'You brought the temperature down and kept it down',
-    text: 'Escalation fell and the exposure of people with no part in this fell with it. It is the least visible achievement available in this scenario, because nothing happening is not an event.',
+    text: 'The temperature fell, and the danger to people with no part in this fell with it. It is the least visible achievement in this scenario, because nothing happening is not an event anyone reports.',
   },
   'held-by-danger': {
     title: 'Your advantage rested on the danger continuing',
-    text: 'You finished holding a strong position in a situation that stayed hot. Leverage of that kind is real, and it is borrowed against the possibility that nobody miscalculates.',
+    text: 'You finished holding a strong position in a situation that stayed hot. Leverage of that kind is real — and it is borrowed against the chance that nobody miscalculates.',
   },
   'risk-carried': {
     title: 'The exposure ended higher than it started',
-    text: 'Whatever else was achieved, the people who would have borne the consequence were closer to it at the end of the week than the beginning. They were not consulted at any point, which is historically accurate and worth sitting with.',
+    text: 'Whatever else was achieved, the people who would have borne the consequences were closer to them at the end of the week than at the beginning. They were not consulted at any point, which is historically accurate and worth sitting with.',
   },
   'quiet-throughout': {
     title: 'You kept it quiet and stayed small',
-    text: 'The crisis never ran hot on your watch and you never accumulated much with which to shape it. Whether that reads as restraint or as absence is the question your own account has to answer.',
+    text: 'The crisis never ran hot on your watch, and you never gathered much to shape it with. Whether that reads as restraint or as absence is the question your own account has to answer.',
   },
 };
 
@@ -75,28 +75,28 @@ export const ROLE_REFLECTIONS = {
     title: 'What it meant to sit in that chair',
     body: [
       'You were never the person who decided, and you were in the room for every decision. That is the particular position the Attorney General held that week: close enough to the President to say the thing nobody else would say, and without the authority to make it stick.',
-      'Almost every pressure you met came from your own side. The people arguing for the harder course were not reckless, they were early — their case got stronger every day the sites came closer to operational, and refusing it required deciding again each morning rather than once.',
+      'Almost every pressure you met came from your own side. The people arguing for the harder course were not reckless; they were early. Their case got stronger every day the sites came closer to working, and refusing it meant deciding again each morning rather than once.',
     ],
     tension:
-      'The office gave you leverage and made you responsible for restraint. Those two are not naturally allies, and the run above is a record of how you spent the tension between them.',
+      'The office gave you leverage and made you responsible for restraint. Those two pull against each other, and the run above is a record of how you handled the pull.',
   },
   dobrynin: {
     title: 'What it meant to sit in that chair',
     body: [
       'You conducted a negotiation on behalf of a government that did not tell you its position. Every assurance you gave was given in good faith on information you had reason to doubt, and the people you gave it to could see that.',
-      'Your instrument was ambiguity, and ambiguity has a short life. It buys room while a situation is still moving and becomes indistinguishable from evasion once positions harden — which is roughly what happened between the chamber and the last morning.',
+      'Your tool was ambiguity, and ambiguity has a short life. It buys room while a situation is still moving, and it starts to look like evasion once positions harden — which is roughly what happened between the chamber and the last morning.',
     ],
     tension:
-      'An ambassador’s authority is borrowed. You spent the week deciding how much of it to risk on judgements your own capital had not authorised, and the run above shows what that bought.',
+      'An ambassador’s authority is borrowed from his government. You spent the week deciding how much of it to risk on judgements Moscow had not authorised, and the run above shows what that bought.',
   },
   uthant: {
     title: 'What it meant to sit in that chair',
     body: [
       'You had no army, no veto and no power to compel anyone. What you had was the ability to be believed in two rooms at once, and every decision you made either added to that or spent it.',
-      'The office cannot escalate. Across five days there was no move available to you that raised the temperature, which is a real description of the Secretariat and also a real limit — the crisis could break around you, and you could not have broken it.',
+      'The office cannot escalate. Across five days there was no move available to you that raised the temperature. That is a true description of the Secretariat, and also a real limit: the crisis could break around you, and you could not have broken it.',
     ],
     tension:
-      'Your standing was the instrument and the thing at stake. Using it consumed it, and holding it back preserved something that only mattered when it was used.',
+      'Your standing was both the tool and the thing at stake. Using it used it up, and holding it back preserved something that only mattered when it was used.',
   },
 };
 

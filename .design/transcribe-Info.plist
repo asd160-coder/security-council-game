@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>CFBundleIdentifier</key>
+  <string>game.october1962.transcribe</string>
+  <key>CFBundleName</key>
+  <string>transcribe</string>
+  <key>CFBundleExecutable</key>
+  <string>transcribe</string>
+  <key>CFBundlePackageType</key>
+  <string>APPL</string>
+  <key>LSUIElement</key>
+  <true/>
+  <key>NSSpeechRecognitionUsageDescription</key>
+  <string>Reads the overture narration to find where each line begins. Recognition runs on this Mac only; nothing is sent anywhere.</string>
+</dict>
+</plist>

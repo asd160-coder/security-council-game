@@ -39,7 +39,7 @@ export const APP = {
   creditsOverture:
     'The overture that opens the simulation is made of sixteen archival photographs, each a work of the United States government and each credited below with its source; it closes on the three seats as the White House photographers found them in 1962, three of those frames being details cut from a wider picture, as their credits say. One still — the flash burns on the steps of a bank in Hiroshima — is attributed on the strength of the holding institution’s record, which names the United States Government as its maker; the photographer is unidentified.',
   creditsVoice:
-    'The voice that speaks the overture is synthetic. It was generated with ElevenLabs from the written script, in a stock voice with a Boston accent, and is not a recording of any person; the words appear on the screen as they are spoken.',
+    'The voice that speaks the overture is synthetic. It was generated with ElevenLabs from the written script, in a stock voice, and is not a recording of any person; the words appear on the screen as they are spoken. The low note under it is a drone synthesised for the game — a recording of nothing — that fades with the film.',
   creditsRooms:
     'The rooms behind the conversations are invented. They are drawn in the interface from simple shapes, not photographed or reconstructed, and no scene depicts a real room, meeting or document.',
   close: 'Close',

@@ -6,9 +6,10 @@
 // Why this exists: a synthesised take renders its breaks shorter than asked
 // for, and the film needs to linger. Each line is taken whole from the source
 // with a handle either side — 0.20 s before, 0.35 s after — so no consonant is
-// clipped, and is followed by exactly the pause asked for. The handles cannot
-// reach a neighbouring line: the script refuses to run if any gap is too
-// narrow for them.
+// clipped, and is followed by exactly the pause asked for. At a gap too
+// narrow for both handles — a voice that runs one line into the next — each
+// handle is clamped to just under half the gap, so no line borrows a
+// neighbour's syllable; the report says where that happened.
 //
 // The pauses are the take's own room tone, not empty time: a stretch from the
 // middle of its longest silence, repeated to length, so the noise floor never
@@ -42,9 +43,20 @@ guard !segments.isEmpty, pauses.count == segments.count else {
 
 let lead = 0.20
 let tail = 0.35
-for i in 1..<segments.count where segments[i].0 - segments[i - 1].1 < lead + tail + 0.1 {
-    FileHandle.standardError.write(String(format: "segments %d and %d are too close (%.2f s) for the handles\n", i, i + 1, segments[i].0 - segments[i - 1].1).data(using: .utf8)!)
-    exit(1)
+/* Per-segment handles: the full lead and tail unless the gap to a neighbour
+   cannot hold them, in which case each side takes just under half the gap. */
+func handles(_ i: Int) -> (Double, Double) {
+    var before = lead
+    var after = tail
+    if i > 0 {
+        let gap = segments[i].0 - segments[i - 1].1
+        before = min(lead, max(0.05, gap / 2 - 0.02))
+    }
+    if i + 1 < segments.count {
+        let gap = segments[i + 1].0 - segments[i].1
+        after = min(tail, max(0.05, gap / 2 - 0.02))
+    }
+    return (before, after)
 }
 
 let asset = AVURLAsset(url: inURL)
@@ -92,11 +104,13 @@ func insertTone(_ seconds: Double) throws {
 var report: [String] = []
 do {
     for (i, seg) in segments.enumerated() {
-        let from = max(0, seg.0 - lead)
-        let to = min(total, seg.1 + tail)
+        let (before, after) = handles(i)
+        let from = max(0, seg.0 - before)
+        let to = min(total, seg.1 + after)
         let speechAt = CMTimeGetSeconds(cursor) + (seg.0 - from)
         try insert(from: from, to: to)
-        report.append(String(format: "%2d  speech %6.2f – %6.2f   then %.2f s pause", i + 1, speechAt, speechAt + (seg.1 - seg.0), pauses[i]))
+        let clamped = (before < lead || after < tail) ? String(format: "   (handles %.2f/%.2f)", before, after) : ""
+        report.append(String(format: "%2d  speech %6.2f – %6.2f   then %.2f s pause%@", i + 1, speechAt, speechAt + (seg.1 - seg.0), pauses[i], clamped))
         try insertTone(pauses[i])
     }
 } catch {

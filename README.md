@@ -13,7 +13,7 @@ It is not a quiz and it does not keep score.
 **How long.** About 40 minutes for one playthrough — roughly 25 minutes of reading plus
 time to decide. It fits a single period.
 
-**What the student actually does.** Pressing Begin plays a short overture — about a minute
+**What the student actually does.** Pressing Begin plays a short overture — a little over a minute
 of archival photographs, closing on the three seats as they were photographed in 1962, with a
 narration that states the stakes — which can be skipped
 at any moment with the Skip button or Escape. Then they take one of three seats and live
@@ -142,16 +142,21 @@ commit. To put it live: make the repository public, set *Settings → Pages → 
 appear at `https://asd160-coder.github.io/security-council-game/`.
 
 **The overture's voice.** The narration is synthesised — generated with ElevenLabs from the
-script in `src/data/overture.js`, in a stock voice — and the credits say so. The delivered
-take is kept as `.design/narration-source.mp3`; the film plays `public/overture/narration.m4a`,
-which is that take with a longer pause after every line, rebuilt by `.design/pad-narration.swift`
-from the cut points that `.design/speech-segments.swift` finds. Each beat's `at` is the second
-at which its line begins in the rebuilt file, read from the detector's output on it, and its
-`hold` is the gap to the next beat, so the timer plays the same film if the audio cannot start.
-To re-voice it: replace the source, run the detector on it, run the padder with the pause table
-in `docs/asset-manifest.md`, run the detector on the result, and copy the twelve starts into
-`overture.js`. `npm run check` refuses a beat out of order or a hold that no longer matches
-its gap.
+script in `src/data/overture.js`, in a stock voice — and the credits say so; the low note
+under it is a drone the game makes for itself (`.design/make-bed.swift`), a recording of
+nothing. The delivered take is kept as `.design/narration-source.mp3`; the film plays
+`public/overture/narration.m4a`, which is the take with a longer pause after every line and
+the bed mixed under it. To re-voice it, in order: `.design/transcribe.swift` (built as the
+small app bundle its header describes — macOS asks once to allow speech recognition, and
+recognition stays on the machine) gives word timestamps; `.design/align-lines.py` turns them
+into one span per line; `.design/pad-narration.swift` rebuilds the take with the pause table
+in `docs/asset-manifest.md` into a clean voice file; `.design/make-bed.swift` and
+`.design/mix-narration.swift` put the bed under it. Each beat's `at` is the second at which
+its line begins in the clean voice file, from the padder's own report, and its `hold` is the
+gap to the next beat, so the timer plays the same film if the audio cannot start. The
+detector cannot read timings from the mixed file — the bed fills the silences — which is why
+the clean voice file is kept. `npm run check` refuses a beat out of order or a hold that no
+longer matches its gap.
 
 **A run is held in the browser and is not sent anywhere.** Nothing a student writes leaves
 their machine.

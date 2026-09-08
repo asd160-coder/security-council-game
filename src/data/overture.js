@@ -25,18 +25,29 @@
    Chiefs, are captioned as what they show, not as eager men.
 
    THE VOICE is synthesised — ElevenLabs, a stock voice — and the credits say
-   so. It was delivered with the breaks between lines rendered at about two
-   seconds, which gave each image three and a half, so .design/pad-narration.swift
-   rebuilt it with a longer pause after every line; docs/asset-manifest.md has
-   the pause table. The pauses are cut from the take's own silence rather than
-   inserted as empty time: not for the ear — the take's floor is −90 dB — but
-   because AVFoundation drops an empty range at the end of a composition, and
-   the last pause is exactly there.
+   so. This is the second take: the first was replaced for sounding robotic.
+   The second is slower and reads with dramatic pauses inside its lines, so
+   the detector that found the first take's twelve lines found eighteen
+   stretches here, and macOS speech recognition could not be reached from a
+   tool (TCC judges the launching app, not the tool — see transcribe.swift).
+   The lines were placed by word count, with two facts read off the waveform:
+   line one is "The …" then a two-second hole then "war had ended", and lines
+   six and seven were spoken in one breath with no pause between them. So the
+   padder (.design/pad-narration.swift) got eleven spans, never cutting inside
+   that breath, and beat 10 begins 1.73 s into it by share of syllables — the
+   one `at` that is an estimate rather than a measurement. Under the voice is
+   a low drone the game makes for itself (.design/make-bed.swift), mixed in
+   by .design/mix-narration.swift; docs/asset-manifest.md has the pause table
+   and the mix level. The pauses are cut from the take's own room tone, not
+   inserted as empty time, because AVFoundation drops an empty range at the
+   end of a composition, and the last pause is exactly there.
 
    TWO CLOCKS. Each beat carries `at`, its start in seconds within the
    narration, and `hold`, its length in milliseconds when the film runs on a
-   timer. Every `at` was read from .design/speech-segments.swift run on the
-   rebuilt file, never typed from a plan: a spoken beat begins 0.15 s before
+   timer. Every `at` comes from the padder's own report of where each line's
+   speech begins in the rebuilt clean-voice file (.design/narration-voice.m4a),
+   cross-checked by .design/speech-segments.swift on that file — never from
+   the mixed file, whose bed fills the silences: a spoken beat begins 0.15 s before
    its line, because `timeupdate` fires about four times a second and the
    caption should land on the voice rather than a quarter-second behind it; a
    wordless beat begins 1.3 s after the line before it ends (1.5 s after the
@@ -69,14 +80,14 @@ export const BEATS = [
     id: 'berlin',
     line: 'The war had ended.',
     at: 0,
-    hold: 3650,
+    hold: 6200,
     shot: { archiveId: 'ov-truman-berlin', alt: 'President Truman, Secretary Byrnes and Admiral Leahy in an open car among the ruins of Berlin, July 1945.', move: 'in' },
   },
   {
     id: 'price',
     line: 'It exacted a terrible price.',
-    at: 3.65,
-    hold: 2850,
+    at: 6.2,
+    hold: 3700,
     shot: { archiveId: 'ov-nagasaki-cloud', alt: 'The cloud over Nagasaki, photographed from the air minutes after the detonation.', move: 'out' },
   },
   {
@@ -84,99 +95,99 @@ export const BEATS = [
        as one — `contain` on the dark ground rather than blown up to fill. */
     id: 'shadow',
     line: '',
-    at: 6.5,
-    hold: 3300,
+    at: 9.9,
+    hold: 2500,
     shot: { archiveId: 'ov-hiroshima-shadow', alt: 'The shadow of a person burned onto the steps of a bank in Hiroshima.', move: 'in', fit: 'contain' },
   },
   {
     id: 'warfare',
     line: 'It ushered in a new age of warfare.',
-    at: 9.8,
-    hold: 4650,
+    at: 12.4,
+    hold: 4700,
     shot: { archiveId: 'ov-crossroads-baker', alt: 'A nuclear test at sea: the column of water rising over the fleet at Bikini Atoll.', move: 'in' },
   },
   {
     id: 'wonders',
     line: 'Where once we hoped for a new era of wonders,',
-    at: 14.45,
-    hold: 3250,
+    at: 17.1,
+    hold: 5200,
     shot: { archiveId: 'ov-shippingport', alt: 'The Shippingport reactor under construction on the Ohio River, 1956.', move: 'left' },
   },
   {
     id: 'rocket',
     line: '',
-    at: 17.7,
-    hold: 3500,
+    at: 22.3,
+    hold: 2700,
     shot: { archiveId: 'ov-juno-explorer', alt: 'A rocket standing on its pad at night, venting, hours before launch.', move: 'in', fit: 'contain' },
   },
   {
     id: 'spectre',
     line: 'now we live under the spectre of destruction,',
-    at: 21.2,
-    hold: 2900,
+    at: 25.0,
+    hold: 4350,
     shot: { archiveId: 'excomm-cabinet-room', alt: 'The Executive Committee in session in the Cabinet Room of the White House.', move: 'in' },
   },
   {
     id: 'cover',
     line: '',
-    at: 24.1,
-    hold: 3500,
+    at: 29.35,
+    hold: 2700,
     shot: { archiveId: 'ov-duck-and-cover-classroom', alt: 'Two schoolchildren curled under their desks with their hands over their necks, a frame from the 1951 civil-defence film Duck and Cover.', move: 'in', fit: 'contain' },
   },
   {
     id: 'arsenals',
     line: 'under threat from nuclear arsenals',
-    at: 27.6,
-    hold: 4300,
+    at: 32.05,
+    hold: 1750,
     shot: { archiveId: 'ss4-reference', alt: 'A Soviet SS-4 medium-range missile on its transporter, paraded through Red Square.', move: 'right' },
   },
   {
     id: 'button',
     line: 'with men on both sides eager to push the button.',
-    at: 31.9,
-    hold: 2900,
+    at: 33.8,
+    hold: 3550,
     shot: { archiveId: 'ov-checkpoint-charlie', alt: 'American and Soviet tanks facing each other across the sector boundary at Checkpoint Charlie, Berlin, October 1961.', move: 'right' },
   },
   {
     id: 'chiefs',
     line: '',
-    at: 34.8,
-    hold: 3500,
+    at: 37.35,
+    hold: 2700,
     shot: { archiveId: 'ov-jfk-colonnade', alt: 'President Kennedy on the West Wing Colonnade with Bundy, Nitze, General Taylor and McNamara, 29 October 1962.', move: 'out' },
   },
   {
     id: 'stand',
     line: 'And we are all that stand in their way.',
-    at: 38.3,
-    hold: 4950,
+    at: 40.05,
+    hold: 8700,
     shot: { archiveId: 'ov-dobrynin-kennedy', alt: 'Ambassador Dobrynin seated across from President Kennedy in the Oval Office, March 1962, photographers behind them.', move: 'in', fit: 'plate' },
   },
   {
     id: 'cowards',
     line: 'Some call us cowards.',
-    at: 43.25,
-    hold: 4200,
+    at: 48.75,
+    hold: 4050,
     shot: { archiveId: 'ov-dobrynin', alt: 'Anatoly Dobrynin, seated, a folder on his knee.', move: 'still', fit: 'plate' },
   },
   {
     id: 'negotiate',
-    line: 'But we negotiate. We compromise, in back rooms.',
-    at: 47.45,
-    hold: 5450,
+    line: 'But we are the negotiators, the compromisers, working in back rooms.',
+    at: 52.8,
+    hold: 5700,
     shot: { archiveId: 'ov-u-thant-kennedy-stevenson', alt: 'President Kennedy, U Thant and Adlai Stevenson side by side on a sofa in a hotel suite, January 1962.', move: 'in', fit: 'plate' },
   },
   {
     id: 'know',
     line: 'Because we know — if we don’t find a way',
-    at: 52.9,
-    hold: 4750,
+    at: 58.5,
+    hold: 8550,
     shot: { archiveId: 'ov-u-thant', alt: 'U Thant, seated, hands folded.', move: 'still', fit: 'plate' },
   },
   {
     id: 'end',
     line: 'it’ll be the end of all things.',
-    at: 57.65,
-    hold: 5800,
+    at: 67.05,
+    hold: 8000,
     shot: { archiveId: 'ov-rfk', alt: 'Robert Kennedy seated in the Oval Office, looking towards the President, February 1962.', move: 'in', fit: 'plate' },
   },
 ];

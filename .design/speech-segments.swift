@@ -1,10 +1,13 @@
 // Find the spoken segments of a narration — where the voice starts and stops.
-//   swift speech-segments.swift <in> [--json]
+//   swift speech-segments.swift <in> [--json] [--gap <seconds>]
 //
 // The track is read as float PCM and measured in 50 ms RMS windows. A window is
 // speech when its RMS is above 5% of the loudest window; runs of speech closer
-// together than 0.45 s are one segment (a breath inside a line is not a break);
-// runs shorter than 0.15 s are dropped (a click is not a word). Prints one line
+// together than the gap — 0.45 s unless --gap says otherwise — are one segment
+// (a breath inside a line is not a break); runs shorter than 0.15 s are
+// dropped (a click is not a word). A voice that pauses inside its lines for
+// longer than that needs a larger gap once the file has been padded, so the
+// padded pauses split lines and the voice's own pauses do not. Prints one line
 // per segment in seconds, with the silence that follows it, the total, and
 // the take's noise floor — the median RMS of its silence.
 //
@@ -21,6 +24,8 @@ guard args.count >= 2 else {
 }
 let inURL = URL(fileURLWithPath: args[1])
 let asJSON = args.contains("--json")
+var mergeGap = 0.45
+if let i = args.firstIndex(of: "--gap"), i + 1 < args.count, let g = Double(args[i + 1]) { mergeGap = g }
 
 let asset = AVURLAsset(url: inURL)
 guard let track = asset.tracks(withMediaType: .audio).first else {
@@ -88,7 +93,7 @@ if let s = start { runs.append((s, Double(rms.count) * step)) }
 
 var merged: [(Double, Double)] = []
 for run in runs {
-    if let last = merged.last, run.0 - last.1 < 0.45 {
+    if let last = merged.last, run.0 - last.1 < mergeGap {
         merged[merged.count - 1].1 = run.1
     } else {
         merged.append(run)

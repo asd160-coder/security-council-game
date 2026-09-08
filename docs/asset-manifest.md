@@ -477,3 +477,35 @@ the film's end; peak −18 dBFS, RMS −26.9 dBFS. `.design/mix-narration.swift`
 the voice at −10 dB, giving a bed measured at −37 dBFS RMS in the pauses, 22 dB under the
 voice's loudest hundred milliseconds (−15 dBFS), and −51 dBFS in the film's last second. `public/overture/narration.m4a` is that mix; the bed WAV is not
 committed (12 MB, reproducible from the script and its four arguments: 75.05 8 6).
+
+## Milestone 22 — twelve shots at the voice's own pace
+
+The user heard Milestone 21 and found it robotic and slow, and could not hear the bed. The
+first was largely the padding: two to four seconds of silence after every line of a take
+that already pauses inside its lines. The second was physics: a 55–110 Hz drone 22 dB under
+the voice, below what laptop speakers reproduce.
+
+**The narration now plays as delivered.** Nothing inside the take is cut, stretched or
+moved. The one addition is a tail of the take's own room tone — `pad-narration.swift` with a
+single span, `0.00:51.85` (the last word's end) and a 4.5 s pause — so the last photograph
+can hold and the bed can fade: 56.71 s in all, and the detector finds the take's eighteen
+stretches at exactly their original positions in the tailed file. The padded 75 s file of
+Milestone 21 is gone (git history has it).
+
+**One image per line — twelve shots.** At the voice's own pace there is no gap for a
+wordless shot, so four were cut with the user's leave: the Hiroshima shadow, the Juno rocket,
+the ExComm room and the President with the Chiefs. The three overture-only stills
+(`hiroshima-shadow-1945-11-20.jpg`, `juno-i-explorer-1958-01-31.jpg`,
+`jfk-colonnade-1962-10-29.jpg`) and their archive entries are removed so the credits list
+only what plays; the ExComm still stays, Day 1 uses it. Beat 7 ("with men on both sides…")
+remains the one estimated cue, 1.73 s into the breath it shares with line six.
+
+**The bed, second version** (`.design/make-bed.swift`): the low fifth kept for real speakers,
+and above it the same fifth at A3 and E4 — three voices each detuned a third of a percent so
+they chorus, six harmonics falling as 1/n, low-passed near 1.5 kHz, with its own slow swell —
+which small speakers can carry. Fade-in 4 s, fade-out 5 s to silence at the film's end; peak
+−18 dBFS, RMS −31.4 dBFS. Mixed at +1.4 dB so the bed measures **−29.4 dBFS in the pause after
+line two and −30.1 dBFS after line eight, 13.5 dB under the voice's loudest hundred
+milliseconds (−15.9 dBFS)**; −27.4 dBFS in the first second (fading in under "The war"),
+−38.6 dBFS in the last. The bed WAV is reproducible from the script and its arguments
+(56.711995 4 5); the gain is one argument to `mix-narration.swift`.

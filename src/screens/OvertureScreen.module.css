@@ -277,7 +277,7 @@
 }
 
 /* The film still plays; it stops moving. Crossfades stay because a hard cut
-   between sixteen stills is its own kind of motion. The caption's typing
+   between twelve stills is its own kind of motion. The caption's typing
    collapses on its own through --dur-teleprinter, but --dur-type is set per
    line, so it is overridden here too. */
 @media (prefers-reduced-motion: reduce) {

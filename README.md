@@ -13,8 +13,8 @@ It is not a quiz and it does not keep score.
 **How long.** About 40 minutes for one playthrough — roughly 25 minutes of reading plus
 time to decide. It fits a single period.
 
-**What the student actually does.** Pressing Begin plays a short overture — a little over a minute
-of archival photographs, closing on the three seats as they were photographed in 1962, with a
+**What the student actually does.** Pressing Begin plays a short overture — under a minute
+of archival photographs, one for each line, closing on the three seats as they were photographed in 1962, with a
 narration that states the stakes — which can be skipped
 at any moment with the Skip button or Escape. Then they take one of three seats and live
 five days of October 1962. Each day they read a briefing, meet someone, and choose what to say. Their
@@ -145,12 +145,12 @@ appear at `https://asd160-coder.github.io/security-council-game/`.
 script in `src/data/overture.js`, in a stock voice — and the credits say so; the low note
 under it is a drone the game makes for itself (`.design/make-bed.swift`), a recording of
 nothing. The delivered take is kept as `.design/narration-source.mp3`; the film plays
-`public/overture/narration.m4a`, which is the take with a longer pause after every line and
-the bed mixed under it. To re-voice it, in order: `.design/transcribe.swift` (built as the
+`public/overture/narration.m4a`, which is the take as delivered — nothing inside it moved —
+with a few seconds of its own room tone added at the end and the bed mixed under it. To re-voice it, in order: `.design/transcribe.swift` (built as the
 small app bundle its header describes — macOS asks once to allow speech recognition, and
 recognition stays on the machine) gives word timestamps; `.design/align-lines.py` turns them
-into one span per line; `.design/pad-narration.swift` rebuilds the take with the pause table
-in `docs/asset-manifest.md` into a clean voice file; `.design/make-bed.swift` and
+into one span per line; `.design/pad-narration.swift` adds the tail (it can also re-pace a
+take, but a padded take sounded robotic and this one plays as delivered) into a clean voice file; `.design/make-bed.swift` and
 `.design/mix-narration.swift` put the bed under it. Each beat's `at` is the second at which
 its line begins in the clean voice file, from the padder's own report, and its `hold` is the
 gap to the next beat, so the timer plays the same film if the audio cannot start. The

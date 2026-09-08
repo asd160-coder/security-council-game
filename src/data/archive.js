@@ -229,8 +229,9 @@ export const ARCHIVE = [
      which maps this array, credits every shot with no second list to keep in
      step. `overture: true` is informational; the day rails only show what a
      briefing names, so none of these leak into play. All are federal works.
-     The Hiroshima print is the one whose authorship Commons could not give —
-     the holding institution's own record supplies it. */
+     Three that played in earlier cuts — the Hiroshima shadow, the Juno rocket,
+     the President with the Chiefs — were removed with the wordless beats in
+     Milestone 22; they remain in git history. */
   {
     id: 'ov-truman-berlin',
     kind: 'image',
@@ -254,18 +255,6 @@ export const ARCHIVE = [
     source: 'Charles Levy, US Army Air Forces — US National Archives and Records Administration',
     rights: 'Public domain — work of the US federal government',
     whyItMatters: 'The second and last use of a nuclear weapon in war. Everything the simulation is about is the effort to keep that number at two.',
-  },
-  {
-    id: 'ov-hiroshima-shadow',
-    kind: 'image',
-    overture: true,
-    file: 'hiroshima-shadow-1945-11-20.jpg',
-    title: 'Flash burns on the steps of the Sumitomo Bank, Hiroshima',
-    date: '20 November 1945',
-    caption: 'A small contact print made by the United States Strategic Bombing Survey: where someone sat on the steps at the moment of the flash, the stone was shielded, and the shape remained.',
-    source: 'Unidentified photographer for the United States Government, 20 November 1945 — print held by the International Center of Photography, 2006.1.411',
-    rights: 'Public domain — work of the US federal government',
-    whyItMatters: 'The price was paid by people who were not consulted. The shadow is the plainest record of that the war left.',
   },
   {
     id: 'ov-crossroads-baker',
@@ -292,18 +281,6 @@ export const ARCHIVE = [
     whyItMatters: 'The promise of the atomic age, in concrete. The same physics on the same decade’s front pages.',
   },
   {
-    id: 'ov-juno-explorer',
-    kind: 'image',
-    overture: true,
-    file: 'juno-i-explorer-1958-01-31.jpg',
-    title: 'Juno I on the pad with Explorer 1, January 1958',
-    date: '31 January 1958',
-    caption: 'The rocket that carried the first American satellite, hours before launch at Cape Canaveral.',
-    source: 'NASA',
-    rights: 'Public domain — work of the US federal government',
-    whyItMatters: 'Four months after Sputnik. The rockets that promised the future were the missiles that threatened it, and everyone knew it.',
-  },
-  {
     id: 'ov-checkpoint-charlie',
     kind: 'image',
     overture: true,
@@ -314,18 +291,6 @@ export const ARCHIVE = [
     source: 'US Army — US Army Heritage and Education Center',
     rights: 'Public domain — work of the US federal government',
     whyItMatters: 'The nearest the two armies came to firing on each other in Europe. It was resolved by a back channel, which is the method this simulation is about.',
-  },
-  {
-    id: 'ov-jfk-colonnade',
-    kind: 'image',
-    overture: true,
-    file: 'jfk-colonnade-1962-10-29.jpg',
-    title: 'The President with his advisers after the Executive Committee, 29 October 1962',
-    date: '29 October 1962',
-    caption: 'Kennedy on the West Wing Colonnade with McGeorge Bundy, Paul Nitze, General Maxwell Taylor and Robert McNamara, the morning after the answer came.',
-    source: 'Cecil Stoughton, White House Photographs — John F. Kennedy Presidential Library, ST-A26-13-62',
-    rights: 'Public domain — work of the US federal government',
-    whyItMatters: 'The chairman of the Joint Chiefs and the Secretary of Defense, in the same frame as the man who had overruled the advice to strike.',
   },
   {
     /* A frame of the film, not its cartoon. The first cut used Bert the

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Field, Paper, PaperBody, Reveal } from '../ui/index.jsx';
 import { PLAY } from '../../data/copy.js';
 import { councilFor } from '../../data/council.js';
@@ -22,6 +23,18 @@ import styles from './steps.module.css';
 
 export default function CouncilStep({ day, step, role, onChoose }) {
   const cabinet = councilFor(role.id);
+  /* Which memos are open. The recommendation line is always visible; the
+     argument under it is one click away, and the first memo opens by default
+     so the shape of a memo is shown once. Three open at once made this the
+     heaviest screen in the game. */
+  const [openIds, setOpenIds] = useState(() => new Set(cabinet ? [cabinet.advisers[0].id] : []));
+  const toggle = (id) =>
+    setOpenIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
   if (!cabinet) return null;
 
   const mood = moodFor(day.number);
@@ -62,8 +75,19 @@ export default function CouncilStep({ day, step, role, onChoose }) {
           {cabinet.advisers.map((adviser, index) => (
             <Reveal key={adviser.id} delay={180 + index * 110}>
               <Paper eyebrow={adviser.source} title={adviser.title} format={adviser.format} stamp={adviser.stamp} titleAs="h2">
-                <PaperBody paragraphs={adviser.body} />
                 <Field label={step.weighLabel}>{adviser.weigh}</Field>
+                <div id={`memo-${adviser.id}`} hidden={!openIds.has(adviser.id)}>
+                  <PaperBody paragraphs={adviser.body} />
+                </div>
+                <button
+                  type="button"
+                  className={styles.memoToggle}
+                  aria-expanded={openIds.has(adviser.id)}
+                  aria-controls={`memo-${adviser.id}`}
+                  onClick={() => toggle(adviser.id)}
+                >
+                  {openIds.has(adviser.id) ? PLAY.foldMemo : PLAY.readMemo}
+                </button>
               </Paper>
             </Reveal>
           ))}

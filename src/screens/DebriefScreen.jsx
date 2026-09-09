@@ -249,10 +249,14 @@ export default function DebriefScreen({ state, role, onRestart, onAnswer }) {
       </Reveal>
 
       {/* ------------------------------------------------ The document */}
+      {/* Folded, as is the office below: the statement was the ending's whole
+          screen a minute ago, and the seat was the private brief on Day 1.
+          Both stay one click away; neither needs reading twice. */}
       <Reveal delay={240} className={styles.section}>
-        <div className={styles.sectionHead}>
-          <Eyebrow>{SECTIONS.document}</Eyebrow>
-        </div>
+        <details className={styles.fold}>
+          <summary className={styles.foldLabel}>
+            <Eyebrow>{SECTIONS.document}</Eyebrow>
+          </summary>
         <p className={styles.caveat}>{NOTES.documentCaveat}</p>
         <div className={styles.document}>
           {document.map((part, index) => (
@@ -284,6 +288,7 @@ export default function DebriefScreen({ state, role, onRestart, onAnswer }) {
             </div>
           ))}
         </div>
+        </details>
       </Reveal>
 
       {/* ------------------------------------------------ Their own words */}
@@ -301,16 +306,18 @@ export default function DebriefScreen({ state, role, onRestart, onAnswer }) {
 
       {/* ------------------------------------------------ The office */}
       <Reveal delay={360} className={styles.section}>
-        <div className={styles.sectionHead}>
-          <Eyebrow>{SECTIONS.role}</Eyebrow>
-          <span className={styles.dayTitle}>{role.name}</span>
-        </div>
-        <div className={styles.prose}>
-          {reflection.body.map((paragraph) => (
-            <p key={paragraph.slice(0, 40)}>{paragraph}</p>
-          ))}
-        </div>
-        <p className={styles.caveat}>{reflection.tension}</p>
+        <details className={styles.fold}>
+          <summary className={styles.foldLabel}>
+            <Eyebrow>{SECTIONS.role}</Eyebrow>
+            <span className={styles.dayTitle}>{role.name}</span>
+          </summary>
+          <div className={styles.prose}>
+            {reflection.body.map((paragraph) => (
+              <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+            ))}
+          </div>
+          <p className={styles.caveat}>{reflection.tension}</p>
+        </details>
       </Reveal>
 
       {/* ------------------------------------------------ What it traded */}

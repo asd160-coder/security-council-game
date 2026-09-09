@@ -16,23 +16,32 @@ const KIND_CLASS = {
   memo: styles.kindMemo,
 };
 
-export function EntryCard({ entry }) {
+/* `compact` is the version the consequence and summary screens show: the
+   title and the one line that says what the entry changes. The whole card
+   stayed on those screens for twenty-odd milestones and was the same card the
+   rail had just filed, read twice within a minute. The viewer and the rail
+   always show it whole. */
+export function EntryCard({ entry, compact = false }) {
   if (entry.type === 'card') {
     return (
       <Paper eyebrow={`${KIND_LABEL[entry.kind]} · ${entry.subtitle}`} title={entry.name}>
         <Field label="Core interests">{entry.interests}</Field>
-        <Field label="Public message">{entry.publicMessage}</Field>
-        <Field label="Private concern">{entry.privateConcern}</Field>
-        <Field label="Preferred style">{entry.style}</Field>
-        <Field label="Red lines">{entry.redLines}</Field>
-        <Field label="Possible concessions">{entry.concessions}</Field>
+        {!compact && (
+          <>
+            <Field label="Public message">{entry.publicMessage}</Field>
+            <Field label="Private concern">{entry.privateConcern}</Field>
+            <Field label="Preferred style">{entry.style}</Field>
+            <Field label="Red lines">{entry.redLines}</Field>
+            <Field label="Possible concessions">{entry.concessions}</Field>
+          </>
+        )}
       </Paper>
     );
   }
 
   return (
     <Paper eyebrow={entry.label} title={entry.title} format={entry.kind === 'memo' ? 'memo' : undefined}>
-      <PaperBody paragraphs={entry.body} />
+      {!compact && <PaperBody paragraphs={entry.body} />}
       <Field label={PLAY.soWhat}>{entry.soWhat}</Field>
     </Paper>
   );

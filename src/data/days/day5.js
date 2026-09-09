@@ -43,9 +43,9 @@ const day5 = {
       },
       situation: {
         sides: [
-          { who: 'United States', did: 'Last night the reply went to Moscow: accept the first letter — the missiles out under United Nations inspection, in return for a promise not to invade. In private, the Attorney General told the Soviet ambassador that the Turkish missiles would be gone within months, but not as a trade, and that Moscow had about a day to answer. Reconnaissance flies at first light. The strike plan is written.' },
+          { who: 'United States', did: 'Replied overnight, accepting the first letter: the missiles out under UN inspection, for a promise not to invade. Moscow has about a day. The strike plan is written.' },
           { who: 'Soviet Union', did: 'Has the reply and the private message. Nothing has come back. Radio Moscow is expected to broadcast something this morning.' },
-          { who: 'United Nations', did: 'The Secretary-General is ready to fly to Havana to arrange inspection of the sites, if there is anything to inspect.' },
+          { who: 'United Nations', did: 'The Secretary-General is ready to fly to Havana and arrange inspection of the sites, if there is anything to inspect.' },
           { who: 'Cuba', did: 'Has not been consulted about the terms, and will learn of the answer from the radio like everyone else.' },
         ],
         today: 'Waiting, which is a decision too. Add nothing, give a private assurance, ask for more time, or withdraw the offer — and live with which of those you chose.',
@@ -53,7 +53,7 @@ const day5 = {
       explainers: [
         {
           term: 'The assurance',
-          text: 'Last night the Attorney General told the Soviet ambassador, in private, that the Turkish missiles would be gone within months — but not as part of any deal, and Washington would deny it if it were made public. A promise like that cannot be written down or enforced; it is worth exactly as much as the reputation of the man who gave it. The rest of the settlement needs inspection of the sites, which requires Cuba’s consent, and Cuba has not been asked.',
+          text: 'The Attorney General told the Soviet ambassador, in private, that the Turkish missiles would be gone within months. Not as a deal: Washington would deny it in public. Such a promise cannot be written down or enforced. It is worth the word of the man who gave it. Inspecting the sites needs Cuba’s consent.',
         },
       ],
       channelCallback: {

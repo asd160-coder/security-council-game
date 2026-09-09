@@ -18,8 +18,9 @@ const MOVEMENT_CLASS = {
 
    Three things a student should leave with: what moved, what they now know
    that they did not this morning, and one sentence about what is coming. The
-   draft so far is shown because the ladder should feel cumulative from the
-   first rung. */
+   newest clause is shown open with the earlier ones folded above it, because
+   the ladder should feel cumulative from the first rung without the summary
+   reprinting the whole document every evening. */
 
 export default function SummaryStep({ day, step, deltas, trackers, unlockedToday, draft, onAdvance }) {
   const moved = Object.entries(deltas).filter(([, value]) => value !== 0);
@@ -83,14 +84,15 @@ export default function SummaryStep({ day, step, deltas, trackers, unlockedToday
           {preview && (
             <section className={styles.summaryBlock} aria-label={SUMMARY.filed}>
               <span className="eyebrow">{SUMMARY.filed}</span>
-              <EntryCard entry={preview} />
+              <EntryCard entry={preview} compact />
+              <p className={styles.fullInFile}>{PLAY.fullInFile}</p>
             </section>
           )}
         </div>
       </Reveal>
 
       <Reveal delay={420}>
-        <DraftingTray draft={draft} compact />
+        <DraftingTray draft={draft} compact latest />
       </Reveal>
 
       {/* One sentence pointing at tomorrow. The field has been in the day data

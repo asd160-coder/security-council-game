@@ -96,6 +96,12 @@ export default function TeachersScreen({ onBack }) {
         ))}
       </div>
 
+      {/* ------------------------------------------------ How long */}
+      <Reveal delay={160} className={styles.note}>
+        <span className={styles.noteLabel}>{TEACHING.lengthLabel}</span>
+        <p className={styles.noteText}>{TEACHING.lengthNote}</p>
+      </Reveal>
+
       {/* ------------------------------------------------ Collecting it */}
       <Reveal delay={200} className={styles.note}>
         <span className={styles.noteLabel}>{TEACHING.copyLabel}</span>

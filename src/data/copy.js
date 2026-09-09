@@ -106,6 +106,10 @@ export const PLAY = {
   draft: 'Draft statement',
   draftEmpty: 'Your statement will be built here, one fragment at a time.',
   draftFragment: (n) => `Fragment ${n}`,
+  /* On the end-of-day summary only the newest clause is open; the rest of the
+     statement was on the tray all day and is folded above it here. */
+  draftEarlier: (n) =>
+    n === 1 ? 'One earlier clause' : `${['Two', 'Three', 'Four'][n - 2] ?? n} earlier clauses`,
   /* Labels the source a clause was argued from. */
   arguedFrom: 'Argued from',
   map: 'Situation map',
@@ -124,6 +128,9 @@ export const PLAY = {
   /* Day 4: the price in the second letter lies outside this frame. */
   mapTurkey: 'The second letter’s price — the Jupiter missiles at İzmir, Turkey — lies 5,900 miles east of this frame. The small map shows it on the wide view.',
   archiveExpand: 'Examine at full size',
+  /* A document on the briefing opens folded to its first paragraph. Reading
+     the rest is the act that files it, the same as opening it at full size. */
+  readRest: 'Read the rest',
   youSaid: 'You said',
   theyReplied: 'The reply',
   reconsider: 'Take it differently',
@@ -148,6 +155,10 @@ export const PLAY = {
      labels the adviser who comes back afterwards, and is deliberately blunt —
      the point of the beat is that you are answerable to someone. */
   councilPrompt: 'Whose course you carry into the room',
+  /* The Day 4 memos. The recommendation line is always visible; the argument
+     under it is one click away, and the first memo opens by default. */
+  readMemo: 'Read the memo',
+  foldMemo: 'Fold the memo',
   overruled: 'The advice you did not take',
   stageOne: 'One',
   stageTwo: 'Two',
@@ -175,6 +186,9 @@ export const PLAY = {
   /* Marks a primary source shown in part rather than whole. */
   excerpted: 'Excerpt — the full document is longer',
   newInFile: 'New in your file',
+  /* Under a compact entry — title and what it changes — on the consequence
+     and summary screens. The whole card is in the rail. */
+  fullInFile: 'The full entry is in your file.',
   soWhat: 'What this changes',
   whyItMatters: 'Why this matters',
   source: 'Source',

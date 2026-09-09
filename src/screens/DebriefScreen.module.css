@@ -567,6 +567,46 @@
   color: var(--brass);
 }
 
+/* A folded section: its head is the summary, so it reads as every other
+   section head with a caret in front. Closed by default — the document and
+   the office are both things the student has already read once. */
+.fold {
+  display: block;
+}
+
+.foldLabel {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.foldLabel::-webkit-details-marker {
+  display: none;
+}
+
+.foldLabel::before {
+  content: '▸';
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  color: var(--brass-dim);
+}
+
+.fold[open] > .foldLabel {
+  margin-bottom: 14px;
+}
+
+.fold[open] > .foldLabel::before {
+  content: '▾';
+  color: var(--brass);
+}
+
+.foldLabel:hover::before {
+  color: var(--brass-bright);
+}
+
 .historyLabel:hover {
   color: var(--brass-bright);
 }

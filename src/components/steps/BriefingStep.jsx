@@ -42,18 +42,24 @@ export default function BriefingStep({ day, step, onAdvance, standing, history, 
         <hr className={styles.rule} />
       </Reveal>
 
-      <Reveal delay={220} className={styles.prose}>
-        {body.map((paragraph) => (
-          <p key={paragraph.slice(0, 40)}>{paragraph}</p>
-        ))}
-      </Reveal>
+      {/* The day's question, first. A student who reads nothing else on this
+          screen still knows what is being decided; everything below it is
+          what they need in order to decide. */}
+      {step.situation?.today && (
+        <Reveal delay={200} className={styles.question}>
+          <span className={styles.questionLabel}>{PLAY.situationToday}</span>
+          <p className={styles.questionText}>{step.situation.today}</p>
+        </Reveal>
+      )}
 
       {/* Where things stand: what each side has actually done, as plain facts,
           before any prose about how it feels. The first playthrough by a
           teacher found the briefings gave a mood and not a situation — the
-          student could not tell what was being responded to. */}
+          student could not tell what was being responded to. Set as a ledger,
+          two sides to a row and one sentence each, so it is read at a glance;
+          the budget in tools/walk.mjs keeps it that short. */}
       {step.situation && (
-        <Reveal delay={280} className={styles.situation}>
+        <Reveal delay={260} className={styles.situation}>
           <span className={styles.situationLabel}>{PLAY.situationLabel}</span>
           <dl className={styles.situationList}>
             {step.situation.sides.map(({ who, did }) => (
@@ -63,20 +69,22 @@ export default function BriefingStep({ day, step, onAdvance, standing, history, 
               </div>
             ))}
           </dl>
-          {step.situation.today && (
-            <p className={styles.situationToday}>
-              <span className={styles.situationTodayLabel}>{PLAY.situationToday}</span>
-              {step.situation.today}
-            </p>
-          )}
         </Reveal>
       )}
+
+      {/* How it feels, after what it is. Days 1 and 2 keep one paragraph
+          here; the facts the other used to carry are in the ledger now. */}
+      <Reveal delay={320} className={styles.prose}>
+        {body.map((paragraph) => (
+          <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+        ))}
+      </Reveal>
 
       {/* In other words: the two or three ideas a student needs to hold to act
           today — what a quarantine is and why it is dangerous, why the Turkish
           missiles matter, what the two letters mean — each in plain words. */}
       {step.explainers?.length > 0 && (
-        <Reveal delay={300} className={styles.explainers}>
+        <Reveal delay={360} className={styles.explainers}>
           <span className={styles.explainersLabel}>{PLAY.explainersLabel}</span>
           {step.explainers.map((entry) => (
             <div key={entry.term} className={styles.explainer}>
@@ -88,7 +96,7 @@ export default function BriefingStep({ day, step, onAdvance, standing, history, 
       )}
 
       {callback && (
-        <Reveal delay={320} className={styles.callback}>
+        <Reveal delay={380} className={styles.callback}>
           <span className={styles.callbackLabel}>{PLAY.sinceYesterday}</span>
           <p className={styles.callbackText}>{callback}</p>
         </Reveal>
@@ -98,12 +106,12 @@ export default function BriefingStep({ day, step, onAdvance, standing, history, 
           the reference photograph that made identifying it possible, because
           the pair is the lesson and either alone is only half of it. */}
       {archive.map((id, index) => (
-        <Reveal key={id} delay={360 + index * 120}>
+        <Reveal key={id} delay={420 + index * 120}>
           <ArchiveModule id={id} onOpen={onOpenArchive} />
         </Reveal>
       ))}
 
-      <Reveal delay={460} className={styles.actions}>
+      <Reveal delay={520} className={styles.actions}>
         <Button variant="primary" onClick={leave}>
           {PLAY.continue}
         </Button>

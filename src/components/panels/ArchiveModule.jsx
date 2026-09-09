@@ -20,6 +20,9 @@ export default function ArchiveModule({ id, onOpen }) {
   const [failed, setFailed] = useState(false);
   const [open, setOpen] = useState(false);
   const close = useCallback(() => setOpen(false), []);
+  /* A document opens folded to its first paragraph; see `folded` below. */
+  const [expanded, setExpanded] = useState(false);
+  const paperRef = useRef(null);
 
   /* Correcting a filename should recover without a reload. */
   useEffect(() => setFailed(false), [item?.file]);
@@ -32,7 +35,11 @@ export default function ArchiveModule({ id, onOpen }) {
      overlay, and a line gated on the document three days later told a
      student who had read every word that they had not. A sentinel at the
      foot of the text fires once when it scrolls into view. The click path
-     stays; this is in addition to it, not instead. */
+     stays; this is in addition to it, not instead.
+
+     A folded document renders no foot, so scrolling past its first paragraph
+     files nothing; the observer attaches when "Read the rest" mounts the
+     rest, which is why `expanded` is in the deps. */
   const endRef = useRef(null);
   const onOpenRef = useRef(onOpen);
   onOpenRef.current = onOpen;
@@ -48,7 +55,7 @@ export default function ArchiveModule({ id, onOpen }) {
     });
     observer.observe(target);
     return () => observer.disconnect();
-  }, [item?.id, item?.kind, item?.unlocks]);
+  }, [item?.id, item?.kind, item?.unlocks, expanded]);
 
   if (!item) return null;
 
@@ -56,6 +63,15 @@ export default function ArchiveModule({ id, onOpen }) {
   /* Documents ship in the bundle, so the awaiting/missing states cannot
      apply to them. */
   const showPlaceholder = item.kind !== 'document' && (!present || failed);
+
+  /* Folded: a document longer than one paragraph shows its first paragraph
+     and a control to read the rest. Reading the rest files it, like opening
+     it at full size. A document scrolled past folded was not read, so it does
+     not file — the archive rail's Unread mark says so, and the Day 4 line
+     that requires the proclamation stays locked until it is actually read.
+     The proclamation ran 237 words on the Day 2 briefing before this. */
+  const folded = item.kind === 'document' && (item.text?.length ?? 0) > 1 && !expanded;
+  const shownText = folded ? item.text.slice(0, 1) : item.text;
 
   return (
     <figure className={styles.module}>
@@ -102,8 +118,10 @@ export default function ArchiveModule({ id, onOpen }) {
             1962, so it goes on stock rather than on the board. */}
         {item.kind === 'document' && (
           <button
+            ref={paperRef}
+            id={`archive-${item.id}-text`}
             type="button"
-            className={styles.document}
+            className={`${styles.document} ${folded ? styles.documentFolded : ''}`}
             /* Examining a document is the act that files it. Same shape as the
                map: the thing you did IS the unlock, rather than a separate
                control that claims you read it. */
@@ -113,7 +131,7 @@ export default function ArchiveModule({ id, onOpen }) {
             }}
             aria-label={PLAY.archiveExpand}
           >
-            {item.text.map((paragraph) => (
+            {shownText.map((paragraph) => (
               <p key={paragraph.slice(0, 40)} className={styles.documentLine}>
                 {paragraph}
               </p>
@@ -121,15 +139,35 @@ export default function ArchiveModule({ id, onOpen }) {
             {/* Said plainly rather than left to be noticed. A proclamation runs
                 nine hundred words; taking the part that argues and marking the
                 cut is better than silently abridging. */}
-            {item.excerpt && <p className={styles.documentCut}>{PLAY.excerpted}</p>}
-            <span
-              ref={endRef}
-              className={styles.readMark}
-              data-read-mark=""
-              data-unlocks={item.unlocks ?? ''}
-              aria-hidden="true"
-            />
+            {!folded && item.excerpt && <p className={styles.documentCut}>{PLAY.excerpted}</p>}
+            {!folded && (
+              <span
+                ref={endRef}
+                className={styles.readMark}
+                data-read-mark=""
+                data-unlocks={item.unlocks ?? ''}
+                aria-hidden="true"
+              />
+            )}
             <span className={styles.documentMark} aria-hidden="true" />
+          </button>
+        )}
+        {/* Outside the paper, because a button cannot hold a button; styled
+            as the paper's own foot. Opening the rest files the document and
+            hands focus back to the paper. */}
+        {folded && (
+          <button
+            type="button"
+            className={styles.documentMore}
+            aria-expanded="false"
+            aria-controls={`archive-${item.id}-text`}
+            onClick={() => {
+              setExpanded(true);
+              if (item.unlocks) onOpen?.(item.unlocks);
+              paperRef.current?.focus();
+            }}
+          >
+            {PLAY.readRest}
           </button>
         )}
 

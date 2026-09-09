@@ -42,7 +42,8 @@ export default function ConsequenceStep({ step, choice, lastUnlock, onAdvance })
           <div className={styles.unlockHead}>
             <span className={styles.unlockLabel}>{PLAY.newInFile}</span>
           </div>
-          <EntryCard entry={unlocked} />
+          <EntryCard entry={unlocked} compact />
+          <p className={styles.fullInFile}>{PLAY.fullInFile}</p>
         </Reveal>
       )}
 

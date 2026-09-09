@@ -235,13 +235,26 @@
 .standing {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px 26px;
+  align-items: start;
+  gap: 14px 26px;
 }
 
 .standingItem {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: start;
   align-items: baseline;
-  gap: 8px;
+  column-gap: 8px;
+  max-width: 22rem;
+}
+
+.standingMeaning {
+  grid-column: 1 / -1;
+  margin-top: 2px;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--silver-fainter);
 }
 
 .standingLabel {

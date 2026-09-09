@@ -148,6 +148,11 @@ export const TEACHING = {
     'The debrief names up to two of these at the end of a run. They are trades, not scores — none of them is the good one. What follows is what each reveals, and something to ask the student who finished with it.',
   meansLabel: 'What it means',
   askLabel: 'Ask them',
+  /* Length, and the two-lesson shape. The README carries the same note; this
+     is the copy a teacher sees with the game in front of them. */
+  lengthLabel: 'How long it takes',
+  lengthNote:
+    'A full run is about an hour: some 35 minutes of reading for a fluent reader, more for a slower one, plus the deciding and a paragraph of writing at the end. It sits better across two lessons than one. A run saves itself in the browser after every screen, so a student can stop at the end of any day and resume from the title screen — on the same device and the same browser, because that is where the run lives.',
   copyLabel: 'Collecting the work',
   copyNote:
     'At the end of the debrief there is a Save as PDF button. It produces a short record of the run — the seat, the outcome, the five decisions summarised and quoted, the trade the run made, the closing paragraph they wrote, and their answers to the discussion questions if they wrote any. Nothing is transmitted anywhere: the run lives in the student’s own browser, and they choose whether to hand the file over.',

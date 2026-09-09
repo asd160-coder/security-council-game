@@ -49,21 +49,21 @@ const day4 = {
       },
       situation: {
         sides: [
-          { who: 'United States', did: 'The quarantine holds. This morning a U-2 was shot down over Cuba and its pilot killed; another strayed over Soviet territory by mistake. The Executive Committee is meeting again with a strike recommendation on the table, and the President must answer Moscow’s letters today.' },
-          { who: 'Soviet Union', did: 'Sent two letters. Friday night’s, private and in Khrushchev’s own words, offers to remove the missiles in return for an American promise not to invade Cuba. This morning’s, read out on Radio Moscow, adds a demand: the American missiles in Turkey must go too. Soviet crews in Cuba fired the missile that brought down the U-2, apparently without orders from Moscow.' },
-          { who: 'United Nations', did: 'The Secretary-General has offered to fly to Havana to arrange inspection. The Council is not sitting; the argument has moved to the letters.' },
-          { who: 'Cuba and Turkey', did: 'Cuba has ordered its guns to fire on low-flying American aircraft, and Castro has urged Khrushchev not to give way. Turkey has learned from the radio that its missiles are being bargained over, and has not been asked.' },
+          { who: 'United States', did: 'The quarantine holds. A U-2 was shot down over Cuba this morning and its pilot killed. The President’s committee has a strike recommendation on the table.' },
+          { who: 'Soviet Union', did: 'Sent two letters that do not agree: missiles out for a no-invasion promise, then the Turkish missiles added. Its crews shot down the aircraft, apparently without orders.' },
+          { who: 'United Nations', did: 'The Secretary-General has offered to fly to Havana to arrange inspection. The Council is not sitting. The argument has moved to the letters.' },
+          { who: 'Cuba and Turkey', did: 'Cuba fires on American aircraft, and Castro urges Khrushchev not to give way. Turkey learned from the radio that its missiles are on the table. Nobody asked it.' },
         ],
-        today: 'First your own advisers — strike, trade, or stall — and which of their courses you carry into the room. Then the decisive conversation: which letter to answer, whether the Turkish missiles are on the table, and what can be promised in private that cannot be said in public.',
+        today: 'First your own advisers, who want a strike, a trade, or a stall. You carry one course into the room. Then the decisive conversation: which letter to answer, whether Turkey is on the table, what can be promised in private.',
       },
       explainers: [
         {
           term: 'The two letters',
-          text: 'Friday night’s letter, in Khrushchev’s own words, offers to take the missiles out of Cuba if the United States promises not to invade the island. This morning’s letter, read out on Radio Moscow, adds a second price: the American missiles in Turkey must go too. A government that sends two offers in one night is arguing with itself, and which letter you answer is a choice about which side of that argument you would rather be dealing with.',
+          text: 'Friday night’s letter, in Khrushchev’s words, offers the missiles out of Cuba if America promises not to invade. This morning’s, on Radio Moscow, adds a second price: the American missiles in Turkey. A government that sends two offers in one night is arguing with itself. Which letter you answer picks a side in that argument.',
         },
         {
           term: 'Why Turkey is the hard part',
-          text: 'The Jupiters in Turkey are old, slow and worth little as weapons; Washington had already been discussing their removal. But trading an ally’s missiles in public would tell every ally that its security can be bargained away. That is why they cannot be traded openly — and why they might be removed quietly, months later, without anyone calling it a trade.',
+          text: 'The Jupiters in Turkey are old, slow and worth little as weapons. Washington was already talking about taking them out. But to trade an ally’s missiles in public tells every ally its safety can be bargained away. So they cannot be traded openly. They might go quietly, months later, with nobody calling it a trade.',
         },
       ],
       channelCallback: {

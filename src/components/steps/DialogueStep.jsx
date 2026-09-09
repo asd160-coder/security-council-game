@@ -77,9 +77,12 @@ export default function DialogueStep({ day, step, role, onChoose, onConsultAdvis
             {adviserTaken ? (
               <span className={scene.adviserTaken}>Adviser consulted · memo filed</span>
             ) : (
-              <Button variant="quiet" onClick={onConsultAdviser}>
-                {step.adviser.label}
-              </Button>
+              <>
+                <Button variant="quiet" onClick={onConsultAdviser}>
+                  {step.adviser.label}
+                </Button>
+                {step.adviser.hint && <span className={scene.adviserHint}>{step.adviser.hint}</span>}
+              </>
             )}
           </Reveal>
         )}

@@ -8,6 +8,7 @@ the real day files, so there is nothing to keep in sync with the game.
 npm run check     # walk + engine — structural, ~1s, run this often
 npm run audit     # the tuning audit — ~16.8M runs, ~3 min, run after content changes
 npm run bands     # a diagnostic, not a check — run when audit reports a dead band
+npm run words     # a reading-load map — where the words are, per screen and per day
 ```
 
 `check` and `audit` **exit non-zero on failure**, so they can gate a commit or a
@@ -88,3 +89,13 @@ never rewritten. Reading grade cannot see idiom, which is what a student actuall
 it finds the long, abstract sentences where idiom lives. Run it before and after a
 plain-words pass to see whether anything moved. `node tools/readability.mjs --file
 days/day2.js` lists one file's sentences, hardest first.
+
+## `npm run words`
+
+Where the words are. For one seat (`--role dobrynin`; rfk by default) it counts every field
+a student is shown, per step kind and per day, and estimates one path through each day — one
+reply, one set of follow-ups, the mean consequence, a folded document's first paragraph. A
+map, not a gate: run it before a pass that means to cut reading, and after, to see what
+moved. Its first run found the "where things stand" ledger had quietly become the largest
+single item in the game, which no amount of playing would have shown. The ledger and the
+explainers now carry word budgets in `walk.mjs` so they stay trimmed.

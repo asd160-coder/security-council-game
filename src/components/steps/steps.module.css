@@ -196,6 +196,49 @@
   color: var(--brass-bright);
 }
 
+/* Under a compact entry — the summary's "filed today" and the consequence's
+   "new in your file" show the title and what it changes, not the whole card.
+   The rail has the whole card; this line says so. */
+.fullInFile {
+  margin: 10px 0 0;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-style: italic;
+  color: var(--silver-fainter);
+}
+
+/* The Day 4 memos: the recommendation is always visible and the argument is
+   one click away. On paper, so in ink. */
+.memoToggle {
+  display: block;
+  margin-top: 10px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  transition: color var(--dur-quick) var(--ease);
+}
+
+.memoToggle::before {
+  content: '▸';
+  display: inline-block;
+  width: 1.2em;
+}
+
+.memoToggle[aria-expanded='true']::before {
+  content: '▾';
+}
+
+.memoToggle:hover,
+.memoToggle:focus-visible {
+  color: var(--ink);
+}
+
 /* ---------------------------------------------------------- Drafting options */
 .draftOptions {
   display: grid;
@@ -584,18 +627,19 @@
   color: var(--brass);
 }
 
+/* A ledger: two sides to a row, the name over one sentence. Four sides make
+   two rows instead of four stacked paragraphs. */
 .situationList {
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 26px;
 }
 
 .situationRow {
-  display: grid;
-  grid-template-columns: 132px minmax(0, 1fr);
-  gap: 16px;
-  align-items: baseline;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 
 .situationWho {
@@ -614,19 +658,24 @@
   color: var(--silver);
 }
 
-.situationToday {
-  margin: 4px 0 0;
-  padding-top: 12px;
-  border-top: 1px solid var(--board-line);
-  font-family: var(--font-body);
-  font-size: var(--fs-body);
-  line-height: 1.55;
-  color: var(--stock);
+@media (max-width: 620px) {
+  .situationList {
+    grid-template-columns: 1fr;
+  }
 }
 
-.situationTodayLabel {
-  display: block;
-  margin-bottom: 4px;
+/* The day's question, above the ledger — the first thing on the briefing
+   after the date. The signal rule the callback uses, because it is the same
+   kind of line: the present interface saying what today is for. */
+.question {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-left: 18px;
+  border-left: 2px solid var(--signal);
+}
+
+.questionLabel {
   font-family: var(--font-mono);
   font-size: var(--fs-label-sm);
   letter-spacing: var(--track-label);
@@ -634,11 +683,13 @@
   color: var(--signal-bright);
 }
 
-@media (max-width: 620px) {
-  .situationRow {
-    grid-template-columns: 1fr;
-    gap: 4px;
-  }
+.questionText {
+  margin: 0;
+  max-width: 44rem;
+  font-family: var(--font-body);
+  font-size: var(--fs-scene);
+  line-height: 1.6;
+  color: var(--stock);
 }
 
 /* In other words: the ideas a student has to hold to act today, in plain

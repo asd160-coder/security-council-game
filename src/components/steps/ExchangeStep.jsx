@@ -128,9 +128,13 @@ export default function ExchangeStep({
             {adviserTaken ? (
               <span className={scene.adviserTaken}>Adviser consulted · memo filed</span>
             ) : (
-              <Button variant="quiet" onClick={onConsultAdviser}>
-                {step.adviser.label}
-              </Button>
+              <>
+                <Button variant="quiet" onClick={onConsultAdviser}>
+                  {step.adviser.label}
+                </Button>
+                {/* Day 1 only: that the adviser is free to ask. */}
+                {step.adviser.hint && <span className={scene.adviserHint}>{step.adviser.hint}</span>}
+              </>
             )}
           </Reveal>
         )}

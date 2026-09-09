@@ -159,6 +159,10 @@ export default function EndingScreen({ state, role, onRestart, onDebrief }) {
           <span key={tracker.key} className={styles.standingItem}>
             <span className={styles.standingLabel}>{tracker.label}</span>
             <span className={styles.standingValue}>{formatValue(state.trackers[tracker.key])}</span>
+            {/* What the number measures. The column suppresses this line in
+                play; here, where the five are read as a verdict, it is the
+                legend the evaluation found missing. */}
+            <span className={styles.standingMeaning}>{tracker.meaning}</span>
           </span>
         ))}
       </Reveal>

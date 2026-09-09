@@ -182,6 +182,18 @@
 
 .adviser {
   display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 14px;
+}
+
+/* Once, on Day 1: that the adviser is free to ask. The button is quiet by
+   design; a first-time player is told once that it is there. */
+.adviserHint {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-style: italic;
+  color: var(--silver-fainter);
 }
 
 .adviserTaken {

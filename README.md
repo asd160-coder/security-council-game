@@ -10,16 +10,21 @@ It is not a quiz and it does not keep score.
 
 ## For a teacher
 
-**How long.** About 40 minutes for one playthrough — roughly 25 minutes of reading plus
-time to decide. It fits a single period.
+**How long.** About an hour for a full run — some 35 minutes of reading for a fluent reader,
+more for a slower one, plus the deciding and a paragraph of writing at the end — so it sits
+better across two lessons than one. A run saves itself in the browser
+after every screen: a student can stop after any day and resume from the title screen on the
+same device and browser, and the debrief and its answers survive a reload too.
 
 **What the student actually does.** Pressing Begin plays a short overture — under a minute
 of archival photographs, one for each line, closing on the three seats as they were photographed in 1962, with a
 narration that states the stakes — which can be skipped
 at any moment with the Skip button or Escape. Then they take one of three seats and live
-five days of October 1962. Each day they read a briefing — which opens with where things stand,
-what each side has actually done, before any prose about how it feels — meet someone, and choose what to say. Under the facts, an "In other words" block explains
-the two or three ideas the day turns on: the Turkish missiles, the quarantine, the two letters. Their
+five days of October 1962. Each day they read a briefing — which opens with the day's question
+and a ledger of what each side has actually done, one sentence a side, before any prose about
+how it feels — meet someone, and choose what to say. Under the facts, an "In other words" block explains
+the two or three ideas the day turns on: the Turkish missiles, the quarantine, the two letters. A
+primary source on the briefing opens folded to its first paragraph; reading the rest is what files it. Their
 choices assemble a diplomatic statement: Day 1 sets its tone, Day 2 composes a clause, Day 3
 revises that clause, Day 4 assembles the terms of a bargain, and Day 5 asks them to write
 its closing paragraph themselves. The run ends with that finished document, an outcome, and

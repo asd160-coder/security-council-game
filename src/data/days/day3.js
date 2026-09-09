@@ -30,7 +30,9 @@ const day3 = {
           'Photography from this morning shows work continuing at the sites at the same pace as last week. The quarantine has stopped what has not yet arrived. It has not touched what is already there.',
         ],
         mid: [
-          'The first vessels reached the line overnight. Some stopped. Some turned back. One was boarded and found to be carrying nothing of interest, and was allowed to proceed — which both governments have described, accurately, as a success.',
+          /* Thursday the 25th: the tanker Bucharest was hailed and let through
+             unboarded. The first boarding, the Marucla, was Friday the 26th. */
+          'The first vessels reached the line overnight. Some stopped. Some turned back. One tanker was hailed, answered, and was let through without being boarded — which both governments have described, accurately, as a success.',
           'Photography from this morning shows work continuing at the sites at the same pace as last week. The quarantine has stopped what has not yet arrived. It has not touched what is already there.',
         ],
         high: [
@@ -50,17 +52,17 @@ const day3 = {
       },
       situation: {
         sides: [
-          { who: 'United States', did: 'The quarantine has been in force since yesterday morning. Some Soviet ships have stopped short of the line or turned for home. Reconnaissance flights continue, and show the missile sites being finished at the same pace. The Joint Chiefs are pressing for an air strike.' },
-          { who: 'Soviet Union', did: 'Has turned back the ships carrying weapons and let the others sail on. Work at the sites goes on. Khrushchev has told the Secretary-General he accepts a pause in principle — and has not stopped building.' },
-          { who: 'United Nations', did: 'Yesterday the Secretary-General asked both leaders to suspend, for two or three weeks, all arms shipments and the quarantine. Moscow said yes in principle. Washington said no pause could leave the sites in place.' },
-          { who: 'Cuba', did: 'Mobilised. Hospitals have been told to prepare for casualties and schools in the west are closed. People have been told an invasion may come within days.' },
+          { who: 'United States', did: 'The quarantine has held since yesterday. Reconnaissance shows the missile sites being finished at the same pace. The Joint Chiefs press for an air strike.' },
+          { who: 'Soviet Union', did: 'Turned back the ships carrying weapons and let the others sail on. Khrushchev accepts a pause in principle, and has not stopped building.' },
+          { who: 'United Nations', did: 'Asked both leaders to suspend shipments and the quarantine for two or three weeks. Moscow said yes in principle. Washington said no: not with the sites still there.' },
+          { who: 'Cuba', did: 'Mobilised. Hospitals are preparing for casualties and schools in the west are closed. People have been told an invasion may come within days.' },
         ],
         today: 'Pressure from your own side. Someone who is supposed to be with you comes to push you toward a harder line, and you decide whether to hold. Then yesterday’s draft clause can stand, or change.',
       },
       explainers: [
         {
           term: 'Why the line is not the answer',
-          text: 'The quarantine stops ships that have not yet arrived. It does nothing about the missiles already on the island, and this morning’s photographs show those being finished at the same pace. That is why the pressure today comes from your own side: every day the line holds is a day closer to the sites being ready.',
+          text: 'The quarantine stops ships that have not arrived yet. It does nothing about the missiles already on the island, which this morning’s photographs show being finished. That is why today’s pressure comes from your own side: every day the line holds, the sites come closer to ready.',
         },
       ],
       body: [
@@ -252,7 +254,7 @@ const day3 = {
               {
                 id: 'rfk3f-refuse',
                 label: 'Refuse the premise',
-                line: 'His political survival is not a American interest. He placed them in secret and he can remove them in public.',
+                line: 'His political survival is not an American interest. He placed them in secret and he can remove them in public.',
                 feedback: 'pressure',
                 effects: { leverage: 2, escalation: 1, legitimacy: 0, councilTrust: -1, civilianRisk: 1 },
               },

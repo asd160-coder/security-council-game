@@ -10,7 +10,8 @@
     "check": "node tools/walk.mjs && node tools/engine.mjs",
     "audit": "node tools/audit.mjs",
     "bands": "node tools/bands.mjs",
-    "readability": "node tools/readability.mjs"
+    "readability": "node tools/readability.mjs",
+    "words": "node tools/words.mjs"
   },
   "dependencies": {
     "@fontsource-variable/libre-franklin": "^5.2.5",

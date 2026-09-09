@@ -26,14 +26,16 @@ const day2 = {
          Examining the proclamation files the legal ground, which is what opens
          the lawfulness line in Day 4's negotiation. */
       archiveIds: ['jfk-address', 'proclamation-3504'],
+      /* One paragraph: what changed in kind. The announcement, the demand and
+         Moscow's reply are in the ledger below, where they used to be said a
+         second time. */
       body: [
-        'Last night the President went on television and told the world what the photographs show. He announced a naval quarantine of Cuba: from tomorrow morning, American warships will stop any vessel carrying offensive weapons to the island and turn it back. He demanded that the missiles be removed, and asked for an emergency meeting of the Security Council. Soviet ships are already at sea.',
-        'Moscow has replied that the weapons are defensive, that the quarantine is an act of piracy, and that its ships will not turn back. Until last night, both governments could still change their minds quietly. From this morning, every position is taken in front of an audience that will remember it.',
+        'Until last night, both governments could still change their minds quietly. From this morning, every position is taken in front of an audience that will remember it.',
       ],
       situation: {
         sides: [
-          { who: 'United States', did: 'Announced the missiles and the quarantine on television last night. Warships are moving into position; the quarantine begins tomorrow at ten in the morning. Forces have been put on higher alert.' },
-          { who: 'Soviet Union', did: 'Denies that the weapons are offensive, calls the quarantine an act of aggression, and says its ships will hold their course. Its own forces are on alert.' },
+          { who: 'United States', did: 'Announced the missiles and a quarantine on television last night, and demanded the missiles go. Warships are moving. It begins at ten tomorrow. Forces are on higher alert.' },
+          { who: 'Soviet Union', did: 'Denies the weapons are offensive, calls the quarantine an act of aggression, and says its ships will hold course. Its forces are on alert.' },
           { who: 'United Nations', did: 'The Security Council meets today at America’s request. The Secretary-General is preparing an appeal to both leaders.' },
           { who: 'Cuba', did: 'Has ordered a general mobilisation. Castro has told the country to expect an invasion.' },
         ],
@@ -42,7 +44,7 @@ const day2 = {
       explainers: [
         {
           term: 'The quarantine',
-          text: 'From tomorrow morning American warships will stop and search ships heading for Cuba, and turn back any carrying weapons. In law a full blockade is an act of war, so the President has called this a quarantine of offensive weapons only — a step short of war, announced as one. The danger is at the line itself: a captain with minutes to decide, a ship that will not stop, and two governments at war before either has chosen it.',
+          text: 'From tomorrow warships will stop ships bound for Cuba and turn back any with weapons. In law a blockade is an act of war. The President calls this a quarantine: a step short of war. The danger is at the line: a captain with minutes to decide, a ship that refuses, a war nobody chose.',
         },
       ],
       radioCaption:

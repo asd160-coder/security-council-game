@@ -97,6 +97,23 @@ for (const n of [1, 2, 4]) {
 }
 console.log(`explainers: ${DAYS.filter((d) => d.steps.find((s) => s.kind === 'briefing')?.explainers?.length).length} of ${DAYS.length} briefings explain their terms`);
 
+/* The ledger and the explainers are read before every choice, and by
+   Milestone 25 they had grown into the largest single item in the game (832
+   and 485 words over a run). Budgets, so they stay trimmed: a side in one
+   sentence, the question in two, an explainer in a definition and a danger. */
+const words = (s) => (typeof s === 'string' ? (s.match(/[A-Za-z’'0-9]+/g) ?? []).length : 0);
+for (const day of DAYS) {
+  const b = day.steps.find((s) => s.kind === 'briefing');
+  for (const side of b?.situation?.sides ?? []) {
+    if (words(side.did) > 28) { problems++; console.log(`  ✗ day ${day.number} ledger "${side.who}" runs ${words(side.did)} words (budget 28)`); }
+  }
+  if (b?.situation?.today && words(b.situation.today) > 40) { problems++; console.log(`  ✗ day ${day.number} question runs ${words(b.situation.today)} words (budget 40)`); }
+  for (const e of b?.explainers ?? []) {
+    if (words(e.text) > 55) { problems++; console.log(`  ✗ day ${day.number} explainer "${e.term}" runs ${words(e.text)} words (budget 55)`); }
+  }
+}
+console.log('briefing budgets: a side ≤ 28 words, the question ≤ 40, an explainer ≤ 55');
+
 /* The overture's beats are timed to the narration by numbers copied from the
    detector's output (.design/speech-segments.swift), so a slip — a beat out of
    order, a hold that no longer matches its gap, an archive id that stopped

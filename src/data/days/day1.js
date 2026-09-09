@@ -24,31 +24,34 @@ const day1 = {
       kind: 'briefing',
       id: 'briefing',
       archiveIds: ['u2-mrbm-launch-site', 'ss4-reference'],
+      /* One paragraph: how it feels. What happened is in the ledger below,
+         which used to be said twice — once here as narrative, once there as
+         fact — on the screen a student reads before anything else. */
       body: [
-        'On Sunday an American U-2 reconnaissance aircraft photographed western Cuba. This morning the photo-interpreters showed the President what the pictures contain: Soviet medium-range nuclear missile sites under construction, weeks or less from being ready. Since the summer the Soviet Union has been shipping the missiles in secret, while assuring Washington that only defensive weapons were going to Cuba.',
         'Nothing has been announced. Outside a small circle in Washington nobody knows, and the question in every capital that learns of it will be the same: how to answer without pushing the world toward war. Every public statement, every private message, and every sign of weakness or resolve will shape what comes next.',
       ],
       /* Where things stand: what each side has actually done, as facts a
          student can act on. The prose above says how it feels; this says what
          is being responded to. Shared by the three seats — the facts do not
-         change with the chair. */
+         change with the chair. One sentence a side, and the budget in
+         tools/walk.mjs keeps it there. */
       situation: {
         sides: [
-          { who: 'United States', did: 'Has the photographs. The President was told this morning and is gathering a small committee of advisers. Nothing has been said in public.' },
-          { who: 'Soviet Union', did: 'Has been shipping missiles, troops and technicians to Cuba since the summer, in secret, while telling Washington that only defensive weapons were going there.' },
-          { who: 'United Nations', did: 'Has been told nothing. The Secretary-General knows only what the newspapers know, which is nothing.' },
-          { who: 'Cuba', did: 'Agreed to the missiles, and has expected an American invasion ever since the failed landing at the Bay of Pigs eighteen months ago.' },
+          { who: 'United States', did: 'Has U-2 photographs of Soviet missile sites in Cuba, weeks from ready. The President was told this morning. Nothing has been said in public.' },
+          { who: 'Soviet Union', did: 'Has shipped missiles, troops and technicians to Cuba in secret since the summer. It told Washington only defensive weapons were going there.' },
+          { who: 'United Nations', did: 'Has been told nothing. The Secretary-General knows what the newspapers know, which is nothing.' },
+          { who: 'Cuba', did: 'Agreed to the missiles, and has expected an American invasion since the failed landing at the Bay of Pigs eighteen months ago.' },
         ],
-        today: 'Your first words. Nothing is public yet, so how you open — firm, careful, open to talks, or insisting on proper process — will shape how everyone else reads you for the rest of the week.',
+        today: 'Your first words. Nothing is public yet, so how you open — firm, careful, open to talks, or insisting on proper process — will shape how everyone reads you all week.',
       },
       explainers: [
         {
           term: 'The missiles in Turkey',
-          text: 'Since 1961 the United States has kept fifteen Jupiter nuclear missiles in Turkey, on the Soviet Union’s southern border — about as far from Moscow as Cuba is from Washington. To Moscow, missiles in Cuba are the mirror of missiles in Turkey. Nobody can say so in public, which is exactly why they will matter in private: they are the bargaining chip of this crisis.',
+          text: 'Since 1961 the United States has kept fifteen Jupiter nuclear missiles in Turkey, on the Soviet border. That is about as far from Moscow as Cuba is from Washington. To Moscow, missiles in Cuba mirror missiles in Turkey. Nobody can say so in public. In private, they are the bargaining chip of this crisis.',
         },
         {
           term: 'Medium range',
-          text: 'The missiles found in Cuba could reach Washington in about thirteen minutes, and most of the eastern United States soon after. That does not change how many weapons each side has. It changes how long anyone has to think before deciding.',
+          text: 'The missiles found in Cuba could reach Washington in about thirteen minutes. Most of the eastern United States would follow soon after. That changes nothing about how many weapons each side has. It changes how long anyone has to think.',
         },
       ],
       radioCaption:
@@ -88,6 +91,9 @@ const day1 = {
       adviser: {
         label: 'Consult your adviser',
         unlocks: 'memo-aide',
+        /* Said once, here, because the button is quiet by design and the
+           evaluation found nothing told a first-time player it was free. */
+        hint: 'Free to ask before you speak. The memo goes in your file.',
       },
       counterpartByRole: {
         rfk: {

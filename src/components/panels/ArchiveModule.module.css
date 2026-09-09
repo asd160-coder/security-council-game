@@ -252,6 +252,45 @@
   height: 1px;
 }
 
+/* Folded: the first paragraph on a paper that visibly continues. The control
+   below is a sibling of the paper button — a button cannot hold a button —
+   drawn as the paper's own foot so the two read as one sheet. */
+.documentFolded {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  padding-bottom: 12px;
+}
+
+.documentMore {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: none;
+  border-top: 1px dashed var(--stock-edge);
+  border-radius: 0 0 var(--radius-paper) var(--radius-paper);
+  padding: 10px 22px 12px;
+  background: var(--stock);
+  box-shadow: var(--shadow-paper);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  transition: color var(--dur-quick) var(--ease);
+}
+
+.documentMore::before {
+  content: '▾';
+  display: inline-block;
+  width: 1.2em;
+}
+
+.documentMore:hover,
+.documentMore:focus-visible {
+  color: var(--ink);
+}
+
 /* Moving image. Same treatment as the still: full width of the module, seated
    on the board's own inset so it does not float. */
 .video {

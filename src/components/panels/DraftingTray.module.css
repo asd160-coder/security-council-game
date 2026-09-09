@@ -91,6 +91,47 @@
   max-width: none;
 }
 
+/* On the summary the newest clause is the one open; the rest of the
+   statement sits folded above it, one click away. */
+.earlier {
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--stock-edge);
+}
+
+.earlierLabel {
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.earlierLabel::-webkit-details-marker {
+  display: none;
+}
+
+.earlierLabel::before {
+  content: '▸';
+  display: inline-block;
+  width: 1.2em;
+}
+
+.earlier[open] > .earlierLabel {
+  margin-bottom: 10px;
+}
+
+.earlier[open] > .earlierLabel::before {
+  content: '▾';
+}
+
+.earlierLabel:hover {
+  color: var(--ink);
+}
+
 .revisedMark {
   font-family: var(--font-mono);
   font-size: var(--fs-label-sm);

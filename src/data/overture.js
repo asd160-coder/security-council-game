@@ -33,10 +33,13 @@
    pauses between them, and macOS speech recognition could not be reached
    from a tool (see .design/transcribe.swift), so the lines were placed by
    word count (.design/align-lines.py) with two facts read off the waveform:
-   line one is "The …", a two-second hole, then "war had ended"; and lines
-   six and seven were spoken in one breath. Beat 7 therefore begins 1.73 s
-   into that breath by share of syllables — the one `at` that is an estimate
-   rather than a measurement.
+   the take opens with a stray syllable at 0.15 s — first read as a clipped
+   "The", heard by the user as "all" — and line one proper begins at 2.65 s;
+   and lines six and seven were spoken in one breath. Beat 7 therefore begins
+   1.73 s into that breath by share of syllables — the one `at` that is an
+   estimate rather than a measurement. The stray syllable has since been
+   silenced in place (.design/mute-range.swift), so the first image holds for
+   two and a half seconds of bed before the voice enters; no `at` moved.
 
    TWO CLOCKS. Each beat carries `at`, its start in seconds within the
    narration, and `hold`, its length in milliseconds when the film runs on a

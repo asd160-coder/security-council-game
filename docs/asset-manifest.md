@@ -510,6 +510,17 @@ milliseconds (−15.9 dBFS)**; −27.4 dBFS in the first second (fading in under
 −38.6 dBFS in the last. The bed WAV is reproducible from the script and its arguments
 (56.711995 4 5); the gain is one argument to `mix-narration.swift`.
 
+**A stray syllable, silenced** (10 September 2026). Listening at the title, the user heard
+a voice say something like "all" before "The war had ended." The detector had always shown
+it — a 0.35 s segment at 0.15 s and a blip at 1.80 s, two seconds before the line proper
+begins at 2.65 s — and the third-pass notes had read it as a clipped "The"; the ear says
+otherwise. `.design/mute-range.swift` replaces 0–2.52 s of the clean voice with silence
+(20 ms fades, every other sample untouched, the length unchanged, so no `at` moves), the
+bed was regenerated from the same arguments and mixed at the same +1.4 dB, and
+`public/overture/narration.m4a` and `.design/narration-voice.m4a` were replaced. The first
+image now holds for two and a half seconds of bed before the voice enters. The delivered
+take (`narration-source.mp3`) is untouched.
+
 ## Milestone 24 — a room you can see, and a debrief you can answer
 
 No new sourcing beyond one still. The drawn rooms behind the establishing card were lifted

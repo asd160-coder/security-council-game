@@ -119,6 +119,14 @@ export default function BackgroundScreen({ onBack }) {
        to move through a long read. */
     <main className={styles.screen}>
       <Reveal className={styles.head}>
+        {/* A way back at the top as well as the foot: this is a long read,
+            and a student who opened it from the title's tab should not have
+            to scroll past all of it to leave. */}
+        <div className={styles.headActions}>
+          <Button variant="quiet" onClick={onBack}>
+            {BACKGROUND.back}
+          </Button>
+        </div>
         <span className="eyebrow">{BACKGROUND.eyebrow}</span>
         <h1 className={styles.title}>{BACKGROUND.title}</h1>
         <p className={styles.standfirst}>{BACKGROUND.standfirst}</p>

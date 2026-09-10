@@ -13,6 +13,23 @@ export default function TitleScreen({ onBegin, onCredits, onBackground, onTeache
         />
       </div>
 
+      {/* The way into the background reading, promoted from the foot. The
+          first thing on the page: an information tab, brass-edged, with one
+          line saying what it is — because at the foot, beside the credits,
+          nobody found it. In flow rather than pinned to the corner, so on a
+          phone it cannot sit on the dateline and the screen's overflow cannot
+          clip its focus ring. Not the primary action: the one filled button
+          below is still the way in; this is the way to understand it first. */}
+      <Reveal delay={0} className={styles.corner}>
+        <nav aria-label={APP.backgroundNav}>
+          <button type="button" className={styles.tab} onClick={onBackground}>
+            <span className={styles.tabEyebrow}>{APP.backgroundEyebrow}</span>
+            <span className={styles.tabLabel}>{APP.background}</span>
+            <span className={styles.tabBlurb}>{APP.backgroundBlurb}</span>
+          </button>
+        </nav>
+      </Reveal>
+
       {/* A main landmark, because a screen-reader user navigating by landmark
           had nothing to jump to on this screen at all. */}
       <main className={styles.inner}>
@@ -53,9 +70,6 @@ export default function TitleScreen({ onBegin, onCredits, onBackground, onTeache
       <div className={styles.foot}>
         <p className={styles.footNote}>{APP.footNote}</p>
         <div className={styles.footActions}>
-          <Button variant="quiet" onClick={onBackground}>
-            {APP.background}
-          </Button>
           <Button variant="quiet" onClick={onTeachers}>
             {APP.teachers}
           </Button>

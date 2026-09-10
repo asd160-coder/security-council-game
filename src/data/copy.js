@@ -29,6 +29,13 @@ export const APP = {
   beginFresh: 'Start a new run',
   credits: 'Sources and credits',
   background: 'Background and the people in it',
+  /* The title's tab into that reading — promoted from the foot, where a
+     quiet button beside the credits went unnoticed by students and teachers
+     alike. The eyebrow says when to read it; the blurb says what it is. */
+  backgroundEyebrow: 'Before you begin',
+  backgroundBlurb:
+    'The road to the crisis and the three men in it, in five minutes’ reading. Not required, but everything after it makes more sense.',
+  backgroundNav: 'Before you begin',
   teachers: 'For teachers',
   creditsTitle: 'Sources and credits',
   creditsBody:

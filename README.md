@@ -16,7 +16,9 @@ better across two lessons than one. A run saves itself in the browser
 after every screen: a student can stop after any day and resume from the title screen on the
 same device and browser, and the debrief and its answers survive a reload too.
 
-**What the student actually does.** Pressing Begin plays a short overture — under a minute
+**What the student actually does.** A tab marked *Before you begin*, top-left above the
+title, opens the background reading: the road to the crisis and the three men in it, five
+minutes that are not required but make everything after them make more sense. Pressing Begin plays a short overture — under a minute
 of archival photographs, one for each line, closing on the three seats as they were photographed in 1962, with a
 narration that states the stakes — which can be skipped
 at any moment with the Skip button or Escape. Then they take one of three seats and live

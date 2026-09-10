@@ -1,7 +1,9 @@
+/* Three rows: the tab into the background reading, the title (which sits at
+   the foot of its row), and the foot. */
 .screen {
   min-height: 100vh;
   display: grid;
-  grid-template-rows: 1fr auto;
+  grid-template-rows: auto 1fr auto;
   position: relative;
   overflow: hidden;
 }
@@ -162,12 +164,86 @@
   flex-wrap: wrap;
 }
 
-/* Two quiet entries at the foot: the background reading and the credits.
-   They sit together so the primary action above stays the only thing that
-   looks like a way in. */
+/* Two quiet entries at the foot: the teachers' page and the credits. The
+   background reading used to be a third, and nobody found it there; it has
+   its own tab at the top of the page now (`.tab`). These two stay quiet so
+   the primary action above remains the only thing that looks like a way in. */
 .footActions {
   display: flex;
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
+}
+
+/* ------------------------------------------------------- Before you begin */
+/* The tab into the background reading. Top-left, first in the page's flow,
+   on the same measure as the title so its left edge lines up with the
+   dateline's. Brass edge — the institutional register, and the colour of
+   every "look here" mark in the game — on raised board, which is what keeps
+   it legible over the photograph and on phones, where the left scrim is
+   replaced by a top-and-bottom one. Deliberately not the filled button: that
+   is the way in; this is the way to understand it first. */
+.corner {
+  position: relative;
+  z-index: 1;
+  padding: 22px var(--gutter) 0;
+  max-width: var(--measure-page);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.tab {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  max-width: 26rem;
+  padding: 12px 18px 13px 16px;
+  text-align: left;
+  background: var(--board-raised);
+  border: 1px solid var(--board-line-bright);
+  border-left: 3px solid var(--brass);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-panel);
+  cursor: pointer;
+  transition: border-color var(--dur-quick) var(--ease);
+}
+
+.tab:hover {
+  border-color: var(--silver-faint);
+  border-left-color: var(--brass-bright);
+}
+
+.tabEyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label-sm);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--brass-bright);
+}
+
+.tabLabel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-button);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--stock);
+}
+
+.tabBlurb {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--silver-muted);
+}
+
+@media (max-width: 860px) {
+  .corner {
+    padding-top: 18px;
+  }
+
+  .tab {
+    max-width: none;
+    width: 100%;
+  }
 }

@@ -551,3 +551,9 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* The back control at the head; the same one sits at the foot. Pulled left
+   by the quiet button's own padding so its text aligns with the eyebrow. */
+.headActions {
+  margin: 0 0 18px -12px;
+}

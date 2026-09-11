@@ -150,7 +150,8 @@ anybody.
 GitHub Pages **only when run by hand** — publishing is a decision, not a side effect of a
 commit. To put it live: make the repository public, set *Settings → Pages → Source* to
 "GitHub Actions", then run the "Build and deploy" workflow from the Actions tab. It will
-appear at `https://asd160-coder.github.io/security-council-game/`.
+appear at `https://october-1962.github.io/` — the repository is named `october-1962.github.io`
+under the `october-1962` organisation, so Pages serves it at the root of that address.
 
 **The overture's voice.** The narration is synthesised — generated with ElevenLabs from the
 script in `src/data/overture.js`, in a stock voice — and the credits say so; the low note

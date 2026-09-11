@@ -8,7 +8,9 @@
 # To publish, once the repo is public:
 #   1. Settings → Pages → Source: "GitHub Actions"
 #   2. Actions → "Build and deploy" → Run workflow
-# The site will appear at https://asd160-coder.github.io/security-council-game/
+# The site will appear at https://october-1962.github.io/ — the repository is
+# named october-1962.github.io under the october-1962 organisation, so Pages
+# serves it at the root of that address.
 #
 # vite.config.js already sets `base: './'`, so the build works from that
 # subdirectory without any change.
